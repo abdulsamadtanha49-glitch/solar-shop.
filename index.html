@@ -669,6 +669,76 @@
   applyLanguage();
 
 </script>
+<!-- PURCHASE -->
+<section class="card">
+  <h2>🛒 Purchase | خریداری</h2>
 
+  <input id="purchaseProduct" type="text" placeholder="د محصول نوم">
+  <input id="purchaseQty" type="number" placeholder="تعداد">
+  <input id="purchasePrice" type="number" placeholder="د اخیستلو قیمت">
+
+  <button onclick="addPurchase()">➕ Add Purchase</button>
+
+  <div id="purchaseList"></div>
+</section>
+
+<script>
+function addPurchase() {
+  const product = document.getElementById("purchaseProduct").value;
+  const qty = Number(document.getElementById("purchaseQty").value);
+  const price = Number(document.getElementById("purchasePrice").value);
+
+  if (!product || !qty || !price) {
+    alert("لطفاً ټول معلومات ولیکئ");
+    return;
+  }
+
+  let purchases = JSON.parse(localStorage.getItem("samadPurchases") || "[]");
+
+  purchases.push({
+    product: product,
+    qty: qty,
+    price: price,
+    total: qty * price,
+    date: new Date().toLocaleDateString()
+  });
+
+  localStorage.setItem("samadPurchases", JSON.stringify(purchases));
+
+  document.getElementById("purchaseProduct").value = "";
+  document.getElementById("purchaseQty").value = "";
+  document.getElementById("purchasePrice").value = "";
+
+  showPurchases();
+}
+
+function showPurchases() {
+  const list = document.getElementById("purchaseList");
+  if (!list) return;
+
+  let purchases = JSON.parse(localStorage.getItem("samadPurchases") || "[]");
+
+  list.innerHTML = purchases.map((p, i) => `
+    <div class="card">
+      📦 ${p.product}<br>
+      تعداد: ${p.qty}<br>
+      قیمت: ${p.price}<br>
+      ټول: ${p.total}<br>
+      📅 ${p.date}
+      <br><br>
+      <button onclick="deletePurchase(${i})">🗑️ Delete</button>
+    </div>
+  `).join("");
+}
+
+function deletePurchase(index) {
+  let purchases = JSON.parse(localStorage.getItem("samadPurchases") || "[]");
+  purchases.splice(index, 1);
+  localStorage.setItem("samadPurchases", JSON.stringify(purchases));
+  showPurchases();
+}
+
+showPurchases();
+</script>
 </body>
 </html>
