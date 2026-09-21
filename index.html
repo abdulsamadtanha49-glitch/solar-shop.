@@ -7,181 +7,224 @@
 
 <style>
 *{box-sizing:border-box}
-
 body{
   margin:0;
-  font-family:Arial,sans-serif;
-  background:#f1f5f9;
-  color:#1e293b;
+  font-family:Arial,Tahoma,sans-serif;
+  background:#f4f7f8;
+  color:#17202a;
 }
-
 header{
   background:#0f766e;
   color:white;
-  padding:25px;
+  padding:18px;
   text-align:center;
+  position:sticky;
+  top:0;
+  z-index:20;
+}
+header h1{margin:0;font-size:25px}
+header small{opacity:.9}
+
+nav{
+  display:flex;
+  gap:7px;
+  overflow-x:auto;
+  padding:10px;
+  background:white;
+  border-bottom:1px solid #ddd;
+  position:sticky;
+  top:72px;
+  z-index:19;
+}
+nav button{
+  border:0;
+  padding:10px 14px;
+  border-radius:8px;
+  background:#e8eeee;
+  cursor:pointer;
+  white-space:nowrap;
+}
+nav button.active{
+  background:#0f766e;
+  color:white;
 }
 
 .container{
-  max-width:1100px;
-  margin:20px auto;
+  max-width:1200px;
+  margin:auto;
   padding:15px;
 }
 
-.settings,.section,.card{
-  background:white;
-  padding:20px;
-  margin-top:20px;
-  border-radius:12px;
-  box-shadow:0 2px 8px #0001;
-}
+.page{display:none}
+.page.active{display:block}
 
 .cards{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:15px;
+  grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+  gap:12px;
 }
-
 .card{
-  text-align:center;
-  margin-top:0;
+  background:white;
+  border-radius:12px;
+  padding:16px;
+  box-shadow:0 2px 8px #00000012;
+}
+.card h3{margin:0 0 8px;font-size:14px;color:#667}
+.card strong{font-size:23px}
+
+.panel{
+  background:white;
+  padding:18px;
+  margin-top:15px;
+  border-radius:12px;
+  box-shadow:0 2px 8px #00000012;
 }
 
-.card h2{
-  color:#0f766e;
+h2{margin-top:0;color:#0f766e}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:10px;
 }
 
-input,select{
+input,select,textarea{
   width:100%;
-  padding:12px;
-  margin:8px 0;
-  border:1px solid #cbd5e1;
+  padding:11px;
+  border:1px solid #ccd5d5;
   border-radius:8px;
   font-size:15px;
+  background:white;
 }
 
 button{
+  font-family:inherit;
+}
+.btn{
+  border:0;
+  border-radius:8px;
+  padding:11px 15px;
+  cursor:pointer;
   background:#0f766e;
   color:white;
-  border:0;
-  padding:12px 20px;
-  border-radius:8px;
-  cursor:pointer;
-  margin:5px;
-  font-size:15px;
+  margin-top:10px;
 }
+.btn.secondary{background:#475569}
+.btn.danger{background:#dc2626}
+.btn.warning{background:#d97706}
+.btn.light{background:#e2e8f0;color:#17202a}
 
-button:hover{
-  background:#115e59;
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:15px;
 }
-
-.delete-btn{
-  background:#dc2626;
+th,td{
+  border-bottom:1px solid #e5e7eb;
+  padding:10px 7px;
+  text-align:right;
 }
-
-.delete-btn:hover{
-  background:#b91c1c;
+th{
+  background:#f1f5f5;
 }
-
-.report-btn{
-  background:#2563eb;
-}
-
-.active-report{
-  background:#7c3aed;
-}
-
-.product{
-  background:#f8fafc;
-  border:1px solid #e2e8f0;
-  padding:15px;
-  margin-top:12px;
-  border-radius:10px;
-}
-
-.low-stock{
+.low{
   color:#dc2626;
   font-weight:bold;
 }
-
-.in-stock{
+.good{
   color:#15803d;
   font-weight:bold;
 }
 
-.money-usd{
-  color:#0f766e;
-  font-weight:bold;
-}
-
-.money-afn{
-  color:#2563eb;
-  font-weight:bold;
-}
-
-.empty{
-  color:#64748b;
-  padding:10px;
-  text-align:center;
-}
-
-.dashboard-title{
-  font-size:14px;
-  color:#64748b;
-}
-
-.report-box{
-  background:#f8fafc;
-  border:1px solid #e2e8f0;
-  border-radius:10px;
-  padding:15px;
-  margin-top:15px;
-}
-
-.report-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:12px;
-  margin-top:15px;
-}
-
-.report-item{
-  background:white;
-  border:1px solid #e2e8f0;
-  border-radius:10px;
-  padding:15px;
-  text-align:center;
-}
-
-.report-item strong{
-  display:block;
-  margin-bottom:8px;
-  color:#64748b;
-}
-
-.report-item span{
-  font-size:20px;
-  font-weight:bold;
-}
-
-.date-box{
-  background:#ecfeff;
-  border:1px solid #a5f3fc;
+.alert{
   padding:12px;
-  border-radius:10px;
+  border-radius:9px;
+  margin:10px 0;
+  background:#fff7ed;
+  color:#9a3412;
+}
+
+.search{
   margin-top:10px;
 }
 
-.date-box label{
-  display:block;
-  font-weight:bold;
-  margin-bottom:5px;
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#0008;
+  z-index:100;
+  align-items:center;
+  justify-content:center;
+  padding:15px;
+}
+.modal.show{display:flex}
+.modal-box{
+  background:white;
+  width:100%;
+  max-width:600px;
+  max-height:90vh;
+  overflow:auto;
+  border-radius:14px;
+  padding:20px;
 }
 
-hr{
-  border:0;
-  border-top:1px solid #e2e8f0;
+.invoice{
+  background:white;
+  padding:25px;
+  max-width:700px;
+  margin:auto;
+  color:#111;
+}
+.invoice-header{
+  text-align:center;
+  border-bottom:2px solid #0f766e;
+  padding-bottom:15px;
+}
+.invoice-logo{
+  width:90px;
+  height:90px;
+  object-fit:contain;
+  display:block;
+  margin:auto;
+}
+.invoice-watermark{
+  text-align:center;
+  opacity:.07;
+  font-size:60px;
   margin:20px 0;
+}
+.invoice-footer{
+  border-top:1px solid #ddd;
+  margin-top:20px;
+  padding-top:15px;
+  text-align:center;
+}
+
+.flex{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.flex>*{flex:1}
+
+.empty{
+  text-align:center;
+  color:#777;
+  padding:25px;
+}
+
+footer{
+  text-align:center;
+  padding:25px;
+  color:#777;
+}
+
+@media(max-width:650px){
+  nav{top:68px}
+  table{font-size:13px}
+  th,td{padding:7px 4px}
+  .hide-mobile{display:none}
 }
 </style>
 </head>
@@ -189,392 +232,417 @@ hr{
 <body>
 
 <header>
-  <h1>☀️ Samad Solar</h1>
-  <p id="appSubtitle">د سولر دوکان د مدیریت سیستم</p>
+  <h1 id="shopTitle">☀️ Samad Solar</h1>
+  <small id="shopSubtitle">Solar Shop Management System</small>
 </header>
+
+<nav>
+  <button onclick="showPage('dashboard',this)" class="active">🏠 Dashboard</button>
+  <button onclick="showPage('products',this)">📦 Stock</button>
+  <button onclick="showPage('purchase',this)">📥 Purchase</button>
+  <button onclick="showPage('sale',this)">📤 Sale</button>
+  <button onclick="showPage('expense',this)">💸 Expenses</button>
+  <button onclick="showPage('debt',this)">📒 Debt</button>
+  <button onclick="showPage('capital',this)">💰 Capital</button>
+  <button onclick="showPage('reports',this)">📊 Reports</button>
+  <button onclick="showPage('settings',this)">⚙️ Settings</button>
+</nav>
 
 <div class="container">
 
 <!-- DASHBOARD -->
+<section id="dashboard" class="page active">
 
 <div class="cards">
 
-  <div class="card">
-    <div class="dashboard-title">💰 سرمایه</div>
-    <h2 id="capital">$0 USD</h2>
-  </div>
+<div class="card">
+<h3>Capital USD</h3>
+<strong id="dashCapital">$0</strong>
+</div>
 
-  <div class="card">
-    <div class="dashboard-title">📦 Stock</div>
-    <h2 id="stock">0</h2>
-  </div>
+<div class="card">
+<h3>Stock Items</h3>
+<strong id="dashStock">0</strong>
+</div>
 
-  <div class="card">
-    <div class="dashboard-title">🛒 Purchase</div>
-    <h2 id="purchase">$0 USD</h2>
-  </div>
+<div class="card">
+<h3>Purchase USD</h3>
+<strong id="dashPurchase">$0</strong>
+</div>
 
-  <div class="card">
-    <div class="dashboard-title">💵 Sale</div>
-    <h2 id="sale">$0 USD</h2>
-  </div>
+<div class="card">
+<h3>Sales USD</h3>
+<strong id="dashSale">$0</strong>
+</div>
 
-  <div class="card">
-    <div class="dashboard-title">💸 Expenses</div>
-    <h2 id="expenses">0 AFN</h2>
-  </div>
+<div class="card">
+<h3>Expenses AFN</h3>
+<strong id="dashExpense">؋0</strong>
+</div>
 
-  <div class="card">
-    <div class="dashboard-title">📊 Profit / Loss</div>
-    <h2 id="profit">$0 USD</h2>
-  </div>
+<div class="card">
+<h3>Profit / Loss USD</h3>
+<strong id="dashProfit">$0</strong>
+</div>
 
 </div>
 
+<div id="lowStockBox"></div>
 
-<!-- SETTINGS -->
+<div class="panel">
+<h2>📌 Quick Actions</h2>
+<div class="flex">
+<button class="btn" onclick="quickPage('products')">➕ Add Product</button>
+<button class="btn" onclick="quickPage('purchase')">📥 Purchase</button>
+<button class="btn" onclick="quickPage('sale')">📤 Sale</button>
+<button class="btn" onclick="quickPage('expense')">💸 Expense</button>
+</div>
+</div>
 
-<div class="settings">
+</section>
 
-  <h2 id="settingsTitle">تنظیمات</h2>
 
-  <label id="languageLabel">ژبه</label>
+<!-- PRODUCTS -->
+<section id="products" class="page">
 
-  <select id="language" onchange="changeLanguage()">
-    <option value="ps">پښتو</option>
-    <option value="fa">دری</option>
-    <option value="en">English</option>
-  </select>
+<div class="panel">
+<h2>📦 Products / Stock</h2>
 
-  <label id="currencyLabel">کرنسي</label>
+<div class="form-grid">
 
-  <select id="currency" onchange="changeCurrency()">
-    <option value="AFN">AFN - افغانۍ</option>
-    <option value="USD">USD - Dollar</option>
-    <option value="Rs">Rs - Rupee</option>
-  </select>
+<input id="productName" placeholder="Product Name">
 
-  <p id="selectedCurrency"></p>
+<input id="productCode" placeholder="Product Code">
+
+<input id="productBuy" type="number" step="0.01" placeholder="Buying Price USD">
+
+<input id="productQty" type="number" placeholder="Quantity">
+
+<input id="productLimit" type="number" placeholder="Low Stock Limit">
 
 </div>
 
+<button class="btn" onclick="saveProduct()">💾 Save Product</button>
 
-<!-- INFO -->
+<input class="search" id="productSearch" oninput="renderProducts()" placeholder="🔎 Search product...">
 
-<div class="cards">
-
-  <div class="card">
-    <h3 id="productsTitle">ټول محصولات</h3>
-    <h2 id="productCount">0</h2>
-  </div>
-
-  <div class="card">
-    <h3 id="salesTitle">ټولې خرڅلاوې</h3>
-    <h2 id="salesCount">0</h2>
-  </div>
-
-  <div class="card">
-    <h3>کرنسي</h3>
-    <h2 id="currencyDisplay">AFN</h2>
-  </div>
-
+<div id="productsTable"></div>
 </div>
 
-
-<!-- ADD PRODUCT -->
-
-<div class="section">
-
-  <h2 id="addProductTitle">نوی محصول اضافه کړه</h2>
-
-  <input id="productName" type="text" placeholder="د محصول نوم">
-
-  <input id="productCode" type="text" placeholder="Product Code">
-
-  <input
-    id="productPrice"
-    type="number"
-    min="0"
-    placeholder="د اخیستلو نرخ (USD)"
-  >
-
-  <input
-    id="productQuantity"
-    type="number"
-    min="0"
-    placeholder="تعداد"
-  >
-
-  <input
-    id="lowLimit"
-    type="number"
-    min="0"
-    placeholder="Low Stock Limit"
-  >
-
-  <button id="saveButton" onclick="addProduct()">
-    ➕ محصول Save کړه
-  </button>
-
-  <p id="message"></p>
-
-</div>
-
-
-<!-- PRODUCT LIST -->
-
-<div class="section">
-
-  <h2 id="listTitle">د محصولاتو لېست</h2>
-
-  <div id="productList"></div>
-
-</div>
+</section>
 
 
 <!-- PURCHASE -->
+<section id="purchase" class="page">
 
-<div class="section">
+<div class="panel">
+<h2>📥 Purchase</h2>
 
-  <h2>🛒 Purchase | خریداری</h2>
+<div class="form-grid">
 
-  <input
-    id="purchaseProduct"
-    type="text"
-    placeholder="د محصول نوم"
-  >
+<select id="purchaseProduct"></select>
 
-  <input
-    id="purchaseQty"
-    type="number"
-    min="1"
-    placeholder="تعداد"
-  >
+<input id="purchaseQty" type="number" placeholder="Quantity">
 
-  <input
-    id="purchasePrice"
-    type="number"
-    min="0"
-    placeholder="د اخیستلو قیمت (USD)"
-  >
+<input id="purchasePrice" type="number" step="0.01" placeholder="Buying Price USD">
 
-  <div class="date-box">
-    <label>📅 د خریداری نېټه</label>
-    <input id="purchaseDate" type="date">
-  </div>
+<input id="purchaseDate" type="date">
 
-  <button onclick="addPurchase()">
-    ➕ Add Purchase
-  </button>
-
-  <div id="purchaseList"></div>
+<input id="purchaseTime" type="time">
 
 </div>
+
+<button class="btn" onclick="addPurchase()">➕ Add Purchase</button>
+
+<div id="purchaseTable"></div>
+</div>
+
+</section>
 
 
 <!-- SALE -->
+<section id="sale" class="page">
 
-<div class="section">
+<div class="panel">
+<h2>📤 Sale</h2>
 
-  <h2>💵 Sale | خرڅلاو</h2>
+<div class="form-grid">
 
-  <input
-    id="saleProduct"
-    type="text"
-    placeholder="د محصول نوم"
-  >
+<select id="saleProduct"></select>
 
-  <input
-    id="saleQty"
-    type="number"
-    min="1"
-    placeholder="تعداد"
-  >
+<input id="saleQty" type="number" placeholder="Quantity">
 
-  <input
-    id="salePrice"
-    type="number"
-    min="0"
-    placeholder="د خرڅلاو قیمت (USD)"
-  >
+<input id="salePrice" type="number" step="0.01" placeholder="Sale Price USD">
 
-  <div class="date-box">
-    <label>📅 د خرڅلاو نېټه</label>
-    <input id="saleDate" type="date">
-  </div>
+<input id="saleDate" type="date">
 
-  <button onclick="addSale()">
-    💵 Add Sale
-  </button>
-
-  <div id="saleList"></div>
+<input id="saleTime" type="time">
 
 </div>
 
+<button class="btn" onclick="addSale()">➕ Add Sale</button>
 
-<!-- EXPENSES -->
+<div id="saleTable"></div>
+</div>
 
-<div class="section">
+</section>
 
-  <h2>💸 Expenses | مصارف</h2>
 
-  <input
-    id="expenseName"
-    type="text"
-    placeholder="د مصرف نوم"
-  >
+<!-- EXPENSE -->
+<section id="expense" class="page">
 
-  <input
-    id="expenseAmount"
-    type="number"
-    min="0"
-    placeholder="مبلغ (AFN)"
-  >
+<div class="panel">
+<h2>💸 Expenses</h2>
 
-  <div class="date-box">
-    <label>📅 د مصرف نېټه</label>
-    <input id="expenseDate" type="date">
-  </div>
+<div class="form-grid">
 
-  <button onclick="addExpense()">
-    ➕ Add Expense
-  </button>
+<input id="expenseName" placeholder="Expense Name">
 
-  <div id="expenseList"></div>
+<input id="expenseAmount" type="number" step="0.01" placeholder="Amount AFN">
+
+<input id="expenseDate" type="date">
+
+<input id="expenseTime" type="time">
 
 </div>
+
+<button class="btn" onclick="addExpense()">➕ Add Expense</button>
+
+<div id="expenseTable"></div>
+</div>
+
+</section>
+
+
+<!-- DEBT -->
+<section id="debt" class="page">
+
+<div class="panel">
+<h2>📒 Debt / پور</h2>
+
+<div class="form-grid">
+
+<input id="debtName" placeholder="Customer Name">
+
+<input id="debtPhone" placeholder="Phone">
+
+<input id="debtAmount" type="number" step="0.01" placeholder="Debt Amount USD">
+
+<input id="debtPaid" type="number" step="0.01" placeholder="Paid USD">
+
+<input id="debtDate" type="date">
+
+<textarea id="debtNote" placeholder="Note"></textarea>
+
+</div>
+
+<button class="btn" onclick="addDebt()">➕ Save Debt</button>
+
+<div id="debtTable"></div>
+</div>
+
+</section>
 
 
 <!-- CAPITAL -->
+<section id="capital" class="page">
 
-<div class="section">
+<div class="panel">
 
-  <h2>💰 Capital | سرمایه</h2>
+<h2>💰 Capital</h2>
 
-  <input
-    id="capitalAmount"
-    type="number"
-    min="0"
-    placeholder="د سرمایې مبلغ (USD)"
-  >
+<div class="alert">
+Capital information is protected by PIN.
+</div>
 
-  <button onclick="saveCapital()">
-    💾 Save Capital
-  </button>
+<input id="capitalPin" type="password" placeholder="Security PIN">
 
-  <div id="capitalDisplay"></div>
+<button class="btn" onclick="openCapital()">🔐 Open Capital</button>
+
+<div id="capitalArea" style="display:none">
+
+<br>
+
+<input id="capitalAmount" type="number" step="0.01" placeholder="Capital USD">
+
+<button class="btn" onclick="saveCapital()">💾 Save Capital</button>
+
+<h3>Current Capital: <span id="capitalValue">$0</span></h3>
 
 </div>
+
+</div>
+
+</section>
 
 
 <!-- REPORTS -->
+<section id="reports" class="page">
 
-<div class="section">
+<div class="panel">
 
-  <h2>📊 Reports | راپورونه</h2>
+<h2>📊 Reports</h2>
 
-  <div>
+<div class="flex">
 
-    <button
-      id="dailyBtn"
-      class="report-btn"
-      onclick="showReport('daily')"
-    >
-      📅 Daily
-    </button>
+<button class="btn" onclick="setReport('daily')">Daily</button>
 
-    <button
-      id="weeklyBtn"
-      class="report-btn"
-      onclick="showReport('weekly')"
-    >
-      📆 Weekly
-    </button>
+<button class="btn" onclick="setReport('weekly')">Weekly</button>
 
-    <button
-      id="monthlyBtn"
-      class="report-btn"
-      onclick="showReport('monthly')"
-    >
-      🗓️ Monthly
-    </button>
+<button class="btn" onclick="setReport('monthly')">Monthly</button>
 
-    <button
-      id="yearlyBtn"
-      class="report-btn"
-      onclick="showReport('yearly')"
-    >
-      📈 Yearly
-    </button>
+<button class="btn" onclick="setReport('yearly')">Yearly</button>
 
-  </div>
+</div>
 
-  <div class="report-box">
+<br>
 
-    <label>
-      📅 د راپور نېټه:
-    </label>
+<input id="reportDate" type="date" onchange="renderReport()">
 
-    <input
-      id="reportDate"
-      type="date"
-      onchange="showReport(currentReportType)"
-    >
+<div class="cards" style="margin-top:15px">
 
-    <h3 id="reportTitle">Daily Report</h3>
+<div class="card">
+<h3>Sales</h3>
+<strong id="reportSales">$0</strong>
+</div>
 
-    <div class="report-grid">
+<div class="card">
+<h3>Purchases</h3>
+<strong id="reportPurchases">$0</strong>
+</div>
 
-      <div class="report-item">
-        <strong>💵 Sales</strong>
-        <span class="money-usd" id="reportSales">
-          $0 USD
-        </span>
-      </div>
+<div class="card">
+<h3>Expenses</h3>
+<strong id="reportExpenses">؋0</strong>
+</div>
 
-      <div class="report-item">
-        <strong>🛒 Purchases</strong>
-        <span class="money-usd" id="reportPurchases">
-          $0 USD
-        </span>
-      </div>
+<div class="card">
+<h3>Profit / Loss</h3>
+<strong id="reportProfit">$0</strong>
+</div>
 
-      <div class="report-item">
-        <strong>💸 Expenses</strong>
-        <span class="money-afn" id="reportExpenses">
-          0 AFN
-        </span>
-      </div>
+</div>
 
-      <div class="report-item">
-        <strong>📊 Profit / Loss</strong>
-        <span class="money-usd" id="reportProfit">
-          $0 USD
-        </span>
-      </div>
+<div class="panel">
+<p>Sales Count: <b id="reportSaleCount">0</b></p>
+<p>Purchase Count: <b id="reportPurchaseCount">0</b></p>
+<p>Expense Count: <b id="reportExpenseCount">0</b></p>
+</div>
 
-      <div class="report-item">
-        <strong>💵 Sale Count</strong>
-        <span id="reportSaleCount">0</span>
-      </div>
+</div>
 
-      <div class="report-item">
-        <strong>🛒 Purchase Count</strong>
-        <span id="reportPurchaseCount">0</span>
-      </div>
+</section>
 
-      <div class="report-item">
-        <strong>💸 Expense Count</strong>
-        <span id="reportExpenseCount">0</span>
-      </div>
 
-    </div>
+<!-- SETTINGS -->
+<section id="settings" class="page">
 
-  </div>
+<div class="panel">
+
+<h2>⚙️ Settings</h2>
+
+<label>Shop Name</label>
+<input id="settingShopName" placeholder="Samad Solar">
+
+<label>Address</label>
+<input id="settingAddress" placeholder="Shop Address">
+
+<label>Phone</label>
+<input id="settingPhone" placeholder="Phone Number">
+
+<label>WhatsApp</label>
+<input id="settingWhatsapp" placeholder="WhatsApp Number">
+
+<label>Language</label>
+<select id="settingLanguage">
+<option value="ps">پښتو</option>
+<option value="fa">دری</option>
+<option value="en">English</option>
+</select>
+
+<label>Currency</label>
+<select id="settingCurrency">
+<option value="AFN">AFN - افغانی</option>
+<option value="USD">USD - Dollar</option>
+<option value="Rs">Rs - Rupee</option>
+</select>
+
+<label>Security PIN</label>
+<input id="settingPin" type="password" placeholder="New PIN">
+
+<label>Logo</label>
+<input id="settingLogo" type="file" accept="image/*">
+
+<button class="btn" onclick="saveSettings()">💾 Save Settings</button>
+
+<hr>
+
+<h3>💾 Backup</h3>
+
+<button class="btn secondary" onclick="backupData()">⬇️ Download Backup</button>
+
+<input id="restoreFile" type="file" accept=".json" onchange="restoreData(event)">
+
+</div>
+
+</section>
+
+</div>
+
+
+<!-- EDIT MODAL -->
+<div class="modal" id="editModal">
+
+<div class="modal-box">
+
+<h2>✏️ Edit Product</h2>
+
+<input type="hidden" id="editProductId">
+
+<input id="editProductName" placeholder="Product Name">
+
+<input id="editProductCode" placeholder="Product Code">
+
+<input id="editProductBuy" type="number" step="0.01" placeholder="Buying Price">
+
+<input id="editProductQty" type="number" placeholder="Quantity">
+
+<input id="editProductLimit" type="number" placeholder="Low Stock Limit">
+
+<button class="btn" onclick="updateProduct()">💾 Update</button>
+
+<button class="btn light" onclick="closeModal()">Cancel</button>
 
 </div>
 
 </div>
+
+
+<!-- INVOICE MODAL -->
+<div class="modal" id="invoiceModal">
+
+<div class="modal-box">
+
+<div id="invoiceContent"></div>
+
+<div class="flex">
+
+<button class="btn" onclick="printInvoice()">🖨️ Print</button>
+
+<button class="btn secondary" onclick="shareInvoice()">📤 Share</button>
+
+<button class="btn light" onclick="closeInvoice()">Close</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<footer>
+Samad Solar © 2026
+</footer>
 
 
 <script>
@@ -583,699 +651,312 @@ hr{
    DATA
 ========================= */
 
-let products =
-  JSON.parse(localStorage.getItem("samadProducts")) || [];
+let products = JSON.parse(localStorage.getItem("samadProducts") || "[]");
+let purchases = JSON.parse(localStorage.getItem("samadPurchases") || "[]");
+let sales = JSON.parse(localStorage.getItem("samadSales") || "[]");
+let expenses = JSON.parse(localStorage.getItem("samadExpenses") || "[]");
+let debts = JSON.parse(localStorage.getItem("samadDebts") || "[]");
 
-let currentLanguage =
-  localStorage.getItem("samadLanguage") || "ps";
+let capital = Number(localStorage.getItem("samadCapital") || 0);
 
-let currentCurrency =
-  localStorage.getItem("samadCurrency") || "AFN";
+let settings = JSON.parse(localStorage.getItem("samadSettings") || "{}");
 
-let currentReportType = "daily";
-
-
-/* =========================
-   TRANSLATIONS
-========================= */
-
-const translations = {
-
-  ps:{
-    dir:"rtl",
-    subtitle:"د سولر دوکان د مدیریت سیستم",
-    settings:"تنظیمات",
-    language:"ژبه",
-    currency:"کرنسي",
-    products:"ټول محصولات",
-    sales:"ټولې خرڅلاوې",
-    addProduct:"نوی محصول اضافه کړه",
-    save:"➕ محصول Save کړه",
-    list:"د محصولاتو لېست",
-    name:"د محصول نوم",
-    code:"Product Code",
-    price:"د اخیستلو نرخ (USD)",
-    quantity:"تعداد",
-    lowLimit:"Low Stock Limit",
-    empty:"تر اوسه محصول نشته.",
-    success:"محصول په بریالیتوب سره Save شو.",
-    error:"مهرباني وکړئ د محصول نوم او تعداد ولیکئ.",
-    inStock:"✅ Stock موجود دی",
-    lowStock:"⚠️ Low Stock",
-    delete:"Delete"
-  },
-
-  fa:{
-    dir:"rtl",
-    subtitle:"سیستم مدیریت فروشگاه سولر",
-    settings:"تنظیمات",
-    language:"زبان",
-    currency:"واحد پول",
-    products:"تمام محصولات",
-    sales:"تمام فروش‌ها",
-    addProduct:"افزودن محصول جدید",
-    save:"➕ ذخیره محصول",
-    list:"لیست محصولات",
-    name:"نام محصول",
-    code:"کد محصول",
-    price:"قیمت خرید (USD)",
-    quantity:"تعداد",
-    lowLimit:"حد پایین موجودی",
-    empty:"هنوز محصولی وجود ندارد.",
-    success:"محصول با موفقیت ذخیره شد.",
-    error:"لطفاً نام محصول و تعداد را وارد کنید.",
-    inStock:"✅ موجودی کافی است",
-    lowStock:"⚠️ موجودی کم است",
-    delete:"حذف"
-  },
-
-  en:{
-    dir:"ltr",
-    subtitle:"Solar Shop Management System",
-    settings:"Settings",
-    language:"Language",
-    currency:"Currency",
-    products:"Total Products",
-    sales:"Total Sales",
-    addProduct:"Add New Product",
-    save:"➕ Save Product",
-    list:"Product List",
-    name:"Product Name",
-    code:"Product Code",
-    price:"Buying Price (USD)",
-    quantity:"Quantity",
-    lowLimit:"Low Stock Limit",
-    empty:"No products yet.",
-    success:"Product saved successfully.",
-    error:"Please enter product name and quantity.",
-    inStock:"✅ In Stock",
-    lowStock:"⚠️ Low Stock",
-    delete:"Delete"
-  }
-
-};
-
-
-function t(key){
-  return translations[currentLanguage][key];
-}
+let reportPeriod = "daily";
 
 
 /* =========================
-   DATA GETTERS
+   HELPERS
 ========================= */
 
-function getPurchases(){
-  return JSON.parse(
-    localStorage.getItem("samadPurchases") || "[]"
-  );
-}
+function saveAll(){
 
-function getSales(){
-  return JSON.parse(
-    localStorage.getItem("samadSales") || "[]"
-  );
-}
-
-function getExpenses(){
-  return JSON.parse(
-    localStorage.getItem("samadExpenses") || "[]"
-  );
-}
-
-function getCapital(){
-  return Number(
-    localStorage.getItem("samadCapital") || 0
-  );
-}
-
-
-/* =========================
-   SAVE PRODUCTS
-========================= */
-
-function saveData(){
-
-  localStorage.setItem(
-    "samadProducts",
-    JSON.stringify(products)
-  );
+localStorage.setItem("samadProducts",JSON.stringify(products));
+localStorage.setItem("samadPurchases",JSON.stringify(purchases));
+localStorage.setItem("samadSales",JSON.stringify(sales));
+localStorage.setItem("samadExpenses",JSON.stringify(expenses));
+localStorage.setItem("samadDebts",JSON.stringify(debts));
+localStorage.setItem("samadCapital",capital);
+localStorage.setItem("samadSettings",JSON.stringify(settings));
 
 }
-
-
-/* =========================
-   DATE FUNCTIONS
-========================= */
 
 function todayInputDate(){
 
-  const now = new Date();
+let d=new Date();
 
-  const year =
-    now.getFullYear();
-
-  const month =
-    String(now.getMonth()+1).padStart(2,"0");
-
-  const day =
-    String(now.getDate()).padStart(2,"0");
-
-  return `${year}-${month}-${day}`;
-}
-
-
-function dateToISO(dateString){
-
-  if(!dateString){
-    return new Date().toISOString();
-  }
-
-  return new Date(
-    dateString + "T12:00:00"
-  ).toISOString();
+return d.toISOString().split("T")[0];
 
 }
 
+function nowTime(){
 
-function getValidDate(value){
+let d=new Date();
 
-  if(!value){
-    return null;
-  }
-
-  const date =
-    new Date(value);
-
-  if(!isNaN(date.getTime())){
-    return date;
-  }
-
-  const parts =
-    String(value).split("/");
-
-  if(parts.length === 3){
-
-    const d =
-      Number(parts[0]);
-
-    const m =
-      Number(parts[1]) - 1;
-
-    const y =
-      Number(parts[2]);
-
-    const oldDate =
-      new Date(y,m,d);
-
-    if(!isNaN(oldDate.getTime())){
-      return oldDate;
-    }
-
-  }
-
-  return null;
-}
-
-
-function formatDate(value){
-
-  const date =
-    getValidDate(value);
-
-  if(!date){
-    return value || "";
-  }
-
-  return date.toLocaleDateString();
+return d.toTimeString().slice(0,5);
 
 }
 
+function money(n,currency="USD"){
 
-function setDefaultDates(){
+n=Number(n)||0;
 
-  const today =
-    todayInputDate();
+if(currency==="AFN") return "؋"+n.toLocaleString();
 
-  const purchaseDate =
-    document.getElementById("purchaseDate");
+if(currency==="Rs") return "Rs "+n.toLocaleString();
 
-  const saleDate =
-    document.getElementById("saleDate");
+return "$"+n.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
 
-  const expenseDate =
-    document.getElementById("expenseDate");
+}
 
-  const reportDate =
-    document.getElementById("reportDate");
+function uid(){
 
-  if(purchaseDate && !purchaseDate.value){
-    purchaseDate.value = today;
-  }
+return Date.now()+Math.floor(Math.random()*10000);
 
-  if(saleDate && !saleDate.value){
-    saleDate.value = today;
-  }
+}
 
-  if(expenseDate && !expenseDate.value){
-    expenseDate.value = today;
-  }
+function escapeHtml(text){
 
-  if(reportDate && !reportDate.value){
-    reportDate.value = today;
-  }
+return String(text ?? "")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
 
 }
 
 
 /* =========================
-   LANGUAGE
+   NAVIGATION
 ========================= */
 
-function applyLanguage(){
+function showPage(id,btn){
 
-  const language =
-    translations[currentLanguage];
+document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
 
-  document.documentElement.lang =
-    currentLanguage;
+document.getElementById(id).classList.add("active");
 
-  document.documentElement.dir =
-    language.dir;
+document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
 
-  document.getElementById("appSubtitle")
-    .textContent =
-    language.subtitle;
+if(btn) btn.classList.add("active");
 
-  document.getElementById("settingsTitle")
-    .textContent =
-    language.settings;
-
-  document.getElementById("languageLabel")
-    .textContent =
-    language.language;
-
-  document.getElementById("currencyLabel")
-    .textContent =
-    language.currency;
-
-  document.getElementById("productsTitle")
-    .textContent =
-    language.products;
-
-  document.getElementById("salesTitle")
-    .textContent =
-    language.sales;
-
-  document.getElementById("addProductTitle")
-    .textContent =
-    language.addProduct;
-
-  document.getElementById("saveButton")
-    .textContent =
-    language.save;
-
-  document.getElementById("listTitle")
-    .textContent =
-    language.list;
-
-  document.getElementById("productName")
-    .placeholder =
-    language.name;
-
-  document.getElementById("productCode")
-    .placeholder =
-    language.code;
-
-  document.getElementById("productPrice")
-    .placeholder =
-    language.price;
-
-  document.getElementById("productQuantity")
-    .placeholder =
-    language.quantity;
-
-  document.getElementById("lowLimit")
-    .placeholder =
-    language.lowLimit;
-
-  document.getElementById("language")
-    .value =
-    currentLanguage;
-
-  document.getElementById("currency")
-    .value =
-    currentCurrency;
-
-  document.getElementById("currencyDisplay")
-    .textContent =
-    currentCurrency;
-
-  document.getElementById("selectedCurrency")
-    .textContent =
-    language.currency +
-    ": " +
-    currentCurrency;
-
-  showProducts();
-  showPurchases();
-  showSales();
-  showExpenses();
-  showCapital();
-  showDashboard();
-  showReport(currentReportType);
+renderAll();
 
 }
 
+function quickPage(id){
 
-function changeLanguage(){
+let button=[...document.querySelectorAll("nav button")]
+.find(b=>b.getAttribute("onclick")?.includes("'"+id+"'"));
 
-  currentLanguage =
-    document.getElementById("language").value;
-
-  localStorage.setItem(
-    "samadLanguage",
-    currentLanguage
-  );
-
-  applyLanguage();
-
-}
-
-
-function changeCurrency(){
-
-  currentCurrency =
-    document.getElementById("currency").value;
-
-  localStorage.setItem(
-    "samadCurrency",
-    currentCurrency
-  );
-
-  applyLanguage();
+showPage(id,button);
 
 }
 
 
 /* =========================
-   DASHBOARD
+   PRODUCTS
 ========================= */
 
-function showDashboard(){
+function saveProduct(){
 
-  const purchases =
-    getPurchases();
+let name=document.getElementById("productName").value.trim();
 
-  const sales =
-    getSales();
+let code=document.getElementById("productCode").value.trim();
 
-  const expenses =
-    getExpenses();
+let buy=Number(document.getElementById("productBuy").value);
 
-  const capital =
-    getCapital();
+let qty=Number(document.getElementById("productQty").value);
 
-  const purchaseTotal =
-    purchases.reduce(
-      (total,item)=>
-        total +
-        Number(item.total || 0),
-      0
-    );
+let limit=Number(document.getElementById("productLimit").value);
 
-  const saleTotal =
-    sales.reduce(
-      (total,item)=>
-        total +
-        Number(item.total || 0),
-      0
-    );
+if(!name){
 
-  const expenseTotal =
-    expenses.reduce(
-      (total,item)=>
-        total +
-        Number(item.amount || 0),
-      0
-    );
+alert("Product name required");
 
-  const stockTotal =
-    products.reduce(
-      (total,product)=>
-        total +
-        Number(product.quantity || 0),
-      0
-    );
+return;
 
-  const profit =
-    saleTotal -
-    purchaseTotal;
+}
 
-  document.getElementById("capital")
-    .textContent =
-    "$" +
-    formatNumber(capital) +
-    " USD";
+products.push({
 
-  document.getElementById("stock")
-    .textContent =
-    formatNumber(stockTotal);
+id:uid(),
 
-  document.getElementById("purchase")
-    .textContent =
-    "$" +
-    formatNumber(purchaseTotal) +
-    " USD";
+name,
 
-  document.getElementById("sale")
-    .textContent =
-    "$" +
-    formatNumber(saleTotal) +
-    " USD";
+code,
 
-  document.getElementById("expenses")
-    .textContent =
-    formatNumber(expenseTotal) +
-    " AFN";
+buy,
 
-  document.getElementById("profit")
-    .textContent =
-    "$" +
-    formatNumber(profit) +
-    " USD";
+qty,
 
-  document.getElementById("salesCount")
-    .textContent =
-    sales.length;
+limit,
+
+createdAt:new Date().toISOString()
+
+});
+
+saveAll();
+
+document.getElementById("productName").value="";
+document.getElementById("productCode").value="";
+document.getElementById("productBuy").value="";
+document.getElementById("productQty").value="";
+document.getElementById("productLimit").value="";
+
+renderAll();
+
+alert("Product saved successfully");
 
 }
 
 
-function formatNumber(number){
+function renderProducts(){
 
-  return Number(number || 0)
-    .toLocaleString();
+let search=document.getElementById("productSearch")?.value.toLowerCase() || "";
+
+let list=products.filter(p=>
+(p.name||"").toLowerCase().includes(search) ||
+(p.code||"").toLowerCase().includes(search)
+);
+
+if(!list.length){
+
+document.getElementById("productsTable").innerHTML=
+'<div class="empty">No products found</div>';
+
+return;
+
+}
+
+let html=`
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Code</th>
+<th>Buy USD</th>
+<th>Qty</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+`;
+
+list.forEach(p=>{
+
+let low=Number(p.qty)<=Number(p.limit);
+
+html+=`
+<tr>
+<td>${escapeHtml(p.name)}</td>
+<td>${escapeHtml(p.code)}</td>
+<td>${money(p.buy)}</td>
+<td>${p.qty}</td>
+<td class="${low?'low':'good'}">
+${low?'⚠️ Low Stock':'✓ Good'}
+</td>
+<td>
+<button class="btn warning" onclick="editProduct(${p.id})">✏️</button>
+<button class="btn danger" onclick="deleteProduct(${p.id})">🗑️</button>
+</td>
+</tr>
+`;
+
+});
+
+html+="</tbody></table>";
+
+document.getElementById("productsTable").innerHTML=html;
+
+}
+
+
+function editProduct(id){
+
+let p=products.find(x=>x.id===id);
+
+if(!p)return;
+
+document.getElementById("editProductId").value=id;
+
+document.getElementById("editProductName").value=p.name;
+
+document.getElementById("editProductCode").value=p.code;
+
+document.getElementById("editProductBuy").value=p.buy;
+
+document.getElementById("editProductQty").value=p.qty;
+
+document.getElementById("editProductLimit").value=p.limit;
+
+document.getElementById("editModal").classList.add("show");
+
+}
+
+
+function updateProduct(){
+
+let id=Number(document.getElementById("editProductId").value);
+
+let p=products.find(x=>x.id===id);
+
+if(!p)return;
+
+p.name=document.getElementById("editProductName").value;
+
+p.code=document.getElementById("editProductCode").value;
+
+p.buy=Number(document.getElementById("editProductBuy").value);
+
+p.qty=Number(document.getElementById("editProductQty").value);
+
+p.limit=Number(document.getElementById("editProductLimit").value);
+
+saveAll();
+
+closeModal();
+
+renderAll();
+
+}
+
+
+function deleteProduct(id){
+
+if(!confirm("Delete this product?"))return;
+
+products=products.filter(p=>p.id!==id);
+
+saveAll();
+
+renderAll();
 
 }
 
 
 /* =========================
-   ADD PRODUCT
+   DROPDOWNS
 ========================= */
 
-function addProduct(){
+function renderProductSelects(){
 
-  const name =
-    document.getElementById("productName")
-      .value.trim();
+let options='<option value="">Select Product</option>';
 
-  const code =
-    document.getElementById("productCode")
-      .value.trim();
+products.forEach(p=>{
 
-  const price =
-    Number(
-      document.getElementById("productPrice")
-        .value || 0
-    );
+options+=`
+<option value="${p.id}">
+${escapeHtml(p.name)} — Stock: ${p.qty}
+</option>
+`;
 
-  const quantity =
-    Number(
-      document.getElementById("productQuantity")
-        .value || 0
-    );
+});
 
-  const lowLimit =
-    Number(
-      document.getElementById("lowLimit")
-        .value || 0
-    );
+document.getElementById("purchaseProduct").innerHTML=options;
 
-  if(!name || quantity <= 0){
-
-    document.getElementById("message")
-      .textContent =
-      t("error");
-
-    return;
-  }
-
-  products.push({
-
-    name:name,
-    code:code,
-    price:price,
-    quantity:quantity,
-    lowLimit:lowLimit,
-    currency:"USD"
-
-  });
-
-  saveData();
-
-  clearProductForm();
-
-  document.getElementById("message")
-    .textContent =
-    t("success");
-
-  showProducts();
-  showDashboard();
-
-}
-
-
-function clearProductForm(){
-
-  document.getElementById("productName")
-    .value="";
-
-  document.getElementById("productCode")
-    .value="";
-
-  document.getElementById("productPrice")
-    .value="";
-
-  document.getElementById("productQuantity")
-    .value="";
-
-  document.getElementById("lowLimit")
-    .value="";
-
-}
-
-
-/* =========================
-   SHOW PRODUCTS
-========================= */
-
-function showProducts(){
-
-  const list =
-    document.getElementById("productList");
-
-  document.getElementById("productCount")
-    .textContent =
-    products.length;
-
-  if(products.length === 0){
-
-    list.innerHTML =
-      `<div class="empty">
-        ${t("empty")}
-      </div>`;
-
-    return;
-  }
-
-  list.innerHTML =
-    products.map((product,index)=>{
-
-      const quantity =
-        Number(product.quantity || 0);
-
-      const lowLimit =
-        Number(product.lowLimit || 0);
-
-      const isLow =
-        lowLimit > 0 &&
-        quantity <= lowLimit;
-
-      const stockStatus =
-        isLow
-          ? `<span class="low-stock">
-              ${t("lowStock")}
-            </span>`
-          : `<span class="in-stock">
-              ${t("inStock")}
-            </span>`;
-
-      return `
-
-        <div class="product">
-
-          <h3>
-            ${index + 1}.
-            ${escapeHtml(product.name)}
-          </h3>
-
-          <p>
-            ${t("code")}:
-            ${escapeHtml(product.code || "-")}
-          </p>
-
-          <p>
-            ${t("price")}:
-            <span class="money-usd">
-              $${formatNumber(product.price || 0)} USD
-            </span>
-          </p>
-
-          <p>
-            ${t("quantity")}:
-            ${formatNumber(quantity)}
-          </p>
-
-          <p>
-            ${t("lowLimit")}:
-            ${formatNumber(lowLimit)}
-          </p>
-
-          <p>${stockStatus}</p>
-
-          <button
-            class="delete-btn"
-            onclick="deleteProduct(${index})"
-          >
-            🗑️ ${t("delete")}
-          </button>
-
-        </div>
-
-      `;
-
-    }).join("");
-
-}
-
-
-/* =========================
-   DELETE PRODUCT
-========================= */
-
-function deleteProduct(index){
-
-  if(!products[index]){
-    return;
-  }
-
-  products.splice(index,1);
-
-  saveData();
-
-  showProducts();
-  showDashboard();
+document.getElementById("saleProduct").innerHTML=options;
 
 }
 
@@ -1286,216 +967,131 @@ function deleteProduct(index){
 
 function addPurchase(){
 
-  const productName =
-    document.getElementById("purchaseProduct")
-      .value.trim();
+let productId=Number(document.getElementById("purchaseProduct").value);
 
-  const qty =
-    Number(
-      document.getElementById("purchaseQty")
-        .value || 0
-    );
+let qty=Number(document.getElementById("purchaseQty").value);
 
-  const price =
-    Number(
-      document.getElementById("purchasePrice")
-        .value || 0
-    );
+let price=Number(document.getElementById("purchasePrice").value);
 
-  const selectedDate =
-    document.getElementById("purchaseDate")
-      .value;
+let date=document.getElementById("purchaseDate").value || todayInputDate();
 
-  if(!productName || qty <= 0 || price <= 0){
+let time=document.getElementById("purchaseTime").value || nowTime();
 
-    alert(
-      "لطفاً ټول معلومات ولیکئ"
-    );
+let p=products.find(x=>x.id===productId);
 
-    return;
-  }
+if(!p || qty<=0 || price<0){
 
-  if(!selectedDate){
+alert("Please enter correct information");
 
-    alert(
-      "لطفاً د خریداری نېټه وټاکئ"
-    );
+return;
 
-    return;
-  }
+}
 
-  const productIndex =
-    products.findIndex(
-      product =>
-        product.name.toLowerCase() ===
-        productName.toLowerCase()
-    );
+p.qty+=qty;
 
-  if(productIndex === -1){
+p.buy=price;
 
-    alert(
-      "دا محصول په Stock کې نشته. لومړی یې د Product List کې اضافه کړئ."
-    );
+purchases.push({
 
-    return;
-  }
+id:uid(),
 
-  products[productIndex].quantity =
-    Number(
-      products[productIndex].quantity || 0
-    ) + qty;
+productId,
 
-  saveData();
+productName:p.name,
 
-  const purchases =
-    getPurchases();
+qty,
 
-  purchases.push({
+price,
 
-    product:productName,
-    qty:qty,
-    price:price,
-    total:qty * price,
-    currency:"USD",
-    date:dateToISO(selectedDate)
+total:qty*price,
 
-  });
+date,
 
-  localStorage.setItem(
-    "samadPurchases",
-    JSON.stringify(purchases)
-  );
+time,
 
-  document.getElementById("purchaseProduct")
-    .value="";
+createdAt:new Date().toISOString()
 
-  document.getElementById("purchaseQty")
-    .value="";
+});
 
-  document.getElementById("purchasePrice")
-    .value="";
+saveAll();
 
-  document.getElementById("purchaseDate")
-    .value=todayInputDate();
+document.getElementById("purchaseQty").value="";
+document.getElementById("purchasePrice").value="";
 
-  showPurchases();
-  showProducts();
-  showDashboard();
-  showReport(currentReportType);
+renderAll();
+
+alert("Purchase saved");
 
 }
 
 
-function showPurchases(){
+function renderPurchases(){
 
-  const list =
-    document.getElementById("purchaseList");
+if(!purchases.length){
 
-  const purchases =
-    getPurchases();
+document.getElementById("purchaseTable").innerHTML=
+'<div class="empty">No purchases</div>';
 
-  if(purchases.length === 0){
+return;
 
-    list.innerHTML =
-      `<div class="empty">
-        تر اوسه Purchase نشته.
-      </div>`;
+}
 
-    return;
-  }
+let html=`
+<table>
+<thead>
+<tr>
+<th>Product</th>
+<th>Qty</th>
+<th>Price</th>
+<th>Total</th>
+<th>Date</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+`;
 
-  list.innerHTML =
-    purchases.map((p,i)=>`
+purchases.slice().reverse().forEach(x=>{
 
-      <div class="card">
+html+=`
+<tr>
+<td>${escapeHtml(x.productName)}</td>
+<td>${x.qty}</td>
+<td>${money(x.price)}</td>
+<td>${money(x.total)}</td>
+<td>${escapeHtml(x.date)} ${escapeHtml(x.time||"")}</td>
+<td>
+<button class="btn danger" onclick="deletePurchase(${x.id})">🗑️</button>
+</td>
+</tr>
+`;
 
-        📦 ${escapeHtml(p.product)}
-        <br>
+});
 
-        تعداد:
-        ${formatNumber(p.qty)}
+html+="</tbody></table>";
 
-        <br>
-
-        قیمت:
-        <span class="money-usd">
-          $${formatNumber(p.price)} USD
-        </span>
-
-        <br>
-
-        ټول:
-        <span class="money-usd">
-          $${formatNumber(p.total)} USD
-        </span>
-
-        <br>
-
-        📅 نېټه:
-        ${escapeHtml(formatDate(p.date))}
-
-        <br><br>
-
-        <button
-          class="delete-btn"
-          onclick="deletePurchase(${i})"
-        >
-          🗑️ Delete
-        </button>
-
-      </div>
-
-    `).join("");
+document.getElementById("purchaseTable").innerHTML=html;
 
 }
 
 
-function deletePurchase(index){
+function deletePurchase(id){
 
-  const purchases =
-    getPurchases();
+let x=purchases.find(p=>p.id===id);
 
-  const purchase =
-    purchases[index];
+if(!x)return;
 
-  if(!purchase){
-    return;
-  }
+if(!confirm("Delete purchase? Stock will be adjusted."))return;
 
-  const productIndex =
-    products.findIndex(
-      product =>
-        product.name.toLowerCase() ===
-        String(purchase.product)
-          .toLowerCase()
-    );
+let p=products.find(p=>p.id===x.productId);
 
-  if(productIndex !== -1){
+if(p)p.qty-=Number(x.qty);
 
-    products[productIndex].quantity =
-      Math.max(
-        0,
-        Number(
-          products[productIndex].quantity || 0
-        ) -
-        Number(purchase.qty || 0)
-      );
+purchases=purchases.filter(p=>p.id!==id);
 
-    saveData();
+saveAll();
 
-  }
-
-  purchases.splice(index,1);
-
-  localStorage.setItem(
-    "samadPurchases",
-    JSON.stringify(purchases)
-  );
-
-  showPurchases();
-  showProducts();
-  showDashboard();
-  showReport(currentReportType);
+renderAll();
 
 }
 
@@ -1506,225 +1102,138 @@ function deletePurchase(index){
 
 function addSale(){
 
-  const productName =
-    document.getElementById("saleProduct")
-      .value.trim();
+let productId=Number(document.getElementById("saleProduct").value);
 
-  const qty =
-    Number(
-      document.getElementById("saleQty")
-        .value || 0
-    );
+let qty=Number(document.getElementById("saleQty").value);
 
-  const price =
-    Number(
-      document.getElementById("salePrice")
-        .value || 0
-    );
+let price=Number(document.getElementById("salePrice").value);
 
-  const selectedDate =
-    document.getElementById("saleDate")
-      .value;
+let date=document.getElementById("saleDate").value || todayInputDate();
 
-  if(!productName || qty <= 0 || price <= 0){
+let time=document.getElementById("saleTime").value || nowTime();
 
-    alert(
-      "لطفاً ټول معلومات ولیکئ"
-    );
+let p=products.find(x=>x.id===productId);
 
-    return;
-  }
+if(!p || qty<=0 || price<0){
 
-  if(!selectedDate){
+alert("Please enter correct information");
 
-    alert(
-      "لطفاً د خرڅلاو نېټه وټاکئ"
-    );
+return;
 
-    return;
-  }
+}
 
-  const productIndex =
-    products.findIndex(
-      product =>
-        product.name.toLowerCase() ===
-        productName.toLowerCase()
-    );
+if(qty>p.qty){
 
-  if(productIndex === -1){
+alert("Not enough stock");
 
-    alert(
-      "دا محصول په Stock کې نشته"
-    );
+return;
 
-    return;
-  }
+}
 
-  const currentStock =
-    Number(
-      products[productIndex].quantity || 0
-    );
+p.qty-=qty;
 
-  if(currentStock < qty){
+sales.push({
 
-    alert(
-      "په Stock کې دومره مال نشته"
-    );
+id:uid(),
 
-    return;
-  }
+productId,
 
-  products[productIndex].quantity =
-    currentStock - qty;
+productName:p.name,
 
-  saveData();
+qty,
 
-  const sales =
-    getSales();
+price,
 
-  sales.push({
+total:qty*price,
 
-    product:productName,
-    qty:qty,
-    price:price,
-    total:qty * price,
-    currency:"USD",
-    date:dateToISO(selectedDate)
+date,
 
-  });
+time,
 
-  localStorage.setItem(
-    "samadSales",
-    JSON.stringify(sales)
-  );
+createdAt:new Date().toISOString()
 
-  document.getElementById("saleProduct")
-    .value="";
+});
 
-  document.getElementById("saleQty")
-    .value="";
+saveAll();
 
-  document.getElementById("salePrice")
-    .value="";
+document.getElementById("saleQty").value="";
+document.getElementById("salePrice").value="";
 
-  document.getElementById("saleDate")
-    .value=todayInputDate();
+renderAll();
 
-  showSales();
-  showProducts();
-  showDashboard();
-  showReport(currentReportType);
+showInvoice(sales[sales.length-1]);
 
 }
 
 
-function showSales(){
+function renderSales(){
 
-  const list =
-    document.getElementById("saleList");
+if(!sales.length){
 
-  const sales =
-    getSales();
+document.getElementById("saleTable").innerHTML=
+'<div class="empty">No sales</div>';
 
-  if(sales.length === 0){
+return;
 
-    list.innerHTML =
-      `<div class="empty">
-        تر اوسه Sale نشته.
-      </div>`;
+}
 
-    return;
-  }
+let html=`
+<table>
+<thead>
+<tr>
+<th>Product</th>
+<th>Qty</th>
+<th>Price</th>
+<th>Total</th>
+<th>Date</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+`;
 
-  list.innerHTML =
-    sales.map((s,i)=>`
+sales.slice().reverse().forEach(x=>{
 
-      <div class="card">
+html+=`
+<tr>
+<td>${escapeHtml(x.productName)}</td>
+<td>${x.qty}</td>
+<td>${money(x.price)}</td>
+<td>${money(x.total)}</td>
+<td>${escapeHtml(x.date)} ${escapeHtml(x.time||"")}</td>
+<td>
+<button class="btn" onclick="showInvoiceById(${x.id})">🧾</button>
+<button class="btn danger" onclick="deleteSale(${x.id})">🗑️</button>
+</td>
+</tr>
+`;
 
-        💵 ${escapeHtml(s.product)}
-        <br>
+});
 
-        تعداد:
-        ${formatNumber(s.qty)}
+html+="</tbody></table>";
 
-        <br>
-
-        قیمت:
-        <span class="money-usd">
-          $${formatNumber(s.price)} USD
-        </span>
-
-        <br>
-
-        ټول:
-        <span class="money-usd">
-          $${formatNumber(s.total)} USD
-        </span>
-
-        <br>
-
-        📅 نېټه:
-        ${escapeHtml(formatDate(s.date))}
-
-        <br><br>
-
-        <button
-          class="delete-btn"
-          onclick="deleteSale(${i})"
-        >
-          🗑️ Delete
-        </button>
-
-      </div>
-
-    `).join("");
+document.getElementById("saleTable").innerHTML=html;
 
 }
 
 
-function deleteSale(index){
+function deleteSale(id){
 
-  const sales =
-    getSales();
+let x=sales.find(s=>s.id===id);
 
-  const sale =
-    sales[index];
+if(!x)return;
 
-  if(!sale){
-    return;
-  }
+if(!confirm("Delete sale? Stock will be restored."))return;
 
-  const productIndex =
-    products.findIndex(
-      product =>
-        product.name.toLowerCase() ===
-        String(sale.product)
-          .toLowerCase()
-    );
+let p=products.find(p=>p.id===x.productId);
 
-  if(productIndex !== -1){
+if(p)p.qty+=Number(x.qty);
 
-    products[productIndex].quantity =
-      Number(
-        products[productIndex].quantity || 0
-      ) +
-      Number(sale.qty || 0);
+sales=sales.filter(s=>s.id!==id);
 
-    saveData();
+saveAll();
 
-  }
-
-  sales.splice(index,1);
-
-  localStorage.setItem(
-    "samadSales",
-    JSON.stringify(sales)
-  );
-
-  showSales();
-  showProducts();
-  showDashboard();
-  showReport(currentReportType);
+renderAll();
 
 }
 
@@ -1735,142 +1244,229 @@ function deleteSale(index){
 
 function addExpense(){
 
-  const name =
-    document.getElementById("expenseName")
-      .value.trim();
+let name=document.getElementById("expenseName").value.trim();
 
-  const amount =
-    Number(
-      document.getElementById("expenseAmount")
-        .value || 0
-    );
+let amount=Number(document.getElementById("expenseAmount").value);
 
-  const selectedDate =
-    document.getElementById("expenseDate")
-      .value;
+let date=document.getElementById("expenseDate").value || todayInputDate();
 
-  if(!name || amount <= 0){
+let time=document.getElementById("expenseTime").value || nowTime();
 
-    alert(
-      "لطفاً د مصرف نوم او مبلغ ولیکئ"
-    );
+if(!name || amount<=0){
 
-    return;
-  }
+alert("Enter expense information");
 
-  if(!selectedDate){
+return;
 
-    alert(
-      "لطفاً د مصرف نېټه وټاکئ"
-    );
+}
 
-    return;
-  }
+expenses.push({
 
-  const expenses =
-    getExpenses();
+id:uid(),
 
-  expenses.push({
+name,
 
-    name:name,
-    amount:amount,
-    currency:"AFN",
-    date:dateToISO(selectedDate)
+amount,
 
-  });
+date,
 
-  localStorage.setItem(
-    "samadExpenses",
-    JSON.stringify(expenses)
-  );
+time,
 
-  document.getElementById("expenseName")
-    .value="";
+createdAt:new Date().toISOString()
 
-  document.getElementById("expenseAmount")
-    .value="";
+});
 
-  document.getElementById("expenseDate")
-    .value=todayInputDate();
+saveAll();
 
-  showExpenses();
-  showDashboard();
-  showReport(currentReportType);
+document.getElementById("expenseName").value="";
+document.getElementById("expenseAmount").value="";
+
+renderAll();
 
 }
 
 
-function showExpenses(){
+function renderExpenses(){
 
-  const list =
-    document.getElementById("expenseList");
+if(!expenses.length){
 
-  const expenses =
-    getExpenses();
+document.getElementById("expenseTable").innerHTML=
+'<div class="empty">No expenses</div>';
 
-  if(expenses.length === 0){
+return;
 
-    list.innerHTML =
-      `<div class="empty">
-        تر اوسه Expenses نشته.
-      </div>`;
+}
 
-    return;
-  }
+let html=`
+<table>
+<thead>
+<tr>
+<th>Expense</th>
+<th>Amount</th>
+<th>Date</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+`;
 
-  list.innerHTML =
-    expenses.map((e,i)=>`
+expenses.slice().reverse().forEach(x=>{
 
-      <div class="card">
+html+=`
+<tr>
+<td>${escapeHtml(x.name)}</td>
+<td>${money(x.amount,"AFN")}</td>
+<td>${escapeHtml(x.date)} ${escapeHtml(x.time||"")}</td>
+<td>
+<button class="btn danger" onclick="deleteExpense(${x.id})">🗑️</button>
+</td>
+</tr>
+`;
 
-        💸 ${escapeHtml(e.name)}
-        <br>
+});
 
-        مبلغ:
-        <span class="money-afn">
-          ${formatNumber(e.amount)} AFN
-        </span>
+html+="</tbody></table>";
 
-        <br>
-
-        📅 نېټه:
-        ${escapeHtml(formatDate(e.date))}
-
-        <br><br>
-
-        <button
-          class="delete-btn"
-          onclick="deleteExpense(${i})"
-        >
-          🗑️ Delete
-        </button>
-
-      </div>
-
-    `).join("");
+document.getElementById("expenseTable").innerHTML=html;
 
 }
 
 
-function deleteExpense(index){
+function deleteExpense(id){
 
-  const expenses =
-    getExpenses();
+if(!confirm("Delete expense?"))return;
 
-  if(!expenses[index]){
-    return;
-  }
+expenses=expenses.filter(x=>x.id!==id);
 
-  expenses.splice(index,1);
+saveAll();
 
-  localStorage.setItem(
-    "samadExpenses",
-    JSON.stringify(expenses)
-  );
+renderAll();
 
-  showExpenses();
-  showDashboard();
-  showReport(currentReportType);
+}
+
+
+/* =========================
+   DEBT
+========================= */
+
+function addDebt(){
+
+let name=document.getElementById("debtName").value.trim();
+
+let phone=document.getElementById("debtPhone").value.trim();
+
+let amount=Number(document.getElementById("debtAmount").value);
+
+let paid=Number(document.getElementById("debtPaid").value);
+
+let date=document.getElementById("debtDate").value || todayInputDate();
+
+let note=document.getElementById("debtNote").value.trim();
+
+if(!name || amount<=0){
+
+alert("Enter debt information");
+
+return;
+
+}
+
+debts.push({
+
+id:uid(),
+
+name,
+
+phone,
+
+amount,
+
+paid,
+
+remaining:Math.max(0,amount-paid),
+
+date,
+
+note
+
+});
+
+saveAll();
+
+document.getElementById("debtName").value="";
+document.getElementById("debtPhone").value="";
+document.getElementById("debtAmount").value="";
+document.getElementById("debtPaid").value="";
+document.getElementById("debtNote").value="";
+
+renderAll();
+
+}
+
+
+function renderDebts(){
+
+if(!debts.length){
+
+document.getElementById("debtTable").innerHTML=
+'<div class="empty">No debts</div>';
+
+return;
+
+}
+
+let html=`
+<table>
+<thead>
+<tr>
+<th>Customer</th>
+<th>Phone</th>
+<th>Total</th>
+<th>Paid</th>
+<th>Remaining</th>
+<th>Date</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+`;
+
+debts.slice().reverse().forEach(x=>{
+
+html+=`
+<tr>
+<td>${escapeHtml(x.name)}</td>
+<td>${escapeHtml(x.phone)}</td>
+<td>${money(x.amount)}</td>
+<td>${money(x.paid)}</td>
+<td class="${x.remaining>0?'low':'good'}">
+${money(x.remaining)}
+</td>
+<td>${escapeHtml(x.date)}</td>
+<td>
+<button class="btn danger" onclick="deleteDebt(${x.id})">🗑️</button>
+</td>
+</tr>
+`;
+
+});
+
+html+="</tbody></table>";
+
+document.getElementById("debtTable").innerHTML=html;
+
+}
+
+
+function deleteDebt(id){
+
+if(!confirm("Delete debt?"))return;
+
+debts=debts.filter(x=>x.id!==id);
+
+saveAll();
+
+renderAll();
 
 }
 
@@ -1879,405 +1475,708 @@ function deleteExpense(index){
    CAPITAL
 ========================= */
 
+function openCapital(){
+
+let pin=document.getElementById("capitalPin").value;
+
+let savedPin=settings.pin || "786";
+
+if(pin!==savedPin){
+
+alert("Wrong PIN");
+
+return;
+
+}
+
+document.getElementById("capitalArea").style.display="block";
+
+document.getElementById("capitalValue").textContent=money(capital);
+
+}
+
+
 function saveCapital(){
 
-  const amount =
-    Number(
-      document.getElementById("capitalAmount")
-        .value || 0
-    );
+let amount=Number(document.getElementById("capitalAmount").value);
 
-  if(amount <= 0){
+if(amount<0){
 
-    alert(
-      "لطفاً د سرمایې مبلغ ولیکئ"
-    );
+alert("Invalid capital");
 
-    return;
-  }
-
-  localStorage.setItem(
-    "samadCapital",
-    amount
-  );
-
-  document.getElementById("capitalAmount")
-    .value="";
-
-  showCapital();
-  showDashboard();
+return;
 
 }
 
+capital=amount;
 
-function showCapital(){
+saveAll();
 
-  const display =
-    document.getElementById("capitalDisplay");
+document.getElementById("capitalValue").textContent=money(capital);
 
-  const capital =
-    getCapital();
+document.getElementById("capitalAmount").value="";
 
-  display.innerHTML = `
+renderDashboard();
 
-    <h3>
-      💰 موجوده سرمایه:
-      <span class="money-usd">
-        $${formatNumber(capital)} USD
-      </span>
-    </h3>
-
-  `;
+alert("Capital saved");
 
 }
 
 
 /* =========================
-   REPORT DATE FILTER
+   REPORTS
 ========================= */
 
-function dateOnly(date){
+function setReport(period){
 
-  return new Date(
-    date.getFullYear(),
-    date.getMonth(),
-    date.getDate()
-  );
+reportPeriod=period;
+
+renderReport();
 
 }
 
 
-function isSameDay(a,b){
+function renderReport(){
 
-  return dateOnly(a).getTime() ===
-         dateOnly(b).getTime();
+let selected=document.getElementById("reportDate")?.value || todayInputDate();
+
+let base=new Date(selected+"T00:00:00");
+
+function match(date){
+
+let d=new Date(date+"T00:00:00");
+
+if(reportPeriod==="daily"){
+
+return d.toDateString()===base.toDateString();
 
 }
 
+if(reportPeriod==="weekly"){
 
-function isInSelectedPeriod(
-  value,
-  type,
-  selectedDate
-){
+let start=new Date(base);
 
-  const itemDate =
-    getValidDate(value);
+let day=start.getDay();
 
-  if(!itemDate){
-    return false;
-  }
+start.setDate(start.getDate()-day);
 
-  const base =
-    dateOnly(selectedDate);
+let end=new Date(start);
 
-  const item =
-    dateOnly(itemDate);
+end.setDate(start.getDate()+6);
 
+return d>=start && d<=end;
 
-  if(type === "daily"){
+}
 
-    return isSameDay(
-      item,
-      base
-    );
+if(reportPeriod==="monthly"){
 
-  }
+return d.getFullYear()===base.getFullYear()
+&& d.getMonth()===base.getMonth();
 
+}
 
-  if(type === "weekly"){
+if(reportPeriod==="yearly"){
 
-    const day =
-      base.getDay();
+return d.getFullYear()===base.getFullYear();
 
-    const diff =
-      day === 0
-        ? 6
-        : day - 1;
+}
 
-    const start =
-      new Date(base);
+return false;
 
-    start.setDate(
-      base.getDate() - diff
-    );
+}
 
-    const end =
-      new Date(start);
+let ps=purchases.filter(x=>match(x.date));
 
-    end.setDate(
-      start.getDate() + 6
-    );
+let ss=sales.filter(x=>match(x.date));
 
-    return (
-      item >= start &&
-      item <= end
-    );
+let es=expenses.filter(x=>match(x.date));
 
-  }
+let purchaseTotal=ps.reduce((a,x)=>a+Number(x.total),0);
 
+let saleTotal=ss.reduce((a,x)=>a+Number(x.total),0);
 
-  if(type === "monthly"){
+let expenseTotal=es.reduce((a,x)=>a+Number(x.amount),0);
 
-    return (
-      item.getFullYear() ===
-        base.getFullYear() &&
-      item.getMonth() ===
-        base.getMonth()
-    );
+document.getElementById("reportSales").textContent=money(saleTotal);
 
-  }
+document.getElementById("reportPurchases").textContent=money(purchaseTotal);
 
+document.getElementById("reportExpenses").textContent=money(expenseTotal,"AFN");
 
-  if(type === "yearly"){
+document.getElementById("reportProfit").textContent=
+money(saleTotal-purchaseTotal);
 
-    return (
-      item.getFullYear() ===
-      base.getFullYear()
-    );
+document.getElementById("reportSaleCount").textContent=ss.length;
 
-  }
+document.getElementById("reportPurchaseCount").textContent=ps.length;
 
-  return false;
+document.getElementById("reportExpenseCount").textContent=es.length;
 
 }
 
 
 /* =========================
-   SHOW REPORT
+   INVOICE
 ========================= */
 
-function showReport(type){
-
-  currentReportType =
-    type;
-
-  const dateInput =
-    document.getElementById("reportDate");
-
-  let selectedDate;
-
-  if(dateInput.value){
-
-    selectedDate =
-      new Date(
-        dateInput.value +
-        "T12:00:00"
-      );
-
-  }else{
-
-    selectedDate =
-      new Date();
-
-    dateInput.value =
-      todayInputDate();
-
-  }
+let currentInvoice=null;
 
 
-  document.querySelectorAll(
-    ".report-btn"
-  ).forEach(btn =>
-    btn.classList.remove(
-      "active-report"
-    )
-  );
+function showInvoiceById(id){
+
+let sale=sales.find(x=>x.id===id);
+
+if(sale)showInvoice(sale);
+
+}
 
 
-  const button =
-    document.getElementById(
-      type + "Btn"
-    );
+function showInvoice(sale){
 
-  if(button){
+currentInvoice=sale;
 
-    button.classList.add(
-      "active-report"
-    );
+let logo=settings.logo
+?`<img class="invoice-logo" src="${settings.logo}">`
+:"";
 
-  }
+let html=`
 
+<div class="invoice" id="printArea">
 
-  const titles = {
+<div class="invoice-header">
 
-    daily:"📅 Daily Report",
+${logo}
 
-    weekly:"📆 Weekly Report",
+<h1>${escapeHtml(settings.shopName || "Samad Solar")}</h1>
 
-    monthly:"🗓️ Monthly Report",
+<p>${escapeHtml(settings.address || "")}</p>
 
-    yearly:"📈 Yearly Report"
+<p>${escapeHtml(settings.phone || "")}</p>
 
-  };
+</div>
 
+<h2 style="text-align:center">INVOICE</h2>
 
-  document.getElementById(
-    "reportTitle"
-  ).textContent =
-    titles[type];
+<p><b>Invoice No:</b> SMD-${sale.id}</p>
 
+<p><b>Date:</b> ${escapeHtml(sale.date)} ${escapeHtml(sale.time||"")}</p>
 
-  const purchases =
-    getPurchases()
-      .filter(item =>
-        isInSelectedPeriod(
-          item.date,
-          type,
-          selectedDate
-        )
-      );
+<table>
 
+<tr>
+<th>Product</th>
+<th>Qty</th>
+<th>Price</th>
+<th>Total</th>
+</tr>
 
-  const sales =
-    getSales()
-      .filter(item =>
-        isInSelectedPeriod(
-          item.date,
-          type,
-          selectedDate
-        )
-      );
+<tr>
+<td>${escapeHtml(sale.productName)}</td>
+<td>${sale.qty}</td>
+<td>${money(sale.price)}</td>
+<td>${money(sale.total)}</td>
+</tr>
 
+</table>
 
-  const expenses =
-    getExpenses()
-      .filter(item =>
-        isInSelectedPeriod(
-          item.date,
-          type,
-          selectedDate
-        )
-      );
+<div class="invoice-watermark">
+${escapeHtml(settings.shopName || "SAMAD SOLAR")}
+</div>
 
+<h2 style="text-align:left">
+Total: ${money(sale.total)}
+</h2>
 
-  const purchaseTotal =
-    purchases.reduce(
-      (total,item) =>
-        total +
-        Number(
-          item.total || 0
-        ),
-      0
-    );
+<div class="invoice-footer">
 
+${escapeHtml(settings.address || "")}
 
-  const saleTotal =
-    sales.reduce(
-      (total,item) =>
-        total +
-        Number(
-          item.total || 0
-        ),
-      0
-    );
+<br>
+
+${escapeHtml(settings.phone || "")}
+
+<br><br>
+
+Thank you for choosing Samad Solar ☀️
+
+</div>
+
+</div>
+`;
+
+document.getElementById("invoiceContent").innerHTML=html;
+
+document.getElementById("invoiceModal").classList.add("show");
+
+}
 
 
-  const expenseTotal =
-    expenses.reduce(
-      (total,item) =>
-        total +
-        Number(
-          item.amount || 0
-        ),
-      0
-    );
+function printInvoice(){
+
+let content=document.getElementById("printArea").innerHTML;
+
+let w=window.open("","_blank");
+
+w.document.write(`
+
+<html>
+
+<head>
+
+<title>Invoice</title>
+
+<style>
+
+body{
+font-family:Arial;
+direction:rtl;
+padding:20px;
+}
+
+.invoice{
+max-width:700px;
+margin:auto;
+}
+
+.invoice-header{
+text-align:center;
+border-bottom:2px solid #0f766e;
+padding-bottom:15px;
+}
+
+.invoice-logo{
+width:90px;
+height:90px;
+object-fit:contain;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th,td{
+border:1px solid #ddd;
+padding:10px;
+}
+
+.invoice-watermark{
+text-align:center;
+opacity:.07;
+font-size:60px;
+margin:20px;
+}
+
+.invoice-footer{
+text-align:center;
+border-top:1px solid #ddd;
+padding-top:15px;
+margin-top:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="invoice">${content}</div>
+
+<script>
+
+window.onload=function(){
+window.print();
+}
+
+<\/script>
+
+</body>
+
+</html>
+
+`);
+
+w.document.close();
+
+}
 
 
-  /*
-    Profit is currently calculated
-    only from USD sales and purchases.
-    AFN expenses are shown separately.
-  */
+async function shareInvoice(){
 
-  const profit =
-    saleTotal -
-    purchaseTotal;
+if(!currentInvoice){
 
+return;
 
-  document.getElementById(
-    "reportSales"
-  ).textContent =
-    "$" +
-    formatNumber(saleTotal) +
-    " USD";
+}
 
+let text=
+`${settings.shopName || "Samad Solar"}
 
-  document.getElementById(
-    "reportPurchases"
-  ).textContent =
-    "$" +
-    formatNumber(purchaseTotal) +
-    " USD";
+Invoice: SMD-${currentInvoice.id}
 
+Product: ${currentInvoice.productName}
 
-  document.getElementById(
-    "reportExpenses"
-  ).textContent =
-    formatNumber(expenseTotal) +
-    " AFN";
+Qty: ${currentInvoice.qty}
 
+Total: ${money(currentInvoice.total)}
 
-  document.getElementById(
-    "reportProfit"
-  ).textContent =
-    "$" +
-    formatNumber(profit) +
-    " USD";
+Date: ${currentInvoice.date}`;
 
+if(navigator.share){
 
-  document.getElementById(
-    "reportSaleCount"
-  ).textContent =
-    sales.length;
+try{
+
+await navigator.share({
+
+title:"Samad Solar Invoice",
+
+text
+
+});
+
+}catch(e){}
+
+}else{
+
+navigator.clipboard?.writeText(text);
+
+alert("Invoice copied");
+
+}
+
+}
 
 
-  document.getElementById(
-    "reportPurchaseCount"
-  ).textContent =
-    purchases.length;
+function closeInvoice(){
 
-
-  document.getElementById(
-    "reportExpenseCount"
-  ).textContent =
-    expenses.length;
+document.getElementById("invoiceModal").classList.remove("show");
 
 }
 
 
 /* =========================
-   HTML SAFETY
+   SETTINGS
 ========================= */
 
-function escapeHtml(value){
+function saveSettings(){
 
-  return String(value)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+settings.shopName=
+document.getElementById("settingShopName").value.trim()
+||"Samad Solar";
+
+settings.address=
+document.getElementById("settingAddress").value.trim();
+
+settings.phone=
+document.getElementById("settingPhone").value.trim();
+
+settings.whatsapp=
+document.getElementById("settingWhatsapp").value.trim();
+
+settings.language=
+document.getElementById("settingLanguage").value;
+
+settings.currency=
+document.getElementById("settingCurrency").value;
+
+let pin=document.getElementById("settingPin").value.trim();
+
+if(pin)settings.pin=pin;
+
+let file=document.getElementById("settingLogo").files[0];
+
+if(file){
+
+let reader=new FileReader();
+
+reader.onload=function(e){
+
+settings.logo=e.target.result;
+
+saveAll();
+
+applySettings();
+
+};
+
+reader.readAsDataURL(file);
+
+}else{
+
+saveAll();
+
+applySettings();
+
+}
+
+alert("Settings saved");
+
+}
+
+
+function applySettings(){
+
+document.getElementById("shopTitle").textContent=
+"☀️ "+(settings.shopName || "Samad Solar");
+
+document.getElementById("settingShopName").value=
+settings.shopName || "Samad Solar";
+
+document.getElementById("settingAddress").value=
+settings.address || "";
+
+document.getElementById("settingPhone").value=
+settings.phone || "";
+
+document.getElementById("settingWhatsapp").value=
+settings.whatsapp || "";
+
+document.getElementById("settingLanguage").value=
+settings.language || "ps";
+
+document.getElementById("settingCurrency").value=
+settings.currency || "AFN";
 
 }
 
 
 /* =========================
-   START APP
+   BACKUP / RESTORE
 ========================= */
 
-setDefaultDates();
+function backupData(){
 
-applyLanguage();
+let data={
 
-showProducts();
-showPurchases();
-showSales();
-showExpenses();
-showCapital();
-showDashboard();
+products,
 
-showReport("daily");
+purchases,
+
+sales,
+
+expenses,
+
+debts,
+
+capital,
+
+settings,
+
+backupDate:new Date().toISOString()
+
+};
+
+let blob=new Blob(
+[JSON.stringify(data,null,2)],
+{type:"application/json"}
+);
+
+let url=URL.createObjectURL(blob);
+
+let a=document.createElement("a");
+
+a.href=url;
+
+a.download=
+"Samad-Solar-Backup-"+todayInputDate()+".json";
+
+a.click();
+
+URL.revokeObjectURL(url);
+
+}
+
+
+function restoreData(event){
+
+let file=event.target.files[0];
+
+if(!file)return;
+
+let reader=new FileReader();
+
+reader.onload=function(e){
+
+try{
+
+let data=JSON.parse(e.target.result);
+
+if(!confirm("Restore backup? Current data will be replaced."))return;
+
+products=data.products||[];
+
+purchases=data.purchases||[];
+
+sales=data.sales||[];
+
+expenses=data.expenses||[];
+
+debts=data.debts||[];
+
+capital=Number(data.capital||0);
+
+settings=data.settings||{};
+
+saveAll();
+
+applySettings();
+
+renderAll();
+
+alert("Backup restored successfully");
+
+}catch(err){
+
+alert("Invalid backup file");
+
+}
+
+};
+
+reader.readAsText(file);
+
+}
+
+
+/* =========================
+   DASHBOARD
+========================= */
+
+function renderDashboard(){
+
+let purchaseTotal=
+purchases.reduce((a,x)=>a+Number(x.total),0);
+
+let saleTotal=
+sales.reduce((a,x)=>a+Number(x.total),0);
+
+let expenseTotal=
+expenses.reduce((a,x)=>a+Number(x.amount),0);
+
+let stockCount=
+products.reduce((a,x)=>a+Number(x.qty),0);
+
+document.getElementById("dashCapital").textContent=money(capital);
+
+document.getElementById("dashStock").textContent=stockCount;
+
+document.getElementById("dashPurchase").textContent=
+money(purchaseTotal);
+
+document.getElementById("dashSale").textContent=
+money(saleTotal);
+
+document.getElementById("dashExpense").textContent=
+money(expenseTotal,"AFN");
+
+document.getElementById("dashProfit").textContent=
+money(saleTotal-purchaseTotal);
+
+let low=products.filter(p=>Number(p.qty)<=Number(p.limit));
+
+let box=document.getElementById("lowStockBox");
+
+if(low.length){
+
+box.innerHTML=`
+
+<div class="alert">
+
+⚠️ <b>Low Stock Alert</b>
+
+<br><br>
+
+${low.map(p=>
+escapeHtml(p.name)+" — "+p.qty
+).join("<br>")}
+
+</div>
+
+`;
+
+}else{
+
+box.innerHTML="";
+
+}
+
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+function closeModal(){
+
+document.getElementById("editModal").classList.remove("show");
+
+}
+
+
+/* =========================
+   RENDER ALL
+========================= */
+
+function renderAll(){
+
+renderDashboard();
+
+renderProducts();
+
+renderProductSelects();
+
+renderPurchases();
+
+renderSales();
+
+renderExpenses();
+
+renderDebts();
+
+renderReport();
+
+applySettings();
+
+}
+
+
+/* =========================
+   INIT
+========================= */
+
+function initDates(){
+
+document.getElementById("purchaseDate").value=
+todayInputDate();
+
+document.getElementById("saleDate").value=
+todayInputDate();
+
+document.getElementById("expenseDate").value=
+todayInputDate();
+
+document.getElementById("debtDate").value=
+todayInputDate();
+
+document.getElementById("reportDate").value=
+todayInputDate();
+
+document.getElementById("purchaseTime").value=
+nowTime();
+
+document.getElementById("saleTime").value=
+nowTime();
+
+document.getElementById("expenseTime").value=
+nowTime();
+
+}
+
+
+initDates();
+
+renderAll();
 
 </script>
 
