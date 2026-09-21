@@ -740,5 +740,117 @@ function deletePurchase(index) {
 
 showPurchases();
 </script>
+  <!-- SALE -->
+<section class="card">
+  <h2>💵 Sale | خرڅلاو</h2>
+
+  <input id="saleProduct" type="text" placeholder="د محصول نوم">
+  <input id="saleQty" type="number" placeholder="تعداد">
+  <input id="salePrice" type="number" placeholder="د خرڅلاو قیمت">
+
+  <button onclick="addSale()">💵 Add Sale</button>
+
+  <div id="saleList"></div>
+</section>
+
+<script>
+function addSale() {
+  const product = document.getElementById("saleProduct").value.trim();
+  const qty = Number(document.getElementById("saleQty").value);
+  const price = Number(document.getElementById("salePrice").value);
+
+  if (!product || !qty || !price) {
+    alert("لطفاً ټول معلومات ولیکئ");
+    return;
+  }
+
+  let products = JSON.parse(localStorage.getItem("samadProducts") || "[]");
+
+  const index = products.findIndex(
+    p => p.name.toLowerCase() === product.toLowerCase()
+  );
+
+  if (index === -1) {
+    alert("دا محصول په Stock کې نشته");
+    return;
+  }
+
+  if (products[index].quantity < qty) {
+    alert("په Stock کې دومره مال نشته");
+    return;
+  }
+
+  products[index].quantity -= qty;
+  localStorage.setItem("samadProducts", JSON.stringify(products));
+
+  let sales = JSON.parse(localStorage.getItem("samadSales") || "[]");
+
+  sales.push({
+    product: product,
+    qty: qty,
+    price: price,
+    total: qty * price,
+    date: new Date().toLocaleDateString()
+  });
+
+  localStorage.setItem("samadSales", JSON.stringify(sales));
+
+  document.getElementById("saleProduct").value = "";
+  document.getElementById("saleQty").value = "";
+  document.getElementById("salePrice").value = "";
+
+  showSales();
+
+  if (typeof showProducts === "function") {
+    showProducts();
+  }
+}
+
+function showSales() {
+  const list = document.getElementById("saleList");
+  if (!list) return;
+
+  let sales = JSON.parse(localStorage.getItem("samadSales") || "[]");
+
+  list.innerHTML = sales.map((s, i) => `
+    <div class="card">
+      💵 ${s.product}<br>
+      تعداد: ${s.qty}<br>
+      قیمت: ${s.price}<br>
+      ټول: ${s.total}<br>
+      📅 ${s.date}
+      <br><br>
+      <button onclick="deleteSale(${i})">🗑️ Delete</button>
+    </div>
+  `).join("");
+}
+
+function deleteSale(index) {
+  let sales = JSON.parse(localStorage.getItem("samadSales") || "[]");
+
+  const sale = sales[index];
+
+  let products = JSON.parse(localStorage.getItem("samadProducts") || "[]");
+  const productIndex = products.findIndex(
+    p => p.name.toLowerCase() === sale.product.toLowerCase()
+  );
+
+  if (productIndex !== -1) {
+    products[productIndex].quantity += sale.qty;
+    localStorage.setItem("samadProducts", JSON.stringify(products));
+  }
+
+  sales.splice(index, 1);
+  localStorage.setItem("samadSales", JSON.stringify(sales));
+
+  showSales();
+
+  if (typeof showProducts === "function") {
+    showProducts();
+  }
+}
+
+showSales();
+</script>
 </body>
 </html>
