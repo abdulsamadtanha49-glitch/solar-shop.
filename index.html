@@ -55,6 +55,7 @@ function addProduct() {
     buyPrice: Number(price),
     quantity: Number(qty),
     lowLimit: Number(limit || 0)
+  <p>Low Stock Limit: ${p.lowLimit}</p>
   });
 
   localStorage.setItem("samadProducts", JSON.stringify(products));
