@@ -2,260 +2,232 @@
 <html lang="ps" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Samad Solar</title>
 
 <style>
-*{box-sizing:border-box}
-
 :root{
-  --main:#0f766e;
-  --bg:#f4f7f8;
+  --primary:#0f766e;
+  --bg:#f4f7f7;
+  --card:#fff;
+  --text:#17202a;
+  --danger:#dc2626;
+  --warning:#f59e0b;
+  --border:#d9e1e1;
 }
-
+*{box-sizing:border-box}
 body{
   margin:0;
-  font-family:Arial,Tahoma,sans-serif;
+  font-family:Tahoma,Arial,sans-serif;
   background:var(--bg);
-  color:#17202a;
+  color:var(--text);
 }
-
+button,input,select,textarea{font:inherit}
+button{
+  border:0;
+  border-radius:10px;
+  padding:10px 14px;
+  cursor:pointer;
+}
+.primary{background:var(--primary);color:white}
+.danger{background:var(--danger);color:white}
+.warning{background:var(--warning);color:white}
+.gray{background:#64748b;color:white}
+.light{background:#e8eeee;color:#17202a}
+.container{max-width:1400px;margin:auto;padding:15px}
 header{
-  background:var(--main);
+  background:var(--primary);
   color:white;
-  padding:18px;
-  text-align:center;
+  padding:14px 18px;
   position:sticky;
   top:0;
   z-index:20;
+  box-shadow:0 2px 10px #0002;
 }
-
-header h1{margin:0;font-size:25px}
-header small{opacity:.9}
-
+.header-inner{
+  max-width:1400px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.brand img{
+  width:48px;height:48px;
+  object-fit:contain;
+  background:white;
+  border-radius:8px;
+}
+.brand h1{margin:0;font-size:21px}
 nav{
+  max-width:1400px;
+  margin:10px auto 0;
   display:flex;
   gap:7px;
   overflow-x:auto;
-  padding:10px;
-  background:white;
-  border-bottom:1px solid #ddd;
-  position:sticky;
-  top:72px;
-  z-index:19;
+  padding-bottom:3px;
 }
-
 nav button{
-  border:0;
-  padding:10px 14px;
-  border-radius:8px;
-  background:#e8eeee;
-  cursor:pointer;
+  background:#ffffff22;
+  color:white;
   white-space:nowrap;
 }
-
-nav button.active{
-  background:var(--main);
-  color:white;
-}
-
-.container{
-  max-width:1200px;
-  margin:auto;
-  padding:15px;
-}
+nav button.active{background:white;color:var(--primary)}
 
 .page{display:none}
 .page.active{display:block}
 
 .cards{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
   gap:12px;
+  margin-bottom:15px;
 }
-
 .card{
-  background:white;
-  border-radius:12px;
-  padding:16px;
-  box-shadow:0 2px 8px #00000012;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:15px;
+  box-shadow:0 2px 7px #00000009;
 }
+.card h3{margin:0 0 8px;font-size:15px}
+.big{font-size:24px;font-weight:bold}
 
-.card h3{
-  margin:0 0 8px;
-  font-size:14px;
-  color:#667;
-}
-
-.card strong{font-size:23px}
-
-.panel{
-  background:white;
-  padding:18px;
-  margin-top:15px;
-  border-radius:12px;
-  box-shadow:0 2px 8px #00000012;
-}
-
-h2{
-  margin-top:0;
-  color:var(--main);
-}
-
-.form-grid{
+.grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
   gap:10px;
 }
-
+label{font-weight:bold;font-size:13px}
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
 input,select,textarea{
   width:100%;
-  padding:11px;
-  border:1px solid #ccd5d5;
-  border-radius:8px;
-  font-size:15px;
+  padding:10px;
+  border:1px solid var(--border);
+  border-radius:9px;
   background:white;
-  margin-bottom:8px;
+  outline:none;
 }
-
-textarea{
-  min-height:80px;
-  resize:vertical;
+input:focus,select:focus,textarea:focus{
+  border-color:var(--primary);
 }
+textarea{min-height:80px;resize:vertical}
 
-label{
-  display:block;
-  margin:8px 0 4px;
-  font-weight:bold;
+.section-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+  margin-bottom:12px;
 }
+.section-title h2{margin:0;font-size:19px}
 
-button{
-  font-family:inherit;
+.table-wrap{
+  overflow:auto;
+  background:white;
+  border-radius:12px;
+  border:1px solid var(--border);
 }
-
-.btn{
-  border:0;
-  border-radius:8px;
-  padding:11px 15px;
-  cursor:pointer;
-  background:var(--main);
-  color:white;
-  margin-top:10px;
-}
-
-.btn.secondary{background:#475569}
-.btn.danger{background:#dc2626}
-.btn.warning{background:#d97706}
-.btn.light{
-  background:#e2e8f0;
-  color:#17202a;
-}
-
 table{
   width:100%;
   border-collapse:collapse;
-  margin-top:15px;
+  min-width:700px;
 }
-
 th,td{
+  padding:10px;
   border-bottom:1px solid #e5e7eb;
-  padding:10px 7px;
   text-align:right;
 }
-
-th{
-  background:#f1f5f5;
-}
-
-.low{
-  color:#dc2626;
+th{background:#eef4f4}
+.low-row{background:#fff4e5}
+.low-badge{
+  background:#fee2e2;
+  color:#b91c1c;
+  padding:4px 7px;
+  border-radius:7px;
+  font-size:12px;
   font-weight:bold;
 }
 
-.good{
-  color:#15803d;
-  font-weight:bold;
-}
-
-.alert{
+.alert-box{
+  border:2px solid #f59e0b;
+  background:#fff8e7;
+  border-radius:12px;
   padding:12px;
-  border-radius:9px;
-  margin:10px 0;
-  background:#fff7ed;
-  color:#9a3412;
+  margin-bottom:15px;
 }
-
-.search{
-  margin-top:10px;
-}
-
-.flex{
+.alert-item{
   display:flex;
+  justify-content:space-between;
+  align-items:center;
   gap:8px;
-  flex-wrap:wrap;
+  padding:9px;
+  background:white;
+  border-radius:9px;
+  margin-top:7px;
 }
-
-.flex>*{flex:1}
-
-.empty{
-  text-align:center;
-  color:#777;
-  padding:25px;
+.alert-item button{
+  background:#f59e0b;color:white;
 }
 
 .modal{
-  display:none;
   position:fixed;
   inset:0;
   background:#0008;
-  z-index:100;
+  display:none;
   align-items:center;
   justify-content:center;
+  z-index:100;
   padding:15px;
 }
-
 .modal.show{display:flex}
-
 .modal-box{
   background:white;
-  width:100%;
-  max-width:650px;
-  max-height:90vh;
+  width:min(900px,100%);
+  max-height:92vh;
   overflow:auto;
-  border-radius:14px;
-  padding:20px;
+  border-radius:15px;
+  padding:18px;
+}
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:15px;
+}
+.modal-head h2{margin:0}
+
+.logo-preview{
+  width:100px;height:100px;
+  object-fit:contain;
+  border:1px dashed #aaa;
+  border-radius:10px;
 }
 
-/* =========================
-   INVOICE
-========================= */
+.extra-row{
+  display:grid;
+  grid-template-columns:1fr 150px 45px;
+  gap:7px;
+  margin-bottom:7px;
+}
 
 .invoice{
+  position:relative;
   background:white;
   padding:25px;
-  max-width:700px;
+  max-width:850px;
   margin:auto;
-  color:#111;
-  position:relative;
   overflow:hidden;
 }
-
-.invoice-header{
-  text-align:center;
-  border-bottom:2px solid var(--main);
-  padding-bottom:15px;
-  position:relative;
-  z-index:2;
-}
-
-.invoice-logo{
-  width:90px;
-  height:90px;
-  object-fit:contain;
-  display:block;
-  margin:auto;
-}
-
 .invoice-watermark{
   position:absolute;
   inset:0;
@@ -263,102 +235,82 @@ th{
   align-items:center;
   justify-content:center;
   pointer-events:none;
-  z-index:0;
 }
-
 .invoice-watermark img{
-  width:360px;
+  width:430px;
   max-width:70%;
   opacity:.07;
+}
+.invoice-content{position:relative;z-index:2}
+.invoice-head{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  border-bottom:2px solid var(--primary);
+  padding-bottom:12px;
+}
+.invoice-logo{
+  width:90px;height:90px;
   object-fit:contain;
 }
-
-.invoice-content{
-  position:relative;
-  z-index:2;
+.invoice h1{margin:0 0 5px}
+.invoice table{min-width:0;margin-top:20px}
+.invoice-total{
+  margin-top:15px;
+  margin-right:auto;
+  width:300px;
 }
-
+.invoice-total div{
+  display:flex;
+  justify-content:space-between;
+  padding:7px;
+  border-bottom:1px solid #ddd;
+}
 .invoice-footer{
+  margin-top:30px;
   border-top:1px solid #ddd;
-  margin-top:20px;
-  padding-top:15px;
+  padding-top:12px;
   text-align:center;
-  position:relative;
-  z-index:2;
 }
 
-.invoice table{
-  position:relative;
-  z-index:2;
+.toast{
+  position:fixed;
+  left:20px;
+  bottom:20px;
+  background:#111827;
+  color:white;
+  padding:12px 16px;
+  border-radius:10px;
+  display:none;
+  z-index:300;
+}
+.toast.show{display:block}
+
+.stat-good{color:#15803d}
+.stat-bad{color:#dc2626}
+
+@media(max-width:600px){
+  .header-inner{align-items:flex-start}
+  .brand h1{font-size:17px}
+  .extra-row{grid-template-columns:1fr 110px 42px}
+  .invoice{padding:12px}
 }
 
-.invoice-actions{
-  position:relative;
-  z-index:5;
-}
-
-.color-preview{
-  width:100%;
-  height:45px;
-  border-radius:8px;
-  border:1px solid #ccc;
-  margin-top:5px;
-}
-
-.logo-preview{
-  width:100px;
-  height:100px;
-  object-fit:contain;
-  border:1px dashed #bbb;
-  padding:5px;
-  margin-top:8px;
-}
-
-footer{
-  text-align:center;
-  padding:25px;
-  color:#777;
-}
-
-@media(max-width:650px){
-  nav{top:68px}
-  table{font-size:13px}
-  th,td{padding:7px 4px}
-}
-
-/* PRINT */
 @media print{
-
-  body{
-    background:white !important;
-  }
-
-  body>*:not(#invoiceModal){
-    display:none !important;
-  }
-
+  body *{visibility:hidden}
+  #invoiceModal,#invoiceModal *{visibility:visible}
   #invoiceModal{
-    display:block !important;
-    position:static !important;
-    background:white !important;
-    padding:0 !important;
+    position:absolute;
+    inset:0;
+    background:white;
+    display:block;
   }
-
   #invoiceModal .modal-box{
-    max-width:none !important;
-    max-height:none !important;
-    box-shadow:none !important;
-    padding:0 !important;
+    width:100%;
+    max-height:none;
+    box-shadow:none;
   }
-
-  .invoice-actions{
-    display:none !important;
-  }
-
-  .invoice{
-    box-shadow:none !important;
-    max-width:none !important;
-  }
+  .no-print{display:none!important}
 }
 </style>
 </head>
@@ -366,2573 +318,2336 @@ footer{
 <body>
 
 <header>
-  <h1 id="shopTitle">☀️ Samad Solar</h1>
-  <small id="shopSubtitle">Solar Shop Management System</small>
+  <div class="header-inner">
+    <div class="brand">
+      <img id="headerLogo" style="display:none">
+      <div>
+        <h1 id="headerName">Samad Solar</h1>
+        <small id="headerAddress"></small>
+      </div>
+    </div>
+    <div id="headerCurrency">AFN</div>
+  </div>
+
+  <nav>
+    <button onclick="showPage('dashboard')" data-page="dashboard">🏠 Dashboard</button>
+    <button onclick="showPage('stock')" data-page="stock">📦 Stock</button>
+    <button onclick="showPage('purchase')" data-page="purchase">🛒 Purchase</button>
+    <button onclick="showPage('sale')" data-page="sale">💰 Sale</button>
+    <button onclick="showPage('expense')" data-page="expense">💸 Expense</button>
+    <button onclick="showPage('debt')" data-page="debt">📒 Debt</button>
+    <button onclick="showPage('capital')" data-page="capital">🔐 Capital</button>
+    <button onclick="showPage('reports')" data-page="reports">📊 Reports</button>
+    <button onclick="showPage('settings')" data-page="settings">⚙️ Settings</button>
+  </nav>
 </header>
 
-<nav>
-  <button onclick="showPage('dashboard',this)" class="active">🏠 Dashboard</button>
-  <button onclick="showPage('products',this)">📦 Stock</button>
-  <button onclick="showPage('purchase',this)">📥 Purchase</button>
-  <button onclick="showPage('sale',this)">📤 Sale</button>
-  <button onclick="showPage('expense',this)">💸 Expenses</button>
-  <button onclick="showPage('debt',this)">📒 Debt</button>
-  <button onclick="showPage('capital',this)">💰 Capital</button>
-  <button onclick="showPage('reports',this)">📊 Reports</button>
-  <button onclick="showPage('settings',this)">⚙️ Settings</button>
-</nav>
-
-<div class="container">
+<main class="container">
 
 <!-- DASHBOARD -->
 <section id="dashboard" class="page active">
 
-<div class="cards">
+  <div id="lowAlerts"></div>
 
-<div class="card">
-<h3>Capital USD</h3>
-<strong id="dashCapital">$0</strong>
-</div>
+  <div class="cards">
+    <div class="card">
+      <h3>📦 Products</h3>
+      <div class="big" id="dashProducts">0</div>
+    </div>
+    <div class="card">
+      <h3>📦 Total Stock</h3>
+      <div class="big" id="dashStock">0</div>
+    </div>
+    <div class="card">
+      <h3>💰 Sales</h3>
+      <div class="big" id="dashSales">$0</div>
+    </div>
+    <div class="card">
+      <h3>🛒 Purchases</h3>
+      <div class="big" id="dashPurchases">$0</div>
+    </div>
+    <div class="card">
+      <h3>💸 Expenses</h3>
+      <div class="big" id="dashExpenses">0 AFN</div>
+    </div>
+    <div class="card">
+      <h3>📒 Debt</h3>
+      <div class="big" id="dashDebt">$0</div>
+    </div>
+  </div>
 
-<div class="card">
-<h3>Stock Items</h3>
-<strong id="dashStock">0</strong>
-</div>
-
-<div class="card">
-<h3>Purchase USD</h3>
-<strong id="dashPurchase">$0</strong>
-</div>
-
-<div class="card">
-<h3>Sales USD</h3>
-<strong id="dashSale">$0</strong>
-</div>
-
-<div class="card">
-<h3>Expenses AFN</h3>
-<strong id="dashExpense">؋0</strong>
-</div>
-
-<div class="card">
-<h3>Profit / Loss USD</h3>
-<strong id="dashProfit">$0</strong>
-</div>
-
-</div>
-
-<div id="lowStockBox"></div>
-
-<div class="panel">
-<h2>📌 Quick Actions</h2>
-
-<div class="flex">
-
-<button class="btn" onclick="quickPage('products')">
-➕ Add Product
-</button>
-
-<button class="btn" onclick="quickPage('purchase')">
-📥 Purchase
-</button>
-
-<button class="btn" onclick="quickPage('sale')">
-📤 Sale
-</button>
-
-<button class="btn" onclick="quickPage('expense')">
-💸 Expense
-</button>
-
-</div>
-</div>
+  <div class="card">
+    <div class="section-title">
+      <h2>📌 Recent Sales</h2>
+      <button class="primary" onclick="showPage('sale')">+ New Sale</button>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Bill</th>
+            <th>Customer</th>
+            <th>Total</th>
+            <th>Date</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="recentSales"></tbody>
+      </table>
+    </div>
+  </div>
 
 </section>
 
+<!-- STOCK -->
+<section id="stock" class="page">
 
-<!-- PRODUCTS -->
-<section id="products" class="page">
+  <div class="card">
+    <div class="section-title">
+      <h2>📦 Stock / Products</h2>
+      <button class="primary" onclick="openProductModal()">+ Add Product</button>
+    </div>
 
-<div class="panel">
+    <div class="grid" style="margin-bottom:12px">
+      <div class="field">
+        <label>🔎 Search</label>
+        <input id="stockSearch" oninput="renderStock()" placeholder="Product name / code">
+      </div>
+    </div>
 
-<h2>📦 Products / Stock</h2>
-
-<div class="form-grid">
-
-<input id="productName" placeholder="Product Name">
-
-<input id="productCode" placeholder="Product Code">
-
-<input id="productBuy" type="number" step="0.01"
-placeholder="Buying Price USD">
-
-<input id="productQty" type="number"
-placeholder="Quantity">
-
-<input id="productLimit" type="number"
-placeholder="Low Stock Limit">
-
-</div>
-
-<button class="btn" onclick="saveProduct()">
-💾 Save Product
-</button>
-
-<input
-class="search"
-id="productSearch"
-oninput="renderProducts()"
-placeholder="🔎 Search product..."
->
-
-<div id="productsTable"></div>
-
-</div>
-
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Code</th>
+            <th>Stock</th>
+            <th>Low Limit</th>
+            <th>Buy $</th>
+            <th>Sell $</th>
+            <th>Unit</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="stockTable"></tbody>
+      </table>
+    </div>
+  </div>
 </section>
-
 
 <!-- PURCHASE -->
 <section id="purchase" class="page">
 
-<div class="panel">
+  <div class="card">
+    <div class="section-title">
+      <h2>🛒 Purchase</h2>
+    </div>
 
-<h2>📥 Purchase</h2>
+    <div class="grid">
+      <div class="field">
+        <label>Product</label>
+        <select id="purchaseProduct"></select>
+      </div>
+      <div class="field">
+        <label>Quantity</label>
+        <input id="purchaseQty" type="number" min="1">
+      </div>
+      <div class="field">
+        <label>Unit Price ($)</label>
+        <input id="purchasePrice" type="number" step="0.01">
+      </div>
+      <div class="field">
+        <label>Supplier</label>
+        <input id="purchaseSupplier">
+      </div>
+      <div class="field">
+        <label>Date</label>
+        <input id="purchaseDate" type="date">
+      </div>
+    </div>
 
-<div class="form-grid">
+    <br>
+    <button class="primary" onclick="addPurchase()">Save Purchase</button>
+  </div>
 
-<select id="purchaseProduct"></select>
+  <br>
 
-<input id="purchaseQty"
-type="number"
-placeholder="Quantity">
-
-<input id="purchasePrice"
-type="number"
-step="0.01"
-placeholder="Buying Price USD">
-
-<input id="purchaseDate"
-type="date">
-
-<input id="purchaseTime"
-type="time">
-
-</div>
-
-<button class="btn" onclick="addPurchase()">
-➕ Add Purchase
-</button>
-
-<div id="purchaseTable"></div>
-
-</div>
-
+  <div class="card">
+    <h2>Purchase History</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Total</th>
+            <th>Supplier</th>
+            <th>Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="purchaseTable"></tbody>
+      </table>
+    </div>
+  </div>
 </section>
-
 
 <!-- SALE -->
 <section id="sale" class="page">
 
-<div class="panel">
+  <div class="card">
+    <div class="section-title">
+      <h2>💰 New Sale / Bill</h2>
+      <div>
+        <b id="nextBillPreview">SMD-1</b>
+      </div>
+    </div>
 
-<h2>📤 Sale</h2>
+    <div class="grid">
+      <div class="field">
+        <label>Bill Number</label>
+        <input id="saleBillNumber" placeholder="SMD-1">
+      </div>
 
-<div class="form-grid">
+      <div class="field">
+        <label>Customer Name</label>
+        <input id="saleCustomer" placeholder="Customer">
+      </div>
 
-<select id="saleProduct"></select>
+      <div class="field">
+        <label>Phone</label>
+        <input id="salePhone">
+      </div>
 
-<input id="saleQty"
-type="number"
-placeholder="Quantity">
+      <div class="field">
+        <label>WhatsApp</label>
+        <input id="saleWhatsapp">
+      </div>
 
-<input id="salePrice"
-type="number"
-step="0.01"
-placeholder="Sale Price USD">
+      <div class="field">
+        <label>Date</label>
+        <input id="saleDate" type="date">
+      </div>
 
-<input id="saleDate"
-type="date">
+      <div class="field">
+        <label>Payment</label>
+        <select id="salePayment">
+          <option value="paid">Paid</option>
+          <option value="debt">Debt</option>
+        </select>
+      </div>
+    </div>
 
-<input id="saleTime"
-type="time">
+    <br>
 
-</div>
+    <div class="card" style="background:#f7faf9">
+      <div class="section-title">
+        <h3>📦 Product</h3>
+      </div>
 
-<button class="btn" onclick="addSale()">
-➕ Add Sale
-</button>
+      <div class="grid">
+        <div class="field">
+          <label>Product</label>
+          <select id="saleProduct" onchange="updateSalePrice()"></select>
+        </div>
 
-<div id="saleTable"></div>
+        <div class="field">
+          <label>Quantity</label>
+          <input id="saleQty" type="number" min="1" value="1">
+        </div>
 
-</div>
+        <div class="field">
+          <label>Unit Price ($)</label>
+          <input id="salePrice" type="number" step="0.01">
+        </div>
 
+        <div class="field" style="justify-content:end">
+          <button class="primary" onclick="addSaleItem()">+ Add Item</button>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="table-wrap">
+        <table style="min-width:500px">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Qty</th>
+              <th>Price</th>
+              <th>Total</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="saleItemsTable"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <br>
+
+    <!-- EXTRA BILL ITEMS -->
+    <div class="card" style="background:#fffaf0">
+      <div class="section-title">
+        <h3>➕ Extra Bill Items / نور مصارف</h3>
+        <button class="warning" onclick="addExtraRow()">+ Add</button>
+      </div>
+
+      <p style="font-size:13px;color:#64748b">
+        مثال: د موټر کرایه، ترانسپورت، نصب، مزدوري، نور خدمات...
+      </p>
+
+      <div id="extraItems"></div>
+    </div>
+
+    <br>
+
+    <div class="card">
+      <div class="grid">
+        <div class="field">
+          <label>Discount ($)</label>
+          <input id="saleDiscount" type="number" value="0" step="0.01" oninput="renderSaleTotal()">
+        </div>
+
+        <div class="field">
+          <label>Paid ($)</label>
+          <input id="salePaid" type="number" value="0" step="0.01" oninput="renderSaleTotal()">
+        </div>
+
+        <div class="field">
+          <label>Total ($)</label>
+          <input id="saleTotal" readonly>
+        </div>
+
+        <div class="field">
+          <label>Remaining ($)</label>
+          <input id="saleRemaining" readonly>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="field">
+        <label>Note</label>
+        <textarea id="saleNote"></textarea>
+      </div>
+
+      <br>
+
+      <button class="primary" onclick="saveSale()">💾 Save Sale & Bill</button>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="card">
+    <h2>Sales History</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Bill</th>
+            <th>Customer</th>
+            <th>Total</th>
+            <th>Paid</th>
+            <th>Debt</th>
+            <th>Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="salesTable"></tbody>
+      </table>
+    </div>
+  </div>
 </section>
-
 
 <!-- EXPENSE -->
 <section id="expense" class="page">
 
-<div class="panel">
+  <div class="card">
+    <h2>💸 Expense</h2>
+    <p style="font-size:13px;color:#64748b">Expenses are recorded in AFN.</p>
 
-<h2>💸 Expenses</h2>
+    <div class="grid">
+      <div class="field">
+        <label>Expense Name</label>
+        <input id="expenseName" placeholder="Rent / Food / Transport...">
+      </div>
 
-<div class="form-grid">
+      <div class="field">
+        <label>Amount (AFN)</label>
+        <input id="expenseAmount" type="number">
+      </div>
 
-<input id="expenseName"
-placeholder="Expense Name">
+      <div class="field">
+        <label>Date</label>
+        <input id="expenseDate" type="date">
+      </div>
+    </div>
 
-<input id="expenseAmount"
-type="number"
-step="0.01"
-placeholder="Amount AFN">
+    <br>
+    <button class="primary" onclick="addExpense()">Save Expense</button>
+  </div>
 
-<input id="expenseDate"
-type="date">
+  <br>
 
-<input id="expenseTime"
-type="time">
-
-</div>
-
-<button class="btn" onclick="addExpense()">
-➕ Add Expense
-</button>
-
-<div id="expenseTable"></div>
-
-</div>
-
+  <div class="card">
+    <h2>Expense History</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Amount AFN</th>
+            <th>Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="expenseTable"></tbody>
+      </table>
+    </div>
+  </div>
 </section>
-
 
 <!-- DEBT -->
 <section id="debt" class="page">
 
-<div class="panel">
+  <div class="card">
+    <div class="section-title">
+      <h2>📒 Debtors</h2>
+    </div>
 
-<h2>📒 Debt / پور</h2>
+    <div class="grid">
+      <div class="field">
+        <label>Name</label>
+        <input id="debtName">
+      </div>
 
-<div class="form-grid">
+      <div class="field">
+        <label>Phone</label>
+        <input id="debtPhone">
+      </div>
 
-<input id="debtName"
-placeholder="Customer Name">
+      <div class="field">
+        <label>WhatsApp</label>
+        <input id="debtWhatsapp" placeholder="937XXXXXXXXX">
+      </div>
 
-<input id="debtPhone"
-placeholder="Phone">
+      <div class="field">
+        <label>Amount ($)</label>
+        <input id="debtAmount" type="number" step="0.01">
+      </div>
 
-<input id="debtAmount"
-type="number"
-step="0.01"
-placeholder="Debt Amount USD">
+      <div class="field">
+        <label>Paid ($)</label>
+        <input id="debtPaid" type="number" step="0.01" value="0">
+      </div>
 
-<input id="debtPaid"
-type="number"
-step="0.01"
-placeholder="Paid USD">
+      <div class="field">
+        <label>Date</label>
+        <input id="debtDate" type="date">
+      </div>
+    </div>
 
-<input id="debtDate"
-type="date">
+    <br>
 
-<textarea
-id="debtNote"
-placeholder="Note">
-</textarea>
+    <div class="field">
+      <label>Note</label>
+      <textarea id="debtNote"></textarea>
+    </div>
 
-</div>
+    <br>
 
-<button class="btn" onclick="addDebt()">
-➕ Save Debt
-</button>
+    <button class="primary" onclick="addDebt()">Save Debt</button>
+  </div>
 
-<div id="debtTable"></div>
+  <br>
 
-</div>
+  <div class="card">
+    <div class="section-title">
+      <h2>📱 Debt Reminder</h2>
+      <button class="warning" onclick="sendThursdayReminders()">Send Thursday Reminders</button>
+    </div>
 
+    <p style="font-size:13px">
+      هر پنجشنبه به هغو قرضدارانو چې پاتې قرض لري، WhatsApp reminder تیارېږي.
+      WhatsApp به د کارونکي په تایید سره خلاصېږي.
+    </p>
+
+    <div id="thursdayStatus"></div>
+  </div>
+
+  <br>
+
+  <div class="card">
+    <h2>Debt History</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>WhatsApp</th>
+            <th>Total</th>
+            <th>Paid</th>
+            <th>Remaining</th>
+            <th>Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="debtTable"></tbody>
+      </table>
+    </div>
+  </div>
 </section>
-
 
 <!-- CAPITAL -->
 <section id="capital" class="page">
 
-<div class="panel">
+  <div id="capitalLocked" class="card">
+    <h2>🔐 Capital</h2>
+    <p>د Capital معلوماتو لپاره PIN داخل کړئ.</p>
+    <input id="capitalPin" type="password" placeholder="PIN">
+    <br><br>
+    <button class="primary" onclick="unlockCapital()">Unlock</button>
+  </div>
 
-<h2>💰 Capital</h2>
+  <div id="capitalContent" style="display:none">
 
-<div class="alert">
-🔐 Capital information is protected by PIN.
-</div>
+    <div class="cards">
+      <div class="card">
+        <h3>Starting Capital</h3>
+        <div class="big" id="capitalValue">$0</div>
+      </div>
+    </div>
 
-<input
-id="capitalPin"
-type="password"
-placeholder="Security PIN">
+    <div class="card">
+      <h2>Set Capital</h2>
+      <div class="grid">
+        <div class="field">
+          <label>Capital ($)</label>
+          <input id="capitalInput" type="number" step="0.01">
+        </div>
+      </div>
+      <br>
+      <button class="primary" onclick="saveCapital()">Save Capital</button>
+    </div>
 
-<button class="btn" onclick="openCapital()">
-🔐 Open Capital
-</button>
-
-<div id="capitalArea" style="display:none">
-
-<br>
-
-<input
-id="capitalAmount"
-type="number"
-step="0.01"
-placeholder="Capital USD">
-
-<button class="btn" onclick="saveCapital()">
-💾 Save Capital
-</button>
-
-<h3>
-Current Capital:
-<span id="capitalValue">$0</span>
-</h3>
-
-</div>
-
-</div>
-
+  </div>
 </section>
-
 
 <!-- REPORTS -->
 <section id="reports" class="page">
 
-<div class="panel">
+  <div class="card">
+    <h2>📊 Reports</h2>
 
-<h2>📊 Reports</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Today Sales</h3>
+        <div class="big" id="reportDaily">$0</div>
+      </div>
 
-<div class="flex">
+      <div class="card">
+        <h3>This Week</h3>
+        <div class="big" id="reportWeekly">$0</div>
+      </div>
 
-<button class="btn"
-onclick="setReport('daily')">
-Daily
-</button>
+      <div class="card">
+        <h3>This Month</h3>
+        <div class="big" id="reportMonthly">$0</div>
+      </div>
 
-<button class="btn"
-onclick="setReport('weekly')">
-Weekly
-</button>
+      <div class="card">
+        <h3>This Year</h3>
+        <div class="big" id="reportYearly">$0</div>
+      </div>
+    </div>
 
-<button class="btn"
-onclick="setReport('monthly')">
-Monthly
-</button>
+    <hr>
 
-<button class="btn"
-onclick="setReport('yearly')">
-Yearly
-</button>
+    <h3>Sales / Purchase Summary</h3>
+    <div id="reportSummary"></div>
 
-</div>
+    <br>
 
-<br>
-
-<input
-id="reportDate"
-type="date"
-onchange="renderReport()">
-
-<div class="cards" style="margin-top:15px">
-
-<div class="card">
-<h3>Sales</h3>
-<strong id="reportSales">$0</strong>
-</div>
-
-<div class="card">
-<h3>Purchases</h3>
-<strong id="reportPurchases">$0</strong>
-</div>
-
-<div class="card">
-<h3>Expenses</h3>
-<strong id="reportExpenses">؋0</strong>
-</div>
-
-<div class="card">
-<h3>Profit / Loss</h3>
-<strong id="reportProfit">$0</strong>
-</div>
-
-</div>
-
-<div class="panel">
-
-<p>
-Sales Count:
-<b id="reportSaleCount">0</b>
-</p>
-
-<p>
-Purchase Count:
-<b id="reportPurchaseCount">0</b>
-</p>
-
-<p>
-Expense Count:
-<b id="reportExpenseCount">0</b>
-</p>
-
-</div>
-
-</div>
-
+    <h3>Monthly Sales</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Month</th>
+            <th>Sales</th>
+            <th>Purchases</th>
+            <th>Difference</th>
+          </tr>
+        </thead>
+        <tbody id="monthlyReport"></tbody>
+      </table>
+    </div>
+  </div>
 </section>
-
 
 <!-- SETTINGS -->
 <section id="settings" class="page">
 
-<div class="panel">
+  <div class="card">
+    <h2>⚙️ Settings</h2>
 
-<h2>⚙️ Settings</h2>
+    <div class="grid">
 
-<label>Shop Name</label>
-<input
-id="settingShopName"
-placeholder="Samad Solar">
+      <div class="field">
+        <label>Shop Name</label>
+        <input id="setShopName">
+      </div>
 
-<label>Gmail</label>
-<input
-id="settingGmail"
-type="email"
-placeholder="example@gmail.com">
+      <div class="field">
+        <label>Gmail</label>
+        <input id="setGmail" type="email">
+      </div>
 
-<label>Address</label>
-<input
-id="settingAddress"
-placeholder="Shop Address">
+      <div class="field">
+        <label>Address</label>
+        <input id="setAddress">
+      </div>
 
-<label>Phone</label>
-<input
-id="settingPhone"
-placeholder="Phone Number">
+      <div class="field">
+        <label>Phone</label>
+        <input id="setPhone">
+      </div>
 
-<label>WhatsApp</label>
-<input
-id="settingWhatsapp"
-placeholder="WhatsApp Number">
+      <div class="field">
+        <label>WhatsApp</label>
+        <input id="setWhatsapp">
+      </div>
 
-<label>Language</label>
+      <div class="field">
+        <label>Language</label>
+        <select id="setLanguage">
+          <option value="ps">پښتو</option>
+          <option value="fa">دری</option>
+          <option value="en">English</option>
+        </select>
+      </div>
 
-<select id="settingLanguage">
+      <div class="field">
+        <label>Currency</label>
+        <select id="setCurrency">
+          <option value="AFN">AFN</option>
+          <option value="USD">USD</option>
+          <option value="Rs">Rs</option>
+        </select>
+      </div>
 
-<option value="ps">
-پښتو
-</option>
+      <div class="field">
+        <label>Background Color</label>
+        <input id="setBgColor" type="color">
+      </div>
 
-<option value="fa">
-دری
-</option>
+      <div class="field">
+        <label>Security PIN</label>
+        <input id="setPin" type="password" placeholder="Enter new PIN">
+      </div>
 
-<option value="en">
-English
-</option>
+      <div class="field">
+        <label>Bill Prefix</label>
+        <input id="setInvoicePrefix" placeholder="SMD">
+      </div>
 
-</select>
+      <div class="field">
+        <label>Next Bill Number</label>
+        <input id="setNextInvoice" type="number" min="1">
+      </div>
 
+    </div>
 
-<label>Currency</label>
+    <br>
 
-<select id="settingCurrency">
+    <div class="card" style="background:#f7faf9">
+      <h3>📱 Thursday WhatsApp Reminder</h3>
 
-<option value="AFN">
-AFN - افغانی
-</option>
+      <label>
+        <input id="setThursdayReminder" type="checkbox" style="width:auto">
+        فعال وي
+      </label>
 
-<option value="USD">
-USD - Dollar
-</option>
+      <br><br>
 
-<option value="Rs">
-Rs - Rupee
-</option>
+      <label>
+        <input id="setGreeting" type="checkbox" style="width:auto">
+        د Message په شروع کې «سلام» ولیکه
+      </label>
 
-</select>
+      <p style="font-size:12px;color:#64748b">
+        یادونه: WhatsApp به په اتومات ډول نه لېږل کېږي؛ سیستم به WhatsApp خلاص کړي او ته به Send کوې.
+      </p>
+    </div>
 
+    <br>
 
-<label>🎨 Background Color</label>
+    <div class="field">
+      <label>Logo</label>
+      <input id="setLogo" type="file" accept="image/*" onchange="previewLogo(event)">
+      <br>
+      <img id="logoPreview" class="logo-preview">
+    </div>
 
-<div class="flex">
+    <br>
 
-<input
-id="settingBgColor"
-type="color"
-class="color-preview"
-value="#f4f7f8"
-oninput="previewBackground()">
+    <button class="primary" onclick="saveSettings()">💾 Save Settings</button>
+  </div>
 
-<button
-class="btn light"
-onclick="resetBackground()">
-Reset Color
-</button>
+  <br>
 
-</div>
+  <div class="card">
+    <h2>💾 Backup / Restore</h2>
 
+    <button class="primary" onclick="backupData()">Download Backup</button>
 
-<label>🖼️ Logo</label>
-
-<input
-id="settingLogo"
-type="file"
-accept="image/*"
-onchange="previewLogo(event)">
-
-<img
-id="logoPreview"
-class="logo-preview"
-style="display:none">
-
-
-<label>🔐 Security PIN</label>
-
-<input
-id="settingPin"
-type="password"
-placeholder="New PIN">
-
-
-<button class="btn"
-onclick="saveSettings()">
-💾 Save Settings
-</button>
-
-
-<hr>
-
-<h3>💾 Backup</h3>
-
-<button
-class="btn secondary"
-onclick="backupData()">
-⬇️ Download Backup
-</button>
-
-<input
-id="restoreFile"
-type="file"
-accept=".json"
-onchange="restoreData(event)">
-
-</div>
-
+    <input id="restoreFile" type="file" accept=".json" style="margin-top:10px">
+    <br><br>
+    <button class="warning" onclick="restoreData()">Restore Backup</button>
+  </div>
 </section>
 
+</main>
+
+<!-- PRODUCT MODAL -->
+<div id="productModal" class="modal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h2 id="productModalTitle">Add Product</h2>
+      <button class="light" onclick="closeModal('productModal')">✕</button>
+    </div>
+
+    <input type="hidden" id="editProductId">
+
+    <div class="grid">
+      <div class="field">
+        <label>Name</label>
+        <input id="productName">
+      </div>
+
+      <div class="field">
+        <label>Code</label>
+        <input id="productCode">
+      </div>
+
+      <div class="field">
+        <label>Stock</label>
+        <input id="productStock" type="number" min="0">
+      </div>
+
+      <div class="field">
+        <label>Low Stock Limit</label>
+        <input id="productLow" type="number" min="0" value="2">
+      </div>
+
+      <div class="field">
+        <label>Buy Price ($)</label>
+        <input id="productBuy" type="number" step="0.01">
+      </div>
+
+      <div class="field">
+        <label>Sell Price ($)</label>
+        <input id="productSell" type="number" step="0.01">
+      </div>
+
+      <div class="field">
+        <label>Unit</label>
+        <input id="productUnit" placeholder="pcs">
+      </div>
+    </div>
+
+    <br>
+
+    <button class="primary" onclick="saveProduct()">Save</button>
+  </div>
 </div>
-
-
-<!-- EDIT PRODUCT MODAL -->
-<div class="modal" id="editModal">
-
-<div class="modal-box">
-
-<h2>✏️ Edit Product</h2>
-
-<input
-type="hidden"
-id="editProductId">
-
-<input
-id="editProductName"
-placeholder="Product Name">
-
-<input
-id="editProductCode"
-placeholder="Product Code">
-
-<input
-id="editProductBuy"
-type="number"
-step="0.01"
-placeholder="Buying Price">
-
-<input
-id="editProductQty"
-type="number"
-placeholder="Quantity">
-
-<input
-id="editProductLimit"
-type="number"
-placeholder="Low Stock Limit">
-
-<button
-class="btn"
-onclick="updateProduct()">
-💾 Update
-</button>
-
-<button
-class="btn light"
-onclick="closeModal()">
-Cancel
-</button>
-
-</div>
-
-</div>
-
 
 <!-- INVOICE MODAL -->
-<div class="modal" id="invoiceModal">
+<div id="invoiceModal" class="modal">
+  <div class="modal-box">
 
-<div class="modal-box">
+    <div class="modal-head no-print">
+      <h2>🧾 Invoice</h2>
+      <div>
+        <button class="primary" onclick="printInvoice()">🖨️ Print</button>
+        <button class="warning" onclick="shareInvoice()">📤 Share</button>
+        <button class="light" onclick="closeModal('invoiceModal')">✕</button>
+      </div>
+    </div>
 
-<div id="invoiceContent"></div>
+    <div id="invoiceContent"></div>
 
-<div class="invoice-actions flex">
-
-<button
-class="btn"
-onclick="printInvoice()">
-🖨️ Print
-</button>
-
-<button
-class="btn secondary"
-onclick="shareInvoice()">
-📤 Share
-</button>
-
-<button
-class="btn light"
-onclick="closeInvoice()">
-Close
-</button>
-
+  </div>
 </div>
 
+<!-- PIN MODAL -->
+<div id="pinModal" class="modal">
+  <div class="modal-box" style="max-width:400px">
+
+    <div class="modal-head">
+      <h2>🔐 Security PIN</h2>
+      <button class="light" onclick="closeModal('pinModal')">✕</button>
+    </div>
+
+    <p>د Edit/Delete لپاره PIN داخل کړئ.</p>
+
+    <input id="actionPin" type="password" placeholder="PIN">
+
+    <br><br>
+
+    <button class="primary" onclick="confirmPinAction()">Confirm</button>
+  </div>
 </div>
 
-</div>
-
-
-<footer>
-Samad Solar © 2026
-</footer>
-
+<div id="toast" class="toast"></div>
 
 <script>
+/* =========================================================
+   SAMAD SOLAR
+   ========================================================= */
 
-/* =========================
-   DATA
-========================= */
+const KEY = {
+  products:"samadProducts",
+  purchases:"samadPurchases",
+  sales:"samadSales",
+  expenses:"samadExpenses",
+  debts:"samadDebts",
+  capital:"samadCapital",
+  settings:"samadSettings"
+};
 
-let products =
-JSON.parse(localStorage.getItem("samadProducts") || "[]");
+let products = load(KEY.products,[]);
+let purchases = load(KEY.purchases,[]);
+let sales = load(KEY.sales,[]);
+let expenses = load(KEY.expenses,[]);
+let debts = load(KEY.debts,[]);
+let capital = Number(localStorage.getItem(KEY.capital) || 0);
 
-let purchases =
-JSON.parse(localStorage.getItem("samadPurchases") || "[]");
+let settings = load(KEY.settings,{
+  shopName:"Samad Solar",
+  gmail:"",
+  address:"",
+  phone:"",
+  whatsapp:"",
+  language:"ps",
+  currency:"AFN",
+  bgColor:"#f4f7f7",
+  pin:"786",
+  logo:"",
+  invoicePrefix:"SMD",
+  nextInvoice:1,
+  thursdayReminder:true,
+  greeting:true
+});
 
-let sales =
-JSON.parse(localStorage.getItem("samadSales") || "[]");
+let saleItems = [];
+let extraItems = [];
+let pendingAction = null;
 
-let expenses =
-JSON.parse(localStorage.getItem("samadExpenses") || "[]");
-
-let debts =
-JSON.parse(localStorage.getItem("samadDebts") || "[]");
-
-let capital =
-Number(localStorage.getItem("samadCapital") || 0);
-
-let settings =
-JSON.parse(localStorage.getItem("samadSettings") || "{}");
-
-let reportPeriod="daily";
-
-let currentInvoice=null;
-
-
-/* =========================
-   SAVE
-========================= */
-
-function saveAll(){
-
-localStorage.setItem(
-"samadProducts",
-JSON.stringify(products)
-);
-
-localStorage.setItem(
-"samadPurchases",
-JSON.stringify(purchases)
-);
-
-localStorage.setItem(
-"samadSales",
-JSON.stringify(sales)
-);
-
-localStorage.setItem(
-"samadExpenses",
-JSON.stringify(expenses)
-);
-
-localStorage.setItem(
-"samadDebts",
-JSON.stringify(debts)
-);
-
-localStorage.setItem(
-"samadCapital",
-capital
-);
-
-localStorage.setItem(
-"samadSettings",
-JSON.stringify(settings)
-);
-
+function load(key, fallback){
+  try{
+    const x = localStorage.getItem(key);
+    return x ? JSON.parse(x) : fallback;
+  }catch(e){
+    return fallback;
+  }
 }
 
-
-/* =========================
-   HELPERS
-========================= */
+function save(key,value){
+  localStorage.setItem(key,JSON.stringify(value));
+}
 
 function uid(){
-
-return Date.now()+Math.floor(Math.random()*10000);
-
+  return Date.now()+Math.floor(Math.random()*1000);
 }
 
-function todayInputDate(){
-
-return new Date().toISOString().split("T")[0];
-
+function today(){
+  const d = new Date();
+  return d.toISOString().slice(0,10);
 }
 
-function nowTime(){
-
-return new Date().toTimeString().slice(0,5);
-
+function money(n){
+  return Number(n||0).toFixed(2);
 }
 
-function money(n,currency="USD"){
-
-n=Number(n)||0;
-
-if(currency==="AFN")
-return "؋"+n.toLocaleString();
-
-if(currency==="Rs")
-return "Rs "+n.toLocaleString();
-
-return "$"+n.toLocaleString(
-undefined,
-{
-minimumFractionDigits:2,
-maximumFractionDigits:2
-}
-);
-
+function esc(x){
+  return String(x ?? "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 }
 
-function escapeHtml(text){
-
-return String(text ?? "")
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
-
+function toast(msg){
+  const t=document.getElementById("toast");
+  t.textContent=msg;
+  t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),2500);
 }
 
+function showPage(id){
+  document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+
+  document.querySelectorAll("nav button").forEach(x=>{
+    x.classList.toggle("active",x.dataset.page===id);
+  });
+
+  renderAll();
+
+  if(id==="capital"){
+    document.getElementById("capitalContent").style.display="none";
+    document.getElementById("capitalLocked").style.display="block";
+    document.getElementById("capitalPin").value="";
+  }
+}
+
+function closeModal(id){
+  document.getElementById(id).classList.remove("show");
+}
 
 /* =========================
-   NAVIGATION
+   SETTINGS
 ========================= */
 
-function showPage(id,btn){
+function applySettings(){
+  document.documentElement.style.setProperty("--primary","#0f766e");
+  document.body.style.background=settings.bgColor || "#f4f7f7";
 
-document
-.querySelectorAll(".page")
-.forEach(p=>p.classList.remove("active"));
+  document.getElementById("headerName").textContent=settings.shopName || "Samad Solar";
+  document.getElementById("headerAddress").textContent=settings.address || "";
+  document.getElementById("headerCurrency").textContent=settings.currency || "AFN";
 
-document
-.getElementById(id)
-.classList.add("active");
+  const logo=document.getElementById("headerLogo");
 
-document
-.querySelectorAll("nav button")
-.forEach(b=>b.classList.remove("active"));
+  if(settings.logo){
+    logo.src=settings.logo;
+    logo.style.display="block";
+  }else{
+    logo.style.display="none";
+  }
 
-if(btn)
-btn.classList.add("active");
-
-renderAll();
-
+  document.documentElement.lang=settings.language==="en"?"en":settings.language;
+  document.documentElement.dir=settings.language==="en"?"ltr":"rtl";
 }
 
-function quickPage(id){
+function loadSettingsForm(){
+  document.getElementById("setShopName").value=settings.shopName||"";
+  document.getElementById("setGmail").value=settings.gmail||"";
+  document.getElementById("setAddress").value=settings.address||"";
+  document.getElementById("setPhone").value=settings.phone||"";
+  document.getElementById("setWhatsapp").value=settings.whatsapp||"";
+  document.getElementById("setLanguage").value=settings.language||"ps";
+  document.getElementById("setCurrency").value=settings.currency||"AFN";
+  document.getElementById("setBgColor").value=settings.bgColor||"#f4f7f7";
+  document.getElementById("setPin").value="";
+  document.getElementById("setInvoicePrefix").value=settings.invoicePrefix||"SMD";
+  document.getElementById("setNextInvoice").value=settings.nextInvoice||1;
+  document.getElementById("setThursdayReminder").checked=settings.thursdayReminder!==false;
+  document.getElementById("setGreeting").checked=settings.greeting!==false;
 
-let button=[...document.querySelectorAll("nav button")]
-.find(b=>
-b.getAttribute("onclick")?.includes("'"+id+"'")
-);
-
-showPage(id,button);
-
+  document.getElementById("logoPreview").src=settings.logo||"";
 }
 
+function saveSettings(){
+  settings.shopName=document.getElementById("setShopName").value.trim() || "Samad Solar";
+  settings.gmail=document.getElementById("setGmail").value.trim();
+  settings.address=document.getElementById("setAddress").value.trim();
+  settings.phone=document.getElementById("setPhone").value.trim();
+  settings.whatsapp=document.getElementById("setWhatsapp").value.trim();
+  settings.language=document.getElementById("setLanguage").value;
+  settings.currency=document.getElementById("setCurrency").value;
+  settings.bgColor=document.getElementById("setBgColor").value;
+  settings.invoicePrefix=document.getElementById("setInvoicePrefix").value.trim() || "SMD";
+
+  const next=Number(document.getElementById("setNextInvoice").value);
+  settings.nextInvoice=next>0?next:1;
+
+  settings.thursdayReminder=document.getElementById("setThursdayReminder").checked;
+  settings.greeting=document.getElementById("setGreeting").checked;
+
+  const pin=document.getElementById("setPin").value.trim();
+  if(pin) settings.pin=pin;
+
+  save(KEY.settings,settings);
+  applySettings();
+  toast("Settings saved");
+  renderAll();
+}
+
+function previewLogo(e){
+  const file=e.target.files[0];
+  if(!file)return;
+
+  const reader=new FileReader();
+
+  reader.onload=function(){
+    settings.logo=reader.result;
+    document.getElementById("logoPreview").src=reader.result;
+  };
+
+  reader.readAsDataURL(file);
+}
 
 /* =========================
-   PRODUCTS
+   STOCK
 ========================= */
+
+function openProductModal(id=null){
+  document.getElementById("productModal").classList.add("show");
+
+  if(id){
+    const p=products.find(x=>x.id===id);
+    if(!p)return;
+
+    document.getElementById("productModalTitle").textContent="Edit Product";
+    document.getElementById("editProductId").value=id;
+    document.getElementById("productName").value=p.name;
+    document.getElementById("productCode").value=p.code||"";
+    document.getElementById("productStock").value=p.stock||0;
+    document.getElementById("productLow").value=p.low||0;
+    document.getElementById("productBuy").value=p.buy||0;
+    document.getElementById("productSell").value=p.sell||0;
+    document.getElementById("productUnit").value=p.unit||"pcs";
+  }else{
+    document.getElementById("productModalTitle").textContent="Add Product";
+    document.getElementById("editProductId").value="";
+    document.getElementById("productName").value="";
+    document.getElementById("productCode").value="";
+    document.getElementById("productStock").value=0;
+    document.getElementById("productLow").value=2;
+    document.getElementById("productBuy").value=0;
+    document.getElementById("productSell").value=0;
+    document.getElementById("productUnit").value="pcs";
+  }
+}
 
 function saveProduct(){
+  const id=document.getElementById("editProductId").value;
 
-let name=
-document.getElementById("productName").value.trim();
+  const data={
+    name:document.getElementById("productName").value.trim(),
+    code:document.getElementById("productCode").value.trim(),
+    stock:Number(document.getElementById("productStock").value||0),
+    low:Number(document.getElementById("productLow").value||0),
+    buy:Number(document.getElementById("productBuy").value||0),
+    sell:Number(document.getElementById("productSell").value||0),
+    unit:document.getElementById("productUnit").value.trim()||"pcs"
+  };
 
-let code=
-document.getElementById("productCode").value.trim();
+  if(!data.name){
+    toast("Product name required");
+    return;
+  }
 
-let buy=
-Number(document.getElementById("productBuy").value);
+  if(id){
+    products=products.map(p=>p.id==id?{...p,...data}:p);
+  }else{
+    products.push({id:uid(),...data});
+  }
 
-let qty=
-Number(document.getElementById("productQty").value);
-
-let limit=
-Number(document.getElementById("productLimit").value);
-
-if(!name){
-
-alert("Product name required");
-
-return;
-
+  save(KEY.products,products);
+  closeModal("productModal");
+  renderAll();
+  toast("Product saved");
 }
 
-products.push({
+function renderStock(){
+  const q=(document.getElementById("stockSearch")?.value||"").toLowerCase();
 
-id:uid(),
-name,
-code,
-buy,
-qty,
-limit,
-createdAt:new Date().toISOString()
+  const rows=products
+    .filter(p=>
+      p.name.toLowerCase().includes(q) ||
+      (p.code||"").toLowerCase().includes(q)
+    )
+    .map(p=>{
+      const low=Number(p.stock)<=Number(p.low);
 
-});
+      return `
+      <tr class="${low?'low-row':''}" id="product-row-${p.id}">
+        <td><b>${esc(p.name)}</b></td>
+        <td>${esc(p.code)}</td>
+        <td>
+          ${p.stock}
+          ${low?'<span class="low-badge">LOW</span>':""}
+        </td>
+        <td>${p.low}</td>
+        <td>$${money(p.buy)}</td>
+        <td>$${money(p.sell)}</td>
+        <td>${esc(p.unit)}</td>
+        <td>
+          <button class="light" onclick="requestEditProduct(${p.id})">✏️ Edit</button>
+          <button class="danger" onclick="requestDeleteProduct(${p.id})">🗑️ Delete</button>
+        </td>
+      </tr>`;
+    }).join("");
 
-saveAll();
-
-document.getElementById("productName").value="";
-document.getElementById("productCode").value="";
-document.getElementById("productBuy").value="";
-document.getElementById("productQty").value="";
-document.getElementById("productLimit").value="";
-
-renderAll();
-
-alert("Product saved successfully");
-
+  document.getElementById("stockTable").innerHTML=
+    rows || `<tr><td colspan="8">No products</td></tr>`;
 }
 
-
-function renderProducts(){
-
-let search=
-document.getElementById("productSearch")
-?.value.toLowerCase() || "";
-
-let list=
-products.filter(p=>
-(p.name||"").toLowerCase().includes(search) ||
-(p.code||"").toLowerCase().includes(search)
-);
-
-if(!list.length){
-
-document.getElementById("productsTable").innerHTML=
-'<div class="empty">No products found</div>';
-
-return;
-
+function requestEditProduct(id){
+  requestPin("editProduct",id);
 }
 
-let html=`
-
-<table>
-
-<thead>
-
-<tr>
-<th>Name</th>
-<th>Code</th>
-<th>Buy USD</th>
-<th>Qty</th>
-<th>Status</th>
-<th>Action</th>
-</tr>
-
-</thead>
-
-<tbody>
-`;
-
-list.forEach(p=>{
-
-let low=
-Number(p.qty)<=Number(p.limit);
-
-html+=`
-
-<tr>
-
-<td>${escapeHtml(p.name)}</td>
-
-<td>${escapeHtml(p.code)}</td>
-
-<td>${money(p.buy)}</td>
-
-<td>${p.qty}</td>
-
-<td class="${low?'low':'good'}">
-
-${low?'⚠️ Low Stock':'✓ Good'}
-
-</td>
-
-<td>
-
-<button
-class="btn warning"
-onclick="editProduct(${p.id})">
-✏️
-</button>
-
-<button
-class="btn danger"
-onclick="deleteProduct(${p.id})">
-🗑️
-</button>
-
-</td>
-
-</tr>
-`;
-
-});
-
-html+="</tbody></table>";
-
-document.getElementById("productsTable").innerHTML=html;
-
+function requestDeleteProduct(id){
+  requestPin("deleteProduct",id);
 }
-
-
-function editProduct(id){
-
-let p=products.find(x=>x.id===id);
-
-if(!p)return;
-
-document.getElementById("editProductId").value=id;
-
-document.getElementById("editProductName").value=p.name;
-
-document.getElementById("editProductCode").value=p.code;
-
-document.getElementById("editProductBuy").value=p.buy;
-
-document.getElementById("editProductQty").value=p.qty;
-
-document.getElementById("editProductLimit").value=p.limit;
-
-document
-.getElementById("editModal")
-.classList.add("show");
-
-}
-
-
-function updateProduct(){
-
-let id=
-Number(document.getElementById("editProductId").value);
-
-let p=
-products.find(x=>x.id===id);
-
-if(!p)return;
-
-p.name=
-document.getElementById("editProductName").value;
-
-p.code=
-document.getElementById("editProductCode").value;
-
-p.buy=
-Number(document.getElementById("editProductBuy").value);
-
-p.qty=
-Number(document.getElementById("editProductQty").value);
-
-p.limit=
-Number(document.getElementById("editProductLimit").value);
-
-saveAll();
-
-closeModal();
-
-renderAll();
-
-}
-
-
-function deleteProduct(id){
-
-if(!confirm("Delete this product?"))
-return;
-
-products=
-products.filter(p=>p.id!==id);
-
-saveAll();
-
-renderAll();
-
-}
-
 
 /* =========================
-   SELECTS
+   LOW STOCK ALERT
 ========================= */
 
-function renderProductSelects(){
+function renderLowAlerts(){
+  const lowProducts=products.filter(p=>Number(p.stock)<=Number(p.low));
 
-let options=
-'<option value="">Select Product</option>';
+  const box=document.getElementById("lowAlerts");
 
-products.forEach(p=>{
+  if(!lowProducts.length){
+    box.innerHTML="";
+    return;
+  }
 
-options+=`
-
-<option value="${p.id}">
-
-${escapeHtml(p.name)}
-— Stock: ${p.qty}
-
-</option>
-
-`;
-
-});
-
-document.getElementById("purchaseProduct")
-.innerHTML=options;
-
-document.getElementById("saleProduct")
-.innerHTML=options;
-
+  box.innerHTML=`
+    <div class="alert-box">
+      <b>⚠️ Low Stock Alert</b>
+      ${lowProducts.map(p=>`
+        <div class="alert-item">
+          <span>
+            <b>${esc(p.name)}</b>
+            — Stock: ${p.stock}
+            / Low limit: ${p.low}
+          </span>
+          <button onclick="openLowStockItem(${p.id})">
+            Open Item
+          </button>
+        </div>
+      `).join("")}
+    </div>
+  `;
 }
 
+function openLowStockItem(id){
+  showPage("stock");
+
+  setTimeout(()=>{
+    const search=document.getElementById("stockSearch");
+    const p=products.find(x=>x.id===id);
+
+    if(p){
+      search.value=p.name;
+      renderStock();
+
+      const row=document.getElementById("product-row-"+id);
+
+      if(row){
+        row.scrollIntoView({
+          behavior:"smooth",
+          block:"center"
+        });
+
+        row.style.outline="3px solid #f59e0b";
+
+        setTimeout(()=>{
+          row.style.outline="";
+        },3000);
+      }
+    }
+  },100);
+}
 
 /* =========================
    PURCHASE
 ========================= */
 
+function populateProductSelects(){
+  const options=
+    `<option value="">Select Product</option>`+
+    products.map(p=>
+      `<option value="${p.id}">
+        ${esc(p.name)} — Stock ${p.stock}
+      </option>`
+    ).join("");
+
+  document.getElementById("purchaseProduct").innerHTML=options;
+  document.getElementById("saleProduct").innerHTML=options;
+}
+
 function addPurchase(){
+  const productId=Number(document.getElementById("purchaseProduct").value);
+  const qty=Number(document.getElementById("purchaseQty").value||0);
+  const price=Number(document.getElementById("purchasePrice").value||0);
 
-let productId=
-Number(document.getElementById("purchaseProduct").value);
+  if(!productId || qty<=0){
+    toast("Select product and quantity");
+    return;
+  }
 
-let qty=
-Number(document.getElementById("purchaseQty").value);
+  const p=products.find(x=>x.id===productId);
 
-let price=
-Number(document.getElementById("purchasePrice").value);
+  if(!p)return;
 
-let date=
-document.getElementById("purchaseDate").value
-||todayInputDate();
+  p.stock+=qty;
 
-let time=
-document.getElementById("purchaseTime").value
-||nowTime();
+  purchases.push({
+    id:uid(),
+    productId,
+    productName:p.name,
+    qty,
+    price,
+    total:qty*price,
+    supplier:document.getElementById("purchaseSupplier").value.trim(),
+    date:document.getElementById("purchaseDate").value||today()
+  });
 
-let p=
-products.find(x=>x.id===productId);
+  save(KEY.products,products);
+  save(KEY.purchases,purchases);
 
-if(!p || qty<=0 || price<0){
+  document.getElementById("purchaseQty").value="";
+  document.getElementById("purchasePrice").value="";
+  document.getElementById("purchaseSupplier").value="";
 
-alert("Please enter correct information");
-
-return;
-
+  renderAll();
+  toast("Purchase saved");
 }
-
-p.qty+=qty;
-
-p.buy=price;
-
-purchases.push({
-
-id:uid(),
-productId,
-productName:p.name,
-qty,
-price,
-total:qty*price,
-date,
-time,
-createdAt:new Date().toISOString()
-
-});
-
-saveAll();
-
-document.getElementById("purchaseQty").value="";
-document.getElementById("purchasePrice").value="";
-
-renderAll();
-
-alert("Purchase saved");
-
-}
-
 
 function renderPurchases(){
-
-if(!purchases.length){
-
-document.getElementById("purchaseTable").innerHTML=
-'<div class="empty">No purchases</div>';
-
-return;
-
+  document.getElementById("purchaseTable").innerHTML=
+    purchases.slice().reverse().map(x=>`
+      <tr>
+        <td>${esc(x.productName)}</td>
+        <td>${x.qty}</td>
+        <td>$${money(x.price)}</td>
+        <td>$${money(x.total)}</td>
+        <td>${esc(x.supplier)}</td>
+        <td>${x.date}</td>
+        <td>
+          <button class="danger" onclick="requestDeletePurchase(${x.id})">
+            Delete
+          </button>
+        </td>
+      </tr>
+    `).join("") ||
+    `<tr><td colspan="7">No purchases</td></tr>`;
 }
 
-let html=`
-
-<table>
-
-<thead>
-
-<tr>
-<th>Product</th>
-<th>Qty</th>
-<th>Price</th>
-<th>Total</th>
-<th>Date</th>
-<th>Action</th>
-</tr>
-
-</thead>
-
-<tbody>
-`;
-
-purchases.slice().reverse().forEach(x=>{
-
-html+=`
-
-<tr>
-
-<td>${escapeHtml(x.productName)}</td>
-
-<td>${x.qty}</td>
-
-<td>${money(x.price)}</td>
-
-<td>${money(x.total)}</td>
-
-<td>
-${escapeHtml(x.date)}
-${escapeHtml(x.time||"")}
-</td>
-
-<td>
-
-<button
-class="btn danger"
-onclick="deletePurchase(${x.id})">
-🗑️
-</button>
-
-</td>
-
-</tr>
-
-`;
-
-});
-
-html+="</tbody></table>";
-
-document.getElementById("purchaseTable").innerHTML=html;
-
+function requestDeletePurchase(id){
+  requestPin("deletePurchase",id);
 }
-
-
-function deletePurchase(id){
-
-let x=
-purchases.find(p=>p.id===id);
-
-if(!x)return;
-
-if(!confirm(
-"Delete purchase? Stock will be adjusted."
-))
-return;
-
-let p=
-products.find(p=>p.id===x.productId);
-
-if(p)
-p.qty-=Number(x.qty);
-
-purchases=
-purchases.filter(p=>p.id!==id);
-
-saveAll();
-
-renderAll();
-
-}
-
 
 /* =========================
    SALE
 ========================= */
 
-function addSale(){
+function updateSalePrice(){
+  const id=Number(document.getElementById("saleProduct").value);
+  const p=products.find(x=>x.id===id);
 
-let productId=
-Number(document.getElementById("saleProduct").value);
-
-let qty=
-Number(document.getElementById("saleQty").value);
-
-let price=
-Number(document.getElementById("salePrice").value);
-
-let date=
-document.getElementById("saleDate").value
-||todayInputDate();
-
-let time=
-document.getElementById("saleTime").value
-||nowTime();
-
-let p=
-products.find(x=>x.id===productId);
-
-if(!p || qty<=0 || price<0){
-
-alert("Please enter correct information");
-
-return;
-
+  if(p){
+    document.getElementById("salePrice").value=p.sell||0;
+  }
 }
 
-if(qty>p.qty){
+function addSaleItem(){
+  const productId=Number(document.getElementById("saleProduct").value);
+  const qty=Number(document.getElementById("saleQty").value||0);
+  const price=Number(document.getElementById("salePrice").value||0);
 
-alert("Not enough stock");
+  if(!productId || qty<=0){
+    toast("Select product and quantity");
+    return;
+  }
 
-return;
+  const p=products.find(x=>x.id===productId);
 
+  if(!p)return;
+
+  const already=saleItems
+    .filter(x=>x.productId===productId)
+    .reduce((a,b)=>a+b.qty,0);
+
+  if(already+qty>p.stock){
+    toast("Not enough stock");
+    return;
+  }
+
+  saleItems.push({
+    id:uid(),
+    productId,
+    name:p.name,
+    qty,
+    price,
+    total:qty*price
+  });
+
+  renderSaleItems();
+  renderSaleTotal();
 }
 
-p.qty-=qty;
-
-let sale={
-
-id:uid(),
-productId,
-productName:p.name,
-qty,
-price,
-total:qty*price,
-date,
-time,
-createdAt:new Date().toISOString()
-
-};
-
-sales.push(sale);
-
-saveAll();
-
-document.getElementById("saleQty").value="";
-document.getElementById("salePrice").value="";
-
-renderAll();
-
-showInvoice(sale);
-
+function removeSaleItem(id){
+  saleItems=saleItems.filter(x=>x.id!==id);
+  renderSaleItems();
+  renderSaleTotal();
 }
 
+function renderSaleItems(){
+  document.getElementById("saleItemsTable").innerHTML=
+    saleItems.map(x=>`
+      <tr>
+        <td>${esc(x.name)}</td>
+        <td>${x.qty}</td>
+        <td>$${money(x.price)}</td>
+        <td>$${money(x.total)}</td>
+        <td>
+          <button class="danger" onclick="removeSaleItem(${x.id})">✕</button>
+        </td>
+      </tr>
+    `).join("") ||
+    `<tr><td colspan="5">No items</td></tr>`;
+}
+
+function addExtraRow(name="",amount=""){
+  extraItems.push({
+    id:uid(),
+    name,
+    amount:Number(amount||0)
+  });
+
+  renderExtraItems();
+  renderSaleTotal();
+}
+
+function removeExtraRow(id){
+  extraItems=extraItems.filter(x=>x.id!==id);
+  renderExtraItems();
+  renderSaleTotal();
+}
+
+function renderExtraItems(){
+  document.getElementById("extraItems").innerHTML=
+    extraItems.map(x=>`
+      <div class="extra-row">
+        <input
+          placeholder="مثلاً د موټر کرایه"
+          value="${esc(x.name)}"
+          oninput="changeExtraName(${x.id},this.value)"
+        >
+
+        <input
+          type="number"
+          step="0.01"
+          placeholder="Amount"
+          value="${x.amount}"
+          oninput="changeExtraAmount(${x.id},this.value)"
+        >
+
+        <button class="danger" onclick="removeExtraRow(${x.id})">✕</button>
+      </div>
+    `).join("");
+}
+
+function changeExtraName(id,value){
+  const x=extraItems.find(x=>x.id===id);
+  if(x)x.name=value;
+}
+
+function changeExtraAmount(id,value){
+  const x=extraItems.find(x=>x.id===id);
+  if(x){
+    x.amount=Number(value||0);
+    renderSaleTotal();
+  }
+}
+
+function calculateSaleTotal(){
+  const itemsTotal=saleItems.reduce((a,b)=>a+b.total,0);
+  const extraTotal=extraItems.reduce((a,b)=>a+Number(b.amount||0),0);
+  const discount=Number(document.getElementById("saleDiscount").value||0);
+
+  return Math.max(0,itemsTotal+extraTotal-discount);
+}
+
+function renderSaleTotal(){
+  const total=calculateSaleTotal();
+  const paid=Number(document.getElementById("salePaid").value||0);
+  const remaining=Math.max(0,total-paid);
+
+  document.getElementById("saleTotal").value=money(total);
+  document.getElementById("saleRemaining").value=money(remaining);
+}
+
+function getNextBillNumber(){
+  return `${settings.invoicePrefix||"SMD"}-${Number(settings.nextInvoice||1)}`;
+}
+
+function prepareSaleForm(){
+  document.getElementById("saleDate").value=today();
+  document.getElementById("saleBillNumber").value=getNextBillNumber();
+  document.getElementById("nextBillPreview").textContent=getNextBillNumber();
+
+  document.getElementById("saleCustomer").value="";
+  document.getElementById("salePhone").value="";
+  document.getElementById("saleWhatsapp").value="";
+  document.getElementById("salePaid").value="0";
+  document.getElementById("saleDiscount").value="0";
+  document.getElementById("saleNote").value="";
+
+  saleItems=[];
+  extraItems=[];
+
+  renderSaleItems();
+  renderExtraItems();
+  renderSaleTotal();
+}
+
+function saveSale(){
+  if(!saleItems.length && !extraItems.length){
+    toast("Add at least one item");
+    return;
+  }
+
+  const bill=
+    document.getElementById("saleBillNumber").value.trim() ||
+    getNextBillNumber();
+
+  const customer=
+    document.getElementById("saleCustomer").value.trim() ||
+    "Customer";
+
+  const total=calculateSaleTotal();
+  const paid=Number(document.getElementById("salePaid").value||0);
+  const remaining=Math.max(0,total-paid);
+
+  if(paid>total){
+    toast("Paid cannot be greater than total");
+    return;
+  }
+
+  /* reduce stock */
+  for(const item of saleItems){
+    const p=products.find(x=>x.id===item.productId);
+
+    if(!p){
+      toast("Product not found");
+      return;
+    }
+
+    if(item.qty>p.stock){
+      toast("Not enough stock for "+p.name);
+      return;
+    }
+  }
+
+  for(const item of saleItems){
+    const p=products.find(x=>x.id===item.productId);
+    p.stock-=item.qty;
+  }
+
+  const sale={
+    id:uid(),
+    bill,
+    customer,
+    phone:document.getElementById("salePhone").value.trim(),
+    whatsapp:document.getElementById("saleWhatsapp").value.trim(),
+    date:document.getElementById("saleDate").value||today(),
+    items:JSON.parse(JSON.stringify(saleItems)),
+    extraItems:JSON.parse(JSON.stringify(extraItems)),
+    discount:Number(document.getElementById("saleDiscount").value||0),
+    total,
+    paid,
+    remaining,
+    payment:remaining>0?"debt":"paid",
+    note:document.getElementById("saleNote").value.trim()
+  };
+
+  sales.push(sale);
+
+  /* create debt automatically */
+  if(remaining>0){
+    debts.push({
+      id:uid(),
+      name:customer,
+      phone:sale.phone,
+      whatsapp:sale.whatsapp,
+      amount:total,
+      paid,
+      remaining,
+      date:sale.date,
+      note:`Bill ${bill}`
+    });
+
+    save(KEY.debts,debts);
+  }
+
+  save(KEY.products,products);
+  save(KEY.sales,sales);
+
+  /* advance invoice number */
+  settings.nextInvoice=Number(settings.nextInvoice||1)+1;
+  save(KEY.settings,settings);
+
+  showInvoice(sale);
+
+  prepareSaleForm();
+  renderAll();
+  toast("Sale saved");
+}
 
 function renderSales(){
-
-if(!sales.length){
-
-document.getElementById("saleTable").innerHTML=
-'<div class="empty">No sales</div>';
-
-return;
-
+  document.getElementById("salesTable").innerHTML=
+    sales.slice().reverse().map(x=>`
+      <tr>
+        <td><b>${esc(x.bill)}</b></td>
+        <td>${esc(x.customer)}</td>
+        <td>$${money(x.total)}</td>
+        <td>$${money(x.paid)}</td>
+        <td>${x.remaining>0?`<span class="stat-bad">$${money(x.remaining)}</span>`:"Paid"}</td>
+        <td>${x.date}</td>
+        <td>
+          <button class="primary" onclick="showInvoiceById(${x.id})">🧾 Bill</button>
+          <button class="danger" onclick="requestDeleteSale(${x.id})">Delete</button>
+        </td>
+      </tr>
+    `).join("") ||
+    `<tr><td colspan="7">No sales</td></tr>`;
 }
 
-let html=`
-
-<table>
-
-<thead>
-
-<tr>
-<th>Product</th>
-<th>Qty</th>
-<th>Price</th>
-<th>Total</th>
-<th>Date</th>
-<th>Action</th>
-</tr>
-
-</thead>
-
-<tbody>
-`;
-
-sales.slice().reverse().forEach(x=>{
-
-html+=`
-
-<tr>
-
-<td>${escapeHtml(x.productName)}</td>
-
-<td>${x.qty}</td>
-
-<td>${money(x.price)}</td>
-
-<td>${money(x.total)}</td>
-
-<td>
-${escapeHtml(x.date)}
-${escapeHtml(x.time||"")}
-</td>
-
-<td>
-
-<button
-class="btn"
-onclick="showInvoiceById(${x.id})">
-🧾
-</button>
-
-<button
-class="btn danger"
-onclick="deleteSale(${x.id})">
-🗑️
-</button>
-
-</td>
-
-</tr>
-
-`;
-
-});
-
-html+="</tbody></table>";
-
-document.getElementById("saleTable").innerHTML=html;
-
+function requestDeleteSale(id){
+  requestPin("deleteSale",id);
 }
-
-
-function deleteSale(id){
-
-let x=
-sales.find(s=>s.id===id);
-
-if(!x)return;
-
-if(!confirm(
-"Delete sale? Stock will be restored."
-))
-return;
-
-let p=
-products.find(p=>p.id===x.productId);
-
-if(p)
-p.qty+=Number(x.qty);
-
-sales=
-sales.filter(s=>s.id!==id);
-
-saveAll();
-
-renderAll();
-
-}
-
-
-/* =========================
-   EXPENSE
-========================= */
-
-function addExpense(){
-
-let name=
-document.getElementById("expenseName").value.trim();
-
-let amount=
-Number(document.getElementById("expenseAmount").value);
-
-let date=
-document.getElementById("expenseDate").value
-||todayInputDate();
-
-let time=
-document.getElementById("expenseTime").value
-||nowTime();
-
-if(!name || amount<=0){
-
-alert("Enter expense information");
-
-return;
-
-}
-
-expenses.push({
-
-id:uid(),
-name,
-amount,
-date,
-time,
-createdAt:new Date().toISOString()
-
-});
-
-saveAll();
-
-document.getElementById("expenseName").value="";
-document.getElementById("expenseAmount").value="";
-
-renderAll();
-
-}
-
-
-function renderExpenses(){
-
-if(!expenses.length){
-
-document.getElementById("expenseTable").innerHTML=
-'<div class="empty">No expenses</div>';
-
-return;
-
-}
-
-let html=`
-
-<table>
-
-<thead>
-
-<tr>
-<th>Expense</th>
-<th>Amount</th>
-<th>Date</th>
-<th>Action</th>
-</tr>
-
-</thead>
-
-<tbody>
-`;
-
-expenses.slice().reverse().forEach(x=>{
-
-html+=`
-
-<tr>
-
-<td>${escapeHtml(x.name)}</td>
-
-<td>${money(x.amount,"AFN")}</td>
-
-<td>
-${escapeHtml(x.date)}
-${escapeHtml(x.time||"")}
-</td>
-
-<td>
-
-<button
-class="btn danger"
-onclick="deleteExpense(${x.id})">
-🗑️
-</button>
-
-</td>
-
-</tr>
-
-`;
-
-});
-
-html+="</tbody></table>";
-
-document.getElementById("expenseTable").innerHTML=html;
-
-}
-
-
-function deleteExpense(id){
-
-if(!confirm("Delete expense?"))
-return;
-
-expenses=
-expenses.filter(x=>x.id!==id);
-
-saveAll();
-
-renderAll();
-
-}
-
-
-/* =========================
-   DEBT
-========================= */
-
-function addDebt(){
-
-let name=
-document.getElementById("debtName").value.trim();
-
-let phone=
-document.getElementById("debtPhone").value.trim();
-
-let amount=
-Number(document.getElementById("debtAmount").value);
-
-let paid=
-Number(document.getElementById("debtPaid").value);
-
-let date=
-document.getElementById("debtDate").value
-||todayInputDate();
-
-let note=
-document.getElementById("debtNote").value.trim();
-
-if(!name || amount<=0){
-
-alert("Enter debt information");
-
-return;
-
-}
-
-debts.push({
-
-id:uid(),
-name,
-phone,
-amount,
-paid,
-remaining:Math.max(0,amount-paid),
-date,
-note
-
-});
-
-saveAll();
-
-document.getElementById("debtName").value="";
-document.getElementById("debtPhone").value="";
-document.getElementById("debtAmount").value="";
-document.getElementById("debtPaid").value="";
-document.getElementById("debtNote").value="";
-
-renderAll();
-
-}
-
-
-function renderDebts(){
-
-if(!debts.length){
-
-document.getElementById("debtTable").innerHTML=
-'<div class="empty">No debts</div>';
-
-return;
-
-}
-
-let html=`
-
-<table>
-
-<thead>
-
-<tr>
-<th>Customer</th>
-<th>Phone</th>
-<th>Total</th>
-<th>Paid</th>
-<th>Remaining</th>
-<th>Date</th>
-<th>Action</th>
-</tr>
-
-</thead>
-
-<tbody>
-`;
-
-debts.slice().reverse().forEach(x=>{
-
-html+=`
-
-<tr>
-
-<td>${escapeHtml(x.name)}</td>
-
-<td>${escapeHtml(x.phone)}</td>
-
-<td>${money(x.amount)}</td>
-
-<td>${money(x.paid)}</td>
-
-<td class="${x.remaining>0?'low':'good'}">
-
-${money(x.remaining)}
-
-</td>
-
-<td>${escapeHtml(x.date)}</td>
-
-<td>
-
-<button
-class="btn danger"
-onclick="deleteDebt(${x.id})">
-🗑️
-</button>
-
-</td>
-
-</tr>
-
-`;
-
-});
-
-html+="</tbody></table>";
-
-document.getElementById("debtTable").innerHTML=html;
-
-}
-
-
-function deleteDebt(id){
-
-if(!confirm("Delete debt?"))
-return;
-
-debts=
-debts.filter(x=>x.id!==id);
-
-saveAll();
-
-renderAll();
-
-}
-
-
-/* =========================
-   CAPITAL
-========================= */
-
-function openCapital(){
-
-let pin=
-document.getElementById("capitalPin").value;
-
-let savedPin=
-settings.pin || "786";
-
-if(pin!==savedPin){
-
-alert("Wrong PIN");
-
-return;
-
-}
-
-document.getElementById("capitalArea")
-.style.display="block";
-
-document.getElementById("capitalValue")
-.textContent=money(capital);
-
-}
-
-
-function saveCapital(){
-
-let amount=
-Number(document.getElementById("capitalAmount").value);
-
-if(amount<0){
-
-alert("Invalid capital");
-
-return;
-
-}
-
-capital=amount;
-
-saveAll();
-
-document.getElementById("capitalValue")
-.textContent=money(capital);
-
-document.getElementById("capitalAmount").value="";
-
-renderDashboard();
-
-alert("Capital saved");
-
-}
-
-
-/* =========================
-   REPORTS
-========================= */
-
-function setReport(period){
-
-reportPeriod=period;
-
-renderReport();
-
-}
-
-
-function renderReport(){
-
-let selected=
-document.getElementById("reportDate")
-?.value || todayInputDate();
-
-let base=
-new Date(selected+"T00:00:00");
-
-function match(date){
-
-let d=
-new Date(date+"T00:00:00");
-
-if(reportPeriod==="daily"){
-
-return d.toDateString()===
-base.toDateString();
-
-}
-
-if(reportPeriod==="weekly"){
-
-let start=new Date(base);
-
-let day=start.getDay();
-
-start.setDate(start.getDate()-day);
-
-let end=new Date(start);
-
-end.setDate(start.getDate()+6);
-
-return d>=start && d<=end;
-
-}
-
-if(reportPeriod==="monthly"){
-
-return d.getFullYear()===base.getFullYear()
-&& d.getMonth()===base.getMonth();
-
-}
-
-if(reportPeriod==="yearly"){
-
-return d.getFullYear()===base.getFullYear();
-
-}
-
-return false;
-
-}
-
-let ps=purchases.filter(x=>match(x.date));
-
-let ss=sales.filter(x=>match(x.date));
-
-let es=expenses.filter(x=>match(x.date));
-
-let purchaseTotal=
-ps.reduce((a,x)=>a+Number(x.total),0);
-
-let saleTotal=
-ss.reduce((a,x)=>a+Number(x.total),0);
-
-let expenseTotal=
-es.reduce((a,x)=>a+Number(x.amount),0);
-
-document.getElementById("reportSales")
-.textContent=money(saleTotal);
-
-document.getElementById("reportPurchases")
-.textContent=money(purchaseTotal);
-
-document.getElementById("reportExpenses")
-.textContent=money(expenseTotal,"AFN");
-
-document.getElementById("reportProfit")
-.textContent=money(saleTotal-purchaseTotal);
-
-document.getElementById("reportSaleCount")
-.textContent=ss.length;
-
-document.getElementById("reportPurchaseCount")
-.textContent=ps.length;
-
-document.getElementById("reportExpenseCount")
-.textContent=es.length;
-
-}
-
 
 /* =========================
    INVOICE
 ========================= */
 
 function showInvoiceById(id){
-
-let sale=
-sales.find(x=>x.id===id);
-
-if(sale)
-showInvoice(sale);
-
+  const sale=sales.find(x=>x.id===id);
+  if(sale)showInvoice(sale);
 }
-
 
 function showInvoice(sale){
+  const logo=settings.logo?
+    `<img class="invoice-logo" src="${settings.logo}">`
+    :"";
 
-currentInvoice=sale;
+  const watermark=settings.logo?
+    `<div class="invoice-watermark">
+       <img src="${settings.logo}">
+     </div>`
+    :"";
 
-let logo="";
+  const items=(sale.items||[]).map(x=>`
+    <tr>
+      <td>${esc(x.name)}</td>
+      <td>${x.qty}</td>
+      <td>$${money(x.price)}</td>
+      <td>$${money(x.total)}</td>
+    </tr>
+  `).join("");
 
-if(settings.logo){
+  const extras=(sale.extraItems||[]).filter(x=>x.name||x.amount).map(x=>`
+    <tr>
+      <td>${esc(x.name||"Extra")}</td>
+      <td>1</td>
+      <td>$${money(x.amount)}</td>
+      <td>$${money(x.amount)}</td>
+    </tr>
+  `).join("");
 
-logo=`
+  const extraTotal=(sale.extraItems||[])
+    .reduce((a,b)=>a+Number(b.amount||0),0);
 
-<img
-class="invoice-logo"
-src="${settings.logo}"
-alt="Logo">
+  document.getElementById("invoiceContent").innerHTML=`
+    <div class="invoice">
 
-`;
+      ${watermark}
 
+      <div class="invoice-content">
+
+        <div class="invoice-head">
+
+          <div>
+            ${logo}
+
+            <h1>${esc(settings.shopName||"Samad Solar")}</h1>
+
+            ${settings.address?
+              `<div>${esc(settings.address)}</div>`:""}
+
+            ${settings.phone?
+              `<div>☎ ${esc(settings.phone)}</div>`:""}
+
+            ${settings.gmail?
+              `<div>✉ ${esc(settings.gmail)}</div>`:""}
+
+          </div>
+
+          <div style="text-align:left">
+            <h2>INVOICE</h2>
+            <b>${esc(sale.bill)}</b>
+            <div>${sale.date}</div>
+          </div>
+
+        </div>
+
+        <br>
+
+        <div>
+          <b>Customer:</b> ${esc(sale.customer)}
+          ${sale.phone?`<br><b>Phone:</b> ${esc(sale.phone)}`:""}
+          ${sale.whatsapp?`<br><b>WhatsApp:</b> ${esc(sale.whatsapp)}`:""}
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Qty</th>
+              <th>Price</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            ${items}
+            ${extras}
+          </tbody>
+        </table>
+
+        <div class="invoice-total">
+
+          <div>
+            <span>Items</span>
+            <b>$${money(
+              (sale.items||[]).reduce((a,b)=>a+b.total,0)
+            )}</b>
+          </div>
+
+          <div>
+            <span>Extra</span>
+            <b>$${money(extraTotal)}</b>
+          </div>
+
+          <div>
+            <span>Discount</span>
+            <b>-$${money(sale.discount)}</b>
+          </div>
+
+          <div>
+            <span>Total</span>
+            <b>$${money(sale.total)}</b>
+          </div>
+
+          <div>
+            <span>Paid</span>
+            <b>$${money(sale.paid)}</b>
+          </div>
+
+          <div>
+            <span>Remaining</span>
+            <b>$${money(sale.remaining)}</b>
+          </div>
+
+        </div>
+
+        ${sale.note?
+          `<p><b>Note:</b> ${esc(sale.note)}</p>`:""}
+
+        <div class="invoice-footer">
+          ${esc(settings.address||"")}
+          <br>
+          مننه چې زموږ کاروبار مو انتخاب کړ.
+        </div>
+
+      </div>
+    </div>
+  `;
+
+  document.getElementById("invoiceModal").classList.add("show");
 }
-
-let watermark="";
-
-if(settings.logo){
-
-watermark=`
-
-<div class="invoice-watermark">
-
-<img
-src="${settings.logo}"
-alt="Watermark">
-
-</div>
-
-`;
-
-}
-
-let html=`
-
-<div class="invoice" id="printArea">
-
-${watermark}
-
-<div class="invoice-content">
-
-<div class="invoice-header">
-
-${logo}
-
-<h1>
-${escapeHtml(
-settings.shopName || "Samad Solar"
-)}
-</h1>
-
-<p>
-${escapeHtml(settings.address || "")}
-</p>
-
-<p>
-📞 ${escapeHtml(settings.phone || "")}
-</p>
-
-<p>
-📧 ${escapeHtml(settings.gmail || "")}
-</p>
-
-<p>
-📱 ${escapeHtml(settings.whatsapp || "")}
-</p>
-
-</div>
-
-<h2 style="text-align:center">
-INVOICE
-</h2>
-
-<p>
-<b>Invoice No:</b>
-SMD-${sale.id}
-</p>
-
-<p>
-<b>Date:</b>
-${escapeHtml(sale.date)}
-${escapeHtml(sale.time || "")}
-</p>
-
-<table>
-
-<tr>
-
-<th>Product</th>
-<th>Qty</th>
-<th>Price</th>
-<th>Total</th>
-
-</tr>
-
-<tr>
-
-<td>
-${escapeHtml(sale.productName)}
-</td>
-
-<td>${sale.qty}</td>
-
-<td>${money(sale.price)}</td>
-
-<td>${money(sale.total)}</td>
-
-</tr>
-
-</table>
-
-<h2 style="text-align:left">
-
-Total:
-${money(sale.total)}
-
-</h2>
-
-<div class="invoice-footer">
-
-${escapeHtml(settings.address || "")}
-
-<br>
-
-${escapeHtml(settings.phone || "")}
-
-<br>
-
-${escapeHtml(settings.gmail || "")}
-
-<br><br>
-
-Thank you for choosing Samad Solar ☀️
-
-</div>
-
-</div>
-
-</div>
-
-`;
-
-document.getElementById("invoiceContent")
-.innerHTML=html;
-
-document.getElementById("invoiceModal")
-.classList.add("show");
-
-}
-
 
 function printInvoice(){
-
-window.print();
-
+  window.print();
 }
-
 
 async function shareInvoice(){
+  const saleText=document.getElementById("invoiceContent").innerText;
 
-if(!currentInvoice)
-return;
-
-let text=`
-
-${settings.shopName || "Samad Solar"}
-
-Invoice: SMD-${currentInvoice.id}
-
-Product: ${currentInvoice.productName}
-
-Qty: ${currentInvoice.qty}
-
-Total: ${money(currentInvoice.total)}
-
-Date: ${currentInvoice.date}
-
-Gmail: ${settings.gmail || ""}
-
-Phone: ${settings.phone || ""}
-
-`;
-
-if(navigator.share){
-
-try{
-
-await navigator.share({
-
-title:"Samad Solar Invoice",
-
-text
-
-});
-
-}catch(e){}
-
-}else{
-
-if(navigator.clipboard){
-
-await navigator.clipboard.writeText(text);
-
+  if(navigator.share){
+    try{
+      await navigator.share({
+        title:"Samad Solar Invoice",
+        text:saleText
+      });
+    }catch(e){}
+  }else{
+    navigator.clipboard?.writeText(saleText);
+    toast("Invoice text copied");
+  }
 }
-
-alert("Invoice information copied");
-
-}
-
-}
-
-
-function closeInvoice(){
-
-document
-.getElementById("invoiceModal")
-.classList.remove("show");
-
-}
-
 
 /* =========================
-   BACKGROUND COLOR
+   EXPENSES
 ========================= */
 
-function previewBackground(){
+function addExpense(){
+  const name=document.getElementById("expenseName").value.trim();
+  const amount=Number(document.getElementById("expenseAmount").value||0);
 
-let color=
-document.getElementById("settingBgColor").value;
+  if(!name || amount<=0){
+    toast("Enter expense and amount");
+    return;
+  }
 
-document.documentElement
-.style.setProperty("--bg",color);
+  expenses.push({
+    id:uid(),
+    name,
+    amount,
+    date:document.getElementById("expenseDate").value||today()
+  });
 
+  save(KEY.expenses,expenses);
+
+  document.getElementById("expenseName").value="";
+  document.getElementById("expenseAmount").value="";
+
+  renderAll();
+  toast("Expense saved");
 }
 
-
-function resetBackground(){
-
-document.getElementById("settingBgColor")
-.value="#f4f7f8";
-
-previewBackground();
-
+function renderExpenses(){
+  document.getElementById("expenseTable").innerHTML=
+    expenses.slice().reverse().map(x=>`
+      <tr>
+        <td>${esc(x.name)}</td>
+        <td>${money(x.amount)} AFN</td>
+        <td>${x.date}</td>
+        <td>
+          <button class="danger" onclick="requestDeleteExpense(${x.id})">
+            Delete
+          </button>
+        </td>
+      </tr>
+    `).join("") ||
+    `<tr><td colspan="4">No expenses</td></tr>`;
 }
 
+function requestDeleteExpense(id){
+  requestPin("deleteExpense",id);
+}
 
 /* =========================
-   LOGO PREVIEW
+   DEBT
 ========================= */
 
-function previewLogo(event){
+function addDebt(){
+  const name=document.getElementById("debtName").value.trim();
+  const amount=Number(document.getElementById("debtAmount").value||0);
+  const paid=Number(document.getElementById("debtPaid").value||0);
 
-let file=
-event.target.files[0];
+  if(!name || amount<=0){
+    toast("Enter debtor name and amount");
+    return;
+  }
 
-if(!file)
-return;
+  if(paid>amount){
+    toast("Paid cannot be greater than amount");
+    return;
+  }
 
-let reader=
-new FileReader();
+  debts.push({
+    id:uid(),
+    name,
+    phone:document.getElementById("debtPhone").value.trim(),
+    whatsapp:document.getElementById("debtWhatsapp").value.trim(),
+    amount,
+    paid,
+    remaining:amount-paid,
+    date:document.getElementById("debtDate").value||today(),
+    note:document.getElementById("debtNote").value.trim()
+  });
 
-reader.onload=function(e){
+  save(KEY.debts,debts);
 
-let preview=
-document.getElementById("logoPreview");
+  document.getElementById("debtName").value="";
+  document.getElementById("debtPhone").value="";
+  document.getElementById("debtWhatsapp").value="";
+  document.getElementById("debtAmount").value="";
+  document.getElementById("debtPaid").value="0";
+  document.getElementById("debtNote").value="";
 
-preview.src=e.target.result;
-
-preview.style.display="block";
-
-};
-
-reader.readAsDataURL(file);
-
+  renderAll();
+  toast("Debt saved");
 }
 
+function renderDebts(){
+  document.getElementById("debtTable").innerHTML=
+    debts.slice().reverse().map(x=>`
+      <tr>
+        <td><b>${esc(x.name)}</b></td>
+        <td>${esc(x.phone)}</td>
+        <td>${esc(x.whatsapp)}</td>
+        <td>$${money(x.amount)}</td>
+        <td>$${money(x.paid)}</td>
+        <td>
+          ${x.remaining>0?
+            `<span class="stat-bad">$${money(x.remaining)}</span>`:
+            `<span class="stat-good">Paid</span>`}
+        </td>
+        <td>${x.date}</td>
+        <td>
+          ${x.remaining>0 && x.whatsapp?
+            `<button class="warning" onclick="sendDebtWhatsapp(${x.id})">WhatsApp</button>`:""}
+
+          <button class="danger" onclick="requestDeleteDebt(${x.id})">Delete</button>
+        </td>
+      </tr>
+    `).join("") ||
+    `<tr><td colspan="8">No debt</td></tr>`;
+}
+
+function requestDeleteDebt(id){
+  requestPin("deleteDebt",id);
+}
 
 /* =========================
-   SETTINGS
+   WHATSAPP
 ========================= */
 
-function saveSettings(){
+function normalizeWhatsapp(number){
+  let n=String(number||"").replace(/\D/g,"");
 
-settings.shopName=
-document.getElementById("settingShopName")
-.value.trim() || "Samad Solar";
+  if(n.startsWith("00")){
+    n=n.slice(2);
+  }
 
-settings.gmail=
-document.getElementById("settingGmail")
-.value.trim();
+  if(n.startsWith("0")){
+    n="93"+n.slice(1);
+  }
 
-settings.address=
-document.getElementById("settingAddress")
-.value.trim();
+  if(n.length===9 && n.startsWith("7")){
+    n="93"+n;
+  }
 
-settings.phone=
-document.getElementById("settingPhone")
-.value.trim();
-
-settings.whatsapp=
-document.getElementById("settingWhatsapp")
-.value.trim();
-
-settings.language=
-document.getElementById("settingLanguage")
-.value;
-
-settings.currency=
-document.getElementById("settingCurrency")
-.value;
-
-settings.bgColor=
-document.getElementById("settingBgColor")
-.value;
-
-let pin=
-document.getElementById("settingPin")
-.value.trim();
-
-if(pin)
-settings.pin=pin;
-
-let file=
-document.getElementById("settingLogo")
-.files[0];
-
-if(file){
-
-let reader=
-new FileReader();
-
-reader.onload=function(e){
-
-settings.logo=e.target.result;
-
-saveAll();
-
-applySettings();
-
-alert("Settings saved");
-
-};
-
-reader.readAsDataURL(file);
-
-}else{
-
-saveAll();
-
-applySettings();
-
-alert("Settings saved");
-
+  return n;
 }
 
+function makeDebtMessage(debt){
+  const greeting=settings.greeting!==false?"سلام، ":"";
+
+  return `${greeting}ستاسو پاتې قرض $${money(debt.remaining)} دی. مهرباني وکړئ د تصفیې لپاره مراجعه وکړئ.`;
 }
 
+function sendDebtWhatsapp(id){
+  const debt=debts.find(x=>x.id===id);
 
-function applySettings(){
+  if(!debt || debt.remaining<=0)return;
 
-document.getElementById("shopTitle")
-.textContent=
-"☀️ "+(settings.shopName || "Samad Solar");
+  const phone=normalizeWhatsapp(debt.whatsapp);
 
-document.getElementById("settingShopName")
-.value=
-settings.shopName || "Samad Solar";
+  if(!phone){
+    toast("WhatsApp number not available");
+    return;
+  }
 
-document.getElementById("settingGmail")
-.value=
-settings.gmail || "";
+  const msg=encodeURIComponent(makeDebtMessage(debt));
 
-document.getElementById("settingAddress")
-.value=
-settings.address || "";
-
-document.getElementById("settingPhone")
-.value=
-settings.phone || "";
-
-document.getElementById("settingWhatsapp")
-.value=
-settings.whatsapp || "";
-
-document.getElementById("settingLanguage")
-.value=
-settings.language || "ps";
-
-document.getElementById("settingCurrency")
-.value=
-settings.currency || "AFN";
-
-document.getElementById("settingBgColor")
-.value=
-settings.bgColor || "#f4f7f8";
-
-document.documentElement
-.style.setProperty(
-"--bg",
-settings.bgColor || "#f4f7f8"
-);
-
-if(settings.logo){
-
-let preview=
-document.getElementById("logoPreview");
-
-preview.src=settings.logo;
-
-preview.style.display="block";
-
+  window.open(
+    `https://wa.me/${phone}?text=${msg}`,
+    "_blank"
+  );
 }
 
+function isThursday(){
+  return new Date().getDay()===4;
 }
 
+function sendThursdayReminders(){
+  const eligible=debts.filter(
+    x=>Number(x.remaining)>0 && normalizeWhatsapp(x.whatsapp)
+  );
+
+  if(!eligible.length){
+    toast("No debtor with WhatsApp number");
+    return;
+  }
+
+  /* Opens first one; browser may block multiple tabs */
+  sendDebtWhatsapp(eligible[0].id);
+
+  if(eligible.length>1){
+    toast(`${eligible.length} debtors found. Open the next ones manually.`);
+  }
+}
+
+function checkThursdayReminder(){
+  const status=document.getElementById("thursdayStatus");
+
+  if(!isThursday()){
+    status.innerHTML=
+      `<span style="color:#64748b">Thursday reminder: not today.</span>`;
+    return;
+  }
+
+  const eligible=debts.filter(
+    x=>Number(x.remaining)>0 && normalizeWhatsapp(x.whatsapp)
+  );
+
+  if(!settings.thursdayReminder){
+    status.innerHTML=
+      `<span style="color:#64748b">Thursday reminder is OFF.</span>`;
+    return;
+  }
+
+  if(!eligible.length){
+    status.innerHTML=
+      `<span class="stat-good">No debtor needs reminder.</span>`;
+    return;
+  }
+
+  status.innerHTML=`
+    <div class="alert-box">
+      <b>📱 Thursday Reminder</b>
+      <p>${eligible.length} debtor(s) have remaining debt.</p>
+      <button class="warning" onclick="sendThursdayReminders()">
+        Open WhatsApp Reminder
+      </button>
+    </div>
+  `;
+}
 
 /* =========================
-   BACKUP
+   CAPITAL
+========================= */
+
+function unlockCapital(){
+  const pin=document.getElementById("capitalPin").value;
+
+  if(pin!==String(settings.pin||"786")){
+    toast("Wrong PIN");
+    return;
+  }
+
+  document.getElementById("capitalLocked").style.display="none";
+  document.getElementById("capitalContent").style.display="block";
+  document.getElementById("capitalInput").value=capital;
+  document.getElementById("capitalValue").textContent="$"+money(capital);
+}
+
+function saveCapital(){
+  const value=Number(document.getElementById("capitalInput").value||0);
+
+  capital=value;
+  localStorage.setItem(KEY.capital,String(capital));
+
+  document.getElementById("capitalValue").textContent="$"+money(capital);
+
+  toast("Capital saved");
+}
+
+/* =========================
+   REPORTS
+========================= */
+
+function dateObj(s){
+  return new Date(s+"T00:00:00");
+}
+
+function startOfWeek(){
+  const d=new Date();
+  const day=d.getDay();
+  const diff=day===0?6:day-1;
+
+  d.setHours(0,0,0,0);
+  d.setDate(d.getDate()-diff);
+
+  return d;
+}
+
+function salesBetween(start,end){
+  return sales
+    .filter(x=>{
+      const d=dateObj(x.date);
+      return d>=start && d<=end;
+    })
+    .reduce((a,b)=>a+Number(b.total||0),0);
+}
+
+function renderReports(){
+  const now=new Date();
+
+  const dayStart=new Date(now);
+  dayStart.setHours(0,0,0,0);
+
+  const dayEnd=new Date(now);
+  dayEnd.setHours(23,59,59,999);
+
+  const weekStart=startOfWeek();
+
+  const weekEnd=new Date(now);
+  weekEnd.setHours(23,59,59,999);
+
+  const monthStart=new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    1
+  );
+
+  const monthEnd=new Date(
+    now.getFullYear(),
+    now.getMonth()+1,
+    0,
+    23,59,59,999
+  );
+
+  const yearStart=new Date(
+    now.getFullYear(),0,1
+  );
+
+  const yearEnd=new Date(
+    now.getFullYear(),11,31,23,59,59,999
+  );
+
+  document.getElementById("reportDaily").textContent=
+    "$"+money(salesBetween(dayStart,dayEnd));
+
+  document.getElementById("reportWeekly").textContent=
+    "$"+money(salesBetween(weekStart,weekEnd));
+
+  document.getElementById("reportMonthly").textContent=
+    "$"+money(salesBetween(monthStart,monthEnd));
+
+  document.getElementById("reportYearly").textContent=
+    "$"+money(salesBetween(yearStart,yearEnd));
+
+  const totalSales=sales.reduce((a,b)=>a+b.total,0);
+  const totalPurchases=purchases.reduce((a,b)=>a+b.total,0);
+  const totalExpenses=expenses.reduce((a,b)=>a+b.amount,0);
+
+  document.getElementById("reportSummary").innerHTML=`
+    <div class="grid">
+      <div class="card">
+        <b>Total Sales</b>
+        <div class="big">$${money(totalSales)}</div>
+      </div>
+
+      <div class="card">
+        <b>Total Purchases</b>
+        <div class="big">$${money(totalPurchases)}</div>
+      </div>
+
+      <div class="card">
+        <b>Expenses</b>
+        <div class="big">${money(totalExpenses)} AFN</div>
+      </div>
+
+      <div class="card">
+        <b>Sales - Purchases</b>
+        <div class="big">$${money(totalSales-totalPurchases)}</div>
+      </div>
+    </div>
+  `;
+
+  const months=[];
+
+  for(let i=0;i<12;i++){
+    const start=new Date(now.getFullYear(),i,1);
+    const end=new Date(now.getFullYear(),i+1,0,23,59,59,999);
+
+    const s=salesBetween(start,end);
+
+    const p=purchases
+      .filter(x=>{
+        const d=dateObj(x.date);
+        return d>=start && d<=end;
+      })
+      .reduce((a,b)=>a+b.total,0);
+
+    months.push(`
+      <tr>
+        <td>${now.getFullYear()}-${String(i+1).padStart(2,"0")}</td>
+        <td>$${money(s)}</td>
+        <td>$${money(p)}</td>
+        <td>$${money(s-p)}</td>
+      </tr>
+    `);
+  }
+
+  document.getElementById("monthlyReport").innerHTML=months.join("");
+}
+
+/* =========================
+   PIN SECURITY
+========================= */
+
+function requestPin(action,id){
+  pendingAction={action,id};
+
+  document.getElementById("actionPin").value="";
+  document.getElementById("pinModal").classList.add("show");
+
+  setTimeout(()=>{
+    document.getElementById("actionPin").focus();
+  },100);
+}
+
+function confirmPinAction(){
+  const pin=document.getElementById("actionPin").value;
+
+  if(pin!==String(settings.pin||"786")){
+    toast("Wrong PIN");
+    return;
+  }
+
+  const action=pendingAction;
+  pendingAction=null;
+
+  closeModal("pinModal");
+
+  if(!action)return;
+
+  executeProtectedAction(action.action,action.id);
+}
+
+function executeProtectedAction(action,id){
+
+  if(action==="editProduct"){
+    openProductModal(id);
+    return;
+  }
+
+  if(action==="deleteProduct"){
+    const p=products.find(x=>x.id===id);
+    if(!p)return;
+
+    products=products.filter(x=>x.id!==id);
+    save(KEY.products,products);
+    renderAll();
+    toast("Product deleted");
+    return;
+  }
+
+  if(action==="deletePurchase"){
+    purchases=purchases.filter(x=>x.id!==id);
+    save(KEY.purchases,purchases);
+    renderAll();
+    toast("Purchase deleted");
+    return;
+  }
+
+  if(action==="deleteSale"){
+    const sale=sales.find(x=>x.id===id);
+
+    if(sale){
+      /* restore stock */
+      (sale.items||[]).forEach(item=>{
+        const p=products.find(x=>x.id===item.productId);
+        if(p)p.stock+=Number(item.qty||0);
+      });
+    }
+
+    sales=sales.filter(x=>x.id!==id);
+
+    save(KEY.sales,sales);
+    save(KEY.products,products);
+
+    renderAll();
+    toast("Sale deleted and stock restored");
+    return;
+  }
+
+  if(action==="deleteExpense"){
+    expenses=expenses.filter(x=>x.id!==id);
+    save(KEY.expenses,expenses);
+    renderAll();
+    toast("Expense deleted");
+    return;
+  }
+
+  if(action==="deleteDebt"){
+    debts=debts.filter(x=>x.id!==id);
+    save(KEY.debts,debts);
+    renderAll();
+    toast("Debt deleted");
+    return;
+  }
+}
+
+/* =========================
+   BACKUP / RESTORE
 ========================= */
 
 function backupData(){
+  const data={
+    products,
+    purchases,
+    sales,
+    expenses,
+    debts,
+    capital,
+    settings,
+    backupDate:new Date().toISOString()
+  };
 
-let data={
+  const blob=new Blob(
+    [JSON.stringify(data,null,2)],
+    {type:"application/json"}
+  );
 
-products,
-purchases,
-sales,
-expenses,
-debts,
-capital,
-settings,
+  const url=URL.createObjectURL(blob);
 
-backupDate:
-new Date().toISOString()
+  const a=document.createElement("a");
+  a.href=url;
+  a.download="samad-solar-backup.json";
+  a.click();
 
-};
+  URL.revokeObjectURL(url);
 
-let blob=
-new Blob(
-[JSON.stringify(data,null,2)],
-{type:"application/json"}
-);
-
-let url=
-URL.createObjectURL(blob);
-
-let a=
-document.createElement("a");
-
-a.href=url;
-
-a.download=
-"Samad-Solar-Backup-"+
-todayInputDate()+
-".json";
-
-a.click();
-
-URL.revokeObjectURL(url);
-
+  toast("Backup downloaded");
 }
 
+function restoreData(){
+  const file=document.getElementById("restoreFile").files[0];
 
-/* =========================
-   RESTORE
-========================= */
+  if(!file){
+    toast("Select backup file");
+    return;
+  }
 
-function restoreData(event){
+  const reader=new FileReader();
 
-let file=
-event.target.files[0];
+  reader.onload=function(){
+    try{
+      const data=JSON.parse(reader.result);
 
-if(!file)
-return;
+      if(data.products)products=data.products;
+      if(data.purchases)purchases=data.purchases;
+      if(data.sales)sales=data.sales;
+      if(data.expenses)expenses=data.expenses;
+      if(data.debts)debts=data.debts;
+      if(data.settings)settings=data.settings;
 
-let reader=
-new FileReader();
+      if(data.capital!==undefined){
+        capital=Number(data.capital||0);
+        localStorage.setItem(KEY.capital,String(capital));
+      }
 
-reader.onload=function(e){
+      save(KEY.products,products);
+      save(KEY.purchases,purchases);
+      save(KEY.sales,sales);
+      save(KEY.expenses,expenses);
+      save(KEY.debts,debts);
+      save(KEY.settings,settings);
 
-try{
+      applySettings();
+      loadSettingsForm();
+      renderAll();
 
-let data=
-JSON.parse(e.target.result);
+      toast("Backup restored");
 
-if(!confirm(
-"Restore backup? Current data will be replaced."
-))
-return;
+    }catch(e){
+      toast("Invalid backup file");
+    }
+  };
 
-products=data.products||[];
-
-purchases=data.purchases||[];
-
-sales=data.sales||[];
-
-expenses=data.expenses||[];
-
-debts=data.debts||[];
-
-capital=
-Number(data.capital||0);
-
-settings=
-data.settings||{};
-
-saveAll();
-
-applySettings();
-
-renderAll();
-
-alert(
-"Backup restored successfully"
-);
-
-}catch(err){
-
-alert("Invalid backup file");
-
+  reader.readAsText(file);
 }
-
-};
-
-reader.readAsText(file);
-
-}
-
 
 /* =========================
    DASHBOARD
 ========================= */
 
 function renderDashboard(){
+  document.getElementById("dashProducts").textContent=products.length;
 
-let purchaseTotal=
-purchases.reduce(
-(a,x)=>a+Number(x.total),0
-);
+  document.getElementById("dashStock").textContent=
+    products.reduce((a,b)=>a+Number(b.stock||0),0);
 
-let saleTotal=
-sales.reduce(
-(a,x)=>a+Number(x.total),0
-);
+  document.getElementById("dashSales").textContent=
+    "$"+money(sales.reduce((a,b)=>a+b.total,0));
 
-let expenseTotal=
-expenses.reduce(
-(a,x)=>a+Number(x.amount),0
-);
+  document.getElementById("dashPurchases").textContent=
+    "$"+money(purchases.reduce((a,b)=>a+b.total,0));
 
-let stockCount=
-products.reduce(
-(a,x)=>a+Number(x.qty),0
-);
+  document.getElementById("dashExpenses").textContent=
+    money(expenses.reduce((a,b)=>a+b.amount,0))+" AFN";
 
-document.getElementById("dashCapital")
-.textContent=money(capital);
+  document.getElementById("dashDebt").textContent=
+    "$"+money(
+      debts.reduce((a,b)=>a+Number(b.remaining||0),0)
+    );
 
-document.getElementById("dashStock")
-.textContent=stockCount;
-
-document.getElementById("dashPurchase")
-.textContent=money(purchaseTotal);
-
-document.getElementById("dashSale")
-.textContent=money(saleTotal);
-
-document.getElementById("dashExpense")
-.textContent=money(expenseTotal,"AFN");
-
-document.getElementById("dashProfit")
-.textContent=
-money(saleTotal-purchaseTotal);
-
-let low=
-products.filter(
-p=>Number(p.qty)<=Number(p.limit)
-);
-
-let box=
-document.getElementById("lowStockBox");
-
-if(low.length){
-
-box.innerHTML=`
-
-<div class="alert">
-
-⚠️ <b>Low Stock Alert</b>
-
-<br><br>
-
-${low.map(
-p=>escapeHtml(p.name)+" — "+p.qty
-).join("<br>")}
-
-</div>
-
-`;
-
-}else{
-
-box.innerHTML="";
-
+  document.getElementById("recentSales").innerHTML=
+    sales.slice().reverse().slice(0,8).map(x=>`
+      <tr>
+        <td>${esc(x.bill)}</td>
+        <td>${esc(x.customer)}</td>
+        <td>$${money(x.total)}</td>
+        <td>${x.date}</td>
+        <td>
+          <button class="primary" onclick="showInvoiceById(${x.id})">Bill</button>
+        </td>
+      </tr>
+    `).join("") ||
+    `<tr><td colspan="5">No sales</td></tr>`;
 }
-
-}
-
-
-/* =========================
-   MODAL
-========================= */
-
-function closeModal(){
-
-document.getElementById("editModal")
-.classList.remove("show");
-
-}
-
 
 /* =========================
    RENDER ALL
 ========================= */
 
 function renderAll(){
+  applySettings();
+  populateProductSelects();
 
-renderDashboard();
-
-renderProducts();
-
-renderProductSelects();
-
-renderPurchases();
-
-renderSales();
-
-renderExpenses();
-
-renderDebts();
-
-renderReport();
-
-applySettings();
-
+  renderLowAlerts();
+  renderDashboard();
+  renderStock();
+  renderPurchases();
+  renderSales();
+  renderExpenses();
+  renderDebts();
+  renderReports();
+  renderSaleItems();
+  renderExtraItems();
+  renderSaleTotal();
+  checkThursdayReminder();
 }
-
 
 /* =========================
-   INIT
+   INITIALIZE
 ========================= */
 
-function initDates(){
+document.getElementById("purchaseDate").value=today();
+document.getElementById("expenseDate").value=today();
+document.getElementById("debtDate").value=today();
+document.getElementById("saleDate").value=today();
 
-document.getElementById("purchaseDate")
-.value=todayInputDate();
-
-document.getElementById("saleDate")
-.value=todayInputDate();
-
-document.getElementById("expenseDate")
-.value=todayInputDate();
-
-document.getElementById("debtDate")
-.value=todayInputDate();
-
-document.getElementById("reportDate")
-.value=todayInputDate();
-
-document.getElementById("purchaseTime")
-.value=nowTime();
-
-document.getElementById("saleTime")
-.value=nowTime();
-
-document.getElementById("expenseTime")
-.value=nowTime();
-
-}
-
-
-initDates();
-
+loadSettingsForm();
+applySettings();
+prepareSaleForm();
 renderAll();
 
+/* Enter key for PIN */
+document.getElementById("actionPin").addEventListener("keydown",e=>{
+  if(e.key==="Enter")confirmPinAction();
+});
+
+document.getElementById("capitalPin").addEventListener("keydown",e=>{
+  if(e.key==="Enter")unlockCapital();
+});
+
+/*
+  Thursday reminder:
+  The browser cannot silently send WhatsApp messages.
+  On Thursday the app shows eligible debtors and opens
+  WhatsApp after the user clicks the reminder button.
+*/
 </script>
 
 </body>
