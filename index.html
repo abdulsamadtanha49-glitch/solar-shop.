@@ -2215,19 +2215,63 @@ function downloadBackup(){
   alert(t("backupDownloaded"));
 }
 
-function restoreBackup(event){
-  const file=event.target.files?.[0];
-  if(!file)return;
+function restoreBackup(event) {
+  const file = event.target.files?.[0];
+  if (!file) return;
 
-  const reader=new FileReader();
+  const reader = new FileReader();
 
-  reader.onload=()=>{
-    try{
-      const data=JSON.parse(reader.result);
+  reader.onload = function () {
+    try {
+      const data = JSON.parse(reader.result);
 
-      if(!data || !Array.isArray(data.products) || !Array.isArray(data.sales)){
+      if (!data || typeof data !== "object") {
         alert("Invalid backup file");
         return;
+      }
+
+      if (!confirm(t("backupWarning"))) {
+        event.target.value = "";
+        return;
+      }
+
+      products = Array.isArray(data.products) ? data.products : [];
+      purchases = Array.isArray(data.purchases) ? data.purchases : [];
+      sales = Array.isArray(data.sales) ? data.sales : [];
+      expenses = Array.isArray(data.expenses) ? data.expenses : [];
+      debts = Array.isArray(data.debts) ? data.debts : [];
+
+      capital = data.capital || { usd: 0, afn: 0 };
+
+      settings = {
+        ...settings,
+        ...(data.settings || {})
+      };
+
+      localStorage.setItem(KEY.products, JSON.stringify(products));
+      localStorage.setItem(KEY.purchases, JSON.stringify(purchases));
+      localStorage.setItem(KEY.sales, JSON.stringify(sales));
+      localStorage.setItem(KEY.expenses, JSON.stringify(expenses));
+      localStorage.setItem(KEY.debts, JSON.stringify(debts));
+      localStorage.setItem(KEY.capital, JSON.stringify(capital));
+      localStorage.setItem(KEY.settings, JSON.stringify(settings));
+
+      event.target.value = "";
+
+      applyLanguage();
+      loadSettingsForm();
+      renderAll();
+
+      alert(t("restored"));
+
+    } catch (error) {
+      console.error(error);
+      alert("Backup file is not valid.");
+    }
+  };
+
+  reader.readAsText(file);
+}
       }
 
       if(!confirm(t("backupWarning"))){
