@@ -512,6 +512,7 @@ th{
 
 <button onclick="showPage('capital')">🔐 Capital</button>
 <button onclick="showPage('backup')">💾 Backup</button>
+<button onclick="showPage('backup')">🔄 Restore</button>
 
 </nav>
 
@@ -1055,6 +1056,13 @@ th{
    <div>
     <label>Address</label>
     <input id="sAddress">
+   </div>
+
+   <div>
+    <label>Shop Logo</label>
+    <input id="sLogo" type="file" accept="image/*" onchange="handleLogoUpload()">
+    <div id="logoPreview" style="margin-top:6px"></div>
+    <button class="gray" type="button" onclick="removeLogo()" style="margin-top:6px">🗑 Remove Logo</button>
    </div>
 
    <div>
@@ -3458,6 +3466,36 @@ function loadSettingsForm(){
  .textContent=
  settings.invoiceDesign||"classic";
 
+ showLogoPreview();
+
+}
+
+function handleLogoUpload(){
+ const file=document.getElementById("sLogo")?.files[0];
+ if(!file)return;
+ const reader=new FileReader();
+ reader.onload=e=>{
+  settings.logo=e.target.result;
+  save(KEY.settings,settings);
+  showLogoPreview();
+ };
+ reader.readAsDataURL(file);
+}
+
+function showLogoPreview(){
+ const el=document.getElementById("logoPreview");
+ if(!el)return;
+ el.innerHTML=settings.logo
+  ? `<img src="${settings.logo}" style="width:70px;height:70px;object-fit:contain;border:1px solid #ddd;border-radius:7px">`
+  : "No logo";
+}
+
+function removeLogo(){
+ settings.logo="";
+ save(KEY.settings,settings);
+ showLogoPreview();
+ const input=document.getElementById("sLogo");
+ if(input)input.value="";
 }
 
 function chooseDesign(name){
@@ -3662,6 +3700,8 @@ function renderInvoice(s){
    <div class="invoice-header">
 
     <div>
+
+     ${settings.logo ? `<img class="invoice-logo" src="${settings.logo}">` : ""}
 
      <div class="shop-name">
       ${esc(settings.shopName)}
@@ -4057,6 +4097,31 @@ function printInvoice(){
   gap:20px;
   border-bottom:2px solid #0f766e;
   padding-bottom:14px
+ }
+
+ .invoice-logo{
+  width:75px;
+  max-height:75px;
+  object-fit:contain;
+  display:block;
+  margin-bottom:6px
+ }
+
+ .watermark{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
+  z-index:1;
+  opacity:.07
+ }
+
+ .watermark img{
+  width:280px;
+  max-height:280px;
+  object-fit:contain
  }
 
  .shop-name{
