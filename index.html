@@ -2322,5 +2322,45 @@ applyLanguage();
 showPage("dashboard");
 
 </script>
+  <script>
+function restoreBackup(event) {
+  const file = event.target.files[0];
+
+  if (!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = function(e) {
+    try {
+      const backup = JSON.parse(e.target.result);
+
+      const keys = [
+        "samadProducts",
+        "samadPurchases",
+        "samadSales",
+        "samadExpenses",
+        "samadDebts",
+        "samadCapital",
+        "samadSettings"
+      ];
+
+      keys.forEach(key => {
+        if (backup[key] !== undefined) {
+          localStorage.setItem(key, JSON.stringify(backup[key]));
+        }
+      });
+
+      alert("Restore په بریالیتوب سره بشپړ شو.");
+      location.reload();
+
+    } catch (error) {
+      alert("Backup فایل ناسم دی.");
+      console.error(error);
+    }
+  };
+
+  reader.readAsText(file);
+}
+</script>
 </body>
 </html>
