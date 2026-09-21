@@ -2,19 +2,27 @@
 <html lang="ps" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Samad Solar</title>
+
+<!-- PDF Libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
 :root{
   --primary:#0f766e;
-  --bg:#f4f7f7;
+  --primary2:#115e59;
+  --bg:#f1f5f9;
   --card:#fff;
-  --text:#17202a;
+  --text:#172033;
+  --muted:#64748b;
   --danger:#dc2626;
-  --warning:#f59e0b;
-  --border:#d9e1e1;
+  --warning:#d97706;
+  --success:#15803d;
+  --border:#e2e8f0;
 }
+
 *{box-sizing:border-box}
 body{
   margin:0;
@@ -22,410 +30,652 @@ body{
   background:var(--bg);
   color:var(--text);
 }
-button,input,select,textarea{font:inherit}
+
+button,input,select,textarea{
+  font-family:inherit;
+}
+
 button{
   border:0;
-  border-radius:10px;
-  padding:10px 14px;
   cursor:pointer;
 }
-.primary{background:var(--primary);color:white}
-.danger{background:var(--danger);color:white}
-.warning{background:var(--warning);color:white}
-.gray{background:#64748b;color:white}
-.light{background:#e8eeee;color:#17202a}
-.container{max-width:1400px;margin:auto;padding:15px}
-header{
-  background:var(--primary);
+
+.header{
+  background:linear-gradient(135deg,var(--primary),var(--primary2));
   color:white;
-  padding:14px 18px;
+  padding:16px;
   position:sticky;
   top:0;
   z-index:20;
-  box-shadow:0 2px 10px #0002;
+  box-shadow:0 3px 12px #0002;
 }
+
 .header-inner{
-  max-width:1400px;
+  max-width:1200px;
   margin:auto;
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  gap:10px;
+  justify-content:space-between;
+  gap:15px;
 }
+
 .brand{
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:12px;
 }
+
 .brand img{
-  width:48px;height:48px;
+  width:48px;
+  height:48px;
   object-fit:contain;
   background:white;
-  border-radius:8px;
+  border-radius:12px;
+  padding:4px;
 }
-.brand h1{margin:0;font-size:21px}
+
+.brand h1{
+  margin:0;
+  font-size:22px;
+}
+
+.brand small{
+  opacity:.85;
+}
+
 nav{
-  max-width:1400px;
-  margin:10px auto 0;
+  max-width:1200px;
+  margin:0 auto;
+  padding:10px;
   display:flex;
   gap:7px;
   overflow-x:auto;
-  padding-bottom:3px;
+  background:white;
+  border-bottom:1px solid var(--border);
+  position:sticky;
+  top:80px;
+  z-index:15;
 }
+
 nav button{
-  background:#ffffff22;
-  color:white;
+  background:#f1f5f9;
+  color:#334155;
+  padding:10px 14px;
+  border-radius:9px;
   white-space:nowrap;
 }
-nav button.active{background:white;color:var(--primary)}
+
+nav button.active{
+  background:var(--primary);
+  color:white;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:20px;
+}
 
 .page{display:none}
 .page.active{display:block}
 
-.cards{
+.grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
-  gap:12px;
-  margin-bottom:15px;
+  gap:15px;
 }
+
 .card{
   background:var(--card);
   border:1px solid var(--border);
-  border-radius:14px;
-  padding:15px;
-  box-shadow:0 2px 7px #00000009;
+  border-radius:15px;
+  padding:18px;
+  box-shadow:0 3px 12px #00000008;
 }
-.card h3{margin:0 0 8px;font-size:15px}
-.big{font-size:24px;font-weight:bold}
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-  gap:10px;
+.stat{
+  font-size:25px;
+  font-weight:bold;
+  margin-top:7px;
 }
-label{font-weight:bold;font-size:13px}
+
+.muted{color:var(--muted)}
+
+h2{
+  margin-top:0;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+  gap:12px;
+}
+
 .field{
   display:flex;
   flex-direction:column;
-  gap:5px;
+  gap:6px;
 }
+
+.field label{
+  font-weight:bold;
+  font-size:14px;
+}
+
 input,select,textarea{
   width:100%;
-  padding:10px;
-  border:1px solid var(--border);
+  padding:11px;
+  border:1px solid #cbd5e1;
   border-radius:9px;
   background:white;
   outline:none;
 }
+
 input:focus,select:focus,textarea:focus{
   border-color:var(--primary);
 }
-textarea{min-height:80px;resize:vertical}
 
-.section-title{
+textarea{
+  min-height:90px;
+  resize:vertical;
+}
+
+.btn{
+  padding:10px 15px;
+  border-radius:9px;
+  margin:3px;
+  font-weight:bold;
+}
+
+.primary{background:var(--primary);color:white}
+.secondary{background:#475569;color:white}
+.success{background:#16a34a;color:white}
+.warning{background:#d97706;color:white}
+.danger{background:#dc2626;color:white}
+.light{background:#e2e8f0;color:#1e293b}
+
+.actions{
   display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:8px;
-  margin-bottom:12px;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:15px;
 }
-.section-title h2{margin:0;font-size:19px}
 
-.table-wrap{
-  overflow:auto;
-  background:white;
-  border-radius:12px;
-  border:1px solid var(--border);
-}
 table{
   width:100%;
   border-collapse:collapse;
-  min-width:700px;
+  background:white;
 }
+
 th,td{
   padding:10px;
-  border-bottom:1px solid #e5e7eb;
+  border-bottom:1px solid var(--border);
   text-align:right;
 }
-th{background:#eef4f4}
-.low-row{background:#fff4e5}
-.low-badge{
-  background:#fee2e2;
-  color:#b91c1c;
-  padding:4px 7px;
-  border-radius:7px;
+
+th{
+  background:#f8fafc;
+}
+
+.table-wrap{
+  overflow:auto;
+  border-radius:12px;
+}
+
+.alert-box{
+  background:#fff7ed;
+  border:1px solid #fed7aa;
+  color:#9a3412;
+  padding:14px;
+  border-radius:12px;
+  margin-bottom:15px;
+}
+
+.low-row{
+  background:#fff1f2;
+}
+
+.badge{
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:20px;
   font-size:12px;
   font-weight:bold;
 }
 
-.alert-box{
-  border:2px solid #f59e0b;
-  background:#fff8e7;
-  border-radius:12px;
-  padding:12px;
-  margin-bottom:15px;
+.badge-success{
+  background:#dcfce7;
+  color:#166534;
 }
-.alert-item{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:8px;
-  padding:9px;
-  background:white;
-  border-radius:9px;
-  margin-top:7px;
+
+.badge-danger{
+  background:#fee2e2;
+  color:#991b1b;
 }
-.alert-item button{
-  background:#f59e0b;color:white;
+
+.badge-warning{
+  background:#fef3c7;
+  color:#92400e;
 }
 
 .modal{
+  display:none;
   position:fixed;
   inset:0;
   background:#0008;
-  display:none;
-  align-items:center;
-  justify-content:center;
   z-index:100;
   padding:15px;
+  overflow:auto;
 }
-.modal.show{display:flex}
+
+.modal.show{
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+}
+
 .modal-box{
   background:white;
   width:min(900px,100%);
-  max-height:92vh;
-  overflow:auto;
-  border-radius:15px;
-  padding:18px;
-}
-.modal-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:15px;
-}
-.modal-head h2{margin:0}
-
-.logo-preview{
-  width:100px;height:100px;
-  object-fit:contain;
-  border:1px dashed #aaa;
-  border-radius:10px;
+  margin:20px auto;
+  border-radius:18px;
+  padding:20px;
+  position:relative;
 }
 
-.extra-row{
+.close{
+  position:absolute;
+  left:15px;
+  top:15px;
+  background:#fee2e2;
+  color:#991b1b;
+  width:35px;
+  height:35px;
+  border-radius:50%;
+}
+
+.item-line{
   display:grid;
-  grid-template-columns:1fr 150px 45px;
+  grid-template-columns:2fr 1fr 1fr 1fr auto;
   gap:7px;
-  margin-bottom:7px;
+  margin-bottom:8px;
+  align-items:center;
 }
+
+.extra-line{
+  display:grid;
+  grid-template-columns:2fr 1fr auto;
+  gap:7px;
+  margin-bottom:8px;
+}
+
+@media(max-width:650px){
+  .item-line{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .extra-line{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .container{padding:12px}
+  nav{top:78px}
+}
+
+/* ================= INVOICE ================= */
 
 .invoice{
-  position:relative;
-  background:white;
-  padding:25px;
-  max-width:850px;
+  width:794px;
+  max-width:100%;
   margin:auto;
+  background:white;
+  color:#172033;
+  position:relative;
   overflow:hidden;
+  border:1px solid #dbe3ea;
+  box-shadow:0 5px 25px #0001;
 }
+
+.invoice-inner{
+  padding:34px;
+  position:relative;
+  z-index:2;
+}
+
 .invoice-watermark{
   position:absolute;
   inset:0;
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
   pointer-events:none;
+  z-index:1;
 }
+
 .invoice-watermark img{
-  width:430px;
-  max-width:70%;
-  opacity:.07;
+  width:420px;
+  height:420px;
+  object-fit:contain;
+  opacity:.065;
 }
-.invoice-content{position:relative;z-index:2}
-.invoice-head{
+
+.invoice-header{
   display:flex;
   justify-content:space-between;
-  gap:15px;
-  border-bottom:2px solid var(--primary);
-  padding-bottom:12px;
+  align-items:center;
+  gap:20px;
+  border-bottom:3px solid var(--primary);
+  padding-bottom:18px;
 }
+
 .invoice-logo{
-  width:90px;height:90px;
+  width:100px;
+  height:100px;
   object-fit:contain;
 }
-.invoice h1{margin:0 0 5px}
-.invoice table{min-width:0;margin-top:20px}
-.invoice-total{
-  margin-top:15px;
-  margin-right:auto;
-  width:300px;
-}
-.invoice-total div{
-  display:flex;
-  justify-content:space-between;
-  padding:7px;
-  border-bottom:1px solid #ddd;
-}
-.invoice-footer{
-  margin-top:30px;
-  border-top:1px solid #ddd;
-  padding-top:12px;
+
+.invoice-shop{
+  flex:1;
   text-align:center;
 }
 
-.toast{
-  position:fixed;
-  left:20px;
-  bottom:20px;
-  background:#111827;
+.invoice-shop h1{
+  margin:0 0 8px;
+  font-size:30px;
+  color:var(--primary);
+}
+
+.invoice-shop div{
+  margin:3px 0;
+  font-size:13px;
+}
+
+.invoice-number{
+  text-align:left;
+  direction:ltr;
+  min-width:140px;
+}
+
+.invoice-number strong{
+  display:block;
+  font-size:17px;
+  margin-bottom:7px;
+}
+
+.invoice-title{
+  text-align:center;
+  font-size:24px;
+  font-weight:bold;
+  margin:22px 0;
+  color:#334155;
+}
+
+.invoice-info{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  background:#f8fafc;
+  border-radius:12px;
+  padding:14px;
+  margin-bottom:18px;
+}
+
+.invoice-info div{
+  padding:5px;
+}
+
+.invoice-table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+.invoice-table th{
+  background:var(--primary);
   color:white;
-  padding:12px 16px;
+  padding:10px;
+}
+
+.invoice-table td{
+  padding:10px;
+  border-bottom:1px solid #e2e8f0;
+}
+
+.invoice-total{
+  width:330px;
+  max-width:100%;
+  margin-right:auto;
+  margin-top:18px;
+  border:1px solid #dbe3ea;
+  border-radius:12px;
+  overflow:hidden;
+}
+
+.invoice-total div{
+  display:flex;
+  justify-content:space-between;
+  padding:9px 13px;
+  border-bottom:1px solid #e2e8f0;
+}
+
+.invoice-total div:last-child{
+  border-bottom:0;
+}
+
+.invoice-total .grand{
+  font-size:18px;
+  font-weight:bold;
+  background:#f0fdfa;
+  color:var(--primary2);
+}
+
+.paid-stamp{
+  position:absolute;
+  left:50%;
+  top:58%;
+  transform:translate(-50%,-50%) rotate(-12deg);
+  border:7px double #15803d;
+  color:#15803d;
+  font-size:44px;
+  font-weight:bold;
+  padding:10px 25px;
+  border-radius:12px;
+  opacity:.82;
+  letter-spacing:3px;
+  z-index:5;
+}
+
+.remaining-stamp{
+  position:absolute;
+  left:50%;
+  top:58%;
+  transform:translate(-50%,-50%) rotate(-12deg);
+  border:5px double #d97706;
+  color:#d97706;
+  font-size:30px;
+  font-weight:bold;
+  padding:9px 20px;
+  border-radius:12px;
+  opacity:.22;
+  z-index:5;
+}
+
+.invoice-note{
+  margin-top:20px;
+  padding:12px;
+  background:#f8fafc;
   border-radius:10px;
-  display:none;
-  z-index:300;
-}
-.toast.show{display:block}
-
-.stat-good{color:#15803d}
-.stat-bad{color:#dc2626}
-
-@media(max-width:600px){
-  .header-inner{align-items:flex-start}
-  .brand h1{font-size:17px}
-  .extra-row{grid-template-columns:1fr 110px 42px}
-  .invoice{padding:12px}
 }
 
+.invoice-footer{
+  margin-top:30px;
+  padding-top:15px;
+  border-top:2px solid var(--primary);
+  text-align:center;
+  color:#475569;
+  font-size:13px;
+}
+
+.invoice-footer strong{
+  color:var(--primary);
+}
+
+.invoice-buttons{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:15px;
+}
+
+/* Print */
 @media print{
-  body *{visibility:hidden}
-  #invoiceModal,#invoiceModal *{visibility:visible}
+  body *{
+    visibility:hidden !important;
+  }
+
+  #invoiceModal,
+  #invoiceModal *{
+    visibility:visible !important;
+  }
+
   #invoiceModal{
-    position:absolute;
-    inset:0;
-    background:white;
-    display:block;
+    position:absolute !important;
+    inset:0 !important;
+    background:white !important;
+    padding:0 !important;
   }
+
   #invoiceModal .modal-box{
-    width:100%;
-    max-height:none;
-    box-shadow:none;
+    margin:0 !important;
+    width:100% !important;
+    box-shadow:none !important;
+    padding:0 !important;
   }
-  .no-print{display:none!important}
+
+  #invoiceButtons,
+  #invoiceClose{
+    display:none !important;
+  }
+
+  .invoice{
+    box-shadow:none;
+    border:0;
+    width:100%;
+  }
+}
+
+.highlight{
+  animation:flash 1.2s ease 3;
+}
+
+@keyframes flash{
+  0%,100%{background:white}
+  50%{background:#fef08a}
+}
+
+.empty{
+  text-align:center;
+  color:#94a3b8;
+  padding:25px;
+}
+
+hr{
+  border:0;
+  border-top:1px solid var(--border);
+  margin:20px 0;
 }
 </style>
 </head>
 
 <body>
 
-<header>
+<header class="header">
   <div class="header-inner">
     <div class="brand">
-      <img id="headerLogo" style="display:none">
+      <img id="headerLogo" src="" alt="">
       <div>
-        <h1 id="headerName">Samad Solar</h1>
-        <small id="headerAddress"></small>
+        <h1 id="headerShopName">Samad Solar</h1>
+        <small>Solar Shop Management</small>
       </div>
     </div>
-    <div id="headerCurrency">AFN</div>
+    <div id="headerDate"></div>
   </div>
-
-  <nav>
-    <button onclick="showPage('dashboard')" data-page="dashboard">🏠 Dashboard</button>
-    <button onclick="showPage('stock')" data-page="stock">📦 Stock</button>
-    <button onclick="showPage('purchase')" data-page="purchase">🛒 Purchase</button>
-    <button onclick="showPage('sale')" data-page="sale">💰 Sale</button>
-    <button onclick="showPage('expense')" data-page="expense">💸 Expense</button>
-    <button onclick="showPage('debt')" data-page="debt">📒 Debt</button>
-    <button onclick="showPage('capital')" data-page="capital">🔐 Capital</button>
-    <button onclick="showPage('reports')" data-page="reports">📊 Reports</button>
-    <button onclick="showPage('settings')" data-page="settings">⚙️ Settings</button>
-  </nav>
 </header>
+
+<nav id="nav">
+  <button onclick="showPage('dashboard')" class="active">🏠 Dashboard</button>
+  <button onclick="showPage('stock')">📦 Stock</button>
+  <button onclick="showPage('purchase')">🛒 Purchase</button>
+  <button onclick="showPage('sale')">💰 Sale</button>
+  <button onclick="showPage('expense')">💸 Expense</button>
+  <button onclick="showPage('debt')">📒 Debt</button>
+  <button onclick="openCapital()">🔐 Capital</button>
+  <button onclick="showPage('reports')">📊 Reports</button>
+  <button onclick="showPage('settings')">⚙️ Settings</button>
+</nav>
 
 <main class="container">
 
 <!-- DASHBOARD -->
 <section id="dashboard" class="page active">
+  <h2>🏠 Dashboard</h2>
 
-  <div id="lowAlerts"></div>
+  <div id="lowStockDashboard"></div>
 
-  <div class="cards">
+  <div class="grid">
     <div class="card">
-      <h3>📦 Products</h3>
-      <div class="big" id="dashProducts">0</div>
+      <div class="muted">Products</div>
+      <div class="stat" id="statProducts">0</div>
     </div>
+
     <div class="card">
-      <h3>📦 Total Stock</h3>
-      <div class="big" id="dashStock">0</div>
+      <div class="muted">Stock Units</div>
+      <div class="stat" id="statStock">0</div>
     </div>
+
     <div class="card">
-      <h3>💰 Sales</h3>
-      <div class="big" id="dashSales">$0</div>
+      <div class="muted">Today Sales</div>
+      <div class="stat" id="statTodaySales">0</div>
     </div>
+
     <div class="card">
-      <h3>🛒 Purchases</h3>
-      <div class="big" id="dashPurchases">$0</div>
+      <div class="muted">Today Expenses</div>
+      <div class="stat" id="statTodayExpenses">0</div>
     </div>
+
     <div class="card">
-      <h3>💸 Expenses</h3>
-      <div class="big" id="dashExpenses">0 AFN</div>
-    </div>
-    <div class="card">
-      <h3>📒 Debt</h3>
-      <div class="big" id="dashDebt">$0</div>
+      <div class="muted">Debt</div>
+      <div class="stat" id="statDebt">0</div>
     </div>
   </div>
 
-  <div class="card">
-    <div class="section-title">
-      <h2>📌 Recent Sales</h2>
-      <button class="primary" onclick="showPage('sale')">+ New Sale</button>
-    </div>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Bill</th>
-            <th>Customer</th>
-            <th>Total</th>
-            <th>Date</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody id="recentSales"></tbody>
-      </table>
-    </div>
+  <div class="card" style="margin-top:15px">
+    <h3>Recent Sales</h3>
+    <div id="recentSales"></div>
   </div>
-
 </section>
 
 <!-- STOCK -->
 <section id="stock" class="page">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+    <h2>📦 Stock</h2>
+    <button class="btn primary" onclick="openProductModal()">＋ Add Product</button>
+  </div>
 
   <div class="card">
-    <div class="section-title">
-      <h2>📦 Stock / Products</h2>
-      <button class="primary" onclick="openProductModal()">+ Add Product</button>
-    </div>
+    <input id="stockSearch" placeholder="🔎 Search product..." oninput="renderStock()">
+  </div>
 
-    <div class="grid" style="margin-bottom:12px">
-      <div class="field">
-        <label>🔎 Search</label>
-        <input id="stockSearch" oninput="renderStock()" placeholder="Product name / code">
-      </div>
-    </div>
-
+  <div class="card" style="margin-top:15px">
     <div class="table-wrap">
       <table>
         <thead>
           <tr>
-            <th>Name</th>
+            <th>Product</th>
             <th>Code</th>
+            <th>Buy Price</th>
             <th>Stock</th>
             <th>Low Limit</th>
-            <th>Buy $</th>
-            <th>Sell $</th>
-            <th>Unit</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -437,82 +687,67 @@ th{background:#eef4f4}
 
 <!-- PURCHASE -->
 <section id="purchase" class="page">
+  <h2>🛒 Purchase</h2>
 
   <div class="card">
-    <div class="section-title">
-      <h2>🛒 Purchase</h2>
-    </div>
-
-    <div class="grid">
+    <div class="form-grid">
       <div class="field">
         <label>Product</label>
         <select id="purchaseProduct"></select>
       </div>
+
       <div class="field">
         <label>Quantity</label>
-        <input id="purchaseQty" type="number" min="1">
+        <input id="purchaseQty" type="number" min="1" value="1">
       </div>
+
       <div class="field">
-        <label>Unit Price ($)</label>
-        <input id="purchasePrice" type="number" step="0.01">
+        <label>Buy Price</label>
+        <input id="purchasePrice" type="number" min="0" step="0.01">
       </div>
-      <div class="field">
-        <label>Supplier</label>
-        <input id="purchaseSupplier">
-      </div>
+
       <div class="field">
         <label>Date</label>
         <input id="purchaseDate" type="date">
       </div>
+
+      <div class="field">
+        <label>Supplier</label>
+        <input id="purchaseSupplier">
+      </div>
+
+      <div class="field">
+        <label>Note</label>
+        <input id="purchaseNote">
+      </div>
     </div>
 
-    <br>
-    <button class="primary" onclick="addPurchase()">Save Purchase</button>
+    <div class="actions">
+      <button class="btn primary" onclick="savePurchase()">💾 Save Purchase</button>
+    </div>
   </div>
 
-  <br>
-
-  <div class="card">
-    <h2>Purchase History</h2>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Product</th>
-            <th>Qty</th>
-            <th>Price</th>
-            <th>Total</th>
-            <th>Supplier</th>
-            <th>Date</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody id="purchaseTable"></tbody>
-      </table>
-    </div>
+  <div class="card" style="margin-top:15px">
+    <h3>Purchase History</h3>
+    <div id="purchaseTable"></div>
   </div>
 </section>
 
 <!-- SALE -->
 <section id="sale" class="page">
+  <h2>💰 New Sale</h2>
 
   <div class="card">
-    <div class="section-title">
-      <h2>💰 New Sale / Bill</h2>
-      <div>
-        <b id="nextBillPreview">SMD-1</b>
-      </div>
-    </div>
 
-    <div class="grid">
+    <div class="form-grid">
       <div class="field">
-        <label>Bill Number</label>
-        <input id="saleBillNumber" placeholder="SMD-1">
+        <label>Invoice No.</label>
+        <input id="saleBillNo" readonly>
       </div>
 
       <div class="field">
-        <label>Customer Name</label>
-        <input id="saleCustomer" placeholder="Customer">
+        <label>Customer</label>
+        <input id="saleCustomer" placeholder="Customer name">
       </div>
 
       <div class="field">
@@ -529,198 +764,108 @@ th{background:#eef4f4}
         <label>Date</label>
         <input id="saleDate" type="date">
       </div>
+    </div>
+
+    <hr>
+
+    <h3>Products</h3>
+
+    <div id="saleItems"></div>
+
+    <button class="btn light" onclick="addSaleItem()">＋ Add Product</button>
+
+    <hr>
+
+    <h3>Extra Items</h3>
+    <small class="muted">مثلاً د موټر کرایه، نصب، ترانسپورت...</small>
+
+    <div id="extraItems" style="margin-top:10px"></div>
+
+    <button class="btn light" onclick="addExtraItem()">＋ Add Extra</button>
+
+    <hr>
+
+    <div class="form-grid">
+      <div class="field">
+        <label>Discount</label>
+        <input id="saleDiscount" type="number" value="0" min="0" oninput="renderSaleTotal()">
+      </div>
 
       <div class="field">
-        <label>Payment</label>
+        <label>Payment Type</label>
         <select id="salePayment">
           <option value="paid">Paid</option>
           <option value="debt">Debt</option>
         </select>
       </div>
-    </div>
-
-    <br>
-
-    <div class="card" style="background:#f7faf9">
-      <div class="section-title">
-        <h3>📦 Product</h3>
-      </div>
-
-      <div class="grid">
-        <div class="field">
-          <label>Product</label>
-          <select id="saleProduct" onchange="updateSalePrice()"></select>
-        </div>
-
-        <div class="field">
-          <label>Quantity</label>
-          <input id="saleQty" type="number" min="1" value="1">
-        </div>
-
-        <div class="field">
-          <label>Unit Price ($)</label>
-          <input id="salePrice" type="number" step="0.01">
-        </div>
-
-        <div class="field" style="justify-content:end">
-          <button class="primary" onclick="addSaleItem()">+ Add Item</button>
-        </div>
-      </div>
-
-      <br>
-
-      <div class="table-wrap">
-        <table style="min-width:500px">
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Qty</th>
-              <th>Price</th>
-              <th>Total</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody id="saleItemsTable"></tbody>
-        </table>
-      </div>
-    </div>
-
-    <br>
-
-    <!-- EXTRA BILL ITEMS -->
-    <div class="card" style="background:#fffaf0">
-      <div class="section-title">
-        <h3>➕ Extra Bill Items / نور مصارف</h3>
-        <button class="warning" onclick="addExtraRow()">+ Add</button>
-      </div>
-
-      <p style="font-size:13px;color:#64748b">
-        مثال: د موټر کرایه، ترانسپورت، نصب، مزدوري، نور خدمات...
-      </p>
-
-      <div id="extraItems"></div>
-    </div>
-
-    <br>
-
-    <div class="card">
-      <div class="grid">
-        <div class="field">
-          <label>Discount ($)</label>
-          <input id="saleDiscount" type="number" value="0" step="0.01" oninput="renderSaleTotal()">
-        </div>
-
-        <div class="field">
-          <label>Paid ($)</label>
-          <input id="salePaid" type="number" value="0" step="0.01" oninput="renderSaleTotal()">
-        </div>
-
-        <div class="field">
-          <label>Total ($)</label>
-          <input id="saleTotal" readonly>
-        </div>
-
-        <div class="field">
-          <label>Remaining ($)</label>
-          <input id="saleRemaining" readonly>
-        </div>
-      </div>
-
-      <br>
 
       <div class="field">
-        <label>Note</label>
-        <textarea id="saleNote"></textarea>
+        <label>Cash Paid</label>
+        <input id="salePaid" type="number" min="0" value="0">
       </div>
+    </div>
 
-      <br>
+    <div id="saleTotalBox" class="card" style="margin-top:15px;background:#f0fdfa">
+      <h3>Total: <span id="saleTotal">0</span></h3>
+      <div>Paid: <span id="salePaidPreview">0</span></div>
+      <div>Remaining: <span id="saleRemainingPreview">0</span></div>
+    </div>
 
-      <button class="primary" onclick="saveSale()">💾 Save Sale & Bill</button>
+    <div class="actions">
+      <button class="btn success" onclick="saveSale()">💾 Save & Invoice</button>
+      <button class="btn light" onclick="prepareSaleForm()">🔄 Clear</button>
     </div>
   </div>
 
-  <br>
-
-  <div class="card">
-    <h2>Sales History</h2>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Bill</th>
-            <th>Customer</th>
-            <th>Total</th>
-            <th>Paid</th>
-            <th>Debt</th>
-            <th>Date</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody id="salesTable"></tbody>
-      </table>
-    </div>
+  <div class="card" style="margin-top:15px">
+    <h3>Sales History</h3>
+    <div id="salesTable"></div>
   </div>
 </section>
 
 <!-- EXPENSE -->
 <section id="expense" class="page">
+  <h2>💸 Expense</h2>
 
   <div class="card">
-    <h2>💸 Expense</h2>
-    <p style="font-size:13px;color:#64748b">Expenses are recorded in AFN.</p>
-
-    <div class="grid">
+    <div class="form-grid">
       <div class="field">
-        <label>Expense Name</label>
-        <input id="expenseName" placeholder="Rent / Food / Transport...">
+        <label>Expense</label>
+        <input id="expenseName">
       </div>
 
       <div class="field">
-        <label>Amount (AFN)</label>
-        <input id="expenseAmount" type="number">
+        <label>Amount AFN</label>
+        <input id="expenseAmount" type="number" min="0">
       </div>
 
       <div class="field">
         <label>Date</label>
         <input id="expenseDate" type="date">
       </div>
+
+      <div class="field">
+        <label>Note</label>
+        <input id="expenseNote">
+      </div>
     </div>
 
-    <br>
-    <button class="primary" onclick="addExpense()">Save Expense</button>
+    <button class="btn primary" onclick="saveExpense()">💾 Save Expense</button>
   </div>
 
-  <br>
-
-  <div class="card">
-    <h2>Expense History</h2>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Amount AFN</th>
-            <th>Date</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody id="expenseTable"></tbody>
-      </table>
-    </div>
+  <div class="card" style="margin-top:15px">
+    <div id="expenseTable"></div>
   </div>
 </section>
 
 <!-- DEBT -->
 <section id="debt" class="page">
+  <h2>📒 Debt</h2>
 
   <div class="card">
-    <div class="section-title">
-      <h2>📒 Debtors</h2>
-    </div>
-
-    <div class="grid">
+    <div class="form-grid">
       <div class="field">
-        <label>Name</label>
+        <label>Customer</label>
         <input id="debtName">
       </div>
 
@@ -731,171 +876,118 @@ th{background:#eef4f4}
 
       <div class="field">
         <label>WhatsApp</label>
-        <input id="debtWhatsapp" placeholder="937XXXXXXXXX">
+        <input id="debtWhatsapp">
       </div>
 
       <div class="field">
-        <label>Amount ($)</label>
-        <input id="debtAmount" type="number" step="0.01">
+        <label>Amount</label>
+        <input id="debtAmount" type="number">
       </div>
 
       <div class="field">
-        <label>Paid ($)</label>
-        <input id="debtPaid" type="number" step="0.01" value="0">
+        <label>Paid</label>
+        <input id="debtPaid" type="number" value="0">
       </div>
 
       <div class="field">
         <label>Date</label>
         <input id="debtDate" type="date">
       </div>
+
+      <div class="field">
+        <label>Note</label>
+        <input id="debtNote">
+      </div>
     </div>
 
-    <br>
-
-    <div class="field">
-      <label>Note</label>
-      <textarea id="debtNote"></textarea>
-    </div>
-
-    <br>
-
-    <button class="primary" onclick="addDebt()">Save Debt</button>
+    <button class="btn primary" onclick="saveDebt()">💾 Save Debt</button>
   </div>
 
-  <br>
-
-  <div class="card">
-    <div class="section-title">
-      <h2>📱 Debt Reminder</h2>
-      <button class="warning" onclick="sendThursdayReminders()">Send Thursday Reminders</button>
-    </div>
-
-    <p style="font-size:13px">
-      هر پنجشنبه به هغو قرضدارانو چې پاتې قرض لري، WhatsApp reminder تیارېږي.
-      WhatsApp به د کارونکي په تایید سره خلاصېږي.
-    </p>
-
+  <div class="card" style="margin-top:15px">
+    <h3>Thursday Reminder</h3>
+    <p class="muted">د پنجشنبې د قرضدارانو یادونه</p>
+    <button class="btn warning" onclick="sendThursdayReminder()">📱 WhatsApp Reminder</button>
     <div id="thursdayStatus"></div>
   </div>
 
-  <br>
-
-  <div class="card">
-    <h2>Debt History</h2>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Phone</th>
-            <th>WhatsApp</th>
-            <th>Total</th>
-            <th>Paid</th>
-            <th>Remaining</th>
-            <th>Date</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody id="debtTable"></tbody>
-      </table>
-    </div>
+  <div class="card" style="margin-top:15px">
+    <div id="debtTable"></div>
   </div>
 </section>
 
 <!-- CAPITAL -->
 <section id="capital" class="page">
-
-  <div id="capitalLocked" class="card">
-    <h2>🔐 Capital</h2>
-    <p>د Capital معلوماتو لپاره PIN داخل کړئ.</p>
-    <input id="capitalPin" type="password" placeholder="PIN">
-    <br><br>
-    <button class="primary" onclick="unlockCapital()">Unlock</button>
-  </div>
-
-  <div id="capitalContent" style="display:none">
-
-    <div class="cards">
-      <div class="card">
-        <h3>Starting Capital</h3>
-        <div class="big" id="capitalValue">$0</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <h2>Set Capital</h2>
-      <div class="grid">
-        <div class="field">
-          <label>Capital ($)</label>
-          <input id="capitalInput" type="number" step="0.01">
-        </div>
-      </div>
-      <br>
-      <button class="primary" onclick="saveCapital()">Save Capital</button>
-    </div>
-
-  </div>
-</section>
-
-<!-- REPORTS -->
-<section id="reports" class="page">
+  <h2>🔐 Capital</h2>
 
   <div class="card">
-    <h2>📊 Reports</h2>
-
     <div class="grid">
-      <div class="card">
-        <h3>Today Sales</h3>
-        <div class="big" id="reportDaily">$0</div>
+      <div>
+        <div class="muted">Capital USD</div>
+        <div class="stat" id="capitalValue">0</div>
       </div>
 
-      <div class="card">
-        <h3>This Week</h3>
-        <div class="big" id="reportWeekly">$0</div>
-      </div>
-
-      <div class="card">
-        <h3>This Month</h3>
-        <div class="big" id="reportMonthly">$0</div>
-      </div>
-
-      <div class="card">
-        <h3>This Year</h3>
-        <div class="big" id="reportYearly">$0</div>
+      <div>
+        <div class="muted">Capital AFN</div>
+        <div class="stat" id="capitalAfnValue">0</div>
       </div>
     </div>
 
     <hr>
 
-    <h3>Sales / Purchase Summary</h3>
-    <div id="reportSummary"></div>
+    <div class="form-grid">
+      <div class="field">
+        <label>Add Capital USD</label>
+        <input id="capitalUsd" type="number">
+      </div>
 
-    <br>
-
-    <h3>Monthly Sales</h3>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Month</th>
-            <th>Sales</th>
-            <th>Purchases</th>
-            <th>Difference</th>
-          </tr>
-        </thead>
-        <tbody id="monthlyReport"></tbody>
-      </table>
+      <div class="field">
+        <label>Add Capital AFN</label>
+        <input id="capitalAfn" type="number">
+      </div>
     </div>
+
+    <button class="btn success" onclick="saveCapital()">💾 Save</button>
+  </div>
+</section>
+
+<!-- REPORTS -->
+<section id="reports" class="page">
+  <h2>📊 Reports</h2>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Today</h3>
+      <div id="reportToday"></div>
+    </div>
+
+    <div class="card">
+      <h3>This Week</h3>
+      <div id="reportWeek"></div>
+    </div>
+
+    <div class="card">
+      <h3>This Month</h3>
+      <div id="reportMonth"></div>
+    </div>
+
+    <div class="card">
+      <h3>This Year</h3>
+      <div id="reportYear"></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:15px">
+    <h3>Summary</h3>
+    <div id="reportSummary"></div>
   </div>
 </section>
 
 <!-- SETTINGS -->
 <section id="settings" class="page">
+  <h2>⚙️ Settings</h2>
 
   <div class="card">
-    <h2>⚙️ Settings</h2>
-
-    <div class="grid">
+    <div class="form-grid">
 
       <div class="field">
         <label>Shop Name</label>
@@ -925,8 +1017,8 @@ th{background:#eef4f4}
       <div class="field">
         <label>Language</label>
         <select id="setLanguage">
-          <option value="ps">پښتو</option>
-          <option value="fa">دری</option>
+          <option value="ps">Pashto</option>
+          <option value="fa">Dari</option>
           <option value="en">English</option>
         </select>
       </div>
@@ -941,73 +1033,51 @@ th{background:#eef4f4}
       </div>
 
       <div class="field">
+        <label>Invoice Prefix</label>
+        <input id="setInvoicePrefix">
+      </div>
+
+      <div class="field">
         <label>Background Color</label>
         <input id="setBgColor" type="color">
       </div>
 
       <div class="field">
         <label>Security PIN</label>
-        <input id="setPin" type="password" placeholder="Enter new PIN">
+        <input id="setPin" type="password">
       </div>
 
       <div class="field">
-        <label>Bill Prefix</label>
-        <input id="setInvoicePrefix" placeholder="SMD">
+        <label>Greeting</label>
+        <input id="setGreeting">
       </div>
 
       <div class="field">
-        <label>Next Bill Number</label>
-        <input id="setNextInvoice" type="number" min="1">
+        <label>Logo</label>
+        <input id="setLogo" type="file" accept="image/*">
       </div>
 
     </div>
 
-    <br>
-
-    <div class="card" style="background:#f7faf9">
-      <h3>📱 Thursday WhatsApp Reminder</h3>
-
-      <label>
-        <input id="setThursdayReminder" type="checkbox" style="width:auto">
-        فعال وي
-      </label>
-
-      <br><br>
-
-      <label>
-        <input id="setGreeting" type="checkbox" style="width:auto">
-        د Message په شروع کې «سلام» ولیکه
-      </label>
-
-      <p style="font-size:12px;color:#64748b">
-        یادونه: WhatsApp به په اتومات ډول نه لېږل کېږي؛ سیستم به WhatsApp خلاص کړي او ته به Send کوې.
-      </p>
+    <div style="margin-top:15px">
+      <img id="logoPreview" style="max-width:130px;max-height:100px;display:none;border-radius:10px">
     </div>
 
-    <br>
-
-    <div class="field">
-      <label>Logo</label>
-      <input id="setLogo" type="file" accept="image/*" onchange="previewLogo(event)">
-      <br>
-      <img id="logoPreview" class="logo-preview">
+    <div class="actions">
+      <button class="btn primary" onclick="saveSettings()">💾 Save Settings</button>
     </div>
-
-    <br>
-
-    <button class="primary" onclick="saveSettings()">💾 Save Settings</button>
   </div>
 
-  <br>
+  <div class="card" style="margin-top:15px">
+    <h3>💾 Backup / Restore</h3>
 
-  <div class="card">
-    <h2>💾 Backup / Restore</h2>
-
-    <button class="primary" onclick="backupData()">Download Backup</button>
-
-    <input id="restoreFile" type="file" accept=".json" style="margin-top:10px">
-    <br><br>
-    <button class="warning" onclick="restoreData()">Restore Backup</button>
+    <div class="actions">
+      <button class="btn secondary" onclick="backupData()">⬇️ Backup</button>
+      <label class="btn light">
+        ⬆️ Restore
+        <input type="file" accept=".json" onchange="restoreData(event)" hidden>
+      </label>
+    </div>
   </div>
 </section>
 
@@ -1016,22 +1086,25 @@ th{background:#eef4f4}
 <!-- PRODUCT MODAL -->
 <div id="productModal" class="modal">
   <div class="modal-box">
-    <div class="modal-head">
-      <h2 id="productModalTitle">Add Product</h2>
-      <button class="light" onclick="closeModal('productModal')">✕</button>
-    </div>
+    <button class="close" onclick="closeModal('productModal')">×</button>
+    <h2 id="productModalTitle">Add Product</h2>
 
-    <input type="hidden" id="editProductId">
+    <input type="hidden" id="productId">
 
-    <div class="grid">
+    <div class="form-grid">
       <div class="field">
-        <label>Name</label>
+        <label>Product Name</label>
         <input id="productName">
       </div>
 
       <div class="field">
         <label>Code</label>
         <input id="productCode">
+      </div>
+
+      <div class="field">
+        <label>Buy Price</label>
+        <input id="productBuyPrice" type="number" min="0">
       </div>
 
       <div class="field">
@@ -1043,74 +1116,50 @@ th{background:#eef4f4}
         <label>Low Stock Limit</label>
         <input id="productLow" type="number" min="0" value="2">
       </div>
-
-      <div class="field">
-        <label>Buy Price ($)</label>
-        <input id="productBuy" type="number" step="0.01">
-      </div>
-
-      <div class="field">
-        <label>Sell Price ($)</label>
-        <input id="productSell" type="number" step="0.01">
-      </div>
-
-      <div class="field">
-        <label>Unit</label>
-        <input id="productUnit" placeholder="pcs">
-      </div>
     </div>
 
-    <br>
-
-    <button class="primary" onclick="saveProduct()">Save</button>
+    <div class="actions">
+      <button class="btn primary" onclick="saveProduct()">💾 Save</button>
+    </div>
   </div>
 </div>
 
 <!-- INVOICE MODAL -->
 <div id="invoiceModal" class="modal">
   <div class="modal-box">
-
-    <div class="modal-head no-print">
-      <h2>🧾 Invoice</h2>
-      <div>
-        <button class="primary" onclick="printInvoice()">🖨️ Print</button>
-        <button class="warning" onclick="shareInvoice()">📤 Share</button>
-        <button class="light" onclick="closeModal('invoiceModal')">✕</button>
-      </div>
-    </div>
+    <button id="invoiceClose" class="close" onclick="closeModal('invoiceModal')">×</button>
 
     <div id="invoiceContent"></div>
 
+    <div id="invoiceButtons" class="invoice-buttons">
+      <button class="btn primary" onclick="printInvoice()">🖨️ Print</button>
+      <button class="btn warning" onclick="shareInvoice()">📄 Share PDF</button>
+      <button class="btn secondary" onclick="downloadInvoicePDF()">⬇️ Download PDF</button>
+    </div>
   </div>
 </div>
 
 <!-- PIN MODAL -->
 <div id="pinModal" class="modal">
   <div class="modal-box" style="max-width:400px">
+    <button class="close" onclick="closeModal('pinModal')">×</button>
 
-    <div class="modal-head">
-      <h2>🔐 Security PIN</h2>
-      <button class="light" onclick="closeModal('pinModal')">✕</button>
+    <h2>🔐 Security PIN</h2>
+
+    <input id="pinInput" type="password" placeholder="Enter PIN">
+
+    <div class="actions">
+      <button class="btn primary" onclick="checkPin()">Continue</button>
     </div>
-
-    <p>د Edit/Delete لپاره PIN داخل کړئ.</p>
-
-    <input id="actionPin" type="password" placeholder="PIN">
-
-    <br><br>
-
-    <button class="primary" onclick="confirmPinAction()">Confirm</button>
   </div>
 </div>
 
-<div id="toast" class="toast"></div>
-
 <script>
 /* =========================================================
-   SAMAD SOLAR
-   ========================================================= */
+   DATA
+========================================================= */
 
-const KEY = {
+const KEY={
   products:"samadProducts",
   purchases:"samadPurchases",
   sales:"samadSales",
@@ -1120,40 +1169,45 @@ const KEY = {
   settings:"samadSettings"
 };
 
-let products = load(KEY.products,[]);
-let purchases = load(KEY.purchases,[]);
-let sales = load(KEY.sales,[]);
-let expenses = load(KEY.expenses,[]);
-let debts = load(KEY.debts,[]);
-let capital = Number(localStorage.getItem(KEY.capital) || 0);
+let products=load(KEY.products,[]);
+let purchases=load(KEY.purchases,[]);
+let sales=load(KEY.sales,[]);
+let expenses=load(KEY.expenses,[]);
+let debts=load(KEY.debts,[]);
+let capital=load(KEY.capital,{usd:0,afn:0});
 
-let settings = load(KEY.settings,{
+let settings=load(KEY.settings,{
   shopName:"Samad Solar",
   gmail:"",
   address:"",
   phone:"",
   whatsapp:"",
   language:"ps",
-  currency:"AFN",
-  bgColor:"#f4f7f7",
+  currency:"USD",
+  bgColor:"#f1f5f9",
   pin:"786",
   logo:"",
   invoicePrefix:"SMD",
   nextInvoice:1,
   thursdayReminder:true,
-  greeting:true
+  greeting:"تشکر از این که برند ما را انتخاب کردید."
 });
 
-let saleItems = [];
-let extraItems = [];
-let pendingAction = null;
+let currentInvoiceId=null;
+let pendingPinAction=null;
+let saleItems=[];
+let extraItems=[];
 
-function load(key, fallback){
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function load(key,def){
   try{
-    const x = localStorage.getItem(key);
-    return x ? JSON.parse(x) : fallback;
+    const x=localStorage.getItem(key);
+    return x?JSON.parse(x):def;
   }catch(e){
-    return fallback;
+    return def;
   }
 }
 
@@ -1162,20 +1216,23 @@ function save(key,value){
 }
 
 function uid(){
-  return Date.now()+Math.floor(Math.random()*1000);
+  return Date.now().toString(36)+Math.random().toString(36).slice(2,8);
 }
 
 function today(){
-  const d = new Date();
-  return d.toISOString().slice(0,10);
+  return new Date().toISOString().slice(0,10);
 }
 
 function money(n){
-  return Number(n||0).toFixed(2);
+  n=Number(n||0);
+  return n.toLocaleString(undefined,{
+    minimumFractionDigits:0,
+    maximumFractionDigits:2
+  })+" "+settings.currency;
 }
 
-function esc(x){
-  return String(x ?? "")
+function esc(v){
+  return String(v??"")
     .replaceAll("&","&amp;")
     .replaceAll("<","&lt;")
     .replaceAll(">","&gt;")
@@ -1184,44 +1241,113 @@ function esc(x){
 }
 
 function toast(msg){
-  const t=document.getElementById("toast");
-  t.textContent=msg;
-  t.classList.add("show");
-  setTimeout(()=>t.classList.remove("show"),2500);
-}
-
-function showPage(id){
-  document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-
-  document.querySelectorAll("nav button").forEach(x=>{
-    x.classList.toggle("active",x.dataset.page===id);
-  });
-
-  renderAll();
-
-  if(id==="capital"){
-    document.getElementById("capitalContent").style.display="none";
-    document.getElementById("capitalLocked").style.display="block";
-    document.getElementById("capitalPin").value="";
-  }
+  alert(msg);
 }
 
 function closeModal(id){
   document.getElementById(id).classList.remove("show");
 }
 
-/* =========================
+function openModal(id){
+  document.getElementById(id).classList.add("show");
+}
+
+/* =========================================================
+   PAGES
+========================================================= */
+
+function showPage(id){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById(id)?.classList.add("active");
+
+  document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
+
+  const buttons=[...document.querySelectorAll("nav button")];
+  const names={
+    dashboard:"dashboard",
+    stock:"stock",
+    purchase:"purchase",
+    sale:"sale",
+    expense:"expense",
+    debt:"debt",
+    reports:"reports",
+    settings:"settings"
+  };
+
+  const index=Object.keys(names).indexOf(id);
+  if(index>=0) buttons[index]?.classList.add("active");
+
+  renderAll();
+}
+
+/* =========================================================
    SETTINGS
-========================= */
+========================================================= */
+
+function renderSettings(){
+  document.getElementById("setShopName").value=settings.shopName||"";
+  document.getElementById("setGmail").value=settings.gmail||"";
+  document.getElementById("setAddress").value=settings.address||"";
+  document.getElementById("setPhone").value=settings.phone||"";
+  document.getElementById("setWhatsapp").value=settings.whatsapp||"";
+  document.getElementById("setLanguage").value=settings.language||"ps";
+  document.getElementById("setCurrency").value=settings.currency||"USD";
+  document.getElementById("setInvoicePrefix").value=settings.invoicePrefix||"SMD";
+  document.getElementById("setBgColor").value=settings.bgColor||"#f1f5f9";
+  document.getElementById("setPin").value=settings.pin||"786";
+  document.getElementById("setGreeting").value=settings.greeting||"";
+
+  const preview=document.getElementById("logoPreview");
+
+  if(settings.logo){
+    preview.src=settings.logo;
+    preview.style.display="block";
+  }else{
+    preview.style.display="none";
+  }
+}
+
+document.getElementById("setLogo").addEventListener("change",function(e){
+  const file=e.target.files[0];
+  if(!file)return;
+
+  const reader=new FileReader();
+
+  reader.onload=function(){
+    settings.logo=reader.result;
+
+    const preview=document.getElementById("logoPreview");
+    preview.src=reader.result;
+    preview.style.display="block";
+  };
+
+  reader.readAsDataURL(file);
+});
+
+function saveSettings(){
+  settings.shopName=document.getElementById("setShopName").value.trim()||"Samad Solar";
+  settings.gmail=document.getElementById("setGmail").value.trim();
+  settings.address=document.getElementById("setAddress").value.trim();
+  settings.phone=document.getElementById("setPhone").value.trim();
+  settings.whatsapp=document.getElementById("setWhatsapp").value.trim();
+  settings.language=document.getElementById("setLanguage").value;
+  settings.currency=document.getElementById("setCurrency").value;
+  settings.invoicePrefix=document.getElementById("setInvoicePrefix").value.trim()||"SMD";
+  settings.bgColor=document.getElementById("setBgColor").value;
+  settings.pin=document.getElementById("setPin").value||"786";
+  settings.greeting=document.getElementById("setGreeting").value.trim();
+
+  save(KEY.settings,settings);
+
+  applySettings();
+
+  toast("Settings saved");
+}
 
 function applySettings(){
-  document.documentElement.style.setProperty("--primary","#0f766e");
-  document.body.style.background=settings.bgColor || "#f4f7f7";
+  document.documentElement.style.setProperty("--bg",settings.bgColor||"#f1f5f9");
 
-  document.getElementById("headerName").textContent=settings.shopName || "Samad Solar";
-  document.getElementById("headerAddress").textContent=settings.address || "";
-  document.getElementById("headerCurrency").textContent=settings.currency || "AFN";
+  document.getElementById("headerShopName").textContent=settings.shopName;
 
   const logo=document.getElementById("headerLogo");
 
@@ -1231,124 +1357,62 @@ function applySettings(){
   }else{
     logo.style.display="none";
   }
-
-  document.documentElement.lang=settings.language==="en"?"en":settings.language;
-  document.documentElement.dir=settings.language==="en"?"ltr":"rtl";
 }
 
-function loadSettingsForm(){
-  document.getElementById("setShopName").value=settings.shopName||"";
-  document.getElementById("setGmail").value=settings.gmail||"";
-  document.getElementById("setAddress").value=settings.address||"";
-  document.getElementById("setPhone").value=settings.phone||"";
-  document.getElementById("setWhatsapp").value=settings.whatsapp||"";
-  document.getElementById("setLanguage").value=settings.language||"ps";
-  document.getElementById("setCurrency").value=settings.currency||"AFN";
-  document.getElementById("setBgColor").value=settings.bgColor||"#f4f7f7";
-  document.getElementById("setPin").value="";
-  document.getElementById("setInvoicePrefix").value=settings.invoicePrefix||"SMD";
-  document.getElementById("setNextInvoice").value=settings.nextInvoice||1;
-  document.getElementById("setThursdayReminder").checked=settings.thursdayReminder!==false;
-  document.getElementById("setGreeting").checked=settings.greeting!==false;
-
-  document.getElementById("logoPreview").src=settings.logo||"";
-}
-
-function saveSettings(){
-  settings.shopName=document.getElementById("setShopName").value.trim() || "Samad Solar";
-  settings.gmail=document.getElementById("setGmail").value.trim();
-  settings.address=document.getElementById("setAddress").value.trim();
-  settings.phone=document.getElementById("setPhone").value.trim();
-  settings.whatsapp=document.getElementById("setWhatsapp").value.trim();
-  settings.language=document.getElementById("setLanguage").value;
-  settings.currency=document.getElementById("setCurrency").value;
-  settings.bgColor=document.getElementById("setBgColor").value;
-  settings.invoicePrefix=document.getElementById("setInvoicePrefix").value.trim() || "SMD";
-
-  const next=Number(document.getElementById("setNextInvoice").value);
-  settings.nextInvoice=next>0?next:1;
-
-  settings.thursdayReminder=document.getElementById("setThursdayReminder").checked;
-  settings.greeting=document.getElementById("setGreeting").checked;
-
-  const pin=document.getElementById("setPin").value.trim();
-  if(pin) settings.pin=pin;
-
-  save(KEY.settings,settings);
-  applySettings();
-  toast("Settings saved");
-  renderAll();
-}
-
-function previewLogo(e){
-  const file=e.target.files[0];
-  if(!file)return;
-
-  const reader=new FileReader();
-
-  reader.onload=function(){
-    settings.logo=reader.result;
-    document.getElementById("logoPreview").src=reader.result;
-  };
-
-  reader.readAsDataURL(file);
-}
-
-/* =========================
-   STOCK
-========================= */
+/* =========================================================
+   PRODUCTS
+========================================================= */
 
 function openProductModal(id=null){
-  document.getElementById("productModal").classList.add("show");
+  document.getElementById("productId").value="";
+  document.getElementById("productName").value="";
+  document.getElementById("productCode").value="";
+  document.getElementById("productBuyPrice").value="";
+  document.getElementById("productStock").value="0";
+  document.getElementById("productLow").value="2";
+
+  document.getElementById("productModalTitle").textContent="Add Product";
 
   if(id){
     const p=products.find(x=>x.id===id);
     if(!p)return;
 
-    document.getElementById("productModalTitle").textContent="Edit Product";
-    document.getElementById("editProductId").value=id;
+    document.getElementById("productId").value=p.id;
     document.getElementById("productName").value=p.name;
     document.getElementById("productCode").value=p.code||"";
+    document.getElementById("productBuyPrice").value=p.buyPrice||0;
     document.getElementById("productStock").value=p.stock||0;
-    document.getElementById("productLow").value=p.low||0;
-    document.getElementById("productBuy").value=p.buy||0;
-    document.getElementById("productSell").value=p.sell||0;
-    document.getElementById("productUnit").value=p.unit||"pcs";
-  }else{
-    document.getElementById("productModalTitle").textContent="Add Product";
-    document.getElementById("editProductId").value="";
-    document.getElementById("productName").value="";
-    document.getElementById("productCode").value="";
-    document.getElementById("productStock").value=0;
-    document.getElementById("productLow").value=2;
-    document.getElementById("productBuy").value=0;
-    document.getElementById("productSell").value=0;
-    document.getElementById("productUnit").value="pcs";
+    document.getElementById("productLow").value=p.low||2;
+
+    document.getElementById("productModalTitle").textContent="Edit Product";
   }
+
+  openModal("productModal");
 }
 
 function saveProduct(){
-  const id=document.getElementById("editProductId").value;
+  const id=document.getElementById("productId").value;
+  const name=document.getElementById("productName").value.trim();
 
-  const data={
-    name:document.getElementById("productName").value.trim(),
-    code:document.getElementById("productCode").value.trim(),
-    stock:Number(document.getElementById("productStock").value||0),
-    low:Number(document.getElementById("productLow").value||0),
-    buy:Number(document.getElementById("productBuy").value||0),
-    sell:Number(document.getElementById("productSell").value||0),
-    unit:document.getElementById("productUnit").value.trim()||"pcs"
-  };
-
-  if(!data.name){
+  if(!name){
     toast("Product name required");
     return;
   }
 
+  const data={
+    id:id||uid(),
+    name,
+    code:document.getElementById("productCode").value.trim(),
+    buyPrice:Number(document.getElementById("productBuyPrice").value||0),
+    stock:Number(document.getElementById("productStock").value||0),
+    low:Number(document.getElementById("productLow").value||0)
+  };
+
   if(id){
-    products=products.map(p=>p.id==id?{...p,...data}:p);
+    const i=products.findIndex(x=>x.id===id);
+    if(i>=0)products[i]=data;
   }else{
-    products.push({id:uid(),...data});
+    products.push(data);
   }
 
   save(KEY.products,products);
@@ -1357,77 +1421,76 @@ function saveProduct(){
   toast("Product saved");
 }
 
+function deleteProduct(id){
+  if(!confirm("Delete this product?"))return;
+
+  requestPin(()=>{
+    products=products.filter(x=>x.id!==id);
+    save(KEY.products,products);
+    renderAll();
+  });
+}
+
 function renderStock(){
   const q=(document.getElementById("stockSearch")?.value||"").toLowerCase();
 
-  const rows=products
-    .filter(p=>
-      p.name.toLowerCase().includes(q) ||
-      (p.code||"").toLowerCase().includes(q)
-    )
-    .map(p=>{
-      const low=Number(p.stock)<=Number(p.low);
+  const list=products.filter(p=>
+    p.name.toLowerCase().includes(q) ||
+    (p.code||"").toLowerCase().includes(q)
+  );
 
-      return `
-      <tr class="${low?'low-row':''}" id="product-row-${p.id}">
-        <td><b>${esc(p.name)}</b></td>
-        <td>${esc(p.code)}</td>
-        <td>
-          ${p.stock}
-          ${low?'<span class="low-badge">LOW</span>':""}
-        </td>
-        <td>${p.low}</td>
-        <td>$${money(p.buy)}</td>
-        <td>$${money(p.sell)}</td>
-        <td>${esc(p.unit)}</td>
-        <td>
-          <button class="light" onclick="requestEditProduct(${p.id})">✏️ Edit</button>
-          <button class="danger" onclick="requestDeleteProduct(${p.id})">🗑️ Delete</button>
-        </td>
-      </tr>`;
-    }).join("");
+  const tbody=document.getElementById("stockTable");
 
-  document.getElementById("stockTable").innerHTML=
-    rows || `<tr><td colspan="8">No products</td></tr>`;
+  if(!list.length){
+    tbody.innerHTML=`<tr><td colspan="6" class="empty">No products</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML=list.map(p=>`
+    <tr id="stock-${p.id}" class="${p.stock<=p.low?'low-row':''}">
+      <td><strong>${esc(p.name)}</strong></td>
+      <td>${esc(p.code||"-")}</td>
+      <td>${money(p.buyPrice)}</td>
+      <td>
+        ${p.stock}
+        ${p.stock<=p.low?'<span class="badge badge-danger">LOW</span>':""}
+      </td>
+      <td>${p.low}</td>
+      <td>
+        <button class="btn light" onclick="openProductModal('${p.id}')">✏️</button>
+        <button class="btn danger" onclick="deleteProduct('${p.id}')">🗑️</button>
+      </td>
+    </tr>
+  `).join("");
 }
 
-function requestEditProduct(id){
-  requestPin("editProduct",id);
-}
+/* =========================================================
+   LOW STOCK
+========================================================= */
 
-function requestDeleteProduct(id){
-  requestPin("deleteProduct",id);
-}
+function renderLowStock(){
+  const low=products.filter(p=>p.stock<=p.low);
 
-/* =========================
-   LOW STOCK ALERT
-========================= */
+  const box=document.getElementById("lowStockDashboard");
 
-function renderLowAlerts(){
-  const lowProducts=products.filter(p=>Number(p.stock)<=Number(p.low));
-
-  const box=document.getElementById("lowAlerts");
-
-  if(!lowProducts.length){
+  if(!low.length){
     box.innerHTML="";
     return;
   }
 
   box.innerHTML=`
     <div class="alert-box">
-      <b>⚠️ Low Stock Alert</b>
-      ${lowProducts.map(p=>`
-        <div class="alert-item">
-          <span>
-            <b>${esc(p.name)}</b>
-            — Stock: ${p.stock}
-            / Low limit: ${p.low}
-          </span>
-          <button onclick="openLowStockItem(${p.id})">
-            Open Item
-          </button>
-        </div>
-      `).join("")}
+      <strong>⚠️ Low Stock Alert</strong>
+      <div style="margin-top:8px">
+        ${low.map(p=>`
+          <div style="margin:5px 0">
+            ${esc(p.name)} — Stock: ${p.stock}
+            <button class="btn warning" onclick="openLowStockItem('${p.id}')">
+              Open Item
+            </button>
+          </div>
+        `).join("")}
+      </div>
     </div>
   `;
 }
@@ -1436,55 +1499,47 @@ function openLowStockItem(id){
   showPage("stock");
 
   setTimeout(()=>{
-    const search=document.getElementById("stockSearch");
+    const input=document.getElementById("stockSearch");
     const p=products.find(x=>x.id===id);
 
     if(p){
-      search.value=p.name;
+      input.value=p.name;
       renderStock();
 
-      const row=document.getElementById("product-row-"+id);
+      const row=document.getElementById("stock-"+id);
 
       if(row){
-        row.scrollIntoView({
-          behavior:"smooth",
-          block:"center"
-        });
+        row.scrollIntoView({behavior:"smooth",block:"center"});
+        row.classList.add("highlight");
 
-        row.style.outline="3px solid #f59e0b";
-
-        setTimeout(()=>{
-          row.style.outline="";
-        },3000);
+        setTimeout(()=>row.classList.remove("highlight"),4000);
       }
     }
   },100);
 }
 
-/* =========================
+/* =========================================================
    PURCHASE
-========================= */
+========================================================= */
 
-function populateProductSelects(){
-  const options=
-    `<option value="">Select Product</option>`+
-    products.map(p=>
-      `<option value="${p.id}">
-        ${esc(p.name)} — Stock ${p.stock}
-      </option>`
-    ).join("");
+function fillPurchaseProducts(){
+  const select=document.getElementById("purchaseProduct");
 
-  document.getElementById("purchaseProduct").innerHTML=options;
-  document.getElementById("saleProduct").innerHTML=options;
+  select.innerHTML=`
+    <option value="">Select Product</option>
+    ${products.map(p=>`
+      <option value="${p.id}">${esc(p.name)}</option>
+    `).join("")}
+  `;
 }
 
-function addPurchase(){
-  const productId=Number(document.getElementById("purchaseProduct").value);
+function savePurchase(){
+  const productId=document.getElementById("purchaseProduct").value;
   const qty=Number(document.getElementById("purchaseQty").value||0);
   const price=Number(document.getElementById("purchasePrice").value||0);
 
-  if(!productId || qty<=0){
-    toast("Select product and quantity");
+  if(!productId||qty<=0){
+    toast("Product and quantity required");
     return;
   }
 
@@ -1493,6 +1548,7 @@ function addPurchase(){
   if(!p)return;
 
   p.stock+=qty;
+  p.buyPrice=price||p.buyPrice;
 
   purchases.push({
     id:uid(),
@@ -1502,91 +1558,96 @@ function addPurchase(){
     price,
     total:qty*price,
     supplier:document.getElementById("purchaseSupplier").value.trim(),
-    date:document.getElementById("purchaseDate").value||today()
+    date:document.getElementById("purchaseDate").value||today(),
+    note:document.getElementById("purchaseNote").value.trim()
   });
 
   save(KEY.products,products);
   save(KEY.purchases,purchases);
 
-  document.getElementById("purchaseQty").value="";
+  document.getElementById("purchaseQty").value=1;
   document.getElementById("purchasePrice").value="";
   document.getElementById("purchaseSupplier").value="";
+  document.getElementById("purchaseNote").value="";
 
   renderAll();
   toast("Purchase saved");
 }
 
 function renderPurchases(){
-  document.getElementById("purchaseTable").innerHTML=
-    purchases.slice().reverse().map(x=>`
-      <tr>
-        <td>${esc(x.productName)}</td>
-        <td>${x.qty}</td>
-        <td>$${money(x.price)}</td>
-        <td>$${money(x.total)}</td>
-        <td>${esc(x.supplier)}</td>
-        <td>${x.date}</td>
-        <td>
-          <button class="danger" onclick="requestDeletePurchase(${x.id})">
-            Delete
-          </button>
-        </td>
-      </tr>
-    `).join("") ||
-    `<tr><td colspan="7">No purchases</td></tr>`;
-}
+  const box=document.getElementById("purchaseTable");
 
-function requestDeletePurchase(id){
-  requestPin("deletePurchase",id);
-}
-
-/* =========================
-   SALE
-========================= */
-
-function updateSalePrice(){
-  const id=Number(document.getElementById("saleProduct").value);
-  const p=products.find(x=>x.id===id);
-
-  if(p){
-    document.getElementById("salePrice").value=p.sell||0;
+  if(!purchases.length){
+    box.innerHTML=`<div class="empty">No purchases</div>`;
+    return;
   }
+
+  box.innerHTML=`
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Product</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Total</th>
+            <th>Supplier</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${[...purchases].reverse().map(x=>`
+            <tr>
+              <td>${x.date}</td>
+              <td>${esc(x.productName)}</td>
+              <td>${x.qty}</td>
+              <td>${money(x.price)}</td>
+              <td>${money(x.total)}</td>
+              <td>${esc(x.supplier||"-")}</td>
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+/* =========================================================
+   SALE
+========================================================= */
+
+function prepareSaleForm(){
+  saleItems=[];
+  extraItems=[];
+
+  document.getElementById("saleBillNo").value=getNextBillNumber();
+  document.getElementById("saleCustomer").value="";
+  document.getElementById("salePhone").value="";
+  document.getElementById("saleWhatsapp").value="";
+  document.getElementById("saleDate").value=today();
+  document.getElementById("saleDiscount").value=0;
+  document.getElementById("salePaid").value=0;
+  document.getElementById("salePayment").value="paid";
+
+  addSaleItem();
+
+  renderExtraItems();
+  renderSaleTotal();
+}
+
+function getNextBillNumber(){
+  return `${settings.invoicePrefix||"SMD"}-${settings.nextInvoice||1}`;
 }
 
 function addSaleItem(){
-  const productId=Number(document.getElementById("saleProduct").value);
-  const qty=Number(document.getElementById("saleQty").value||0);
-  const price=Number(document.getElementById("salePrice").value||0);
-
-  if(!productId || qty<=0){
-    toast("Select product and quantity");
-    return;
-  }
-
-  const p=products.find(x=>x.id===productId);
-
-  if(!p)return;
-
-  const already=saleItems
-    .filter(x=>x.productId===productId)
-    .reduce((a,b)=>a+b.qty,0);
-
-  if(already+qty>p.stock){
-    toast("Not enough stock");
-    return;
-  }
-
   saleItems.push({
     id:uid(),
-    productId,
-    name:p.name,
-    qty,
-    price,
-    total:qty*price
+    productId:"",
+    qty:1,
+    price:0
   });
 
   renderSaleItems();
-  renderSaleTotal();
 }
 
 function removeSaleItem(id){
@@ -1596,80 +1657,151 @@ function removeSaleItem(id){
 }
 
 function renderSaleItems(){
-  document.getElementById("saleItemsTable").innerHTML=
-    saleItems.map(x=>`
-      <tr>
-        <td>${esc(x.name)}</td>
-        <td>${x.qty}</td>
-        <td>$${money(x.price)}</td>
-        <td>$${money(x.total)}</td>
-        <td>
-          <button class="danger" onclick="removeSaleItem(${x.id})">✕</button>
-        </td>
-      </tr>
-    `).join("") ||
-    `<tr><td colspan="5">No items</td></tr>`;
+  const box=document.getElementById("saleItems");
+
+  if(!saleItems.length){
+    box.innerHTML=`<div class="empty">No product selected</div>`;
+    return;
+  }
+
+  box.innerHTML=saleItems.map(item=>`
+    <div class="item-line">
+      <select onchange="changeSaleItem('${item.id}',this.value)">
+        <option value="">Select product</option>
+        ${products.map(p=>`
+          <option value="${p.id}" ${item.productId===p.id?"selected":""}>
+            ${esc(p.name)} — Stock ${p.stock}
+          </option>
+        `).join("")}
+      </select>
+
+      <input
+        type="number"
+        min="1"
+        value="${item.qty}"
+        onchange="changeSaleQty('${item.id}',this.value)"
+        placeholder="Qty"
+      >
+
+      <input
+        type="number"
+        min="0"
+        step="0.01"
+        value="${item.price}"
+        onchange="changeSalePrice('${item.id}',this.value)"
+        placeholder="Price"
+      >
+
+      <div>${money(item.qty*item.price)}</div>
+
+      <button class="btn danger" onclick="removeSaleItem('${item.id}')">×</button>
+    </div>
+  `).join("");
 }
 
-function addExtraRow(name="",amount=""){
+function changeSaleItem(id,value){
+  const item=saleItems.find(x=>x.id===id);
+  if(!item)return;
+
+  item.productId=value;
+
+  const p=products.find(x=>x.id===value);
+
+  if(p){
+    item.price=Number(p.buyPrice||0);
+  }
+
+  renderSaleItems();
+  renderSaleTotal();
+}
+
+function changeSaleQty(id,value){
+  const item=saleItems.find(x=>x.id===id);
+  if(!item)return;
+
+  item.qty=Math.max(1,Number(value||1));
+
+  renderSaleTotal();
+}
+
+function changeSalePrice(id,value){
+  const item=saleItems.find(x=>x.id===id);
+  if(!item)return;
+
+  item.price=Math.max(0,Number(value||0));
+
+  renderSaleTotal();
+}
+
+function addExtraItem(){
   extraItems.push({
     id:uid(),
-    name,
-    amount:Number(amount||0)
+    name:"",
+    amount:0
   });
 
   renderExtraItems();
   renderSaleTotal();
 }
 
-function removeExtraRow(id){
+function removeExtraItem(id){
   extraItems=extraItems.filter(x=>x.id!==id);
   renderExtraItems();
   renderSaleTotal();
 }
 
 function renderExtraItems(){
-  document.getElementById("extraItems").innerHTML=
-    extraItems.map(x=>`
-      <div class="extra-row">
-        <input
-          placeholder="مثلاً د موټر کرایه"
-          value="${esc(x.name)}"
-          oninput="changeExtraName(${x.id},this.value)"
-        >
+  const box=document.getElementById("extraItems");
 
-        <input
-          type="number"
-          step="0.01"
-          placeholder="Amount"
-          value="${x.amount}"
-          oninput="changeExtraAmount(${x.id},this.value)"
-        >
-
-        <button class="danger" onclick="removeExtraRow(${x.id})">✕</button>
-      </div>
-    `).join("");
-}
-
-function changeExtraName(id,value){
-  const x=extraItems.find(x=>x.id===id);
-  if(x)x.name=value;
-}
-
-function changeExtraAmount(id,value){
-  const x=extraItems.find(x=>x.id===id);
-  if(x){
-    x.amount=Number(value||0);
-    renderSaleTotal();
+  if(!extraItems.length){
+    box.innerHTML=`<div class="muted">No extra items</div>`;
+    return;
   }
+
+  box.innerHTML=extraItems.map(x=>`
+    <div class="extra-line">
+      <input
+        placeholder="Extra item name"
+        value="${esc(x.name)}"
+        oninput="changeExtraName('${x.id}',this.value)"
+      >
+
+      <input
+        type="number"
+        min="0"
+        value="${x.amount}"
+        oninput="changeExtraAmount('${x.id}',this.value)"
+      >
+
+      <button class="btn danger" onclick="removeExtraItem('${x.id}')">×</button>
+    </div>
+  `).join("");
+}
+
+function changeExtraName(id,v){
+  const x=extraItems.find(x=>x.id===id);
+  if(x)x.name=v;
+  renderSaleTotal();
+}
+
+function changeExtraAmount(id,v){
+  const x=extraItems.find(x=>x.id===id);
+  if(x)x.amount=Number(v||0);
+  renderSaleTotal();
 }
 
 function calculateSaleTotal(){
-  const itemsTotal=saleItems.reduce((a,b)=>a+b.total,0);
-  const extraTotal=extraItems.reduce((a,b)=>a+Number(b.amount||0),0);
+  const productsTotal=saleItems.reduce((sum,x)=>{
+    return sum+(Number(x.qty||0)*Number(x.price||0));
+  },0);
+
+  const extraTotal=extraItems.reduce((sum,x)=>{
+    return sum+Number(x.amount||0);
+  },0);
+
   const discount=Number(document.getElementById("saleDiscount").value||0);
 
-  return Math.max(0,itemsTotal+extraTotal-discount);
+  return Math.max(0,productsTotal+extraTotal-discount);
 }
 
 function renderSaleTotal(){
@@ -1677,235 +1809,287 @@ function renderSaleTotal(){
   const paid=Number(document.getElementById("salePaid").value||0);
   const remaining=Math.max(0,total-paid);
 
-  document.getElementById("saleTotal").value=money(total);
-  document.getElementById("saleRemaining").value=money(remaining);
+  document.getElementById("saleTotal").textContent=money(total);
+  document.getElementById("salePaidPreview").textContent=money(paid);
+  document.getElementById("saleRemainingPreview").textContent=money(remaining);
 }
 
-function getNextBillNumber(){
-  return `${settings.invoicePrefix||"SMD"}-${Number(settings.nextInvoice||1)}`;
-}
-
-function prepareSaleForm(){
-  document.getElementById("saleDate").value=today();
-  document.getElementById("saleBillNumber").value=getNextBillNumber();
-  document.getElementById("nextBillPreview").textContent=getNextBillNumber();
-
-  document.getElementById("saleCustomer").value="";
-  document.getElementById("salePhone").value="";
-  document.getElementById("saleWhatsapp").value="";
-  document.getElementById("salePaid").value="0";
-  document.getElementById("saleDiscount").value="0";
-  document.getElementById("saleNote").value="";
-
-  saleItems=[];
-  extraItems=[];
-
-  renderSaleItems();
-  renderExtraItems();
-  renderSaleTotal();
-}
+/* =========================================================
+   SAVE SALE
+========================================================= */
 
 function saveSale(){
-  if(!saleItems.length && !extraItems.length){
-    toast("Add at least one item");
+
+  const validItems=saleItems.filter(x=>x.productId);
+
+  if(!validItems.length && !extraItems.some(x=>x.name&&x.amount>0)){
+    toast("Add at least one product or extra item");
     return;
   }
 
-  const bill=
-    document.getElementById("saleBillNumber").value.trim() ||
-    getNextBillNumber();
+  for(const item of validItems){
+    const p=products.find(x=>x.id===item.productId);
 
-  const customer=
-    document.getElementById("saleCustomer").value.trim() ||
-    "Customer";
+    if(!p)continue;
+
+    if(item.qty>p.stock){
+      toast(`Not enough stock: ${p.name}`);
+      return;
+    }
+  }
 
   const total=calculateSaleTotal();
-  const paid=Number(document.getElementById("salePaid").value||0);
-  const remaining=Math.max(0,total-paid);
+
+  let paid=Number(document.getElementById("salePaid").value||0);
+
+  if(paid<0){
+    toast("Paid cannot be negative");
+    return;
+  }
 
   if(paid>total){
     toast("Paid cannot be greater than total");
     return;
   }
 
-  /* reduce stock */
-  for(const item of saleItems){
-    const p=products.find(x=>x.id===item.productId);
+  /*
+    IMPORTANT PAYMENT LOGIC:
 
-    if(!p){
-      toast("Product not found");
-      return;
-    }
+    If customer entered some amount but it is less than total,
+    ask whether that amount is actually the complete payment.
 
-    if(item.qty>p.stock){
-      toast("Not enough stock for "+p.name);
-      return;
+    Example:
+    Total = 3000
+    Paid = 2000
+
+    YES -> Paid becomes 3000
+    NO  -> Paid stays 2000, Remaining = 1000
+  */
+
+  if(paid>0 && paid<total){
+
+    const allPaid=confirm(
+      "ایا مشتری ټولې پیسې درکړې؟\n\n"+
+      "Bill Total: "+money(total)+"\n"+
+      "Entered Cash: "+money(paid)+"\n\n"+
+      "YES = ټولې پیسې ورکړل شوې\n"+
+      "NO = پاتې پیسې قرض دي"
+    );
+
+    if(allPaid){
+      paid=total;
     }
   }
 
-  for(const item of saleItems){
-    const p=products.find(x=>x.id===item.productId);
-    p.stock-=item.qty;
-  }
+  const remaining=Math.max(0,total-paid);
+
+  /*
+    If payment is full automatically mark it as paid.
+  */
+  const payment=remaining<=0?"paid":"debt";
 
   const sale={
     id:uid(),
-    bill,
-    customer,
+    billNo:document.getElementById("saleBillNo").value||getNextBillNumber(),
+
+    customer:document.getElementById("saleCustomer").value.trim(),
     phone:document.getElementById("salePhone").value.trim(),
     whatsapp:document.getElementById("saleWhatsapp").value.trim(),
+
     date:document.getElementById("saleDate").value||today(),
-    items:JSON.parse(JSON.stringify(saleItems)),
-    extraItems:JSON.parse(JSON.stringify(extraItems)),
+
+    items:validItems.map(x=>({
+      productId:x.productId,
+      qty:Number(x.qty),
+      price:Number(x.price),
+      total:Number(x.qty)*Number(x.price)
+    })),
+
+    extraItems:extraItems
+      .filter(x=>x.name&&Number(x.amount)>0)
+      .map(x=>({
+        name:x.name.trim(),
+        amount:Number(x.amount)
+      })),
+
     discount:Number(document.getElementById("saleDiscount").value||0),
+
     total,
     paid,
     remaining,
-    payment:remaining>0?"debt":"paid",
-    note:document.getElementById("saleNote").value.trim()
+    payment
   };
+
+  /*
+    Reduce stock
+  */
+  for(const item of validItems){
+    const p=products.find(x=>x.id===item.productId);
+
+    if(p){
+      p.stock-=Number(item.qty);
+    }
+  }
 
   sales.push(sale);
 
-  /* create debt automatically */
+  /*
+    Create debt ONLY if money is still remaining.
+  */
   if(remaining>0){
+
     debts.push({
       id:uid(),
-      name:customer,
+      saleId:sale.id,
+      billNo:sale.billNo,
+
+      name:sale.customer||"Customer",
       phone:sale.phone,
       whatsapp:sale.whatsapp,
+
       amount:total,
       paid,
       remaining,
-      date:sale.date,
-      note:`Bill ${bill}`
-    });
 
-    save(KEY.debts,debts);
+      date:sale.date,
+      note:"From invoice "+sale.billNo
+    });
   }
+
+  settings.nextInvoice=Number(settings.nextInvoice||1)+1;
 
   save(KEY.products,products);
   save(KEY.sales,sales);
-
-  /* advance invoice number */
-  settings.nextInvoice=Number(settings.nextInvoice||1)+1;
+  save(KEY.debts,debts);
   save(KEY.settings,settings);
+
+  renderAll();
+
+  currentInvoiceId=sale.id;
 
   showInvoice(sale);
 
   prepareSaleForm();
-  renderAll();
-  toast("Sale saved");
 }
 
-function renderSales(){
-  document.getElementById("salesTable").innerHTML=
-    sales.slice().reverse().map(x=>`
-      <tr>
-        <td><b>${esc(x.bill)}</b></td>
-        <td>${esc(x.customer)}</td>
-        <td>$${money(x.total)}</td>
-        <td>$${money(x.paid)}</td>
-        <td>${x.remaining>0?`<span class="stat-bad">$${money(x.remaining)}</span>`:"Paid"}</td>
-        <td>${x.date}</td>
-        <td>
-          <button class="primary" onclick="showInvoiceById(${x.id})">🧾 Bill</button>
-          <button class="danger" onclick="requestDeleteSale(${x.id})">Delete</button>
-        </td>
-      </tr>
-    `).join("") ||
-    `<tr><td colspan="7">No sales</td></tr>`;
-}
-
-function requestDeleteSale(id){
-  requestPin("deleteSale",id);
-}
-
-/* =========================
+/* =========================================================
    INVOICE
-========================= */
-
-function showInvoiceById(id){
-  const sale=sales.find(x=>x.id===id);
-  if(sale)showInvoice(sale);
-}
+========================================================= */
 
 function showInvoice(sale){
-  const logo=settings.logo?
-    `<img class="invoice-logo" src="${settings.logo}">`
-    :"";
+  currentInvoiceId=sale.id;
 
-  const watermark=settings.logo?
-    `<div class="invoice-watermark">
-       <img src="${settings.logo}">
-     </div>`
-    :"";
+  const itemsHtml=sale.items.map((item,i)=>{
+    const p=products.find(x=>x.id===item.productId);
 
-  const items=(sale.items||[]).map(x=>`
+    return `
+      <tr>
+        <td>${i+1}</td>
+        <td>${esc(p?.name||"Product")}</td>
+        <td>${item.qty}</td>
+        <td>${money(item.price)}</td>
+        <td>${money(item.total)}</td>
+      </tr>
+    `;
+  }).join("");
+
+  const extraHtml=(sale.extraItems||[]).map((x,i)=>`
     <tr>
+      <td>${sale.items.length+i+1}</td>
       <td>${esc(x.name)}</td>
-      <td>${x.qty}</td>
-      <td>$${money(x.price)}</td>
-      <td>$${money(x.total)}</td>
-    </tr>
-  `).join("");
-
-  const extras=(sale.extraItems||[]).filter(x=>x.name||x.amount).map(x=>`
-    <tr>
-      <td>${esc(x.name||"Extra")}</td>
       <td>1</td>
-      <td>$${money(x.amount)}</td>
-      <td>$${money(x.amount)}</td>
+      <td>${money(x.amount)}</td>
+      <td>${money(x.amount)}</td>
     </tr>
   `).join("");
 
-  const extraTotal=(sale.extraItems||[])
-    .reduce((a,b)=>a+Number(b.amount||0),0);
+  const isPaid=Number(sale.remaining||0)<=0;
 
   document.getElementById("invoiceContent").innerHTML=`
-    <div class="invoice">
 
-      ${watermark}
+    <div class="invoice" id="printableInvoice">
 
-      <div class="invoice-content">
+      <div class="invoice-watermark">
+        ${settings.logo?`<img src="${settings.logo}" alt="">`:""}
+      </div>
 
-        <div class="invoice-head">
+      <div class="invoice-inner">
+
+        <div class="invoice-header">
 
           <div>
-            ${logo}
-
-            <h1>${esc(settings.shopName||"Samad Solar")}</h1>
-
-            ${settings.address?
-              `<div>${esc(settings.address)}</div>`:""}
-
-            ${settings.phone?
-              `<div>☎ ${esc(settings.phone)}</div>`:""}
-
-            ${settings.gmail?
-              `<div>✉ ${esc(settings.gmail)}</div>`:""}
-
+            ${
+              settings.logo
+              ? `<img class="invoice-logo" src="${settings.logo}" alt="Logo">`
+              : `<div class="invoice-logo"></div>`
+            }
           </div>
 
-          <div style="text-align:left">
-            <h2>INVOICE</h2>
-            <b>${esc(sale.bill)}</b>
-            <div>${sale.date}</div>
+          <div class="invoice-shop">
+            <h1>${esc(settings.shopName)}</h1>
+
+            ${settings.address
+              ? `<div>📍 ${esc(settings.address)}</div>`
+              : ""
+            }
+
+            ${settings.phone
+              ? `<div>📞 ${esc(settings.phone)}</div>`
+              : ""
+            }
+
+            ${settings.whatsapp
+              ? `<div>💬 ${esc(settings.whatsapp)}</div>`
+              : ""
+            }
+
+            ${settings.gmail
+              ? `<div>✉️ ${esc(settings.gmail)}</div>`
+              : ""
+            }
+          </div>
+
+          <div class="invoice-number">
+            <strong>${esc(sale.billNo)}</strong>
+            <div>${esc(sale.date)}</div>
           </div>
 
         </div>
 
-        <br>
-
-        <div>
-          <b>Customer:</b> ${esc(sale.customer)}
-          ${sale.phone?`<br><b>Phone:</b> ${esc(sale.phone)}`:""}
-          ${sale.whatsapp?`<br><b>WhatsApp:</b> ${esc(sale.whatsapp)}`:""}
+        <div class="invoice-title">
+          SALES INVOICE
         </div>
 
-        <table>
+        <div class="invoice-info">
+          <div>
+            <strong>Customer:</strong>
+            ${esc(sale.customer||"Walk-in Customer")}
+          </div>
+
+          <div>
+            <strong>Phone:</strong>
+            ${esc(sale.phone||"-")}
+          </div>
+
+          <div>
+            <strong>WhatsApp:</strong>
+            ${esc(sale.whatsapp||"-")}
+          </div>
+
+          <div>
+            <strong>Status:</strong>
+            ${
+              isPaid
+              ? `<span class="badge badge-success">PAID</span>`
+              : `<span class="badge badge-warning">REMAINING</span>`
+            }
+          </div>
+        </div>
+
+        <table class="invoice-table">
           <thead>
             <tr>
+              <th>#</th>
               <th>Item</th>
               <th>Qty</th>
               <th>Price</th>
@@ -1914,93 +2098,342 @@ function showInvoice(sale){
           </thead>
 
           <tbody>
-            ${items}
-            ${extras}
+            ${itemsHtml}
+            ${extraHtml}
           </tbody>
         </table>
 
         <div class="invoice-total">
 
           <div>
-            <span>Items</span>
-            <b>$${money(
-              (sale.items||[]).reduce((a,b)=>a+b.total,0)
-            )}</b>
-          </div>
-
-          <div>
-            <span>Extra</span>
-            <b>$${money(extraTotal)}</b>
-          </div>
-
-          <div>
             <span>Discount</span>
-            <b>-$${money(sale.discount)}</b>
+            <strong>${money(sale.discount)}</strong>
           </div>
 
-          <div>
+          <div class="grand">
             <span>Total</span>
-            <b>$${money(sale.total)}</b>
+            <strong>${money(sale.total)}</strong>
           </div>
 
           <div>
             <span>Paid</span>
-            <b>$${money(sale.paid)}</b>
+            <strong>${money(sale.paid)}</strong>
           </div>
 
           <div>
             <span>Remaining</span>
-            <b>$${money(sale.remaining)}</b>
+            <strong>${money(sale.remaining)}</strong>
           </div>
 
         </div>
 
-        ${sale.note?
-          `<p><b>Note:</b> ${esc(sale.note)}</p>`:""}
+        ${
+          isPaid
+          ? `<div class="paid-stamp">PAID</div>`
+          : `<div class="remaining-stamp">REMAINING</div>`
+        }
+
+        <div class="invoice-note">
+          ${
+            sale.remaining>0
+            ? `Remaining amount: <strong>${money(sale.remaining)}</strong>`
+            : `<strong>Payment completed — PAID</strong>`
+          }
+        </div>
 
         <div class="invoice-footer">
-          ${esc(settings.address||"")}
-          <br>
-          مننه چې زموږ کاروبار مو انتخاب کړ.
+          <strong>${esc(settings.greeting||"Thank you")}</strong>
+
+          ${
+            settings.address
+            ? `<div style="margin-top:7px">${esc(settings.address)}</div>`
+            : ""
+          }
+
+          <div style="margin-top:7px">
+            ${esc(settings.shopName)}
+          </div>
         </div>
 
       </div>
     </div>
   `;
 
-  document.getElementById("invoiceModal").classList.add("show");
+  openModal("invoiceModal");
+}
+
+function showInvoiceById(id){
+  const sale=sales.find(x=>x.id===id);
+  if(sale)showInvoice(sale);
 }
 
 function printInvoice(){
   window.print();
 }
 
-async function shareInvoice(){
-  const saleText=document.getElementById("invoiceContent").innerText;
+/* =========================================================
+   PDF GENERATION
+========================================================= */
 
-  if(navigator.share){
-    try{
-      await navigator.share({
-        title:"Samad Solar Invoice",
-        text:saleText
-      });
-    }catch(e){}
-  }else{
-    navigator.clipboard?.writeText(saleText);
-    toast("Invoice text copied");
+async function makeInvoicePDF(){
+
+  const element=document.getElementById("printableInvoice");
+
+  if(!element){
+    throw new Error("Invoice not found");
+  }
+
+  /*
+    Temporarily make sure invoice is visible.
+  */
+
+  const canvas=await html2canvas(element,{
+    scale:2,
+    useCORS:true,
+    backgroundColor:"#ffffff",
+    logging:false
+  });
+
+  const {jsPDF}=window.jspdf;
+
+  const pdf=new jsPDF({
+    orientation:"portrait",
+    unit:"mm",
+    format:"a4"
+  });
+
+  const pageWidth=210;
+  const pageHeight=297;
+
+  const margin=8;
+
+  const imgWidth=pageWidth-margin*2;
+  const imgHeight=canvas.height*imgWidth/canvas.width;
+
+  let heightLeft=imgHeight;
+  let position=margin;
+
+  pdf.addImage(
+    canvas.toDataURL("image/jpeg",0.95),
+    "JPEG",
+    margin,
+    position,
+    imgWidth,
+    imgHeight
+  );
+
+  heightLeft-=pageHeight-margin*2;
+
+  while(heightLeft>0){
+
+    position=heightLeft-imgHeight+margin;
+
+    pdf.addPage();
+
+    pdf.addImage(
+      canvas.toDataURL("image/jpeg",0.95),
+      "JPEG",
+      margin,
+      position,
+      imgWidth,
+      imgHeight
+    );
+
+    heightLeft-=pageHeight-margin*2;
+  }
+
+  const sale=sales.find(x=>x.id===currentInvoiceId);
+
+  const billNo=sale?.billNo||"invoice";
+
+  return pdf;
+}
+
+async function downloadInvoicePDF(){
+
+  try{
+
+    const pdf=await makeInvoicePDF();
+
+    const sale=sales.find(x=>x.id===currentInvoiceId);
+
+    const billNo=sale?.billNo||"invoice";
+
+    pdf.save(`${settings.shopName}-${billNo}.pdf`);
+
+  }catch(e){
+
+    console.error(e);
+
+    toast("PDF جوړ نه شو. بیا هڅه وکړه.");
+
   }
 }
 
-/* =========================
-   EXPENSES
-========================= */
+/*
+  SHARE PDF:
 
-function addExpense(){
+  On supported phones/browsers:
+  Native share opens with the actual PDF file.
+
+  If file sharing is not supported:
+  PDF automatically downloads.
+*/
+
+async function shareInvoice(){
+
+  try{
+
+    const pdf=await makeInvoicePDF();
+
+    const sale=sales.find(x=>x.id===currentInvoiceId);
+
+    const billNo=sale?.billNo||"invoice";
+
+    const blob=pdf.output("blob");
+
+    const file=new File(
+      [blob],
+      `${settings.shopName}-${billNo}.pdf`,
+      {type:"application/pdf"}
+    );
+
+    /*
+      Native file share
+    */
+
+    if(
+      navigator.share &&
+      (!navigator.canShare || navigator.canShare({files:[file]}))
+    ){
+
+      await navigator.share({
+        title:`${settings.shopName} Invoice ${billNo}`,
+        text:`${settings.shopName} - Invoice ${billNo}`,
+        files:[file]
+      });
+
+      return;
+    }
+
+    /*
+      Fallback:
+      download the actual PDF
+    */
+
+    const url=URL.createObjectURL(blob);
+
+    const a=document.createElement("a");
+    a.href=url;
+    a.download=`${settings.shopName}-${billNo}.pdf`;
+
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+
+    toast("PDF download شو؛ اوس یې Share کولی شې.");
+
+  }catch(e){
+
+    console.error(e);
+
+    if(e.name==="AbortError"){
+      return;
+    }
+
+    toast("PDF Share کې ستونزه راغله.");
+
+  }
+}
+
+/* =========================================================
+   SALES HISTORY
+========================================================= */
+
+function renderSales(){
+
+  const box=document.getElementById("salesTable");
+
+  if(!sales.length){
+    box.innerHTML=`<div class="empty">No sales</div>`;
+    return;
+  }
+
+  box.innerHTML=`
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Invoice</th>
+            <th>Customer</th>
+            <th>Total</th>
+            <th>Paid</th>
+            <th>Remaining</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          ${[...sales].reverse().map(s=>`
+
+            <tr>
+
+              <td>${s.date}</td>
+
+              <td>
+                <strong>${esc(s.billNo)}</strong>
+              </td>
+
+              <td>
+                ${esc(s.customer||"Walk-in")}
+              </td>
+
+              <td>${money(s.total)}</td>
+
+              <td>${money(s.paid)}</td>
+
+              <td>
+                ${
+                  s.remaining<=0
+                  ? `<span class="badge badge-success">PAID</span>`
+                  : `<span class="badge badge-warning">${money(s.remaining)}</span>`
+                }
+              </td>
+
+              <td>
+                <button
+                  class="btn primary"
+                  onclick="showInvoiceById('${s.id}')"
+                >
+                  📄 Invoice
+                </button>
+              </td>
+
+            </tr>
+
+          `).join("")}
+
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+/* =========================================================
+   EXPENSE
+========================================================= */
+
+function saveExpense(){
+
   const name=document.getElementById("expenseName").value.trim();
   const amount=Number(document.getElementById("expenseAmount").value||0);
 
-  if(!name || amount<=0){
-    toast("Enter expense and amount");
+  if(!name||amount<=0){
+    toast("Expense name and amount required");
     return;
   }
 
@@ -2008,50 +2441,69 @@ function addExpense(){
     id:uid(),
     name,
     amount,
-    date:document.getElementById("expenseDate").value||today()
+    date:document.getElementById("expenseDate").value||today(),
+    note:document.getElementById("expenseNote").value.trim()
   });
 
   save(KEY.expenses,expenses);
 
   document.getElementById("expenseName").value="";
   document.getElementById("expenseAmount").value="";
+  document.getElementById("expenseNote").value="";
 
   renderAll();
+
   toast("Expense saved");
 }
 
 function renderExpenses(){
-  document.getElementById("expenseTable").innerHTML=
-    expenses.slice().reverse().map(x=>`
-      <tr>
-        <td>${esc(x.name)}</td>
-        <td>${money(x.amount)} AFN</td>
-        <td>${x.date}</td>
-        <td>
-          <button class="danger" onclick="requestDeleteExpense(${x.id})">
-            Delete
-          </button>
-        </td>
-      </tr>
-    `).join("") ||
-    `<tr><td colspan="4">No expenses</td></tr>`;
+
+  const box=document.getElementById("expenseTable");
+
+  if(!expenses.length){
+    box.innerHTML=`<div class="empty">No expenses</div>`;
+    return;
+  }
+
+  box.innerHTML=`
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Expense</th>
+            <th>Amount AFN</th>
+            <th>Note</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          ${[...expenses].reverse().map(x=>`
+            <tr>
+              <td>${x.date}</td>
+              <td>${esc(x.name)}</td>
+              <td>${Number(x.amount).toLocaleString()} AFN</td>
+              <td>${esc(x.note||"-")}</td>
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+    </div>
+  `;
 }
 
-function requestDeleteExpense(id){
-  requestPin("deleteExpense",id);
-}
-
-/* =========================
+/* =========================================================
    DEBT
-========================= */
+========================================================= */
 
-function addDebt(){
+function saveDebt(){
+
   const name=document.getElementById("debtName").value.trim();
   const amount=Number(document.getElementById("debtAmount").value||0);
   const paid=Number(document.getElementById("debtPaid").value||0);
 
-  if(!name || amount<=0){
-    toast("Enter debtor name and amount");
+  if(!name||amount<=0){
+    toast("Customer and amount required");
     return;
   }
 
@@ -2078,411 +2530,389 @@ function addDebt(){
   document.getElementById("debtPhone").value="";
   document.getElementById("debtWhatsapp").value="";
   document.getElementById("debtAmount").value="";
-  document.getElementById("debtPaid").value="0";
+  document.getElementById("debtPaid").value=0;
   document.getElementById("debtNote").value="";
 
   renderAll();
+
   toast("Debt saved");
 }
 
 function renderDebts(){
-  document.getElementById("debtTable").innerHTML=
-    debts.slice().reverse().map(x=>`
-      <tr>
-        <td><b>${esc(x.name)}</b></td>
-        <td>${esc(x.phone)}</td>
-        <td>${esc(x.whatsapp)}</td>
-        <td>$${money(x.amount)}</td>
-        <td>$${money(x.paid)}</td>
-        <td>
-          ${x.remaining>0?
-            `<span class="stat-bad">$${money(x.remaining)}</span>`:
-            `<span class="stat-good">Paid</span>`}
-        </td>
-        <td>${x.date}</td>
-        <td>
-          ${x.remaining>0 && x.whatsapp?
-            `<button class="warning" onclick="sendDebtWhatsapp(${x.id})">WhatsApp</button>`:""}
 
-          <button class="danger" onclick="requestDeleteDebt(${x.id})">Delete</button>
-        </td>
-      </tr>
-    `).join("") ||
-    `<tr><td colspan="8">No debt</td></tr>`;
-}
+  const box=document.getElementById("debtTable");
 
-function requestDeleteDebt(id){
-  requestPin("deleteDebt",id);
-}
-
-/* =========================
-   WHATSAPP
-========================= */
-
-function normalizeWhatsapp(number){
-  let n=String(number||"").replace(/\D/g,"");
-
-  if(n.startsWith("00")){
-    n=n.slice(2);
+  if(!debts.length){
+    box.innerHTML=`<div class="empty">No debt</div>`;
+    return;
   }
 
-  if(n.startsWith("0")){
-    n="93"+n.slice(1);
-  }
+  box.innerHTML=`
+    <div class="table-wrap">
 
-  if(n.length===9 && n.startsWith("7")){
-    n="93"+n;
-  }
+      <table>
 
-  return n;
+        <thead>
+          <tr>
+            <th>Customer</th>
+            <th>Phone</th>
+            <th>Total</th>
+            <th>Paid</th>
+            <th>Remaining</th>
+            <th>Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          ${[...debts].reverse().map(d=>`
+
+            <tr>
+
+              <td>${esc(d.name)}</td>
+
+              <td>${esc(d.phone||"-")}</td>
+
+              <td>${money(d.amount)}</td>
+
+              <td>${money(d.paid)}</td>
+
+              <td>
+                ${
+                  d.remaining<=0
+                  ? `<span class="badge badge-success">PAID</span>`
+                  : `<span class="badge badge-danger">${money(d.remaining)}</span>`
+                }
+              </td>
+
+              <td>${d.date}</td>
+
+              <td>
+                ${
+                  d.whatsapp
+                  ? `<button class="btn success" onclick="sendDebtWhatsApp('${d.id}')">WhatsApp</button>`
+                  : ""
+                }
+              </td>
+
+            </tr>
+
+          `).join("")}
+
+        </tbody>
+
+      </table>
+
+    </div>
+  `;
 }
 
-function makeDebtMessage(debt){
-  const greeting=settings.greeting!==false?"سلام، ":"";
+function sendDebtWhatsApp(id){
 
-  return `${greeting}ستاسو پاتې قرض $${money(debt.remaining)} دی. مهرباني وکړئ د تصفیې لپاره مراجعه وکړئ.`;
-}
+  const d=debts.find(x=>x.id===id);
 
-function sendDebtWhatsapp(id){
-  const debt=debts.find(x=>x.id===id);
-
-  if(!debt || debt.remaining<=0)return;
-
-  const phone=normalizeWhatsapp(debt.whatsapp);
-
-  if(!phone){
+  if(!d||!d.whatsapp){
     toast("WhatsApp number not available");
     return;
   }
 
-  const msg=encodeURIComponent(makeDebtMessage(debt));
+  let phone=d.whatsapp.replace(/\D/g,"");
+
+  if(phone.startsWith("0")){
+    phone="93"+phone.slice(1);
+  }
+
+  const text=
+`سلام ${d.name}
+ستاسو پاتې پیسې: ${money(d.remaining)}
+مهرباني وکړئ د پیسو د تصفیې لپاره اړیکه ونیسئ.
+${settings.shopName}`;
 
   window.open(
-    `https://wa.me/${phone}?text=${msg}`,
+    `https://wa.me/${phone}?text=${encodeURIComponent(text)}`,
     "_blank"
   );
 }
 
-function isThursday(){
-  return new Date().getDay()===4;
-}
+function sendThursdayReminder(){
 
-function sendThursdayReminders(){
-  const eligible=debts.filter(
-    x=>Number(x.remaining)>0 && normalizeWhatsapp(x.whatsapp)
-  );
+  const pending=debts.filter(d=>d.remaining>0 && d.whatsapp);
 
-  if(!eligible.length){
-    toast("No debtor with WhatsApp number");
+  if(!pending.length){
+    toast("No WhatsApp debtors");
     return;
   }
 
-  /* Opens first one; browser may block multiple tabs */
-  sendDebtWhatsapp(eligible[0].id);
+  /*
+    Open the first one.
+    Browser popup blocking can prevent multiple windows.
+  */
 
-  if(eligible.length>1){
-    toast(`${eligible.length} debtors found. Open the next ones manually.`);
-  }
-}
+  sendDebtWhatsApp(pending[0].id);
 
-function checkThursdayReminder(){
-  const status=document.getElementById("thursdayStatus");
-
-  if(!isThursday()){
-    status.innerHTML=
-      `<span style="color:#64748b">Thursday reminder: not today.</span>`;
-    return;
-  }
-
-  const eligible=debts.filter(
-    x=>Number(x.remaining)>0 && normalizeWhatsapp(x.whatsapp)
-  );
-
-  if(!settings.thursdayReminder){
-    status.innerHTML=
-      `<span style="color:#64748b">Thursday reminder is OFF.</span>`;
-    return;
-  }
-
-  if(!eligible.length){
-    status.innerHTML=
-      `<span class="stat-good">No debtor needs reminder.</span>`;
-    return;
-  }
-
-  status.innerHTML=`
-    <div class="alert-box">
-      <b>📱 Thursday Reminder</b>
-      <p>${eligible.length} debtor(s) have remaining debt.</p>
-      <button class="warning" onclick="sendThursdayReminders()">
-        Open WhatsApp Reminder
-      </button>
-    </div>
+  document.getElementById("thursdayStatus").innerHTML=`
+    <p class="muted">
+      ${pending.length} debtors found.
+      First WhatsApp opened. Other debtors can be opened manually.
+    </p>
   `;
 }
 
-/* =========================
-   CAPITAL
-========================= */
+/* =========================================================
+   CAPITAL + PIN
+========================================================= */
 
-function unlockCapital(){
-  const pin=document.getElementById("capitalPin").value;
+function requestPin(callback){
+  pendingPinAction=callback;
 
-  if(pin!==String(settings.pin||"786")){
+  document.getElementById("pinInput").value="";
+
+  openModal("pinModal");
+}
+
+function checkPin(){
+
+  const input=document.getElementById("pinInput").value;
+
+  if(input!==String(settings.pin||"786")){
     toast("Wrong PIN");
     return;
   }
 
-  document.getElementById("capitalLocked").style.display="none";
-  document.getElementById("capitalContent").style.display="block";
-  document.getElementById("capitalInput").value=capital;
-  document.getElementById("capitalValue").textContent="$"+money(capital);
+  closeModal("pinModal");
+
+  const action=pendingPinAction;
+
+  pendingPinAction=null;
+
+  if(action)action();
+}
+
+function openCapital(){
+
+  requestPin(()=>{
+    showPage("capital");
+  });
 }
 
 function saveCapital(){
-  const value=Number(document.getElementById("capitalInput").value||0);
 
-  capital=value;
-  localStorage.setItem(KEY.capital,String(capital));
+  const usd=Number(document.getElementById("capitalUsd").value||0);
+  const afn=Number(document.getElementById("capitalAfn").value||0);
 
-  document.getElementById("capitalValue").textContent="$"+money(capital);
+  capital.usd+=usd;
+  capital.afn+=afn;
+
+  save(KEY.capital,capital);
+
+  document.getElementById("capitalUsd").value="";
+  document.getElementById("capitalAfn").value="";
+
+  renderCapital();
 
   toast("Capital saved");
 }
 
-/* =========================
+function renderCapital(){
+
+  document.getElementById("capitalValue").textContent=
+    capital.usd.toLocaleString()+" USD";
+
+  document.getElementById("capitalAfnValue").textContent=
+    capital.afn.toLocaleString()+" AFN";
+}
+
+/* =========================================================
    REPORTS
-========================= */
+========================================================= */
 
-function dateObj(s){
-  return new Date(s+"T00:00:00");
+function dateDiffDays(dateStr){
+
+  const d=new Date(dateStr+"T00:00:00");
+  const now=new Date();
+
+  const start=new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate()
+  );
+
+  return Math.floor((start-d)/86400000);
 }
 
-function startOfWeek(){
-  const d=new Date();
-  const day=d.getDay();
-  const diff=day===0?6:day-1;
+function reportSales(filter){
 
-  d.setHours(0,0,0,0);
-  d.setDate(d.getDate()-diff);
-
-  return d;
+  return sales.filter(s=>filter(s));
 }
 
-function salesBetween(start,end){
-  return sales
-    .filter(x=>{
-      const d=dateObj(x.date);
-      return d>=start && d<=end;
-    })
-    .reduce((a,b)=>a+Number(b.total||0),0);
+function renderPeriodReport(id,filter){
+
+  const list=reportSales(filter);
+
+  const total=list.reduce((sum,s)=>sum+Number(s.total||0),0);
+
+  const paid=list.reduce((sum,s)=>sum+Number(s.paid||0),0);
+
+  const remaining=list.reduce((sum,s)=>sum+Number(s.remaining||0),0);
+
+  document.getElementById(id).innerHTML=`
+    <p>Sales: <strong>${list.length}</strong></p>
+    <p>Total: <strong>${money(total)}</strong></p>
+    <p>Paid: <strong>${money(paid)}</strong></p>
+    <p>Remaining: <strong>${money(remaining)}</strong></p>
+  `;
 }
 
 function renderReports(){
-  const now=new Date();
 
-  const dayStart=new Date(now);
-  dayStart.setHours(0,0,0,0);
+  const t=today();
 
-  const dayEnd=new Date(now);
-  dayEnd.setHours(23,59,59,999);
-
-  const weekStart=startOfWeek();
-
-  const weekEnd=new Date(now);
-  weekEnd.setHours(23,59,59,999);
-
-  const monthStart=new Date(
-    now.getFullYear(),
-    now.getMonth(),
-    1
+  renderPeriodReport(
+    "reportToday",
+    s=>s.date===t
   );
 
-  const monthEnd=new Date(
-    now.getFullYear(),
-    now.getMonth()+1,
-    0,
-    23,59,59,999
+  renderPeriodReport(
+    "reportWeek",
+    s=>dateDiffDays(s.date)>=0 && dateDiffDays(s.date)<7
   );
 
-  const yearStart=new Date(
-    now.getFullYear(),0,1
+  renderPeriodReport(
+    "reportMonth",
+    s=>{
+      const d=new Date(s.date+"T00:00:00");
+      const n=new Date();
+
+      return d.getFullYear()===n.getFullYear()
+        && d.getMonth()===n.getMonth();
+    }
   );
 
-  const yearEnd=new Date(
-    now.getFullYear(),11,31,23,59,59,999
+  renderPeriodReport(
+    "reportYear",
+    s=>{
+      const d=new Date(s.date+"T00:00:00");
+      const n=new Date();
+
+      return d.getFullYear()===n.getFullYear();
+    }
   );
 
-  document.getElementById("reportDaily").textContent=
-    "$"+money(salesBetween(dayStart,dayEnd));
+  const salesTotal=sales.reduce((a,b)=>a+Number(b.total||0),0);
 
-  document.getElementById("reportWeekly").textContent=
-    "$"+money(salesBetween(weekStart,weekEnd));
+  const purchaseTotal=purchases.reduce((a,b)=>a+Number(b.total||0),0);
 
-  document.getElementById("reportMonthly").textContent=
-    "$"+money(salesBetween(monthStart,monthEnd));
+  const expenseAfn=expenses.reduce((a,b)=>a+Number(b.amount||0),0);
 
-  document.getElementById("reportYearly").textContent=
-    "$"+money(salesBetween(yearStart,yearEnd));
-
-  const totalSales=sales.reduce((a,b)=>a+b.total,0);
-  const totalPurchases=purchases.reduce((a,b)=>a+b.total,0);
-  const totalExpenses=expenses.reduce((a,b)=>a+b.amount,0);
+  const debtRemaining=debts.reduce((a,b)=>a+Number(b.remaining||0),0);
 
   document.getElementById("reportSummary").innerHTML=`
+
     <div class="grid">
-      <div class="card">
-        <b>Total Sales</b>
-        <div class="big">$${money(totalSales)}</div>
+
+      <div>
+        <strong>Total Sales</strong>
+        <div class="stat">${money(salesTotal)}</div>
       </div>
 
-      <div class="card">
-        <b>Total Purchases</b>
-        <div class="big">$${money(totalPurchases)}</div>
+      <div>
+        <strong>Total Purchases</strong>
+        <div class="stat">${money(purchaseTotal)}</div>
       </div>
 
-      <div class="card">
-        <b>Expenses</b>
-        <div class="big">${money(totalExpenses)} AFN</div>
+      <div>
+        <strong>Expenses</strong>
+        <div class="stat">${expenseAfn.toLocaleString()} AFN</div>
       </div>
 
-      <div class="card">
-        <b>Sales - Purchases</b>
-        <div class="big">$${money(totalSales-totalPurchases)}</div>
+      <div>
+        <strong>Debt Remaining</strong>
+        <div class="stat">${money(debtRemaining)}</div>
       </div>
+
+    </div>
+
+    <p class="muted" style="margin-top:20px">
+      Note: د Profit حساب دلته د Sales USD - Purchase USD پر اساس ساده محاسبه دی؛
+      AFN expenses جلا ښودل شوي.
+    </p>
+  `;
+}
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+function renderDashboard(){
+
+  document.getElementById("statProducts").textContent=products.length;
+
+  document.getElementById("statStock").textContent=
+    products.reduce((a,p)=>a+Number(p.stock||0),0);
+
+  const t=today();
+
+  const todaySales=sales.filter(s=>s.date===t);
+
+  document.getElementById("statTodaySales").textContent=
+    money(todaySales.reduce((a,s)=>a+Number(s.total||0),0));
+
+  document.getElementById("statTodayExpenses").textContent=
+    expenses
+      .filter(e=>e.date===t)
+      .reduce((a,e)=>a+Number(e.amount||0),0)
+      .toLocaleString()+" AFN";
+
+  document.getElementById("statDebt").textContent=
+    money(debts.reduce((a,d)=>a+Number(d.remaining||0),0));
+
+  const recent=document.getElementById("recentSales");
+
+  if(!sales.length){
+    recent.innerHTML=`<div class="empty">No sales</div>`;
+    return;
+  }
+
+  recent.innerHTML=`
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Invoice</th>
+            <th>Customer</th>
+            <th>Total</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          ${[...sales].slice(-8).reverse().map(s=>`
+            <tr>
+              <td>${esc(s.billNo)}</td>
+              <td>${esc(s.customer||"Walk-in")}</td>
+              <td>${money(s.total)}</td>
+              <td>
+                ${
+                  s.remaining<=0
+                  ? `<span class="badge badge-success">PAID</span>`
+                  : `<span class="badge badge-warning">${money(s.remaining)}</span>`
+                }
+              </td>
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
     </div>
   `;
-
-  const months=[];
-
-  for(let i=0;i<12;i++){
-    const start=new Date(now.getFullYear(),i,1);
-    const end=new Date(now.getFullYear(),i+1,0,23,59,59,999);
-
-    const s=salesBetween(start,end);
-
-    const p=purchases
-      .filter(x=>{
-        const d=dateObj(x.date);
-        return d>=start && d<=end;
-      })
-      .reduce((a,b)=>a+b.total,0);
-
-    months.push(`
-      <tr>
-        <td>${now.getFullYear()}-${String(i+1).padStart(2,"0")}</td>
-        <td>$${money(s)}</td>
-        <td>$${money(p)}</td>
-        <td>$${money(s-p)}</td>
-      </tr>
-    `);
-  }
-
-  document.getElementById("monthlyReport").innerHTML=months.join("");
 }
 
-/* =========================
-   PIN SECURITY
-========================= */
-
-function requestPin(action,id){
-  pendingAction={action,id};
-
-  document.getElementById("actionPin").value="";
-  document.getElementById("pinModal").classList.add("show");
-
-  setTimeout(()=>{
-    document.getElementById("actionPin").focus();
-  },100);
-}
-
-function confirmPinAction(){
-  const pin=document.getElementById("actionPin").value;
-
-  if(pin!==String(settings.pin||"786")){
-    toast("Wrong PIN");
-    return;
-  }
-
-  const action=pendingAction;
-  pendingAction=null;
-
-  closeModal("pinModal");
-
-  if(!action)return;
-
-  executeProtectedAction(action.action,action.id);
-}
-
-function executeProtectedAction(action,id){
-
-  if(action==="editProduct"){
-    openProductModal(id);
-    return;
-  }
-
-  if(action==="deleteProduct"){
-    const p=products.find(x=>x.id===id);
-    if(!p)return;
-
-    products=products.filter(x=>x.id!==id);
-    save(KEY.products,products);
-    renderAll();
-    toast("Product deleted");
-    return;
-  }
-
-  if(action==="deletePurchase"){
-    purchases=purchases.filter(x=>x.id!==id);
-    save(KEY.purchases,purchases);
-    renderAll();
-    toast("Purchase deleted");
-    return;
-  }
-
-  if(action==="deleteSale"){
-    const sale=sales.find(x=>x.id===id);
-
-    if(sale){
-      /* restore stock */
-      (sale.items||[]).forEach(item=>{
-        const p=products.find(x=>x.id===item.productId);
-        if(p)p.stock+=Number(item.qty||0);
-      });
-    }
-
-    sales=sales.filter(x=>x.id!==id);
-
-    save(KEY.sales,sales);
-    save(KEY.products,products);
-
-    renderAll();
-    toast("Sale deleted and stock restored");
-    return;
-  }
-
-  if(action==="deleteExpense"){
-    expenses=expenses.filter(x=>x.id!==id);
-    save(KEY.expenses,expenses);
-    renderAll();
-    toast("Expense deleted");
-    return;
-  }
-
-  if(action==="deleteDebt"){
-    debts=debts.filter(x=>x.id!==id);
-    save(KEY.debts,debts);
-    renderAll();
-    toast("Debt deleted");
-    return;
-  }
-}
-
-/* =========================
+/* =========================================================
    BACKUP / RESTORE
-========================= */
+========================================================= */
 
 function backupData(){
+
   const data={
     products,
     purchases,
@@ -2502,27 +2932,29 @@ function backupData(){
   const url=URL.createObjectURL(blob);
 
   const a=document.createElement("a");
+
   a.href=url;
-  a.download="samad-solar-backup.json";
+  a.download="Samad-Solar-Backup.json";
+
+  document.body.appendChild(a);
   a.click();
+  a.remove();
 
   URL.revokeObjectURL(url);
-
-  toast("Backup downloaded");
 }
 
-function restoreData(){
-  const file=document.getElementById("restoreFile").files[0];
+function restoreData(event){
 
-  if(!file){
-    toast("Select backup file");
-    return;
-  }
+  const file=event.target.files[0];
+
+  if(!file)return;
 
   const reader=new FileReader();
 
   reader.onload=function(){
+
     try{
+
       const data=JSON.parse(reader.result);
 
       if(data.products)products=data.products;
@@ -2530,124 +2962,83 @@ function restoreData(){
       if(data.sales)sales=data.sales;
       if(data.expenses)expenses=data.expenses;
       if(data.debts)debts=data.debts;
+      if(data.capital)capital=data.capital;
       if(data.settings)settings=data.settings;
-
-      if(data.capital!==undefined){
-        capital=Number(data.capital||0);
-        localStorage.setItem(KEY.capital,String(capital));
-      }
 
       save(KEY.products,products);
       save(KEY.purchases,purchases);
       save(KEY.sales,sales);
       save(KEY.expenses,expenses);
       save(KEY.debts,debts);
+      save(KEY.capital,capital);
       save(KEY.settings,settings);
 
-      applySettings();
-      loadSettingsForm();
       renderAll();
 
-      toast("Backup restored");
+      toast("Backup restored successfully");
 
     }catch(e){
+
       toast("Invalid backup file");
+
     }
   };
 
   reader.readAsText(file);
 }
 
-/* =========================
-   DASHBOARD
-========================= */
-
-function renderDashboard(){
-  document.getElementById("dashProducts").textContent=products.length;
-
-  document.getElementById("dashStock").textContent=
-    products.reduce((a,b)=>a+Number(b.stock||0),0);
-
-  document.getElementById("dashSales").textContent=
-    "$"+money(sales.reduce((a,b)=>a+b.total,0));
-
-  document.getElementById("dashPurchases").textContent=
-    "$"+money(purchases.reduce((a,b)=>a+b.total,0));
-
-  document.getElementById("dashExpenses").textContent=
-    money(expenses.reduce((a,b)=>a+b.amount,0))+" AFN";
-
-  document.getElementById("dashDebt").textContent=
-    "$"+money(
-      debts.reduce((a,b)=>a+Number(b.remaining||0),0)
-    );
-
-  document.getElementById("recentSales").innerHTML=
-    sales.slice().reverse().slice(0,8).map(x=>`
-      <tr>
-        <td>${esc(x.bill)}</td>
-        <td>${esc(x.customer)}</td>
-        <td>$${money(x.total)}</td>
-        <td>${x.date}</td>
-        <td>
-          <button class="primary" onclick="showInvoiceById(${x.id})">Bill</button>
-        </td>
-      </tr>
-    `).join("") ||
-    `<tr><td colspan="5">No sales</td></tr>`;
-}
-
-/* =========================
+/* =========================================================
    RENDER ALL
-========================= */
+========================================================= */
 
 function renderAll(){
-  applySettings();
-  populateProductSelects();
 
-  renderLowAlerts();
+  applySettings();
+
   renderDashboard();
+  renderLowStock();
   renderStock();
+  fillPurchaseProducts();
   renderPurchases();
-  renderSales();
-  renderExpenses();
-  renderDebts();
-  renderReports();
   renderSaleItems();
   renderExtraItems();
   renderSaleTotal();
-  checkThursdayReminder();
+  renderSales();
+  renderExpenses();
+  renderDebts();
+  renderCapital();
+  renderReports();
+  renderSettings();
+
+  document.getElementById("headerDate").textContent=today();
 }
 
-/* =========================
-   INITIALIZE
-========================= */
+/* =========================================================
+   EVENTS
+========================================================= */
+
+document.getElementById("salePaid").addEventListener(
+  "input",
+  renderSaleTotal
+);
+
+document.getElementById("saleDiscount").addEventListener(
+  "input",
+  renderSaleTotal
+);
+
+/* =========================================================
+   INIT
+========================================================= */
 
 document.getElementById("purchaseDate").value=today();
 document.getElementById("expenseDate").value=today();
 document.getElementById("debtDate").value=today();
-document.getElementById("saleDate").value=today();
 
-loadSettingsForm();
 applySettings();
 prepareSaleForm();
 renderAll();
 
-/* Enter key for PIN */
-document.getElementById("actionPin").addEventListener("keydown",e=>{
-  if(e.key==="Enter")confirmPinAction();
-});
-
-document.getElementById("capitalPin").addEventListener("keydown",e=>{
-  if(e.key==="Enter")unlockCapital();
-});
-
-/*
-  Thursday reminder:
-  The browser cannot silently send WhatsApp messages.
-  On Thursday the app shows eligible debtors and opens
-  WhatsApp after the user clicks the reminder button.
-*/
 </script>
 
 </body>
