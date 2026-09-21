@@ -1,699 +1,369 @@
+
 <!DOCTYPE html>
 <html lang="ps" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Samad Solar</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Samad Solar</title>
 
-<style>
-*{box-sizing:border-box}
-body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#f1f5f9;
-color:#1e293b
-}
-header{
-background:#0f766e;
-color:white;
-padding:22px;
-text-align:center
-}
-header h1{margin:0;font-size:30px}
-nav{
-display:flex;
-flex-wrap:wrap;
-gap:8px;
-padding:12px;
-background:white;
-box-shadow:0 2px 8px #0001
-}
-nav button{
-border:0;
-padding:11px 18px;
-border-radius:8px;
-cursor:pointer;
-background:#e2e8f0;
-font-weight:bold
-}
-nav button:hover{background:#99f6e4}
-main{max-width:1200px;margin:auto;padding:20px}
-.page{display:none}
-.page.active{display:block}
-.cards{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:15px
-}
-.card{
-background:white;
-padding:20px;
-border-radius:12px;
-box-shadow:0 2px 8px #0001
-}
-.card h3{color:#64748b}
-.card strong{
-font-size:25px;
-color:#0f766e
-}
-.form{
-background:white;
-padding:20px;
-border-radius:12px;
-margin:20px 0
-}
-input,select{
-width:100%;
-padding:12px;
-margin:7px 0 14px;
-border:1px solid #cbd5e1;
-border-radius:7px
-}
-.primary{
-background:#0f766e;
-color:white;
-border:0;
-padding:12px 20px;
-border-radius:7px;
-cursor:pointer
-}
-table{
-width:100%;
-border-collapse:collapse;
-background:white
-}
-th,td{
-padding:12px;
-border-bottom:1px solid #e2e8f0;
-text-align:right
-}
-th{background:#ccfbf1}
-.table-wrap{overflow:auto}
-.delete{
-background:#dc2626;
-color:white;
-border:0;
-padding:6px 10px;
-border-radius:5px;
-cursor:pointer
-}
-</style>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f1f5f9;
+      color: #1e293b;
+    }
+
+    header {
+      background: #0f766e;
+      color: white;
+      padding: 25px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 20px auto;
+      padding: 15px;
+    }
+
+    .settings, .section, .card {
+      background: white;
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px #0001;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+
+    .card {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .card h2 { color: #0f766e; }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+    }
+
+    button {
+      background: #0f766e;
+      color: white;
+      border: 0;
+      padding: 12px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 5px;
+    }
+
+    button:hover { background: #115e59; }
+
+    #message {
+      color: #0f766e;
+      font-weight: bold;
+    }
+
+    .product {
+      border-bottom: 1px solid #ddd;
+      padding: 12px;
+      margin-top: 8px;
+    }
+  </style>
 </head>
 
 <body>
 
 <header>
-<h1>☀️ Samad Solar</h1>
-<p>د سولر کاروبار مدیریت سیستم</p>
+  <h1 id="appTitle">☀️ Samad Solar</h1>
+  <p id="appSubtitle">د سولر دوکان د مدیریت سیستم</p>
 </header>
 
-<nav>
-<button onclick="show('dashboard')">🏠 ډشبورډ</button>
-<button onclick="show('products')">📦 اجناس</button>
-<button onclick="show('sales')">💰 خرڅلاو</button>
-<button onclick="show('purchases')">🛒 خریداري</button>
-<button onclick="show('expenses')">💸 مصارف</button>
-<button onclick="show('debts')">📒 پورونه</button>
-<button onclick="show('reports')">📊 راپورونه</button>
-</nav>
+<div class="container">
 
-<main>
+  <!-- ژبه او کرنسي -->
+  <div class="settings">
+    <h2 id="settingsTitle">تنظیمات</h2>
 
-<!-- DASHBOARD -->
-<section id="dashboard" class="page active">
+    <label id="languageLabel">ژبه / Language</label>
+    <select id="language" onchange="changeLanguage()">
+      <option value="ps">پښتو</option>
+      <option value="fa">دری</option>
+      <option value="en">English</option>
+    </select>
 
-<h2>ډشبورډ</h2>
+    <label id="currencyLabel">کرنسي / Currency</label>
+    <select id="currency" onchange="changeCurrency()">
+      <option value="AFN">AFN - افغانۍ</option>
+      <option value="USD">USD - Dollar</option>
+      <option value="Rs">Rs - Rupee</option>
+    </select>
 
-<div class="cards">
+    <p id="selectedCurrency"></p>
+  </div>
 
-<div class="card">
-<h3>ټول اجناس</h3>
-<strong id="productCount">0</strong>
-</div>
+  <!-- معلومات -->
+  <div class="cards">
+    <div class="card">
+      <h3 id="productsTitle">ټول محصولات</h3>
+      <h2 id="productCount">0</h2>
+    </div>
 
-<div class="card">
-<h3>ټول خرڅلاو</h3>
-<strong id="salesTotal">0 AFN</strong>
-</div>
+    <div class="card">
+      <h3 id="salesTitle">ټولې خرڅلاوې</h3>
+      <h2 id="salesCount">0</h2>
+    </div>
 
-<div class="card">
-<h3>ټول مصارف</h3>
-<strong id="expenseTotal">0 AFN</strong>
-</div>
+    <div class="card">
+      <h3 id="currencyTitle">کرنسي</h3>
+      <h2 id="currencyDisplay">AFN</h2>
+    </div>
+  </div>
 
-<div class="card">
-<h3>ګټه</h3>
-<strong id="profitTotal">0 AFN</strong>
-</div>
+  <!-- محصول -->
+  <div class="section">
+    <h2 id="addProductTitle">نوی محصول اضافه کړه</h2>
 
-</div>
+    <input id="productName" placeholder="د محصول نوم">
+    <input id="productPrice" type="number" placeholder="نرخ">
+    <input id="productQuantity" type="number" placeholder="تعداد">
 
-</section>
+    <button id="saveButton" onclick="addProduct()">محصول Save کړه</button>
 
+    <p id="message"></p>
+  </div>
 
-<!-- PRODUCTS -->
-<section id="products" class="page">
-
-<h2>📦 اجناس / Inventory</h2>
-
-<div class="form">
-
-<label>د جنس نوم</label>
-<input id="pName" placeholder="مثلاً Inverter 1.5KW">
-
-<label>کټګوري</label>
-<select id="pCategory">
-<option>Inverter</option>
-<option>Solar Panel</option>
-<option>Battery</option>
-<option>Accessories</option>
-<option>Other</option>
-</select>
-
-<label>تعداد</label>
-<input id="pQty" type="number">
-
-<label>د اخیستلو قیمت (AFN)</label>
-<input id="pBuy" type="number">
-
-<button class="primary" onclick="addProduct()">
-➕ جنس اضافه کړه
-</button>
+  <!-- لېست -->
+  <div class="section">
+    <h2 id="listTitle">د محصولاتو لېست</h2>
+    <div id="productList">تر اوسه محصول نشته.</div>
+  </div>
 
 </div>
-
-<div class="table-wrap">
-<table>
-<thead>
-<tr>
-<th>جنس</th>
-<th>کټګوري</th>
-<th>تعداد</th>
-<th>د اخیستلو قیمت</th>
-<th>عمل</th>
-</tr>
-</thead>
-
-<tbody id="productTable"></tbody>
-</table>
-</div>
-
-</section>
-
-
-<!-- SALES -->
-<section id="sales" class="page">
-
-<h2>💰 خرڅلاو</h2>
-
-<div class="form">
-
-<label>د مشتری نوم</label>
-<input id="customer">
-
-<label>جنس</label>
-<select id="saleProduct"></select>
-
-<label>تعداد</label>
-<input id="saleQty" type="number" value="1">
-
-<label>ټول قیمت (AFN)</label>
-<input id="saleAmount" type="number">
-
-<button class="primary" onclick="addSale()">
-💰 خرڅلاو ثبت کړه
-</button>
-
-</div>
-
-<div class="table-wrap">
-<table>
-<thead>
-<tr>
-<th>مشتری</th>
-<th>جنس</th>
-<th>تعداد</th>
-<th>مبلغ</th>
-<th>نېټه</th>
-</tr>
-</thead>
-
-<tbody id="salesTable"></tbody>
-</table>
-</div>
-
-</section>
-
-
-<!-- PURCHASE -->
-<section id="purchases" class="page">
-
-<h2>🛒 خریداري</h2>
-
-<div class="form">
-
-<label>د عرضه کوونکي نوم</label>
-<input id="supplier">
-
-<label>جنس</label>
-<input id="purchaseProduct" placeholder="د جنس نوم">
-
-<label>تعداد</label>
-<input id="purchaseQty" type="number">
-
-<label>ټول قیمت (AFN)</label>
-<input id="purchaseAmount" type="number">
-
-<button class="primary" onclick="addPurchase()">
-🛒 خریداري ثبت کړه
-</button>
-
-</div>
-
-<div class="table-wrap">
-<table>
-<thead>
-<tr>
-<th>عرضه کوونکی</th>
-<th>جنس</th>
-<th>تعداد</th>
-<th>مبلغ</th>
-<th>نېټه</th>
-</tr>
-</thead>
-
-<tbody id="purchaseTable"></tbody>
-</table>
-</div>
-
-</section>
-
-
-<!-- EXPENSES -->
-<section id="expenses" class="page">
-
-<h2>💸 مصارف</h2>
-
-<div class="form">
-
-<label>د مصرف نوم</label>
-<input id="expenseName" placeholder="مثلاً د دوکان کرایه">
-
-<label>مبلغ (AFN)</label>
-<input id="expenseAmount" type="number">
-
-<button class="primary" onclick="addExpense()">
-➕ مصرف ثبت کړه
-</button>
-
-</div>
-
-<div class="table-wrap">
-<table>
-<thead>
-<tr>
-<th>مصرف</th>
-<th>مبلغ</th>
-<th>نېټه</th>
-</tr>
-</thead>
-
-<tbody id="expenseTable"></tbody>
-</table>
-</div>
-
-</section>
-
-
-<!-- DEBTS -->
-<section id="debts" class="page">
-
-<h2>📒 پورونه</h2>
-
-<div class="form">
-
-<label>د مشتری نوم</label>
-<input id="debtCustomer">
-
-<label>مبلغ (AFN)</label>
-<input id="debtAmount" type="number">
-
-<button class="primary" onclick="addDebt()">
-➕ پور ثبت کړه
-</button>
-
-</div>
-
-<div class="table-wrap">
-<table>
-<thead>
-<tr>
-<th>مشتری</th>
-<th>مبلغ</th>
-<th>نېټه</th>
-</tr>
-</thead>
-
-<tbody id="debtTable"></tbody>
-</table>
-</div>
-
-</section>
-
-
-<!-- REPORTS -->
-<section id="reports" class="page">
-
-<h2>📊 راپورونه</h2>
-
-<div class="cards">
-
-<div class="card">
-<h3>خرڅلاو</h3>
-<strong id="rSales">0 AFN</strong>
-</div>
-
-<div class="card">
-<h3>مصارف</h3>
-<strong id="rExpenses">0 AFN</strong>
-</div>
-
-<div class="card">
-<h3>ګټه</h3>
-<strong id="rProfit">0 AFN</strong>
-</div>
-
-</div>
-
-</section>
-
-</main>
-
 
 <script>
+  let products = JSON.parse(localStorage.getItem("samadProducts")) || [];
+
+  let currentLanguage =
+    localStorage.getItem("samadLanguage") || "ps";
+
+  let currentCurrency =
+    localStorage.getItem("samadCurrency") || "AFN";
+
+  const translations = {
+    ps: {
+      dir: "rtl",
+      subtitle: "د سولر دوکان د مدیریت سیستم",
+      settings: "تنظیمات",
+      language: "ژبه",
+      currency: "کرنسي",
+      products: "ټول محصولات",
+      sales: "ټولې خرڅلاوې",
+      addProduct: "نوی محصول اضافه کړه",
+      save: "محصول Save کړه",
+      list: "د محصولاتو لېست",
+      name: "د محصول نوم",
+      price: "نرخ",
+      quantity: "تعداد",
+      empty: "تر اوسه محصول نشته.",
+      success: "محصول په بریالیتوب سره Save شو.",
+      error: "مهرباني وکړئ ټول معلومات ولیکئ."
+    },
+
+    fa: {
+      dir: "rtl",
+      subtitle: "سیستم مدیریت فروشگاه سولر",
+      settings: "تنظیمات",
+      language: "زبان",
+      currency: "واحد پول",
+      products: "تمام محصولات",
+      sales: "تمام فروش‌ها",
+      addProduct: "افزودن محصول جدید",
+      save: "ذخیره محصول",
+      list: "لیست محصولات",
+      name: "نام محصول",
+      price: "قیمت",
+      quantity: "تعداد",
+      empty: "هنوز محصولی وجود ندارد.",
+      success: "محصول با موفقیت ذخیره شد.",
+      error: "لطفاً تمام معلومات را وارد کنید."
+    },
+
+    en: {
+      dir: "ltr",
+      subtitle: "Solar Shop Management System",
+      settings: "Settings",
+      language: "Language",
+      currency: "Currency",
+      products: "Total Products",
+      sales: "Total Sales",
+      addProduct: "Add New Product",
+      save: "Save Product",
+      list: "Product List",
+      name: "Product Name",
+      price: "Price",
+      quantity: "Quantity",
+      empty: "No products yet.",
+      success: "Product saved successfully.",
+      error: "Please fill in all fields."
+    }
+  };
+
+  function t(key) {
+    return translations[currentLanguage][key];
+  }
+
+  function applyLanguage() {
+    const language = translations[currentLanguage];
+
+    document.documentElement.lang = currentLanguage;
+    document.documentElement.dir = language.dir;
+
+    document.getElementById("appSubtitle").textContent =
+      language.subtitle;
+
+    document.getElementById("settingsTitle").textContent =
+      language.settings;
+
+    document.getElementById("languageLabel").textContent =
+      language.language;
+
+    document.getElementById("currencyLabel").textContent =
+      language.currency;
+
+    document.getElementById("productsTitle").textContent =
+      language.products;
+
+    document.getElementById("salesTitle").textContent =
+      language.sales;
+
+    document.getElementById("addProductTitle").textContent =
+      language.addProduct;
+
+    document.getElementById("saveButton").textContent =
+      language.save;
+
+    document.getElementById("listTitle").textContent =
+      language.list;
 
-let products=JSON.parse(localStorage.getItem("products")||"[]");
-let sales=JSON.parse(localStorage.getItem("sales")||"[]");
-let purchases=JSON.parse(localStorage.getItem("purchases")||"[]");
-let expenses=JSON.parse(localStorage.getItem("expenses")||"[]");
-let debts=JSON.parse(localStorage.getItem("debts")||"[]");
+    document.getElementById("productName").placeholder =
+      language.name;
 
+    document.getElementById("productPrice").placeholder =
+      language.price;
 
-function save(){
+    document.getElementById("productQuantity").placeholder =
+      language.quantity;
 
-localStorage.setItem("products",JSON.stringify(products));
-localStorage.setItem("sales",JSON.stringify(sales));
-localStorage.setItem("purchases",JSON.stringify(purchases));
-localStorage.setItem("expenses",JSON.stringify(expenses));
-localStorage.setItem("debts",JSON.stringify(debts));
+    document.getElementById("currencyTitle").textContent =
+      language.currency;
 
-}
+    document.getElementById("language").value =
+      currentLanguage;
 
+    document.getElementById("currency").value =
+      currentCurrency;
 
-function show(id){
+    document.getElementById("currencyDisplay").textContent =
+      currentCurrency;
 
-document.querySelectorAll(".page").forEach(x=>{
-x.classList.remove("active")
-});
+    document.getElementById("selectedCurrency").textContent =
+      language.currency + ": " + currentCurrency;
 
-document.getElementById(id).classList.add("active");
+    showProducts();
+  }
 
-refresh();
+  function changeLanguage() {
+    currentLanguage =
+      document.getElementById("language").value;
 
-}
+    localStorage.setItem("samadLanguage", currentLanguage);
 
+    applyLanguage();
+  }
 
-function addProduct(){
+  function changeCurrency() {
+    currentCurrency =
+      document.getElementById("currency").value;
 
-let name=document.getElementById("pName").value;
-let category=document.getElementById("pCategory").value;
-let qty=Number(document.getElementById("pQty").value);
-let buy=Number(document.getElementById("pBuy").value);
+    localStorage.setItem("samadCurrency", currentCurrency);
 
-if(!name||qty<=0){
+    applyLanguage();
+  }
 
-alert("د جنس معلومات بشپړ کړه");
-return;
+  function saveData() {
+    localStorage.setItem(
+      "samadProducts",
+      JSON.stringify(products)
+    );
+  }
 
-}
+  function addProduct() {
+    const name =
+      document.getElementById("productName").value.trim();
 
-products.push({
-id:Date.now(),
-name,
-category,
-qty,
-buy
-});
+    const price =
+      document.getElementById("productPrice").value;
 
-save();
+    const quantity =
+      document.getElementById("productQuantity").value;
 
-document.getElementById("pName").value="";
-document.getElementById("pQty").value="";
-document.getElementById("pBuy").value="";
+    if (!name || !price || !quantity) {
+      document.getElementById("message").textContent =
+        t("error");
+      return;
+    }
 
-refresh();
+    products.push({
+      name: name,
+      price: Number(price),
+      quantity: Number(quantity),
+      currency: currentCurrency
+    });
 
-}
+    saveData();
+    showProducts();
 
+    document.getElementById("productName").value = "";
+    document.getElementById("productPrice").value = "";
+    document.getElementById("productQuantity").value = "";
 
-function addSale(){
+    document.getElementById("message").textContent =
+      t("success");
+  }
 
-let customer=document.getElementById("customer").value;
-let id=Number(document.getElementById("saleProduct").value);
-let qty=Number(document.getElementById("saleQty").value);
-let amount=Number(document.getElementById("saleAmount").value);
+  function showProducts() {
+    document.getElementById("productCount").textContent =
+      products.length;
 
-let product=products.find(p=>p.id===id);
+    if (products.length === 0) {
+      document.getElementById("productList").textContent =
+        t("empty");
+      return;
+    }
 
-if(!product||qty<=0||qty>product.qty){
+    document.getElementById("productList").innerHTML =
+      products.map((product, index) => `
+        <div class="product">
+          <b>${index + 1}. ${product.name}</b><br>
+          ${t("price")}: ${product.price} ${product.currency}<br>
+          ${t("quantity")}: ${product.quantity}
+        </div>
+      `).join("");
+  }
 
-alert("موجودي یا تعداد سم نه دی");
-return;
-
-}
-
-product.qty-=qty;
-
-sales.push({
-customer,
-product:product.name,
-qty,
-amount,
-cost:product.buy*qty,
-date:new Date().toLocaleDateString()
-});
-
-save();
-refresh();
-
-}
-
-
-function addPurchase(){
-
-let supplier=document.getElementById("supplier").value;
-let product=document.getElementById("purchaseProduct").value;
-let qty=Number(document.getElementById("purchaseQty").value);
-let amount=Number(document.getElementById("purchaseAmount").value);
-
-if(!product||qty<=0){
-
-alert("معلومات بشپړ کړه");
-return;
-
-}
-
-purchases.push({
-supplier,
-product,
-qty,
-amount,
-date:new Date().toLocaleDateString()
-});
-
-save();
-refresh();
-
-}
-
-
-function addExpense(){
-
-let name=document.getElementById("expenseName").value;
-let amount=Number(document.getElementById("expenseAmount").value);
-
-if(!name||amount<=0){
-
-alert("د مصرف معلومات بشپړ کړه");
-return;
-
-}
-
-expenses.push({
-name,
-amount,
-date:new Date().toLocaleDateString()
-});
-
-save();
-refresh();
-
-}
-
-
-function addDebt(){
-
-let customer=document.getElementById("debtCustomer").value;
-let amount=Number(document.getElementById("debtAmount").value);
-
-if(!customer||amount<=0){
-
-alert("معلومات بشپړ کړه");
-return;
-
-}
-
-debts.push({
-customer,
-amount,
-date:new Date().toLocaleDateString()
-});
-
-save();
-refresh();
-
-}
-
-
-function refresh(){
-
-document.getElementById("productTable").innerHTML=
-products.map(p=>`
-
-<tr>
-<td>${p.name}</td>
-<td>${p.category}</td>
-<td>${p.qty}</td>
-<td>${p.buy.toLocaleString()} AFN</td>
-<td>
-<button class="delete"
-onclick="deleteProduct(${p.id})">
-حذف
-</button>
-</td>
-</tr>
-
-`).join("");
-
-
-document.getElementById("saleProduct").innerHTML=
-products.map(p=>`
-
-<option value="${p.id}">
-${p.name} — موجودي: ${p.qty}
-</option>
-
-`).join("");
-
-
-document.getElementById("salesTable").innerHTML=
-sales.map(s=>`
-
-<tr>
-<td>${s.customer}</td>
-<td>${s.product}</td>
-<td>${s.qty}</td>
-<td>${s.amount.toLocaleString()} AFN</td>
-<td>${s.date}</td>
-</tr>
-
-`).join("");
-
-
-document.getElementById("purchaseTable").innerHTML=
-purchases.map(p=>`
-
-<tr>
-<td>${p.supplier}</td>
-<td>${p.product}</td>
-<td>${p.qty}</td>
-<td>${p.amount.toLocaleString()} AFN</td>
-<td>${p.date}</td>
-</tr>
-
-`).join("");
-
-
-document.getElementById("expenseTable").innerHTML=
-expenses.map(e=>`
-
-<tr>
-<td>${e.name}</td>
-<td>${e.amount.toLocaleString()} AFN</td>
-<td>${e.date}</td>
-</tr>
-
-`).join("");
-
-
-document.getElementById("debtTable").innerHTML=
-debts.map(d=>`
-
-<tr>
-<td>${d.customer}</td>
-<td>${d.amount.toLocaleString()} AFN</td>
-<td>${d.date}</td>
-</tr>
-
-`).join("");
-
-
-let totalSales=sales.reduce((a,b)=>a+b.amount,0);
-
-let totalExpenses=expenses.reduce((a,b)=>a+b.amount,0);
-
-let totalCost=sales.reduce((a,b)=>a+b.cost,0);
-
-let profit=totalSales-totalCost-totalExpenses;
-
-
-document.getElementById("productCount").textContent=
-products.reduce((a,b)=>a+b.qty,0);
-
-document.getElementById("salesTotal").textContent=
-totalSales.toLocaleString()+" AFN";
-
-document.getElementById("expenseTotal").textContent=
-totalExpenses.toLocaleString()+" AFN";
-
-document.getElementById("profitTotal").textContent=
-profit.toLocaleString()+" AFN";
-
-
-document.getElementById("rSales").textContent=
-totalSales.toLocaleString()+" AFN";
-
-document.getElementById("rExpenses").textContent=
-totalExpenses.toLocaleString()+" AFN";
-
-document.getElementById("rProfit").textContent=
-profit.toLocaleString()+" AFN";
-
-}
-
-
-function deleteProduct(id){
-
-products=products.filter(p=>p.id!==id);
-
-save();
-refresh();
-
-}
-
-
-refresh();
-
+  applyLanguage();
 </script>
 
 </body>
