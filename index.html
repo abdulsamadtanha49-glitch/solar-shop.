@@ -1,157 +1,101 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ps" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Samad Solar</title>
 
 <style>
-* {
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
+*{box-sizing:border-box}
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f1f5f9;
+color:#1e293b
 }
-
-body {
-  margin: 0;
-  background: #f3f6f8;
-  color: #1e293b;
+header{
+background:#0f766e;
+color:white;
+padding:22px;
+text-align:center
 }
-
-header {
-  background: #0f766e;
-  color: white;
-  padding: 20px;
-  text-align: center;
+header h1{margin:0;font-size:30px}
+nav{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+padding:12px;
+background:white;
+box-shadow:0 2px 8px #0001
 }
-
-header h1 {
-  margin: 0 0 6px;
+nav button{
+border:0;
+padding:11px 18px;
+border-radius:8px;
+cursor:pointer;
+background:#e2e8f0;
+font-weight:bold
 }
-
-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  padding: 12px;
-  background: white;
-  border-bottom: 1px solid #ddd;
+nav button:hover{background:#99f6e4}
+main{max-width:1200px;margin:auto;padding:20px}
+.page{display:none}
+.page.active{display:block}
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:15px
 }
-
-nav button {
-  padding: 10px 14px;
-  border: none;
-  border-radius: 8px;
-  background: #e2e8f0;
-  cursor: pointer;
-  font-weight: bold;
+.card{
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 2px 8px #0001
 }
-
-nav button:hover {
-  background: #99f6e4;
+.card h3{color:#64748b}
+.card strong{
+font-size:25px;
+color:#0f766e
 }
-
-main {
-  max-width: 1100px;
-  margin: auto;
-  padding: 20px;
+.form{
+background:white;
+padding:20px;
+border-radius:12px;
+margin:20px 0
 }
-
-.page {
-  display: none;
+input,select{
+width:100%;
+padding:12px;
+margin:7px 0 14px;
+border:1px solid #cbd5e1;
+border-radius:7px
 }
-
-.page.active {
-  display: block;
+.primary{
+background:#0f766e;
+color:white;
+border:0;
+padding:12px 20px;
+border-radius:7px;
+cursor:pointer
 }
-
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 15px;
-  margin: 20px 0;
+table{
+width:100%;
+border-collapse:collapse;
+background:white
 }
-
-.card {
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px #00000010;
+th,td{
+padding:12px;
+border-bottom:1px solid #e2e8f0;
+text-align:right
 }
-
-.card h3 {
-  margin-top: 0;
-  color: #64748b;
-  font-size: 15px;
-}
-
-.card p {
-  font-size: 25px;
-  font-weight: bold;
-  margin-bottom: 0;
-  color: #0f766e;
-}
-
-.form {
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  margin-bottom: 20px;
-}
-
-input, select {
-  width: 100%;
-  padding: 11px;
-  margin: 6px 0 12px;
-  border: 1px solid #cbd5e1;
-  border-radius: 7px;
-}
-
-button.primary {
-  background: #0f766e;
-  color: white;
-  padding: 11px 18px;
-  border: none;
-  border-radius: 7px;
-  cursor: pointer;
-}
-
-button.delete {
-  background: #dc2626;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 6px 10px;
-  cursor: pointer;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: white;
-}
-
-th, td {
-  padding: 12px;
-  text-align: left;
-  border-bottom: 1px solid #e2e8f0;
-}
-
-th {
-  background: #ccfbf1;
-}
-
-.table-wrap {
-  overflow-x: auto;
-}
-
-label {
-  font-weight: bold;
-  display: block;
-}
-
-h2 {
-  color: #0f766e;
+th{background:#ccfbf1}
+.table-wrap{overflow:auto}
+.delete{
+background:#dc2626;
+color:white;
+border:0;
+padding:6px 10px;
+border-radius:5px;
+cursor:pointer
 }
 </style>
 </head>
@@ -159,418 +103,595 @@ h2 {
 <body>
 
 <header>
-  <h1>☀️ Samad Solar</h1>
-  <p>Solar Business Management</p>
+<h1>☀️ Samad Solar</h1>
+<p>د سولر کاروبار مدیریت سیستم</p>
 </header>
 
 <nav>
-  <button onclick="showPage('dashboard')">Dashboard</button>
-  <button onclick="showPage('products')">Products</button>
-  <button onclick="showPage('sales')">Sales</button>
-  <button onclick="showPage('expenses')">Expenses</button>
-  <button onclick="showPage('reports')">Reports</button>
+<button onclick="show('dashboard')">🏠 ډشبورډ</button>
+<button onclick="show('products')">📦 اجناس</button>
+<button onclick="show('sales')">💰 خرڅلاو</button>
+<button onclick="show('purchases')">🛒 خریداري</button>
+<button onclick="show('expenses')">💸 مصارف</button>
+<button onclick="show('debts')">📒 پورونه</button>
+<button onclick="show('reports')">📊 راپورونه</button>
 </nav>
 
 <main>
 
 <!-- DASHBOARD -->
 <section id="dashboard" class="page active">
-  <h2>Dashboard</h2>
 
-  <div class="cards">
-    <div class="card">
-      <h3>Total Products</h3>
-      <p id="totalProducts">0</p>
-    </div>
+<h2>ډشبورډ</h2>
 
-    <div class="card">
-      <h3>Total Sales</h3>
-      <p id="totalSales">0</p>
-    </div>
+<div class="cards">
 
-    <div class="card">
-      <h3>Total Expenses</h3>
-      <p id="totalExpenses">0</p>
-    </div>
+<div class="card">
+<h3>ټول اجناس</h3>
+<strong id="productCount">0</strong>
+</div>
 
-    <div class="card">
-      <h3>Estimated Profit</h3>
-      <p id="totalProfit">0</p>
-    </div>
-  </div>
+<div class="card">
+<h3>ټول خرڅلاو</h3>
+<strong id="salesTotal">0 AFN</strong>
+</div>
 
-  <div class="form">
-    <h3>Welcome to Samad Solar ☀️</h3>
-    <p>Manage your products, sales and expenses from one place.</p>
-    <p>Your data is saved in this browser.</p>
-  </div>
+<div class="card">
+<h3>ټول مصارف</h3>
+<strong id="expenseTotal">0 AFN</strong>
+</div>
+
+<div class="card">
+<h3>ګټه</h3>
+<strong id="profitTotal">0 AFN</strong>
+</div>
+
+</div>
+
 </section>
+
 
 <!-- PRODUCTS -->
 <section id="products" class="page">
-  <h2>Products & Inventory</h2>
 
-  <div class="form">
-    <h3>Add New Product</h3>
+<h2>📦 اجناس / Inventory</h2>
 
-    <label>Product Name</label>
-    <input id="productName" placeholder="Example: Inverter 1.5kW">
+<div class="form">
 
-    <label>Category</label>
-    <select id="productCategory">
-      <option>Inverter</option>
-      <option>Solar Panel</option>
-      <option>Battery</option>
-      <option>Accessories</option>
-      <option>Other</option>
-    </select>
+<label>د جنس نوم</label>
+<input id="pName" placeholder="مثلاً Inverter 1.5KW">
 
-    <label>Quantity</label>
-    <input id="productQty" type="number" min="0" placeholder="0">
+<label>کټګوري</label>
+<select id="pCategory">
+<option>Inverter</option>
+<option>Solar Panel</option>
+<option>Battery</option>
+<option>Accessories</option>
+<option>Other</option>
+</select>
 
-    <label>Buying Price (AFN)</label>
-    <input id="productBuy" type="number" min="0" placeholder="0">
+<label>تعداد</label>
+<input id="pQty" type="number">
 
-    <label>Selling Price (AFN)</label>
-    <input id="productSell" type="number" min="0" placeholder="0">
+<label>د اخیستلو قیمت (AFN)</label>
+<input id="pBuy" type="number">
 
-    <button class="primary" onclick="addProduct()">Add Product</button>
-  </div>
+<button class="primary" onclick="addProduct()">
+➕ جنس اضافه کړه
+</button>
 
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th>Product</th>
-          <th>Category</th>
-          <th>Stock</th>
-          <th>Buy Price</th>
-          <th>Sell Price</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody id="productTable"></tbody>
-    </table>
-  </div>
+</div>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>جنس</th>
+<th>کټګوري</th>
+<th>تعداد</th>
+<th>د اخیستلو قیمت</th>
+<th>عمل</th>
+</tr>
+</thead>
+
+<tbody id="productTable"></tbody>
+</table>
+</div>
+
 </section>
+
 
 <!-- SALES -->
 <section id="sales" class="page">
-  <h2>Sales</h2>
 
-  <div class="form">
-    <h3>Record Sale</h3>
+<h2>💰 خرڅلاو</h2>
 
-    <label>Customer Name</label>
-    <input id="customerName" placeholder="Customer name">
+<div class="form">
 
-    <label>Product</label>
-    <select id="saleProduct"></select>
+<label>د مشتری نوم</label>
+<input id="customer">
 
-    <label>Quantity</label>
-    <input id="saleQty" type="number" min="1" value="1">
+<label>جنس</label>
+<select id="saleProduct"></select>
 
-    <label>Sale Price (AFN)</label>
-    <input id="salePrice" type="number" min="0" placeholder="Total sale amount">
+<label>تعداد</label>
+<input id="saleQty" type="number" value="1">
 
-    <button class="primary" onclick="addSale()">Save Sale</button>
-  </div>
+<label>ټول قیمت (AFN)</label>
+<input id="saleAmount" type="number">
 
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th>Customer</th>
-          <th>Product</th>
-          <th>Quantity</th>
-          <th>Amount</th>
-          <th>Date</th>
-        </tr>
-      </thead>
-      <tbody id="salesTable"></tbody>
-    </table>
-  </div>
+<button class="primary" onclick="addSale()">
+💰 خرڅلاو ثبت کړه
+</button>
+
+</div>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>مشتری</th>
+<th>جنس</th>
+<th>تعداد</th>
+<th>مبلغ</th>
+<th>نېټه</th>
+</tr>
+</thead>
+
+<tbody id="salesTable"></tbody>
+</table>
+</div>
+
 </section>
+
+
+<!-- PURCHASE -->
+<section id="purchases" class="page">
+
+<h2>🛒 خریداري</h2>
+
+<div class="form">
+
+<label>د عرضه کوونکي نوم</label>
+<input id="supplier">
+
+<label>جنس</label>
+<input id="purchaseProduct" placeholder="د جنس نوم">
+
+<label>تعداد</label>
+<input id="purchaseQty" type="number">
+
+<label>ټول قیمت (AFN)</label>
+<input id="purchaseAmount" type="number">
+
+<button class="primary" onclick="addPurchase()">
+🛒 خریداري ثبت کړه
+</button>
+
+</div>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>عرضه کوونکی</th>
+<th>جنس</th>
+<th>تعداد</th>
+<th>مبلغ</th>
+<th>نېټه</th>
+</tr>
+</thead>
+
+<tbody id="purchaseTable"></tbody>
+</table>
+</div>
+
+</section>
+
 
 <!-- EXPENSES -->
 <section id="expenses" class="page">
-  <h2>Expenses</h2>
 
-  <div class="form">
-    <h3>Add Expense</h3>
+<h2>💸 مصارف</h2>
 
-    <label>Expense Name</label>
-    <input id="expenseName" placeholder="Example: Shop rent">
+<div class="form">
 
-    <label>Amount (AFN)</label>
-    <input id="expenseAmount" type="number" min="0" placeholder="0">
+<label>د مصرف نوم</label>
+<input id="expenseName" placeholder="مثلاً د دوکان کرایه">
 
-    <button class="primary" onclick="addExpense()">Save Expense</button>
-  </div>
+<label>مبلغ (AFN)</label>
+<input id="expenseAmount" type="number">
 
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th>Expense</th>
-          <th>Amount</th>
-          <th>Date</th>
-        </tr>
-      </thead>
-      <tbody id="expenseTable"></tbody>
-    </table>
-  </div>
+<button class="primary" onclick="addExpense()">
+➕ مصرف ثبت کړه
+</button>
+
+</div>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>مصرف</th>
+<th>مبلغ</th>
+<th>نېټه</th>
+</tr>
+</thead>
+
+<tbody id="expenseTable"></tbody>
+</table>
+</div>
+
 </section>
+
+
+<!-- DEBTS -->
+<section id="debts" class="page">
+
+<h2>📒 پورونه</h2>
+
+<div class="form">
+
+<label>د مشتری نوم</label>
+<input id="debtCustomer">
+
+<label>مبلغ (AFN)</label>
+<input id="debtAmount" type="number">
+
+<button class="primary" onclick="addDebt()">
+➕ پور ثبت کړه
+</button>
+
+</div>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>مشتری</th>
+<th>مبلغ</th>
+<th>نېټه</th>
+</tr>
+</thead>
+
+<tbody id="debtTable"></tbody>
+</table>
+</div>
+
+</section>
+
 
 <!-- REPORTS -->
 <section id="reports" class="page">
-  <h2>Reports</h2>
 
-  <div class="form">
-    <h3>Business Summary</h3>
-    <p>Total sales: <strong id="reportSales">0 AFN</strong></p>
-    <p>Total expenses: <strong id="reportExpenses">0 AFN</strong></p>
-    <p>Estimated profit: <strong id="reportProfit">0 AFN</strong></p>
-    <p><small>Profit here is sales minus recorded expenses. Product purchase costs are not yet included in the calculation.</small></p>
-  </div>
+<h2>📊 راپورونه</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>خرڅلاو</h3>
+<strong id="rSales">0 AFN</strong>
+</div>
+
+<div class="card">
+<h3>مصارف</h3>
+<strong id="rExpenses">0 AFN</strong>
+</div>
+
+<div class="card">
+<h3>ګټه</h3>
+<strong id="rProfit">0 AFN</strong>
+</div>
+
+</div>
+
 </section>
 
 </main>
 
+
 <script>
-// ===============================
-// SAMAD SOLAR APP
-// ===============================
 
-let products = JSON.parse(
-  localStorage.getItem("samad_products") || "[]"
-);
+let products=JSON.parse(localStorage.getItem("products")||"[]");
+let sales=JSON.parse(localStorage.getItem("sales")||"[]");
+let purchases=JSON.parse(localStorage.getItem("purchases")||"[]");
+let expenses=JSON.parse(localStorage.getItem("expenses")||"[]");
+let debts=JSON.parse(localStorage.getItem("debts")||"[]");
 
-let sales = JSON.parse(
-  localStorage.getItem("samad_sales") || "[]"
-);
 
-let expenses = JSON.parse(
-  localStorage.getItem("samad_expenses") || "[]"
-);
+function save(){
 
-// PAGE NAVIGATION
-function showPage(page) {
-  document.querySelectorAll(".page").forEach(section => {
-    section.classList.remove("active");
-  });
+localStorage.setItem("products",JSON.stringify(products));
+localStorage.setItem("sales",JSON.stringify(sales));
+localStorage.setItem("purchases",JSON.stringify(purchases));
+localStorage.setItem("expenses",JSON.stringify(expenses));
+localStorage.setItem("debts",JSON.stringify(debts));
 
-  document.getElementById(page).classList.add("active");
-
-  refresh();
 }
 
-// SAVE DATA
-function saveData() {
-  localStorage.setItem("samad_products", JSON.stringify(products));
-  localStorage.setItem("samad_sales", JSON.stringify(sales));
-  localStorage.setItem("samad_expenses", JSON.stringify(expenses));
+
+function show(id){
+
+document.querySelectorAll(".page").forEach(x=>{
+x.classList.remove("active")
+});
+
+document.getElementById(id).classList.add("active");
+
+refresh();
+
 }
 
-// ADD PRODUCT
-function addProduct() {
-  const name = document.getElementById("productName").value.trim();
-  const category = document.getElementById("productCategory").value;
-  const qty = Number(document.getElementById("productQty").value);
-  const buy = Number(document.getElementById("productBuy").value);
-  const sell = Number(document.getElementById("productSell").value);
 
-  if (!name || qty < 0 || buy < 0 || sell < 0) {
-    alert("Please enter valid product information.");
-    return;
-  }
+function addProduct(){
 
-  products.push({
-    id: Date.now(),
-    name,
-    category,
-    qty,
-    buy,
-    sell
-  });
+let name=document.getElementById("pName").value;
+let category=document.getElementById("pCategory").value;
+let qty=Number(document.getElementById("pQty").value);
+let buy=Number(document.getElementById("pBuy").value);
 
-  saveData();
+if(!name||qty<=0){
 
-  document.getElementById("productName").value = "";
-  document.getElementById("productQty").value = "";
-  document.getElementById("productBuy").value = "";
-  document.getElementById("productSell").value = "";
+alert("د جنس معلومات بشپړ کړه");
+return;
 
-  refresh();
-
-  alert("Product added successfully!");
 }
 
-// DELETE PRODUCT
-function deleteProduct(id) {
-  products = products.filter(product => product.id !== id);
-  saveData();
-  refresh();
+products.push({
+id:Date.now(),
+name,
+category,
+qty,
+buy
+});
+
+save();
+
+document.getElementById("pName").value="";
+document.getElementById("pQty").value="";
+document.getElementById("pBuy").value="";
+
+refresh();
+
 }
 
-// ADD SALE
-function addSale() {
-  const customer = document.getElementById("customerName").value.trim();
-  const productId = Number(document.getElementById("saleProduct").value);
-  const qty = Number(document.getElementById("saleQty").value);
-  const amount = Number(document.getElementById("salePrice").value);
 
-  const product = products.find(p => p.id === productId);
+function addSale(){
 
-  if (!product) {
-    alert("Please select a product.");
-    return;
-  }
+let customer=document.getElementById("customer").value;
+let id=Number(document.getElementById("saleProduct").value);
+let qty=Number(document.getElementById("saleQty").value);
+let amount=Number(document.getElementById("saleAmount").value);
 
-  if (qty <= 0 || amount < 0 || qty > product.qty) {
-    alert("Check quantity, stock and sale amount.");
-    return;
-  }
+let product=products.find(p=>p.id===id);
 
-  product.qty -= qty;
+if(!product||qty<=0||qty>product.qty){
 
-  sales.push({
-    id: Date.now(),
-    customer,
-    product: product.name,
-    qty,
-    amount,
-    cost: product.buy * qty,
-    date: new Date().toLocaleDateString()
-  });
+alert("موجودي یا تعداد سم نه دی");
+return;
 
-  saveData();
-
-  document.getElementById("customerName").value = "";
-  document.getElementById("salePrice").value = "";
-
-  refresh();
-
-  alert("Sale saved successfully!");
 }
 
-// ADD EXPENSE
-function addExpense() {
-  const name = document.getElementById("expenseName").value.trim();
-  const amount = Number(document.getElementById("expenseAmount").value);
+product.qty-=qty;
 
-  if (!name || amount <= 0) {
-    alert("Please enter valid expense information.");
-    return;
-  }
+sales.push({
+customer,
+product:product.name,
+qty,
+amount,
+cost:product.buy*qty,
+date:new Date().toLocaleDateString()
+});
 
-  expenses.push({
-    id: Date.now(),
-    name,
-    amount,
-    date: new Date().toLocaleDateString()
-  });
+save();
+refresh();
 
-  saveData();
-
-  document.getElementById("expenseName").value = "";
-  document.getElementById("expenseAmount").value = "";
-
-  refresh();
-
-  alert("Expense saved successfully!");
 }
 
-// REFRESH APP
-function refresh() {
 
-  // PRODUCT TABLE
-  const productTable = document.getElementById("productTable");
+function addPurchase(){
 
-  productTable.innerHTML = products.map(p => `
-    <tr>
-      <td>${escapeHTML(p.name)}</td>
-      <td>${escapeHTML(p.category)}</td>
-      <td>${p.qty}</td>
-      <td>${p.buy.toLocaleString()} AFN</td>
-      <td>${p.sell.toLocaleString()} AFN</td>
-      <td>
-        <button class="delete" onclick="deleteProduct(${p.id})">
-          Delete
-        </button>
-      </td>
-    </tr>
-  `).join("");
+let supplier=document.getElementById("supplier").value;
+let product=document.getElementById("purchaseProduct").value;
+let qty=Number(document.getElementById("purchaseQty").value);
+let amount=Number(document.getElementById("purchaseAmount").value);
 
-  // SALES PRODUCT DROPDOWN
-  const saleProduct = document.getElementById("saleProduct");
+if(!product||qty<=0){
 
-  saleProduct.innerHTML = products.map(p => `
-    <option value="${p.id}">
-      ${escapeHTML(p.name)} (Stock: ${p.qty})
-    </option>
-  `).join("");
+alert("معلومات بشپړ کړه");
+return;
 
-  // SALES TABLE
-  document.getElementById("salesTable").innerHTML = sales.map(s => `
-    <tr>
-      <td>${escapeHTML(s.customer || "Unknown")}</td>
-      <td>${escapeHTML(s.product)}</td>
-      <td>${s.qty}</td>
-      <td>${s.amount.toLocaleString()} AFN</td>
-      <td>${escapeHTML(s.date)}</td>
-    </tr>
-  `).join("");
-
-  // EXPENSE TABLE
-  document.getElementById("expenseTable").innerHTML = expenses.map(e => `
-    <tr>
-      <td>${escapeHTML(e.name)}</td>
-      <td>${e.amount.toLocaleString()} AFN</td>
-      <td>${escapeHTML(e.date)}</td>
-    </tr>
-  `).join("");
-
-  // DASHBOARD TOTALS
-  const totalSales = sales.reduce((sum, s) => sum + s.amount, 0);
-  const totalExpenses = expenses.reduce((sum, e) => sum + e.amount, 0);
-  const totalCost = sales.reduce((sum, s) => sum + s.cost, 0);
-  const profit = totalSales - totalCost - totalExpenses;
-
-  document.getElementById("totalProducts").textContent =
-    products.reduce((sum, p) => sum + p.qty, 0);
-
-  document.getElementById("totalSales").textContent =
-    totalSales.toLocaleString() + " AFN";
-
-  document.getElementById("totalExpenses").textContent =
-    totalExpenses.toLocaleString() + " AFN";
-
-  document.getElementById("totalProfit").textContent =
-    profit.toLocaleString() + " AFN";
-
-  // REPORTS
-  document.getElementById("reportSales").textContent =
-    totalSales.toLocaleString() + " AFN";
-
-  document.getElementById("reportExpenses").textContent =
-    totalExpenses.toLocaleString() + " AFN";
-
-  document.getElementById("reportProfit").textContent =
-    profit.toLocaleString() + " AFN";
 }
 
-// BASIC HTML ESCAPE
-function escapeHTML(value) {
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
+purchases.push({
+supplier,
+product,
+qty,
+amount,
+date:new Date().toLocaleDateString()
+});
+
+save();
+refresh();
+
 }
 
-// START APP
+
+function addExpense(){
+
+let name=document.getElementById("expenseName").value;
+let amount=Number(document.getElementById("expenseAmount").value);
+
+if(!name||amount<=0){
+
+alert("د مصرف معلومات بشپړ کړه");
+return;
+
+}
+
+expenses.push({
+name,
+amount,
+date:new Date().toLocaleDateString()
+});
+
+save();
+refresh();
+
+}
+
+
+function addDebt(){
+
+let customer=document.getElementById("debtCustomer").value;
+let amount=Number(document.getElementById("debtAmount").value);
+
+if(!customer||amount<=0){
+
+alert("معلومات بشپړ کړه");
+return;
+
+}
+
+debts.push({
+customer,
+amount,
+date:new Date().toLocaleDateString()
+});
+
+save();
+refresh();
+
+}
+
+
+function refresh(){
+
+document.getElementById("productTable").innerHTML=
+products.map(p=>`
+
+<tr>
+<td>${p.name}</td>
+<td>${p.category}</td>
+<td>${p.qty}</td>
+<td>${p.buy.toLocaleString()} AFN</td>
+<td>
+<button class="delete"
+onclick="deleteProduct(${p.id})">
+حذف
+</button>
+</td>
+</tr>
+
+`).join("");
+
+
+document.getElementById("saleProduct").innerHTML=
+products.map(p=>`
+
+<option value="${p.id}">
+${p.name} — موجودي: ${p.qty}
+</option>
+
+`).join("");
+
+
+document.getElementById("salesTable").innerHTML=
+sales.map(s=>`
+
+<tr>
+<td>${s.customer}</td>
+<td>${s.product}</td>
+<td>${s.qty}</td>
+<td>${s.amount.toLocaleString()} AFN</td>
+<td>${s.date}</td>
+</tr>
+
+`).join("");
+
+
+document.getElementById("purchaseTable").innerHTML=
+purchases.map(p=>`
+
+<tr>
+<td>${p.supplier}</td>
+<td>${p.product}</td>
+<td>${p.qty}</td>
+<td>${p.amount.toLocaleString()} AFN</td>
+<td>${p.date}</td>
+</tr>
+
+`).join("");
+
+
+document.getElementById("expenseTable").innerHTML=
+expenses.map(e=>`
+
+<tr>
+<td>${e.name}</td>
+<td>${e.amount.toLocaleString()} AFN</td>
+<td>${e.date}</td>
+</tr>
+
+`).join("");
+
+
+document.getElementById("debtTable").innerHTML=
+debts.map(d=>`
+
+<tr>
+<td>${d.customer}</td>
+<td>${d.amount.toLocaleString()} AFN</td>
+<td>${d.date}</td>
+</tr>
+
+`).join("");
+
+
+let totalSales=sales.reduce((a,b)=>a+b.amount,0);
+
+let totalExpenses=expenses.reduce((a,b)=>a+b.amount,0);
+
+let totalCost=sales.reduce((a,b)=>a+b.cost,0);
+
+let profit=totalSales-totalCost-totalExpenses;
+
+
+document.getElementById("productCount").textContent=
+products.reduce((a,b)=>a+b.qty,0);
+
+document.getElementById("salesTotal").textContent=
+totalSales.toLocaleString()+" AFN";
+
+document.getElementById("expenseTotal").textContent=
+totalExpenses.toLocaleString()+" AFN";
+
+document.getElementById("profitTotal").textContent=
+profit.toLocaleString()+" AFN";
+
+
+document.getElementById("rSales").textContent=
+totalSales.toLocaleString()+" AFN";
+
+document.getElementById("rExpenses").textContent=
+totalExpenses.toLocaleString()+" AFN";
+
+document.getElementById("rProfit").textContent=
+profit.toLocaleString()+" AFN";
+
+}
+
+
+function deleteProduct(id){
+
+products=products.filter(p=>p.id!==id);
+
+save();
+refresh();
+
+}
+
+
 refresh();
 
 </script>
