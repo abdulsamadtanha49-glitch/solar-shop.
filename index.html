@@ -8,7 +8,97 @@
 
   <style>
     * { box-sizing: border-box; }
+<!-- STOCK SECTION -->
+<div class="container">
 
+  <h2>📦 Stock / محصولات</h2>
+
+  <div class="card">
+    <input id="productName" type="text" placeholder="د محصول نوم">
+
+    <input id="productCode" type="text" placeholder="Product Code">
+
+    <input id="buyPrice" type="number" placeholder="Buying Price">
+
+    <input id="productQty" type="number" placeholder="Quantity">
+
+    <input id="lowLimit" type="number" placeholder="Low Stock Limit">
+
+    <button onclick="addProduct()">➕ Add Product</button>
+  </div>
+
+  <div id="stockList"></div>
+
+</div>
+
+<script>
+function addProduct() {
+
+  const name = document.getElementById("productName").value;
+  const code = document.getElementById("productCode").value;
+  const price = document.getElementById("buyPrice").value;
+  const qty = document.getElementById("productQty").value;
+  const limit = document.getElementById("lowLimit").value;
+
+  if (!name || !qty) {
+    alert("د محصول نوم او Quantity ولیکئ");
+    return;
+  }
+
+  const products = JSON.parse(
+    localStorage.getItem("samadProducts") || "[]"
+  );
+
+  products.push({
+    name: name,
+    code: code,
+    buyPrice: Number(price),
+    quantity: Number(qty),
+    lowLimit: Number(limit || 0)
+  });
+
+  localStorage.setItem("samadProducts", JSON.stringify(products));
+
+  document.getElementById("productName").value = "";
+  document.getElementById("productCode").value = "";
+  document.getElementById("buyPrice").value = "";
+  document.getElementById("productQty").value = "";
+  document.getElementById("lowLimit").value = "";
+
+  showProducts();
+}
+
+function showProducts() {
+
+  const products = JSON.parse(
+    localStorage.getItem("samadProducts") || "[]"
+  );
+
+  const list = document.getElementById("stockList");
+
+  list.innerHTML = "";
+
+  products.forEach((p, index) => {
+
+    const low =
+      p.quantity <= p.lowLimit
+        ? "⚠️ Low Stock"
+        : "✅ In Stock";
+
+    list.innerHTML += `
+      <div class="card">
+        <h3>${p.name}</h3>
+        <p>Code: ${p.code || "-"}</p>
+        <p>Buying Price: ${p.buyPrice}</p>
+        <p>Quantity: ${p.quantity}</p>
+        <p>${low}</p>
+      </div>
+    `;
+  });
+}
+
+showProducts();
+</script>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
