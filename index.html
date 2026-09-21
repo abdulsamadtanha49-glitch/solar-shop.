@@ -920,5 +920,45 @@ function deleteExpense(index) {
 
 showExpenses();
 </script>
+  <!-- CAPITAL -->
+<section class="card">
+  <h2>💰 Capital | سرمایه</h2>
+
+  <input id="capitalAmount" type="number" placeholder="د سرمایې مبلغ (AFN)">
+
+  <button onclick="saveCapital()">💾 Save Capital</button>
+
+  <div id="capitalDisplay"></div>
+</section>
+
+<script>
+function saveCapital() {
+  const amount = Number(document.getElementById("capitalAmount").value);
+
+  if (!amount) {
+    alert("لطفاً د سرمایې مبلغ ولیکئ");
+    return;
+  }
+
+  localStorage.setItem("samadCapital", amount);
+
+  document.getElementById("capitalAmount").value = "";
+
+  showCapital();
+}
+
+function showCapital() {
+  const display = document.getElementById("capitalDisplay");
+  if (!display) return;
+
+  const capital = Number(localStorage.getItem("samadCapital") || 0);
+
+  display.innerHTML = `
+    <h3>💰 موجوده سرمایه: ${capital} AFN</h3>
+  `;
+}
+
+showCapital();
+</script>
 </body>
 </html>
