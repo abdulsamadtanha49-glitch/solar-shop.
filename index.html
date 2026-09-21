@@ -1,105 +1,16 @@
-
 <!DOCTYPE html>
 <html lang="ps" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Samad Solar</title>
-  
+
   <style>
-    * { box-sizing: border-box; }
-<!-- STOCK SECTION -->
-<div class="container">
+    * {
+      box-sizing: border-box;
+    }
 
-  <h2>📦 Stock / محصولات</h2>
-
-  <div class="card">
-    <input id="productName" type="text" placeholder="د محصول نوم">
-
-    <input id="productCode" type="text" placeholder="Product Code">
-
-    <input id="buyPrice" type="number" placeholder="Buying Price">
-
-    <input id="productQty" type="number" placeholder="Quantity">
-
-    <input id="lowLimit" type="number" placeholder="Low Stock Limit">
-
-    <button onclick="addProduct()">➕ Add Product</button>
-  </div>
-
-  <div id="stockList"></div>
-
-</div>
-
-<script>
-function addProduct() {
-
-  const name = document.getElementById("productName").value;
-  const code = document.getElementById("productCode").value;
-  const price = document.getElementById("buyPrice").value;
-  const qty = document.getElementById("productQty").value;
-  const limit = document.getElementById("lowLimit").value;
-
-  if (!name || !qty) {
-    alert("د محصول نوم او Quantity ولیکئ");
-    return;
-  }
-
-  const products = JSON.parse(
-    localStorage.getItem("samadProducts") || "[]"
-  );
-
-  products.push({
-    name: name,
-    code: code,
-    buyPrice: Number(price),
-    quantity: Number(qty),
-    lowLimit: Number(limit 0)
-  <p>Low Stock Limit: ${p.lowLimit}</p>
-  });
-
-  localStorage.setItem("samadProducts", JSON.stringify(products));
-
-  document.getElementById("productName").value = "";
-  document.getElementById("productCode").value = "";
-  document.getElementById("buyPrice").value = "";
-  document.getElementById("productQty").value = "";
-  document.getElementById("lowLimit").value = "";
-
-  showProducts();
-}
-
-function showProducts() {
-
-  const products = JSON.parse(
-    localStorage.getItem("samadProducts") || "[]"
-  );
-
-  const list = document.getElementById("stockList");
-
-  list.innerHTML = "";
-
-  products.forEach((p, index) => {
-
-    const low =
-      p.quantity <= p.lowLimit
-        ? "⚠️ Low Stock"
-        : "✅ In Stock";
-
-    list.innerHTML += `
-      <div class="card">
-        <h3>${p.name}</h3>
-        <p>Code: ${p.code || "-"}</p>
-        <p>Buying Price: ${p.buyPrice}</p>
-        <p>Quantity: ${p.quantity}</p>
-        <p>${low}</p>
-      </div>
-    `;
-  });
-}
-
-showProducts();
-</script>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -120,7 +31,9 @@ showProducts();
       padding: 15px;
     }
 
-    .settings, .section, .card {
+    .settings,
+    .section,
+    .card {
       background: white;
       padding: 20px;
       margin-top: 20px;
@@ -139,14 +52,18 @@ showProducts();
       margin-top: 0;
     }
 
-    .card h2 { color: #0f766e; }
+    .card h2 {
+      color: #0f766e;
+    }
 
-    input, select {
+    input,
+    select {
       width: 100%;
       padding: 12px;
       margin: 8px 0;
       border: 1px solid #cbd5e1;
       border-radius: 8px;
+      font-size: 15px;
     }
 
     button {
@@ -157,9 +74,12 @@ showProducts();
       border-radius: 8px;
       cursor: pointer;
       margin: 5px;
+      font-size: 15px;
     }
 
-    button:hover { background: #115e59; }
+    button:hover {
+      background: #115e59;
+    }
 
     #message {
       color: #0f766e;
@@ -167,9 +87,29 @@ showProducts();
     }
 
     .product {
-      border-bottom: 1px solid #ddd;
-      padding: 12px;
-      margin-top: 8px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      padding: 15px;
+      margin-top: 12px;
+      border-radius: 10px;
+    }
+
+    .low-stock {
+      color: #dc2626;
+      font-weight: bold;
+    }
+
+    .in-stock {
+      color: #15803d;
+      font-weight: bold;
+    }
+
+    .delete-btn {
+      background: #dc2626;
+    }
+
+    .delete-btn:hover {
+      background: #b91c1c;
     }
   </style>
 </head>
@@ -181,52 +121,61 @@ showProducts();
   <p id="appSubtitle">د سولر دوکان د مدیریت سیستم</p>
 </header>
 
+
 <div class="container">
 
-  <<div class="cards">
+  <!-- DASHBOARD -->
+  <div class="cards">
 
-  <div class="card">
-    <h3>💰 سرمایه</h3>
-    <h2 id="capital">0 AFN</h2>
+    <div class="card">
+      <h3>💰 سرمایه</h3>
+      <h2 id="capital">0 AFN</h2>
+    </div>
+
+    <div class="card">
+      <h3>📦 Stock</h3>
+      <h2 id="stock">0</h2>
+    </div>
+
+    <div class="card">
+      <h3>🛒 Purchase</h3>
+      <h2 id="purchase">0</h2>
+    </div>
+
+    <div class="card">
+      <h3>💵 Sale</h3>
+      <h2 id="sale">0</h2>
+    </div>
+
+    <div class="card">
+      <h3>💸 Expenses</h3>
+      <h2 id="expenses">0</h2>
+    </div>
+
+    <div class="card">
+      <h3>📊 Profit / Loss</h3>
+      <h2 id="profit">0</h2>
+    </div>
+
   </div>
 
-  <div class="card">
-    <h3>📦 Stock</h3>
-    <h2 id="stock">0</h2>
-  </div>
 
-  <div class="card">
-    <h3>🛒 Purchase</h3>
-    <h2 id="purchase">0</h2>
-  </div>
-
-  <div class="card">
-    <h3>💵 Sale</h3>
-    <h2 id="sale">0</h2>
-  </div>
-
-  <div class="card">
-    <h3>💸 Expenses</h3>
-    <h2 id="expenses">0</h2>
-  </div>
-
-  <div class="card">
-    <h3>📊 Profit / Loss</h3>
-    <h2 id="profit">0</h2>
-  </div>
-
-</div>!-- ژبه او کرنسي -->
+  <!-- SETTINGS -->
   <div class="settings">
+
     <h2 id="settingsTitle">تنظیمات</h2>
 
     <label id="languageLabel">ژبه / Language</label>
+
     <select id="language" onchange="changeLanguage()">
       <option value="ps">پښتو</option>
       <option value="fa">دری</option>
       <option value="en">English</option>
     </select>
 
+
     <label id="currencyLabel">کرنسي / Currency</label>
+
     <select id="currency" onchange="changeCurrency()">
       <option value="AFN">AFN - افغانۍ</option>
       <option value="USD">USD - Dollar</option>
@@ -234,10 +183,13 @@ showProducts();
     </select>
 
     <p id="selectedCurrency"></p>
+
   </div>
 
-  <!-- معلومات -->
+
+  <!-- INFO CARDS -->
   <div class="cards">
+
     <div class="card">
       <h3 id="productsTitle">ټول محصولات</h3>
       <h2 id="productCount">0</h2>
@@ -252,31 +204,72 @@ showProducts();
       <h3 id="currencyTitle">کرنسي</h3>
       <h2 id="currencyDisplay">AFN</h2>
     </div>
+
   </div>
 
-  <!-- محصول -->
+
+  <!-- ADD PRODUCT -->
   <div class="section">
+
     <h2 id="addProductTitle">نوی محصول اضافه کړه</h2>
 
-    <input id="productName" placeholder="د محصول نوم">
-    <input id="productPrice" type="number" placeholder="نرخ">
-    <input id="productQuantity" type="number" placeholder="تعداد">
+    <input
+      id="productName"
+      placeholder="د محصول نوم"
+    >
 
-    <button id="saveButton" onclick="addProduct()">محصول Save کړه</button>
+    <input
+      id="productCode"
+      placeholder="Product Code"
+    >
+
+    <input
+      id="productPrice"
+      type="number"
+      placeholder="Buying Price"
+    >
+
+    <input
+      id="productQuantity"
+      type="number"
+      placeholder="Quantity"
+    >
+
+    <input
+      id="lowLimit"
+      type="number"
+      placeholder="Low Stock Limit"
+    >
+
+    <button id="saveButton" onclick="addProduct()">
+      ➕ محصول Save کړه
+    </button>
 
     <p id="message"></p>
+
   </div>
 
-  <!-- لېست -->
+
+  <!-- PRODUCT LIST -->
   <div class="section">
+
     <h2 id="listTitle">د محصولاتو لېست</h2>
-    <div id="productList">تر اوسه محصول نشته.</div>
+
+    <div id="productList">
+      تر اوسه محصول نشته.
+    </div>
+
   </div>
 
 </div>
 
+
 <script>
-  let products = JSON.parse(localStorage.getItem("samadProducts")) || [];
+
+  /* DATA */
+
+  let products =
+    JSON.parse(localStorage.getItem("samadProducts")) || [];
 
   let currentLanguage =
     localStorage.getItem("samadLanguage") || "ps";
@@ -284,7 +277,11 @@ showProducts();
   let currentCurrency =
     localStorage.getItem("samadCurrency") || "AFN";
 
+
+  /* TRANSLATIONS */
+
   const translations = {
+
     ps: {
       dir: "rtl",
       subtitle: "د سولر دوکان د مدیریت سیستم",
@@ -294,14 +291,19 @@ showProducts();
       products: "ټول محصولات",
       sales: "ټولې خرڅلاوې",
       addProduct: "نوی محصول اضافه کړه",
-      save: "محصول Save کړه",
+      save: "➕ محصول Save کړه",
       list: "د محصولاتو لېست",
       name: "د محصول نوم",
-      price: "نرخ",
+      code: "Product Code",
+      price: "د اخیستلو نرخ",
       quantity: "تعداد",
+      lowLimit: "Low Stock Limit",
       empty: "تر اوسه محصول نشته.",
       success: "محصول په بریالیتوب سره Save شو.",
-      error: "مهرباني وکړئ ټول معلومات ولیکئ."
+      error: "مهرباني وکړئ د محصول نوم او تعداد ولیکئ.",
+      inStock: "✅ Stock موجود دی",
+      lowStock: "⚠️ Low Stock",
+      delete: "Delete"
     },
 
     fa: {
@@ -313,14 +315,19 @@ showProducts();
       products: "تمام محصولات",
       sales: "تمام فروش‌ها",
       addProduct: "افزودن محصول جدید",
-      save: "ذخیره محصول",
+      save: "➕ ذخیره محصول",
       list: "لیست محصولات",
       name: "نام محصول",
-      price: "قیمت",
+      code: "کد محصول",
+      price: "قیمت خرید",
       quantity: "تعداد",
+      lowLimit: "حد پایین موجودی",
       empty: "هنوز محصولی وجود ندارد.",
       success: "محصول با موفقیت ذخیره شد.",
-      error: "لطفاً تمام معلومات را وارد کنید."
+      error: "لطفاً نام محصول و تعداد را وارد کنید.",
+      inStock: "✅ موجودی کافی است",
+      lowStock: "⚠️ موجودی کم است",
+      delete: "حذف"
     },
 
     en: {
@@ -332,26 +339,42 @@ showProducts();
       products: "Total Products",
       sales: "Total Sales",
       addProduct: "Add New Product",
-      save: "Save Product",
+      save: "➕ Save Product",
       list: "Product List",
       name: "Product Name",
-      price: "Price",
+      code: "Product Code",
+      price: "Buying Price",
       quantity: "Quantity",
+      lowLimit: "Low Stock Limit",
       empty: "No products yet.",
       success: "Product saved successfully.",
-      error: "Please fill in all fields."
+      error: "Please enter product name and quantity.",
+      inStock: "✅ In Stock",
+      lowStock: "⚠️ Low Stock",
+      delete: "Delete"
     }
+
   };
+
 
   function t(key) {
     return translations[currentLanguage][key];
   }
 
-  function applyLanguage() {
-    const language = translations[currentLanguage];
 
-    document.documentElement.lang = currentLanguage;
-    document.documentElement.dir = language.dir;
+  /* LANGUAGE */
+
+  function applyLanguage() {
+
+    const language =
+      translations[currentLanguage];
+
+    document.documentElement.lang =
+      currentLanguage;
+
+    document.documentElement.dir =
+      language.dir;
+
 
     document.getElementById("appSubtitle").textContent =
       language.subtitle;
@@ -380,8 +403,12 @@ showProducts();
     document.getElementById("listTitle").textContent =
       language.list;
 
+
     document.getElementById("productName").placeholder =
       language.name;
+
+    document.getElementById("productCode").placeholder =
+      language.code;
 
     document.getElementById("productPrice").placeholder =
       language.price;
@@ -389,8 +416,9 @@ showProducts();
     document.getElementById("productQuantity").placeholder =
       language.quantity;
 
-    document.getElementById("currencyTitle").textContent =
-      language.currency;
+    document.getElementById("lowLimit").placeholder =
+      language.lowLimit;
+
 
     document.getElementById("language").value =
       currentLanguage;
@@ -398,95 +426,248 @@ showProducts();
     document.getElementById("currency").value =
       currentCurrency;
 
+
     document.getElementById("currencyDisplay").textContent =
       currentCurrency;
 
     document.getElementById("selectedCurrency").textContent =
       language.currency + ": " + currentCurrency;
 
+
     showProducts();
   }
 
+
   function changeLanguage() {
+
     currentLanguage =
       document.getElementById("language").value;
 
-    localStorage.setItem("samadLanguage", currentLanguage);
+    localStorage.setItem(
+      "samadLanguage",
+      currentLanguage
+    );
 
     applyLanguage();
   }
 
+
   function changeCurrency() {
+
     currentCurrency =
       document.getElementById("currency").value;
 
-    localStorage.setItem("samadCurrency", currentCurrency);
+    localStorage.setItem(
+      "samadCurrency",
+      currentCurrency
+    );
 
     applyLanguage();
   }
 
+
+  /* SAVE DATA */
+
   function saveData() {
+
     localStorage.setItem(
       "samadProducts",
       JSON.stringify(products)
     );
   }
 
+
+  /* ADD PRODUCT */
+
   function addProduct() {
+
     const name =
-      document.getElementById("productName").value.trim();
+      document.getElementById("productName")
+      .value.trim();
+
+    const code =
+      document.getElementById("productCode")
+      .value.trim();
 
     const price =
-      document.getElementById("productPrice").value;
+      document.getElementById("productPrice")
+      .value;
 
     const quantity =
-      document.getElementById("productQuantity").value;
+      document.getElementById("productQuantity")
+      .value;
 
-    if (!name || !price || !quantity) {
-      document.getElementById("message").textContent =
-        t("error");
+    const lowLimit =
+      document.getElementById("lowLimit")
+      .value;
+
+
+    if (!name || !quantity) {
+
+      document.getElementById("message")
+        .textContent = t("error");
+
       return;
     }
+
 
     products.push({
+
       name: name,
-      price: Number(price),
+
+      code: code,
+
+      price: Number(price || 0),
+
       quantity: Number(quantity),
+
+      lowLimit: Number(lowLimit || 0),
+
       currency: currentCurrency
+
     });
 
+
     saveData();
+
     showProducts();
 
+
     document.getElementById("productName").value = "";
+
+    document.getElementById("productCode").value = "";
+
     document.getElementById("productPrice").value = "";
+
     document.getElementById("productQuantity").value = "";
 
-    document.getElementById("message").textContent =
-      t("success");
+    document.getElementById("lowLimit").value = "";
+
+
+    document.getElementById("message")
+      .textContent = t("success");
   }
 
+
+  /* SHOW PRODUCTS */
+
   function showProducts() {
-    document.getElementById("productCount").textContent =
-      products.length;
+
+    const list =
+      document.getElementById("productList");
+
+
+    document.getElementById("productCount")
+      .textContent = products.length;
+
+
+    /* Total Stock Quantity */
+
+    const totalStock =
+      products.reduce(
+        (total, product) =>
+          total + Number(product.quantity || 0),
+        0
+      );
+
+    document.getElementById("stock")
+      .textContent = totalStock;
+
 
     if (products.length === 0) {
-      document.getElementById("productList").textContent =
-        t("empty");
+
+      list.textContent = t("empty");
+
       return;
     }
 
-    document.getElementById("productList").innerHTML =
-      products.map((product, index) => `
-        <div class="product">
-          <b>${index + 1}. ${product.name}</b><br>
-          ${t("price")}: ${product.price} ${product.currency}<br>
-          ${t("quantity")}: ${product.quantity}
-        </div>
-      `).join("");
+
+    list.innerHTML = products.map(
+      (product, index) => {
+
+        const quantity =
+          Number(product.quantity || 0);
+
+        const lowLimit =
+          Number(product.lowLimit || 0);
+
+
+        const isLow =
+          lowLimit > 0 &&
+          quantity <= lowLimit;
+
+
+        const stockStatus =
+          isLow
+            ? `<span class="low-stock">${t("lowStock")}</span>`
+            : `<span class="in-stock">${t("inStock")}</span>`;
+
+
+        return `
+
+          <div class="product">
+
+            <h3>
+              ${index + 1}. ${product.name}
+            </h3>
+
+            <p>
+              ${t("code")}:
+              ${product.code || "-"}
+            </p>
+
+            <p>
+              ${t("price")}:
+              ${product.price}
+              ${product.currency}
+            </p>
+
+            <p>
+              ${t("quantity")}:
+              ${quantity}
+            </p>
+
+            <p>
+              ${t("lowLimit")}:
+              ${lowLimit}
+            </p>
+
+            <p>
+              ${stockStatus}
+            </p>
+
+            <button
+              class="delete-btn"
+              onclick="deleteProduct(${index})"
+            >
+              🗑️ ${t("delete")}
+            </button>
+
+          </div>
+
+        `;
+
+      }
+    ).join("");
   }
 
+
+  /* DELETE PRODUCT */
+
+  function deleteProduct(index) {
+
+    products.splice(index, 1);
+
+    saveData();
+
+    showProducts();
+  }
+
+
+  /* START */
+
   applyLanguage();
+
 </script>
 
 </body>
