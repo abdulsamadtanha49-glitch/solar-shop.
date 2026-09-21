@@ -852,5 +852,73 @@ function deleteSale(index) {
 
 showSales();
 </script>
+  <!-- EXPENSES -->
+<section class="card">
+  <h2>💸 Expenses | مصارف</h2>
+
+  <input id="expenseName" type="text" placeholder="د مصرف نوم">
+  <input id="expenseAmount" type="number" placeholder="مبلغ (AFN)">
+
+  <button onclick="addExpense()">➕ Add Expense</button>
+
+  <div id="expenseList"></div>
+</section>
+
+<script>
+function addExpense() {
+  const name = document.getElementById("expenseName").value.trim();
+  const amount = Number(document.getElementById("expenseAmount").value);
+
+  if (!name || !amount) {
+    alert("لطفاً د مصرف نوم او مبلغ ولیکئ");
+    return;
+  }
+
+  let expenses = JSON.parse(localStorage.getItem("samadExpenses") || "[]");
+
+  expenses.push({
+    name: name,
+    amount: amount,
+    currency: "AFN",
+    date: new Date().toLocaleDateString()
+  });
+
+  localStorage.setItem("samadExpenses", JSON.stringify(expenses));
+
+  document.getElementById("expenseName").value = "";
+  document.getElementById("expenseAmount").value = "";
+
+  showExpenses();
+}
+
+function showExpenses() {
+  const list = document.getElementById("expenseList");
+  if (!list) return;
+
+  let expenses = JSON.parse(localStorage.getItem("samadExpenses") || "[]");
+
+  list.innerHTML = expenses.map((e, i) => `
+    <div class="card">
+      💸 ${e.name}<br>
+      مبلغ: ${e.amount} AFN<br>
+      📅 ${e.date}
+      <br><br>
+      <button onclick="deleteExpense(${i})">🗑️ Delete</button>
+    </div>
+  `).join("");
+}
+
+function deleteExpense(index) {
+  let expenses = JSON.parse(localStorage.getItem("samadExpenses") || "[]");
+
+  expenses.splice(index, 1);
+
+  localStorage.setItem("samadExpenses", JSON.stringify(expenses));
+
+  showExpenses();
+}
+
+showExpenses();
+</script>
 </body>
 </html>
