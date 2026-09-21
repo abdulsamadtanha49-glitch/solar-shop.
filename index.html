@@ -81,6 +81,14 @@
       background: #115e59;
     }
 
+    .delete-btn {
+      background: #dc2626;
+    }
+
+    .delete-btn:hover {
+      background: #b91c1c;
+    }
+
     #message {
       color: #0f766e;
       font-weight: bold;
@@ -104,12 +112,25 @@
       font-weight: bold;
     }
 
-    .delete-btn {
-      background: #dc2626;
+    .money-usd {
+      color: #0f766e;
+      font-weight: bold;
     }
 
-    .delete-btn:hover {
-      background: #b91c1c;
+    .money-afn {
+      color: #2563eb;
+      font-weight: bold;
+    }
+
+    .empty {
+      color: #64748b;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .dashboard-title {
+      font-size: 14px;
+      color: #64748b;
     }
   </style>
 </head>
@@ -117,10 +138,9 @@
 <body>
 
 <header>
-  <h1 id="appTitle">☀️ Samad Solar</h1>
+  <h1>☀️ Samad Solar</h1>
   <p id="appSubtitle">د سولر دوکان د مدیریت سیستم</p>
 </header>
-
 
 <div class="container">
 
@@ -128,33 +148,33 @@
   <div class="cards">
 
     <div class="card">
-      <h3>💰 سرمایه</h3>
-      <h2 id="capital">0 AFN</h2>
+      <div class="dashboard-title">💰 سرمایه</div>
+      <h2 id="capital">$0 USD</h2>
     </div>
 
     <div class="card">
-      <h3>📦 Stock</h3>
+      <div class="dashboard-title">📦 Stock</div>
       <h2 id="stock">0</h2>
     </div>
 
     <div class="card">
-      <h3>🛒 Purchase</h3>
-      <h2 id="purchase">0</h2>
+      <div class="dashboard-title">🛒 Purchase</div>
+      <h2 id="purchase">$0 USD</h2>
     </div>
 
     <div class="card">
-      <h3>💵 Sale</h3>
-      <h2 id="sale">0</h2>
+      <div class="dashboard-title">💵 Sale</div>
+      <h2 id="sale">$0 USD</h2>
     </div>
 
     <div class="card">
-      <h3>💸 Expenses</h3>
-      <h2 id="expenses">0</h2>
+      <div class="dashboard-title">💸 Expenses</div>
+      <h2 id="expenses">0 AFN</h2>
     </div>
 
     <div class="card">
-      <h3>📊 Profit / Loss</h3>
-      <h2 id="profit">0</h2>
+      <div class="dashboard-title">📊 Profit / Loss</div>
+      <h2 id="profit">$0 USD</h2>
     </div>
 
   </div>
@@ -165,7 +185,7 @@
 
     <h2 id="settingsTitle">تنظیمات</h2>
 
-    <label id="languageLabel">ژبه / Language</label>
+    <label id="languageLabel">ژبه</label>
 
     <select id="language" onchange="changeLanguage()">
       <option value="ps">پښتو</option>
@@ -173,8 +193,7 @@
       <option value="en">English</option>
     </select>
 
-
-    <label id="currencyLabel">کرنسي / Currency</label>
+    <label id="currencyLabel">کرنسي</label>
 
     <select id="currency" onchange="changeCurrency()">
       <option value="AFN">AFN - افغانۍ</option>
@@ -201,7 +220,7 @@
     </div>
 
     <div class="card">
-      <h3 id="currencyTitle">کرنسي</h3>
+      <h3>کرنسي</h3>
       <h2 id="currencyDisplay">AFN</h2>
     </div>
 
@@ -215,29 +234,34 @@
 
     <input
       id="productName"
+      type="text"
       placeholder="د محصول نوم"
     >
 
     <input
       id="productCode"
+      type="text"
       placeholder="Product Code"
     >
 
     <input
       id="productPrice"
       type="number"
-      placeholder="Buying Price"
+      min="0"
+      placeholder="د اخیستلو نرخ (USD)"
     >
 
     <input
       id="productQuantity"
       type="number"
-      placeholder="Quantity"
+      min="0"
+      placeholder="تعداد"
     >
 
     <input
       id="lowLimit"
       type="number"
+      min="0"
       placeholder="Low Stock Limit"
     >
 
@@ -255,9 +279,123 @@
 
     <h2 id="listTitle">د محصولاتو لېست</h2>
 
-    <div id="productList">
-      تر اوسه محصول نشته.
-    </div>
+    <div id="productList"></div>
+
+  </div>
+
+
+  <!-- PURCHASE -->
+  <div class="section">
+
+    <h2>🛒 Purchase | خریداری</h2>
+
+    <input
+      id="purchaseProduct"
+      type="text"
+      placeholder="د محصول نوم"
+    >
+
+    <input
+      id="purchaseQty"
+      type="number"
+      min="1"
+      placeholder="تعداد"
+    >
+
+    <input
+      id="purchasePrice"
+      type="number"
+      min="0"
+      placeholder="د اخیستلو قیمت (USD)"
+    >
+
+    <button onclick="addPurchase()">
+      ➕ Add Purchase
+    </button>
+
+    <div id="purchaseList"></div>
+
+  </div>
+
+
+  <!-- SALE -->
+  <div class="section">
+
+    <h2>💵 Sale | خرڅلاو</h2>
+
+    <input
+      id="saleProduct"
+      type="text"
+      placeholder="د محصول نوم"
+    >
+
+    <input
+      id="saleQty"
+      type="number"
+      min="1"
+      placeholder="تعداد"
+    >
+
+    <input
+      id="salePrice"
+      type="number"
+      min="0"
+      placeholder="د خرڅلاو قیمت (USD)"
+    >
+
+    <button onclick="addSale()">
+      💵 Add Sale
+    </button>
+
+    <div id="saleList"></div>
+
+  </div>
+
+
+  <!-- EXPENSES -->
+  <div class="section">
+
+    <h2>💸 Expenses | مصارف</h2>
+
+    <input
+      id="expenseName"
+      type="text"
+      placeholder="د مصرف نوم"
+    >
+
+    <input
+      id="expenseAmount"
+      type="number"
+      min="0"
+      placeholder="مبلغ (AFN)"
+    >
+
+    <button onclick="addExpense()">
+      ➕ Add Expense
+    </button>
+
+    <div id="expenseList"></div>
+
+  </div>
+
+
+  <!-- CAPITAL -->
+  <div class="section">
+
+    <h2>💰 Capital | سرمایه</h2>
+
+    <input
+      id="capitalAmount"
+      type="number"
+      min="0"
+      placeholder="د سرمایې مبلغ (USD)"
+    >
+
+    <button onclick="saveCapital()">
+      💾 Save Capital
+    </button>
+
+    <div id="capitalDisplay"></div>
 
   </div>
 
@@ -266,7 +404,9 @@
 
 <script>
 
-  /* DATA */
+  /* =========================
+     DATA
+  ========================= */
 
   let products =
     JSON.parse(localStorage.getItem("samadProducts")) || [];
@@ -278,7 +418,9 @@
     localStorage.getItem("samadCurrency") || "AFN";
 
 
-  /* TRANSLATIONS */
+  /* =========================
+     TRANSLATIONS
+  ========================= */
 
   const translations = {
 
@@ -295,7 +437,7 @@
       list: "د محصولاتو لېست",
       name: "د محصول نوم",
       code: "Product Code",
-      price: "د اخیستلو نرخ",
+      price: "د اخیستلو نرخ (USD)",
       quantity: "تعداد",
       lowLimit: "Low Stock Limit",
       empty: "تر اوسه محصول نشته.",
@@ -319,7 +461,7 @@
       list: "لیست محصولات",
       name: "نام محصول",
       code: "کد محصول",
-      price: "قیمت خرید",
+      price: "قیمت خرید (USD)",
       quantity: "تعداد",
       lowLimit: "حد پایین موجودی",
       empty: "هنوز محصولی وجود ندارد.",
@@ -343,7 +485,7 @@
       list: "Product List",
       name: "Product Name",
       code: "Product Code",
-      price: "Buying Price",
+      price: "Buying Price (USD)",
       quantity: "Quantity",
       lowLimit: "Low Stock Limit",
       empty: "No products yet.",
@@ -362,7 +504,52 @@
   }
 
 
-  /* LANGUAGE */
+  /* =========================
+     GET DATA
+  ========================= */
+
+  function getPurchases() {
+    return JSON.parse(
+      localStorage.getItem("samadPurchases") || "[]"
+    );
+  }
+
+  function getSales() {
+    return JSON.parse(
+      localStorage.getItem("samadSales") || "[]"
+    );
+  }
+
+  function getExpenses() {
+    return JSON.parse(
+      localStorage.getItem("samadExpenses") || "[]"
+    );
+  }
+
+  function getCapital() {
+    return Number(
+      localStorage.getItem("samadCapital") || 0
+    );
+  }
+
+
+  /* =========================
+     SAVE PRODUCTS
+  ========================= */
+
+  function saveData() {
+
+    localStorage.setItem(
+      "samadProducts",
+      JSON.stringify(products)
+    );
+
+  }
+
+
+  /* =========================
+     LANGUAGE
+  ========================= */
 
   function applyLanguage() {
 
@@ -375,66 +562,68 @@
     document.documentElement.dir =
       language.dir;
 
+    document.getElementById("appSubtitle")
+      .textContent = language.subtitle;
 
-    document.getElementById("appSubtitle").textContent =
-      language.subtitle;
+    document.getElementById("settingsTitle")
+      .textContent = language.settings;
 
-    document.getElementById("settingsTitle").textContent =
-      language.settings;
+    document.getElementById("languageLabel")
+      .textContent = language.language;
 
-    document.getElementById("languageLabel").textContent =
-      language.language;
+    document.getElementById("currencyLabel")
+      .textContent = language.currency;
 
-    document.getElementById("currencyLabel").textContent =
-      language.currency;
+    document.getElementById("productsTitle")
+      .textContent = language.products;
 
-    document.getElementById("productsTitle").textContent =
-      language.products;
+    document.getElementById("salesTitle")
+      .textContent = language.sales;
 
-    document.getElementById("salesTitle").textContent =
-      language.sales;
+    document.getElementById("addProductTitle")
+      .textContent = language.addProduct;
 
-    document.getElementById("addProductTitle").textContent =
-      language.addProduct;
+    document.getElementById("saveButton")
+      .textContent = language.save;
 
-    document.getElementById("saveButton").textContent =
-      language.save;
+    document.getElementById("listTitle")
+      .textContent = language.list;
 
-    document.getElementById("listTitle").textContent =
-      language.list;
+    document.getElementById("productName")
+      .placeholder = language.name;
 
+    document.getElementById("productCode")
+      .placeholder = language.code;
 
-    document.getElementById("productName").placeholder =
-      language.name;
+    document.getElementById("productPrice")
+      .placeholder = language.price;
 
-    document.getElementById("productCode").placeholder =
-      language.code;
+    document.getElementById("productQuantity")
+      .placeholder = language.quantity;
 
-    document.getElementById("productPrice").placeholder =
-      language.price;
+    document.getElementById("lowLimit")
+      .placeholder = language.lowLimit;
 
-    document.getElementById("productQuantity").placeholder =
-      language.quantity;
+    document.getElementById("language")
+      .value = currentLanguage;
 
-    document.getElementById("lowLimit").placeholder =
-      language.lowLimit;
+    document.getElementById("currency")
+      .value = currentCurrency;
 
+    document.getElementById("currencyDisplay")
+      .textContent = currentCurrency;
 
-    document.getElementById("language").value =
-      currentLanguage;
-
-    document.getElementById("currency").value =
-      currentCurrency;
-
-
-    document.getElementById("currencyDisplay").textContent =
-      currentCurrency;
-
-    document.getElementById("selectedCurrency").textContent =
+    document.getElementById("selectedCurrency")
+      .textContent =
       language.currency + ": " + currentCurrency;
 
-
     showProducts();
+    showPurchases();
+    showSales();
+    showExpenses();
+    showCapital();
+    showDashboard();
+
   }
 
 
@@ -449,6 +638,7 @@
     );
 
     applyLanguage();
+
   }
 
 
@@ -463,46 +653,134 @@
     );
 
     applyLanguage();
+
   }
 
 
-  /* SAVE DATA */
+  /* =========================
+     DASHBOARD
+  ========================= */
 
-  function saveData() {
+  function showDashboard() {
 
-    localStorage.setItem(
-      "samadProducts",
-      JSON.stringify(products)
-    );
+    const purchases = getPurchases();
+    const sales = getSales();
+    const expenses = getExpenses();
+    const capital = getCapital();
+
+    const purchaseTotal =
+      purchases.reduce(
+        (total, item) =>
+          total + Number(item.total || 0),
+        0
+      );
+
+    const saleTotal =
+      sales.reduce(
+        (total, item) =>
+          total + Number(item.total || 0),
+        0
+      );
+
+    const expenseTotal =
+      expenses.reduce(
+        (total, item) =>
+          total + Number(item.amount || 0),
+        0
+      );
+
+    const stockTotal =
+      products.reduce(
+        (total, product) =>
+          total + Number(product.quantity || 0),
+        0
+      );
+
+    /*
+      Profit is currently calculated in USD:
+      Sales - Purchases
+
+      AFN expenses are kept separate because
+      AFN and USD should not be mixed without
+      an exchange rate.
+    */
+
+    const profit =
+      saleTotal - purchaseTotal;
+
+    document.getElementById("capital")
+      .textContent =
+      "$" + formatNumber(capital) + " USD";
+
+    document.getElementById("stock")
+      .textContent =
+      formatNumber(stockTotal);
+
+    document.getElementById("purchase")
+      .textContent =
+      "$" + formatNumber(purchaseTotal) + " USD";
+
+    document.getElementById("sale")
+      .textContent =
+      "$" + formatNumber(saleTotal) + " USD";
+
+    document.getElementById("expenses")
+      .textContent =
+      formatNumber(expenseTotal) + " AFN";
+
+    document.getElementById("profit")
+      .textContent =
+      "$" + formatNumber(profit) + " USD";
+
+    document.getElementById("salesCount")
+      .textContent =
+      sales.length;
+
   }
 
 
-  /* ADD PRODUCT */
+  function formatNumber(number) {
+
+    return Number(number || 0)
+      .toLocaleString();
+
+  }
+
+
+  /* =========================
+     ADD PRODUCT
+  ========================= */
 
   function addProduct() {
 
     const name =
       document.getElementById("productName")
-      .value.trim();
+        .value.trim();
 
     const code =
       document.getElementById("productCode")
-      .value.trim();
+        .value.trim();
 
     const price =
-      document.getElementById("productPrice")
-      .value;
+      Number(
+        document.getElementById("productPrice")
+          .value || 0
+      );
 
     const quantity =
-      document.getElementById("productQuantity")
-      .value;
+      Number(
+        document.getElementById("productQuantity")
+          .value || 0
+      );
 
     const lowLimit =
-      document.getElementById("lowLimit")
-      .value;
+      Number(
+        document.getElementById("lowLimit")
+          .value || 0
+      );
 
 
-    if (!name || !quantity) {
+    if (!name || quantity <= 0) {
 
       document.getElementById("message")
         .textContent = t("error");
@@ -514,76 +792,78 @@
     products.push({
 
       name: name,
-
       code: code,
+      price: price,
+      quantity: quantity,
+      lowLimit: lowLimit,
 
-      price: Number(price || 0),
-
-      quantity: Number(quantity),
-
-      lowLimit: Number(lowLimit || 0),
-
-      currency: currentCurrency
+      /*
+        Product buying price is always USD.
+      */
+      currency: "USD"
 
     });
 
 
     saveData();
 
-    showProducts();
-
-
-    document.getElementById("productName").value = "";
-
-    document.getElementById("productCode").value = "";
-
-    document.getElementById("productPrice").value = "";
-
-    document.getElementById("productQuantity").value = "";
-
-    document.getElementById("lowLimit").value = "";
-
+    clearProductForm();
 
     document.getElementById("message")
       .textContent = t("success");
+
+    showProducts();
+    showDashboard();
+
   }
 
 
-  /* SHOW PRODUCTS */
+  function clearProductForm() {
+
+    document.getElementById("productName")
+      .value = "";
+
+    document.getElementById("productCode")
+      .value = "";
+
+    document.getElementById("productPrice")
+      .value = "";
+
+    document.getElementById("productQuantity")
+      .value = "";
+
+    document.getElementById("lowLimit")
+      .value = "";
+
+  }
+
+
+  /* =========================
+     SHOW PRODUCTS
+  ========================= */
 
   function showProducts() {
 
     const list =
       document.getElementById("productList");
 
-
     document.getElementById("productCount")
       .textContent = products.length;
 
 
-    /* Total Stock Quantity */
-
-    const totalStock =
-      products.reduce(
-        (total, product) =>
-          total + Number(product.quantity || 0),
-        0
-      );
-
-    document.getElementById("stock")
-      .textContent = totalStock;
-
-
     if (products.length === 0) {
 
-      list.textContent = t("empty");
+      list.innerHTML =
+        `<div class="empty">${t("empty")}</div>`;
+
+      showDashboard();
 
       return;
     }
 
 
-    list.innerHTML = products.map(
-      (product, index) => {
+    list.innerHTML =
+      products.map((product, index) => {
 
         const quantity =
           Number(product.quantity || 0);
@@ -591,11 +871,9 @@
         const lowLimit =
           Number(product.lowLimit || 0);
 
-
         const isLow =
           lowLimit > 0 &&
           quantity <= lowLimit;
-
 
         const stockStatus =
           isLow
@@ -608,28 +886,29 @@
           <div class="product">
 
             <h3>
-              ${index + 1}. ${product.name}
+              ${index + 1}. ${escapeHtml(product.name)}
             </h3>
 
             <p>
               ${t("code")}:
-              ${product.code || "-"}
+              ${escapeHtml(product.code || "-")}
             </p>
 
             <p>
               ${t("price")}:
-              ${product.price}
-              ${product.currency}
+              <span class="money-usd">
+                $${formatNumber(product.price || 0)} USD
+              </span>
             </p>
 
             <p>
               ${t("quantity")}:
-              ${quantity}
+              ${formatNumber(quantity)}
             </p>
 
             <p>
               ${t("lowLimit")}:
-              ${lowLimit}
+              ${formatNumber(lowLimit)}
             </p>
 
             <p>
@@ -647,318 +926,701 @@
 
         `;
 
-      }
-    ).join("");
+      }).join("");
+
   }
 
 
-  /* DELETE PRODUCT */
+  /* =========================
+     DELETE PRODUCT
+  ========================= */
 
   function deleteProduct(index) {
+
+    if (!products[index]) {
+      return;
+    }
 
     products.splice(index, 1);
 
     saveData();
 
     showProducts();
+    showDashboard();
+
   }
 
 
-  /* START */
+  /* =========================
+     PURCHASE
+  ========================= */
+
+  function addPurchase() {
+
+    const productName =
+      document.getElementById("purchaseProduct")
+        .value.trim();
+
+    const qty =
+      Number(
+        document.getElementById("purchaseQty")
+          .value || 0
+      );
+
+    const price =
+      Number(
+        document.getElementById("purchasePrice")
+          .value || 0
+      );
+
+
+    if (!productName || qty <= 0 || price <= 0) {
+
+      alert("لطفاً ټول معلومات ولیکئ");
+
+      return;
+    }
+
+
+    const productIndex =
+      products.findIndex(
+        product =>
+          product.name.toLowerCase() ===
+          productName.toLowerCase()
+      );
+
+
+    if (productIndex === -1) {
+
+      alert(
+        "دا محصول په Stock کې نشته. لومړی یې د Product List کې اضافه کړئ."
+      );
+
+      return;
+    }
+
+
+    /*
+      Purchase increases stock.
+    */
+
+    products[productIndex].quantity =
+      Number(products[productIndex].quantity || 0)
+      + qty;
+
+
+    saveData();
+
+
+    const purchases =
+      getPurchases();
+
+
+    purchases.push({
+
+      product: productName,
+      qty: qty,
+      price: price,
+      total: qty * price,
+      currency: "USD",
+      date: new Date().toLocaleDateString()
+
+    });
+
+
+    localStorage.setItem(
+      "samadPurchases",
+      JSON.stringify(purchases)
+    );
+
+
+    document.getElementById("purchaseProduct")
+      .value = "";
+
+    document.getElementById("purchaseQty")
+      .value = "";
+
+    document.getElementById("purchasePrice")
+      .value = "";
+
+
+    showPurchases();
+    showProducts();
+    showDashboard();
+
+  }
+
+
+  function showPurchases() {
+
+    const list =
+      document.getElementById("purchaseList");
+
+    const purchases =
+      getPurchases();
+
+
+    if (purchases.length === 0) {
+
+      list.innerHTML =
+        `<div class="empty">تر اوسه Purchase نشته.</div>`;
+
+      return;
+    }
+
+
+    list.innerHTML =
+      purchases.map((p, i) => `
+
+        <div class="card">
+
+          📦 ${escapeHtml(p.product)}
+          <br>
+
+          تعداد:
+          ${formatNumber(p.qty)}
+          <br>
+
+          قیمت:
+          <span class="money-usd">
+            $${formatNumber(p.price)} USD
+          </span>
+          <br>
+
+          ټول:
+          <span class="money-usd">
+            $${formatNumber(p.total)} USD
+          </span>
+          <br>
+
+          📅 ${escapeHtml(p.date || "")}
+
+          <br><br>
+
+          <button
+            class="delete-btn"
+            onclick="deletePurchase(${i})"
+          >
+            🗑️ Delete
+          </button>
+
+        </div>
+
+      `).join("");
+
+  }
+
+
+  function deletePurchase(index) {
+
+    const purchases =
+      getPurchases();
+
+    const purchase =
+      purchases[index];
+
+
+    if (!purchase) {
+      return;
+    }
+
+
+    /*
+      Reverse stock increase.
+    */
+
+    const productIndex =
+      products.findIndex(
+        product =>
+          product.name.toLowerCase() ===
+          String(purchase.product).toLowerCase()
+      );
+
+
+    if (productIndex !== -1) {
+
+      products[productIndex].quantity =
+        Math.max(
+          0,
+          Number(products[productIndex].quantity || 0)
+          - Number(purchase.qty || 0)
+        );
+
+      saveData();
+
+    }
+
+
+    purchases.splice(index, 1);
+
+
+    localStorage.setItem(
+      "samadPurchases",
+      JSON.stringify(purchases)
+    );
+
+
+    showPurchases();
+    showProducts();
+    showDashboard();
+
+  }
+
+
+  /* =========================
+     SALE
+  ========================= */
+
+  function addSale() {
+
+    const productName =
+      document.getElementById("saleProduct")
+        .value.trim();
+
+    const qty =
+      Number(
+        document.getElementById("saleQty")
+          .value || 0
+      );
+
+    const price =
+      Number(
+        document.getElementById("salePrice")
+          .value || 0
+      );
+
+
+    if (!productName || qty <= 0 || price <= 0) {
+
+      alert("لطفاً ټول معلومات ولیکئ");
+
+      return;
+    }
+
+
+    const productIndex =
+      products.findIndex(
+        product =>
+          product.name.toLowerCase() ===
+          productName.toLowerCase()
+      );
+
+
+    if (productIndex === -1) {
+
+      alert("دا محصول په Stock کې نشته");
+
+      return;
+    }
+
+
+    const currentStock =
+      Number(products[productIndex].quantity || 0);
+
+
+    if (currentStock < qty) {
+
+      alert("په Stock کې دومره مال نشته");
+
+      return;
+    }
+
+
+    /*
+      Sale decreases stock.
+    */
+
+    products[productIndex].quantity =
+      currentStock - qty;
+
+
+    saveData();
+
+
+    const sales =
+      getSales();
+
+
+    sales.push({
+
+      product: productName,
+      qty: qty,
+      price: price,
+      total: qty * price,
+      currency: "USD",
+      date: new Date().toLocaleDateString()
+
+    });
+
+
+    localStorage.setItem(
+      "samadSales",
+      JSON.stringify(sales)
+    );
+
+
+    document.getElementById("saleProduct")
+      .value = "";
+
+    document.getElementById("saleQty")
+      .value = "";
+
+    document.getElementById("salePrice")
+      .value = "";
+
+
+    showSales();
+    showProducts();
+    showDashboard();
+
+  }
+
+
+  function showSales() {
+
+    const list =
+      document.getElementById("saleList");
+
+    const sales =
+      getSales();
+
+
+    if (sales.length === 0) {
+
+      list.innerHTML =
+        `<div class="empty">تر اوسه Sale نشته.</div>`;
+
+      return;
+    }
+
+
+    list.innerHTML =
+      sales.map((s, i) => `
+
+        <div class="card">
+
+          💵 ${escapeHtml(s.product)}
+          <br>
+
+          تعداد:
+          ${formatNumber(s.qty)}
+          <br>
+
+          قیمت:
+          <span class="money-usd">
+            $${formatNumber(s.price)} USD
+          </span>
+          <br>
+
+          ټول:
+          <span class="money-usd">
+            $${formatNumber(s.total)} USD
+          </span>
+          <br>
+
+          📅 ${escapeHtml(s.date || "")}
+
+          <br><br>
+
+          <button
+            class="delete-btn"
+            onclick="deleteSale(${i})"
+          >
+            🗑️ Delete
+          </button>
+
+        </div>
+
+      `).join("");
+
+  }
+
+
+  function deleteSale(index) {
+
+    const sales =
+      getSales();
+
+    const sale =
+      sales[index];
+
+
+    if (!sale) {
+      return;
+    }
+
+
+    /*
+      Reverse sale stock decrease.
+    */
+
+    const productIndex =
+      products.findIndex(
+        product =>
+          product.name.toLowerCase() ===
+          String(sale.product).toLowerCase()
+      );
+
+
+    if (productIndex !== -1) {
+
+      products[productIndex].quantity =
+        Number(products[productIndex].quantity || 0)
+        + Number(sale.qty || 0);
+
+      saveData();
+
+    }
+
+
+    sales.splice(index, 1);
+
+
+    localStorage.setItem(
+      "samadSales",
+      JSON.stringify(sales)
+    );
+
+
+    showSales();
+    showProducts();
+    showDashboard();
+
+  }
+
+
+  /* =========================
+     EXPENSES
+  ========================= */
+
+  function addExpense() {
+
+    const name =
+      document.getElementById("expenseName")
+        .value.trim();
+
+    const amount =
+      Number(
+        document.getElementById("expenseAmount")
+          .value || 0
+      );
+
+
+    if (!name || amount <= 0) {
+
+      alert(
+        "لطفاً د مصرف نوم او مبلغ ولیکئ"
+      );
+
+      return;
+    }
+
+
+    const expenses =
+      getExpenses();
+
+
+    expenses.push({
+
+      name: name,
+      amount: amount,
+      currency: "AFN",
+      date: new Date().toLocaleDateString()
+
+    });
+
+
+    localStorage.setItem(
+      "samadExpenses",
+      JSON.stringify(expenses)
+    );
+
+
+    document.getElementById("expenseName")
+      .value = "";
+
+    document.getElementById("expenseAmount")
+      .value = "";
+
+
+    showExpenses();
+    showDashboard();
+
+  }
+
+
+  function showExpenses() {
+
+    const list =
+      document.getElementById("expenseList");
+
+    const expenses =
+      getExpenses();
+
+
+    if (expenses.length === 0) {
+
+      list.innerHTML =
+        `<div class="empty">تر اوسه Expenses نشته.</div>`;
+
+      return;
+    }
+
+
+    list.innerHTML =
+      expenses.map((e, i) => `
+
+        <div class="card">
+
+          💸 ${escapeHtml(e.name)}
+          <br>
+
+          مبلغ:
+          <span class="money-afn">
+            ${formatNumber(e.amount)} AFN
+          </span>
+          <br>
+
+          📅 ${escapeHtml(e.date || "")}
+
+          <br><br>
+
+          <button
+            class="delete-btn"
+            onclick="deleteExpense(${i})"
+          >
+            🗑️ Delete
+          </button>
+
+        </div>
+
+      `).join("");
+
+  }
+
+
+  function deleteExpense(index) {
+
+    const expenses =
+      getExpenses();
+
+
+    if (!expenses[index]) {
+      return;
+    }
+
+
+    expenses.splice(index, 1);
+
+
+    localStorage.setItem(
+      "samadExpenses",
+      JSON.stringify(expenses)
+    );
+
+
+    showExpenses();
+    showDashboard();
+
+  }
+
+
+  /* =========================
+     CAPITAL
+  ========================= */
+
+  function saveCapital() {
+
+    const amount =
+      Number(
+        document.getElementById("capitalAmount")
+          .value || 0
+      );
+
+
+    if (amount <= 0) {
+
+      alert(
+        "لطفاً د سرمایې مبلغ ولیکئ"
+      );
+
+      return;
+    }
+
+
+    /*
+      Capital is always USD.
+    */
+
+    localStorage.setItem(
+      "samadCapital",
+      amount
+    );
+
+
+    document.getElementById("capitalAmount")
+      .value = "";
+
+
+    showCapital();
+    showDashboard();
+
+  }
+
+
+  function showCapital() {
+
+    const display =
+      document.getElementById("capitalDisplay");
+
+    const capital =
+      getCapital();
+
+
+    display.innerHTML = `
+
+      <h3>
+        💰 موجوده سرمایه:
+        <span class="money-usd">
+          $${formatNumber(capital)} USD
+        </span>
+      </h3>
+
+    `;
+
+  }
+
+
+  /* =========================
+     SECURITY / HTML SAFETY
+  ========================= */
+
+  function escapeHtml(value) {
+
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+
+  }
+
+
+  /* =========================
+     START APP
+  ========================= */
 
   applyLanguage();
 
-</script>
-<!-- PURCHASE -->
-<section class="card">
-  <h2>🛒 Purchase | خریداری</h2>
-
-  <input id="purchaseProduct" type="text" placeholder="د محصول نوم">
-  <input id="purchaseQty" type="number" placeholder="تعداد">
-  <input id="purchasePrice" type="number" placeholder="د اخیستلو قیمت">
-
-  <button onclick="addPurchase()">➕ Add Purchase</button>
-
-  <div id="purchaseList"></div>
-</section>
-
-<script>
-function addPurchase() {
-  const product = document.getElementById("purchaseProduct").value;
-  const qty = Number(document.getElementById("purchaseQty").value);
-  const price = Number(document.getElementById("purchasePrice").value);
-
-  if (!product || !qty || !price) {
-    alert("لطفاً ټول معلومات ولیکئ");
-    return;
-  }
-
-  let purchases = JSON.parse(localStorage.getItem("samadPurchases") || "[]");
-
-  purchases.push({
-    product: product,
-    qty: qty,
-    price: price,
-    total: qty * price,
-    date: new Date().toLocaleDateString()
-  });
-
-  localStorage.setItem("samadPurchases", JSON.stringify(purchases));
-
-  document.getElementById("purchaseProduct").value = "";
-  document.getElementById("purchaseQty").value = "";
-  document.getElementById("purchasePrice").value = "";
-
+  showProducts();
   showPurchases();
-}
-
-function showPurchases() {
-  const list = document.getElementById("purchaseList");
-  if (!list) return;
-
-  let purchases = JSON.parse(localStorage.getItem("samadPurchases") || "[]");
-
-  list.innerHTML = purchases.map((p, i) => `
-    <div class="card">
-      📦 ${p.product}<br>
-      تعداد: ${p.qty}<br>
-      قیمت: ${p.price}<br>
-      ټول: ${p.total}<br>
-      📅 ${p.date}
-      <br><br>
-      <button onclick="deletePurchase(${i})">🗑️ Delete</button>
-    </div>
-  `).join("");
-}
-
-function deletePurchase(index) {
-  let purchases = JSON.parse(localStorage.getItem("samadPurchases") || "[]");
-  purchases.splice(index, 1);
-  localStorage.setItem("samadPurchases", JSON.stringify(purchases));
-  showPurchases();
-}
-
-showPurchases();
-</script>
-  <!-- SALE -->
-<section class="card">
-  <h2>💵 Sale | خرڅلاو</h2>
-
-  <input id="saleProduct" type="text" placeholder="د محصول نوم">
-  <input id="saleQty" type="number" placeholder="تعداد">
-  <input id="salePrice" type="number" placeholder="د خرڅلاو قیمت">
-
-  <button onclick="addSale()">💵 Add Sale</button>
-
-  <div id="saleList"></div>
-</section>
-
-<script>
-function addSale() {
-  const product = document.getElementById("saleProduct").value.trim();
-  const qty = Number(document.getElementById("saleQty").value);
-  const price = Number(document.getElementById("salePrice").value);
-
-  if (!product || !qty || !price) {
-    alert("لطفاً ټول معلومات ولیکئ");
-    return;
-  }
-
-  let products = JSON.parse(localStorage.getItem("samadProducts") || "[]");
-
-  const index = products.findIndex(
-    p => p.name.toLowerCase() === product.toLowerCase()
-  );
-
-  if (index === -1) {
-    alert("دا محصول په Stock کې نشته");
-    return;
-  }
-
-  if (products[index].quantity < qty) {
-    alert("په Stock کې دومره مال نشته");
-    return;
-  }
-
-  products[index].quantity -= qty;
-  localStorage.setItem("samadProducts", JSON.stringify(products));
-
-  let sales = JSON.parse(localStorage.getItem("samadSales") || "[]");
-
-  sales.push({
-    product: product,
-    qty: qty,
-    price: price,
-    total: qty * price,
-    date: new Date().toLocaleDateString()
-  });
-
-  localStorage.setItem("samadSales", JSON.stringify(sales));
-
-  document.getElementById("saleProduct").value = "";
-  document.getElementById("saleQty").value = "";
-  document.getElementById("salePrice").value = "";
-
   showSales();
-
-  if (typeof showProducts === "function") {
-    showProducts();
-  }
-}
-
-function showSales() {
-  const list = document.getElementById("saleList");
-  if (!list) return;
-
-  let sales = JSON.parse(localStorage.getItem("samadSales") || "[]");
-
-  list.innerHTML = sales.map((s, i) => `
-    <div class="card">
-      💵 ${s.product}<br>
-      تعداد: ${s.qty}<br>
-      قیمت: ${s.price}<br>
-      ټول: ${s.total}<br>
-      📅 ${s.date}
-      <br><br>
-      <button onclick="deleteSale(${i})">🗑️ Delete</button>
-    </div>
-  `).join("");
-}
-
-function deleteSale(index) {
-  let sales = JSON.parse(localStorage.getItem("samadSales") || "[]");
-
-  const sale = sales[index];
-
-  let products = JSON.parse(localStorage.getItem("samadProducts") || "[]");
-  const productIndex = products.findIndex(
-    p => p.name.toLowerCase() === sale.product.toLowerCase()
-  );
-
-  if (productIndex !== -1) {
-    products[productIndex].quantity += sale.qty;
-    localStorage.setItem("samadProducts", JSON.stringify(products));
-  }
-
-  sales.splice(index, 1);
-  localStorage.setItem("samadSales", JSON.stringify(sales));
-
-  showSales();
-
-  if (typeof showProducts === "function") {
-    showProducts();
-  }
-}
-
-showSales();
-</script>
-  <!-- EXPENSES -->
-<section class="card">
-  <h2>💸 Expenses | مصارف</h2>
-
-  <input id="expenseName" type="text" placeholder="د مصرف نوم">
-  <input id="expenseAmount" type="number" placeholder="مبلغ (USD)">
-
-  <button onclick="addExpense()">➕ Add Expense</button>
-
-  <div id="expenseList"></div>
-</section>
-
-<script>
-function addExpense() {
-  const name = document.getElementById("expenseName").value.trim();
-  const amount = Number(document.getElementById("expenseAmount").value);
-
-  if (!name || !amount) {
-    alert("لطفاً د مصرف نوم او مبلغ ولیکئ");
-    return;
-  }
-
-  let expenses = JSON.parse(localStorage.getItem("samadExpenses") || "[]");
-
-  expenses.push({
-    name: name,
-    amount: amount,
-    currency: "AFN",
-    date: new Date().toLocaleDateString()
-  });
-
-  localStorage.setItem("samadExpenses", JSON.stringify(expenses));
-
-  document.getElementById("expenseName").value = "";
-  document.getElementById("expenseAmount").value = "";
-
   showExpenses();
-}
-
-function showExpenses() {
-  const list = document.getElementById("expenseList");
-  if (!list) return;
-
-  let expenses = JSON.parse(localStorage.getItem("samadExpenses") || "[]");
-
-  list.innerHTML = expenses.map((e, i) => `
-    <div class="card">
-      💸 ${e.name}<br>
-      مبلغ: ${e.amount} AFN<br>
-      📅 ${e.date}
-      <br><br>
-      <button onclick="deleteExpense(${i})">🗑️ Delete</button>
-    </div>
-  `).join("");
-}
-
-function deleteExpense(index) {
-  let expenses = JSON.parse(localStorage.getItem("samadExpenses") || "[]");
-
-  expenses.splice(index, 1);
-
-  localStorage.setItem("samadExpenses", JSON.stringify(expenses));
-
-  showExpenses();
-}
-
-showExpenses();
-</script>
-  <!-- CAPITAL -->
-<section class="card">
-  <h2>💰 Capital | سرمایه</h2>
-
-  <input id="capitalAmount" type="number" placeholder="د سرمایې مبلغ (USD)">
-
-  <button onclick="saveCapital()">💾 Save Capital</button>
-
-  <div id="capitalDisplay"></div>
-</section>
-
-<script>
-function saveCapital() {
-  const amount = Number(document.getElementById("capitalAmount").value);
-
-  if (!amount) {
-    alert("لطفاً د سرمایې مبلغ ولیکئ");
-    return;
-  }
-
-  localStorage.setItem("samadCapital", amount);
-
-  document.getElementById("capitalAmount").value = "";
-
   showCapital();
-}
+  showDashboard();
 
-function showCapital() {
-  const display = document.getElementById("capitalDisplay");
-  if (!display) return;
-
-  const capital = Number(localStorage.getItem("samadCapital") || 0);
-
-  display.innerHTML = `
-    <h3>💰 موجوده سرمایه: $${capital} USD</h3>
-  `;
-}
-
-showCapital();
 </script>
+
 </body>
 </html>
