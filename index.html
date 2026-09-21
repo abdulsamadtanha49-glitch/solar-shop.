@@ -2,7 +2,7 @@
 <html lang="ps" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Samad Solar</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -11,308 +11,207 @@
 <style>
 *{box-sizing:border-box}
 body{
-  margin:0;
-  font-family:Arial,Tahoma,sans-serif;
-  background:#eef2f7;
-  color:#172033
+ margin:0;
+ font-family:Arial,Tahoma,sans-serif;
+ background:#eef2f7;
+ color:#172033
 }
 button,input,select,textarea{font-family:inherit}
 button{
-  border:0;
-  border-radius:10px;
-  padding:10px 15px;
-  cursor:pointer;
-  font-weight:bold
+ border:0;border-radius:10px;padding:10px 15px;
+ cursor:pointer;font-weight:bold
 }
 .top{
-  background:#0f766e;
-  color:white;
-  padding:18px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px
+ background:#0f766e;color:#fff;padding:18px;
+ display:flex;justify-content:space-between;align-items:center;gap:10px
 }
 .top h1{margin:0;font-size:24px}
-.top small{opacity:.9}
 .nav{
-  display:flex;
-  gap:7px;
-  flex-wrap:wrap;
-  padding:10px;
-  background:white;
-  box-shadow:0 2px 8px #0001
+ display:flex;gap:7px;flex-wrap:wrap;padding:10px;
+ background:#fff;box-shadow:0 2px 8px #0001
 }
 .nav button{background:#e8f5f3;color:#0f766e}
-.nav button.active{background:#0f766e;color:white}
-
-.container{max-width:1200px;margin:auto;padding:15px}
+.nav button.active{background:#0f766e;color:#fff}
+.container{max-width:1250px;margin:auto;padding:15px}
 .page{display:none}
 .page.active{display:block}
-
 .card{
-  background:white;
-  border-radius:15px;
-  padding:18px;
-  margin-bottom:15px;
-  box-shadow:0 3px 12px #0000000d
+ background:#fff;border-radius:15px;padding:18px;margin-bottom:15px;
+ box-shadow:0 3px 12px #0000000d
 }
 .grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
-  gap:12px
+ display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+ gap:12px
 }
 .stat{
-  background:#fff;
-  border-radius:15px;
-  padding:18px;
-  box-shadow:0 3px 12px #0000000d
+ background:#fff;border-radius:15px;padding:18px;
+ box-shadow:0 3px 12px #0000000d
 }
-.stat b{display:block;font-size:24px;margin-top:8px;color:#0f766e}
-
+.stat b{
+ display:block;font-size:23px;margin-top:8px;color:#0f766e
+}
+.form-grid{
+ display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+ gap:12px
+}
 label{display:block;font-weight:bold;margin-bottom:5px}
 input,select,textarea{
-  width:100%;
-  padding:11px;
-  border:1px solid #d5dce5;
-  border-radius:9px;
-  background:white
+ width:100%;padding:11px;border:1px solid #d5dce5;
+ border-radius:9px;background:#fff
 }
 textarea{min-height:80px}
-.form-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:12px
-}
-.primary{background:#0f766e;color:white}
-.green{background:#16a34a;color:white}
-.red{background:#dc2626;color:white}
-.blue{background:#2563eb;color:white}
-.gray{background:#64748b;color:white}
-.orange{background:#ea580c;color:white}
-.purple{background:#7c3aed;color:white}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.primary{background:#0f766e;color:#fff}
+.green{background:#16a34a;color:#fff}
+.red{background:#dc2626;color:#fff}
+.blue{background:#2563eb;color:#fff}
+.gray{background:#64748b;color:#fff}
+.orange{background:#ea580c;color:#fff}
+.purple{background:#7c3aed;color:#fff}
+.black{background:#111827;color:#fff}
 
 table{
-  width:100%;
-  border-collapse:collapse;
-  margin-top:12px
+ width:100%;border-collapse:collapse;margin-top:12px
 }
 th,td{
-  padding:10px;
-  border-bottom:1px solid #e5e7eb;
-  text-align:right
+ padding:10px;border-bottom:1px solid #e5e7eb;text-align:right
 }
 th{background:#f8fafc}
-
 .alert{
-  background:#fff7ed;
-  color:#9a3412;
-  border:1px solid #fed7aa;
-  padding:12px;
-  border-radius:10px;
-  margin-bottom:10px
+ background:#fff7ed;color:#9a3412;border:1px solid #fed7aa;
+ padding:12px;border-radius:10px;margin-bottom:10px
 }
 .success{
-  background:#ecfdf5;
-  color:#166534;
-  border:1px solid #bbf7d0;
-  padding:12px;
-  border-radius:10px
+ background:#ecfdf5;color:#166534;border:1px solid #bbf7d0;
+ padding:12px;border-radius:10px
 }
-.actions{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  margin-top:12px
+.info{
+ background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe;
+ padding:12px;border-radius:10px
 }
+.danger{color:#dc2626}
+.good{color:#16a34a}
+
+.report-filter{
+ display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px
+}
+.report-filter button.active{
+ background:#0f766e;color:#fff
+}
+.report-summary{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+ gap:12px
+}
+.report-box{
+ background:#f8fafc;border-radius:12px;padding:15px;
+ border:1px solid #e5e7eb
+}
+.report-box span{display:block;color:#64748b;font-size:13px}
+.report-box b{font-size:21px;display:block;margin-top:7px}
+.report-title{
+ text-align:center;
+ margin-bottom:20px
+}
+.report-title h2{margin:0;color:#0f766e}
+.report-title p{margin:6px 0;color:#64748b}
 
 .modal{
-  position:fixed;
-  inset:0;
-  background:#0008;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:15px;
-  z-index:1000
+ position:fixed;inset:0;background:#0008;
+ display:none;align-items:center;justify-content:center;
+ padding:15px;z-index:1000
 }
 .modal.show{display:flex}
 .modal-box{
-  background:white;
-  width:min(850px,100%);
-  max-height:95vh;
-  overflow:auto;
-  border-radius:15px;
-  padding:15px
+ background:#fff;width:min(900px,100%);
+ max-height:95vh;overflow:auto;border-radius:15px;padding:15px
 }
 
 /* INVOICE */
 .invoice{
-  width:794px;
-  max-width:100%;
-  min-height:1123px;
-  margin:auto;
-  background:white;
-  position:relative;
-  overflow:hidden;
-  color:#172033
+ width:794px;max-width:100%;min-height:1123px;
+ margin:auto;position:relative;overflow:hidden;
+ color:#172033;background:#fff
 }
-.invoice-inner{
-  position:relative;
-  z-index:2;
-  padding:35px
-}
+.invoice-inner{position:relative;z-index:2;padding:35px}
 .invoice-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:20px;
-  border-bottom:3px solid #0f766e;
-  padding-bottom:18px
+ display:flex;justify-content:space-between;align-items:flex-start;
+ gap:20px;border-bottom:3px solid #0f766e;padding-bottom:18px
 }
 .invoice-logo{
-  width:85px;
-  height:85px;
-  object-fit:contain;
-  border-radius:12px
+ width:85px;height:85px;object-fit:contain;border-radius:12px
 }
-.shop-name{
-  font-size:28px;
-  font-weight:bold;
-  color:#0f766e
-}
+.shop-name{font-size:28px;font-weight:bold;color:#0f766e}
 .invoice-meta{text-align:left;font-size:13px}
 .invoice-meta b{font-size:18px}
-
 .customer-box{
-  margin-top:22px;
-  padding:12px;
-  border-radius:10px;
-  background:#f8fafc
+ margin-top:22px;padding:12px;border-radius:10px;background:#f8fafc
 }
-.invoice-table{
-  margin-top:20px
-}
-.invoice-table th{
-  background:#0f766e;
-  color:white
-}
+.invoice-table{margin-top:20px}
+.invoice-table th{background:#0f766e;color:#fff}
 .invoice-total{
-  margin-top:20px;
-  margin-left:0;
-  width:330px;
-  max-width:100%;
-  border:1px solid #ddd;
-  border-radius:10px;
-  overflow:hidden
+ margin-top:20px;margin-left:0;width:330px;max-width:100%;
+ border:1px solid #ddd;border-radius:10px;overflow:hidden
 }
 .total-row{
-  display:flex;
-  justify-content:space-between;
-  padding:10px 13px;
-  border-bottom:1px solid #eee
+ display:flex;justify-content:space-between;
+ padding:10px 13px;border-bottom:1px solid #eee
 }
-.total-row:last-child{
-  border:0;
-  font-size:19px;
-  font-weight:bold
-}
+.total-row:last-child{border:0;font-size:19px;font-weight:bold}
 .remaining{color:#dc2626}
 .paid{color:#16a34a}
-
 .invoice-footer{
-  position:absolute;
-  bottom:22px;
-  left:35px;
-  right:35px;
-  border-top:1px solid #ddd;
-  padding-top:12px;
-  display:flex;
-  justify-content:space-between;
-  gap:15px;
-  font-size:12px
+ position:absolute;bottom:22px;left:35px;right:35px;
+ border-top:1px solid #ddd;padding-top:12px;
+ display:flex;justify-content:space-between;gap:15px;font-size:12px
 }
-
 .watermark{
-  position:absolute;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:1;
-  pointer-events:none
+ position:absolute;inset:0;display:flex;align-items:center;
+ justify-content:center;z-index:1;pointer-events:none
 }
-.watermark img{
-  width:420px;
-  max-width:65%;
-  opacity:.045;
-  transform:rotate(-25deg)
-}
+.watermark img{width:420px;max-width:65%;opacity:.045;transform:rotate(-25deg)}
 
 .whatsapp{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  color:#16a34a;
-  font-weight:bold;
-  text-decoration:none
+ display:inline-flex;align-items:center;gap:6px;
+ color:#16a34a;font-weight:bold;text-decoration:none
 }
-.wa-icon{
-  width:20px;
-  height:20px
-}
+.wa-icon{width:20px;height:20px}
 
-/* invoice designs */
 .design-classic{background:#fff}
 .design-light{
-  background:
-    radial-gradient(circle at 90% 10%,#dff7f1 0 90px,transparent 91px),
-    linear-gradient(135deg,#fff,#f7fbfa)
+ background:
+ radial-gradient(circle at 90% 10%,#dff7f1 0 90px,transparent 91px),
+ linear-gradient(135deg,#fff,#f7fbfa)
 }
 .design-solar{
-  background:
-    linear-gradient(135deg,#fff 0 65%,#eff6ff 65% 100%)
+ background:linear-gradient(135deg,#fff 0 65%,#eff6ff 65% 100%)
 }
 .design-dark{
-  background:
-    linear-gradient(135deg,#ffffff 0 70%,#e2e8f0 70% 100%)
+ background:linear-gradient(135deg,#fff 0 70%,#e2e8f0 70% 100%)
 }
 
+.design-options{
+ display:grid;grid-template-columns:repeat(4,1fr);gap:10px
+}
 .preview-design{
-  height:90px;
-  border-radius:10px;
-  border:2px solid #ddd;
-  cursor:pointer;
-  position:relative;
-  overflow:hidden
+ height:90px;border-radius:10px;border:2px solid #ddd;
+ cursor:pointer;position:relative;overflow:hidden
 }
 .preview-design span{
-  position:absolute;
-  bottom:7px;
-  right:8px;
-  background:#0009;
-  color:white;
-  padding:4px 7px;
-  border-radius:5px;
-  font-size:12px
+ position:absolute;bottom:7px;right:8px;background:#0009;
+ color:#fff;padding:4px 7px;border-radius:5px;font-size:12px
 }
-.d1{background:white}
+.d1{background:#fff}
 .d2{background:linear-gradient(135deg,#fff,#dff7f1)}
 .d3{background:linear-gradient(135deg,#fff 60%,#dbeafe 60%)}
 .d4{background:linear-gradient(135deg,#fff 70%,#cbd5e1 70%)}
 
-.design-options{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px
-}
-
 @media(max-width:650px){
-  .top{align-items:flex-start;flex-direction:column}
-  .design-options{grid-template-columns:repeat(2,1fr)}
-  .invoice-inner{padding:20px}
-  .invoice-header{flex-direction:column}
-  .invoice-footer{left:20px;right:20px}
+ .top{align-items:flex-start;flex-direction:column}
+ .design-options{grid-template-columns:repeat(2,1fr)}
+ .invoice-inner{padding:20px}
+ .invoice-header{flex-direction:column}
+ .invoice-footer{left:20px;right:20px}
 }
 </style>
 </head>
@@ -320,375 +219,468 @@ th{background:#f8fafc}
 <body>
 
 <header class="top">
-  <div>
-    <h1 id="shopTitle">Samad Solar</h1>
-    <small>Solar Shop Management System</small>
-  </div>
-  <div id="dateNow"></div>
+ <div>
+  <h1 id="shopTitle">Samad Solar</h1>
+  <small>Solar Shop Management System</small>
+ </div>
+ <div id="dateNow"></div>
 </header>
 
 <nav class="nav">
-  <button onclick="showPage('dashboard')" class="active">Dashboard</button>
-  <button onclick="showPage('stock')">Stock</button>
-  <button onclick="showPage('purchase')">Purchase</button>
-  <button onclick="showPage('sale')">Sale</button>
-  <button onclick="showPage('expense')">Expenses</button>
-  <button onclick="showPage('debt')">Debt</button>
-  <button onclick="showPage('reports')">Reports</button>
-  <button onclick="showPage('capital')">Capital</button>
-  <button onclick="showPage('settings')">Settings</button>
-  <button onclick="showPage('backup')">Backup</button>
+ <button onclick="showPage('dashboard')" class="active">Dashboard</button>
+ <button onclick="showPage('stock')">Stock</button>
+ <button onclick="showPage('purchase')">Purchase</button>
+ <button onclick="showPage('sale')">Sale</button>
+ <button onclick="showPage('expense')">Expenses</button>
+ <button onclick="showPage('debt')">Debt</button>
+ <button onclick="showPage('reports')">Reports</button>
+ <button onclick="showPage('capital')">Capital</button>
+ <button onclick="showPage('settings')">Settings</button>
+ <button onclick="showPage('backup')">Backup</button>
 </nav>
 
 <main class="container">
 
 <section id="dashboard" class="page active">
-  <div class="grid">
-    <div class="stat">Products<b id="dProducts">0</b></div>
-    <div class="stat">Stock Items<b id="dStock">0</b></div>
-    <div class="stat">Sales<b id="dSales">0</b></div>
-    <div class="stat">Purchases<b id="dPurchases">0</b></div>
-    <div class="stat">Expenses AFN<b id="dExpenses">0</b></div>
-    <div class="stat">Remaining Debt<b id="dDebt">0</b></div>
-  </div>
+ <div class="grid">
+  <div class="stat">Products<b id="dProducts">0</b></div>
+  <div class="stat">Stock Items<b id="dStock">0</b></div>
+  <div class="stat">Sales<b id="dSales">0</b></div>
+  <div class="stat">Purchases<b id="dPurchases">0</b></div>
+  <div class="stat">Expenses AFN<b id="dExpenses">0</b></div>
+  <div class="stat">Remaining Debt<b id="dDebt">0</b></div>
+ </div>
 
-  <div class="card">
-    <h2>Low Stock</h2>
-    <div id="lowStock"></div>
-  </div>
+ <div class="card">
+  <h2>Low Stock</h2>
+  <div id="lowStock"></div>
+ </div>
 
-  <div class="card">
-    <h2>Recent Sales</h2>
-    <div id="recentSales"></div>
-  </div>
+ <div class="card">
+  <h2>Recent Sales</h2>
+  <div id="recentSales"></div>
+ </div>
 </section>
 
 <section id="stock" class="page">
-  <div class="card">
-    <h2>Products / Stock</h2>
+ <div class="card">
+  <h2>Products / Stock</h2>
 
-    <div class="form-grid">
-      <div>
-        <label>Product Name</label>
-        <input id="pName">
-      </div>
-      <div>
-        <label>Model</label>
-        <input id="pModel">
-      </div>
-      <div>
-        <label>Category</label>
-        <input id="pCategory">
-      </div>
-      <div>
-        <label>Buy Price USD</label>
-        <input id="pBuy" type="number">
-      </div>
-      <div>
-        <label>Sell Price USD</label>
-        <input id="pSell" type="number">
-      </div>
-      <div>
-        <label>Stock</label>
-        <input id="pStock" type="number">
-      </div>
-      <div>
-        <label>Low Stock Limit</label>
-        <input id="pLimit" type="number" value="2">
-      </div>
-    </div>
-
-    <div class="actions">
-      <button class="primary" onclick="saveProduct()">Save Product</button>
-      <button class="gray" onclick="clearProductForm()">Clear</button>
-    </div>
+  <div class="form-grid">
+   <div>
+    <label>Product Name</label>
+    <input id="pName">
+   </div>
+   <div>
+    <label>Model</label>
+    <input id="pModel">
+   </div>
+   <div>
+    <label>Category</label>
+    <input id="pCategory">
+   </div>
+   <div>
+    <label>Buy Price USD</label>
+    <input id="pBuy" type="number">
+   </div>
+   <div>
+    <label>Sell Price USD</label>
+    <input id="pSell" type="number">
+   </div>
+   <div>
+    <label>Stock</label>
+    <input id="pStock" type="number">
+   </div>
+   <div>
+    <label>Low Stock Limit</label>
+    <input id="pLimit" type="number" value="2">
+   </div>
   </div>
 
-  <div class="card">
-    <input id="stockSearch" placeholder="Search product..." oninput="renderStock()">
-    <div id="stockTable"></div>
+  <div class="actions">
+   <button class="primary" onclick="saveProduct()">Save Product</button>
+   <button class="gray" onclick="clearProductForm()">Clear</button>
   </div>
+ </div>
+
+ <div class="card">
+  <input id="stockSearch" placeholder="Search product..." oninput="renderStock()">
+  <div id="stockTable"></div>
+ </div>
 </section>
 
 <section id="purchase" class="page">
-  <div class="card">
-    <h2>Purchase</h2>
+ <div class="card">
+  <h2>Purchase</h2>
 
-    <div class="form-grid">
-      <div>
-        <label>Product</label>
-        <select id="purchaseProduct"></select>
-      </div>
-      <div>
-        <label>Quantity</label>
-        <input id="purchaseQty" type="number" min="1">
-      </div>
-      <div>
-        <label>Buy Price USD</label>
-        <input id="purchasePrice" type="number">
-      </div>
-      <div>
-        <label>Supplier</label>
-        <input id="purchaseSupplier">
-      </div>
-    </div>
-
-    <button class="primary" onclick="savePurchase()">Save Purchase</button>
+  <div class="form-grid">
+   <div>
+    <label>Product</label>
+    <select id="purchaseProduct"></select>
+   </div>
+   <div>
+    <label>Quantity</label>
+    <input id="purchaseQty" type="number" min="1">
+   </div>
+   <div>
+    <label>Buy Price USD</label>
+    <input id="purchasePrice" type="number">
+   </div>
+   <div>
+    <label>Supplier</label>
+    <input id="purchaseSupplier">
+   </div>
   </div>
 
-  <div class="card">
-    <h3>Purchase History</h3>
-    <div id="purchaseTable"></div>
-  </div>
+  <button class="primary" onclick="savePurchase()">Save Purchase</button>
+ </div>
+
+ <div class="card">
+  <h3>Purchase History</h3>
+  <div id="purchaseTable"></div>
+ </div>
 </section>
 
 <section id="sale" class="page">
-  <div class="card">
-    <h2>New Sale / Invoice</h2>
+ <div class="card">
+  <h2>New Sale / Invoice</h2>
 
-    <div class="form-grid">
-      <div>
-        <label>Customer Name</label>
-        <input id="customerName">
-      </div>
-      <div>
-        <label>Customer Phone</label>
-        <input id="customerPhone">
-      </div>
-      <div>
-        <label>Customer WhatsApp</label>
-        <input id="customerWhatsapp">
-      </div>
-      <div>
-        <label>Product</label>
-        <select id="saleProduct"></select>
-      </div>
-      <div>
-        <label>Quantity</label>
-        <input id="saleQty" type="number" min="1" value="1">
-      </div>
-      <div>
-        <label>Sell Price USD</label>
-        <input id="salePrice" type="number">
-      </div>
-    </div>
-
-    <div class="actions">
-      <button class="blue" onclick="addSaleItem()">Add Item</button>
-      <button class="gray" onclick="addOtherItem()">Other Item</button>
-    </div>
-
-    <div id="saleItems"></div>
-
-    <div class="form-grid">
-      <div>
-        <label>Transport / Installation</label>
-        <input id="extraCost" type="number" value="0">
-      </div>
-      <div>
-        <label>Total Bill</label>
-        <input id="saleTotal" type="number" readonly>
-      </div>
-      <div>
-        <label>Cash Paid</label>
-        <input id="salePaid" type="number" value="0">
-      </div>
-    </div>
-
-    <div class="actions">
-      <button class="green" onclick="completeSale()">Create Invoice</button>
-      <button class="gray" onclick="clearSale()">Clear</button>
-    </div>
+  <div class="form-grid">
+   <div>
+    <label>Customer Name</label>
+    <input id="customerName">
+   </div>
+   <div>
+    <label>Customer Phone</label>
+    <input id="customerPhone">
+   </div>
+   <div>
+    <label>Customer WhatsApp</label>
+    <input id="customerWhatsapp">
+   </div>
+   <div>
+    <label>Product</label>
+    <select id="saleProduct"></select>
+   </div>
+   <div>
+    <label>Quantity</label>
+    <input id="saleQty" type="number" min="1" value="1">
+   </div>
+   <div>
+    <label>Sell Price USD</label>
+    <input id="salePrice" type="number">
+   </div>
   </div>
 
-  <div class="card">
-    <h3>Sales History</h3>
-    <div id="salesTable"></div>
+  <div class="actions">
+   <button class="blue" onclick="addSaleItem()">Add Item</button>
+   <button class="gray" onclick="addOtherItem()">Other Item</button>
   </div>
+
+  <div id="saleItems"></div>
+
+  <div class="form-grid">
+   <div>
+    <label>Transport / Installation</label>
+    <input id="extraCost" type="number" value="0">
+   </div>
+   <div>
+    <label>Total Bill</label>
+    <input id="saleTotal" type="number" readonly>
+   </div>
+   <div>
+    <label>Cash Paid</label>
+    <input id="salePaid" type="number" value="0">
+   </div>
+  </div>
+
+  <div class="actions">
+   <button class="green" onclick="completeSale()">Create Invoice</button>
+   <button class="gray" onclick="clearSale()">Clear</button>
+  </div>
+ </div>
+
+ <div class="card">
+  <h3>Sales History</h3>
+  <div id="salesTable"></div>
+ </div>
 </section>
 
 <section id="expense" class="page">
-  <div class="card">
-    <h2>Expense — AFN</h2>
-    <div class="form-grid">
-      <div>
-        <label>Title</label>
-        <input id="expenseTitle">
-      </div>
-      <div>
-        <label>Amount AFN</label>
-        <input id="expenseAmount" type="number">
-      </div>
-      <div>
-        <label>Note</label>
-        <input id="expenseNote">
-      </div>
-    </div>
-    <button class="primary" onclick="saveExpense()">Save Expense</button>
+ <div class="card">
+  <h2>Expense — AFN</h2>
+
+  <div class="form-grid">
+   <div>
+    <label>Title</label>
+    <input id="expenseTitle">
+   </div>
+   <div>
+    <label>Amount AFN</label>
+    <input id="expenseAmount" type="number">
+   </div>
+   <div>
+    <label>Note</label>
+    <input id="expenseNote">
+   </div>
   </div>
 
-  <div class="card">
-    <div id="expenseTable"></div>
-  </div>
+  <button class="primary" onclick="saveExpense()">Save Expense</button>
+ </div>
+
+ <div class="card">
+  <div id="expenseTable"></div>
+ </div>
 </section>
 
 <section id="debt" class="page">
-  <div class="card">
-    <h2>Debt</h2>
-    <div id="debtTable"></div>
-  </div>
+ <div class="card">
+  <h2>Debt</h2>
+  <div id="debtTable"></div>
+ </div>
 </section>
 
+<!-- REPORTS -->
 <section id="reports" class="page">
-  <div class="card">
-    <h2>Reports</h2>
-    <div class="grid">
-      <div class="stat">Total Sales<b id="rSales">0</b></div>
-      <div class="stat">Total Purchases<b id="rPurchases">0</b></div>
-      <div class="stat">Expenses AFN<b id="rExpenses">0</b></div>
-      <div class="stat">Gross Difference<b id="rGross">0</b></div>
-    </div>
-    <p style="margin-top:15px;color:#64748b">
-      Note: Gross Difference = Sales − Purchases. AFN expenses are shown separately.
-    </p>
+
+ <div class="card">
+  <h2>📊 Reports</h2>
+
+  <div class="report-filter">
+   <button id="rfDaily" onclick="setReportPeriod('daily')">Daily</button>
+   <button id="rfWeekly" onclick="setReportPeriod('weekly')">Weekly</button>
+   <button id="rfMonthly" onclick="setReportPeriod('monthly')">Monthly</button>
+   <button id="rfYearly" onclick="setReportPeriod('yearly')">Yearly</button>
+   <button id="rfAll" onclick="setReportPeriod('all')">All Time</button>
   </div>
+
+  <div class="info" id="reportPeriodText"></div>
+ </div>
+
+ <div class="card" id="reportPrintArea">
+
+  <div class="report-title">
+   <h2 id="reportShopName">Samad Solar</h2>
+   <p id="reportHeading">Report</p>
+   <p id="reportDateRange"></p>
+  </div>
+
+  <div class="report-summary">
+
+   <div class="report-box">
+    <span>Sales</span>
+    <b id="rrSales">0 USD</b>
+   </div>
+
+   <div class="report-box">
+    <span>Purchases</span>
+    <b id="rrPurchases">0 USD</b>
+   </div>
+
+   <div class="report-box">
+    <span>Gross Profit</span>
+    <b id="rrProfit">0 USD</b>
+   </div>
+
+   <div class="report-box">
+    <span>Paid</span>
+    <b id="rrPaid">0 USD</b>
+   </div>
+
+   <div class="report-box">
+    <span>Remaining</span>
+    <b class="danger" id="rrRemaining">0 USD</b>
+   </div>
+
+   <div class="report-box">
+    <span>Expenses</span>
+    <b id="rrExpenses">0 AFN</b>
+   </div>
+
+   <div class="report-box">
+    <span>Sales Count</span>
+    <b id="rrSalesCount">0</b>
+   </div>
+
+   <div class="report-box">
+    <span>Purchase Count</span>
+    <b id="rrPurchaseCount">0</b>
+   </div>
+
+  </div>
+
+  <div style="margin-top:25px">
+   <h3>🧾 Sold Items</h3>
+   <div id="reportItems"></div>
+  </div>
+
+  <div style="margin-top:25px">
+   <h3>💰 Sales Details</h3>
+   <div id="reportSales"></div>
+  </div>
+
+  <div style="margin-top:25px">
+   <h3>🛒 Purchase Details</h3>
+   <div id="reportPurchases"></div>
+  </div>
+
+  <div style="margin-top:25px">
+   <h3>💸 Expense Details</h3>
+   <div id="reportExpenses"></div>
+  </div>
+
+ </div>
+
+ <div class="actions">
+  <button class="black" onclick="printReport()">🖨 Print Report</button>
+  <button class="green" onclick="shareReportPDF()">📤 Share PDF</button>
+  <button class="blue" onclick="downloadReportPDF()">📄 Download PDF</button>
+ </div>
+
 </section>
 
 <section id="capital" class="page">
-  <div class="card">
-    <h2>Capital</h2>
-    <button class="purple" onclick="unlockCapital()">🔐 View Capital</button>
-    <div id="capitalBox" style="margin-top:15px"></div>
-  </div>
+ <div class="card">
+  <h2>Capital</h2>
+  <button class="purple" onclick="unlockCapital()">🔐 View Capital</button>
+  <div id="capitalBox" style="margin-top:15px"></div>
+ </div>
 </section>
 
 <section id="settings" class="page">
-  <div class="card">
-    <h2>Shop Settings</h2>
+ <div class="card">
+  <h2>Shop Settings</h2>
 
-    <div class="form-grid">
-      <div>
-        <label>Shop Name</label>
-        <input id="sShopName">
-      </div>
-      <div>
-        <label>Gmail</label>
-        <input id="sGmail">
-      </div>
-      <div>
-        <label>Phone</label>
-        <input id="sPhone">
-      </div>
-      <div>
-        <label>WhatsApp Number</label>
-        <input id="sWhatsapp" placeholder="937XXXXXXXXX">
-      </div>
-      <div>
-        <label>Address</label>
-        <input id="sAddress">
-      </div>
-      <div>
-        <label>Language</label>
-        <select id="sLanguage">
-          <option value="ps">Pashto</option>
-          <option value="fa">Dari</option>
-          <option value="en">English</option>
-        </select>
-      </div>
-      <div>
-        <label>Currency</label>
-        <select id="sCurrency">
-          <option value="USD">USD</option>
-          <option value="AFN">AFN</option>
-          <option value="Rs">Rs</option>
-        </select>
-      </div>
-      <div>
-        <label>Security PIN</label>
-        <input id="sPin">
-      </div>
-      <div>
-        <label>Invoice Prefix</label>
-        <input id="sPrefix">
-      </div>
-    </div>
+  <div class="form-grid">
+   <div>
+    <label>Shop Name</label>
+    <input id="sShopName">
+   </div>
 
-    <hr style="margin:25px 0">
+   <div>
+    <label>Gmail</label>
+    <input id="sGmail">
+   </div>
 
-    <h3>Invoice Design / Background</h3>
-    <p>د Invoice لپاره Background انتخاب کړه:</p>
+   <div>
+    <label>Phone</label>
+    <input id="sPhone">
+   </div>
 
-    <div class="design-options">
-      <div class="preview-design d1" onclick="chooseDesign('classic')">
-        <span>Classic</span>
-      </div>
-      <div class="preview-design d2" onclick="chooseDesign('light')">
-        <span>Light Green</span>
-      </div>
-      <div class="preview-design d3" onclick="chooseDesign('solar')">
-        <span>Solar Blue</span>
-      </div>
-      <div class="preview-design d4" onclick="chooseDesign('dark')">
-        <span>Elegant</span>
-      </div>
-    </div>
+   <div>
+    <label>WhatsApp Number</label>
+    <input id="sWhatsapp" placeholder="937XXXXXXXXX">
+   </div>
 
-    <p>Selected: <b id="selectedDesign">Classic</b></p>
+   <div>
+    <label>Address</label>
+    <input id="sAddress">
+   </div>
 
-    <div class="form-grid">
-      <div>
-        <label>Invoice Background Color</label>
-        <input id="sBgColor" type="color">
-      </div>
-    </div>
+   <div>
+    <label>Language</label>
+    <select id="sLanguage">
+     <option value="ps">Pashto</option>
+     <option value="fa">Dari</option>
+     <option value="en">English</option>
+    </select>
+   </div>
 
-    <hr style="margin:25px 0">
+   <div>
+    <label>Currency</label>
+    <select id="sCurrency">
+     <option value="USD">USD</option>
+     <option value="AFN">AFN</option>
+     <option value="Rs">Rs</option>
+    </select>
+   </div>
 
-    <label>Shop Logo</label>
-    <input id="sLogo" type="file" accept="image/*">
+   <div>
+    <label>Security PIN</label>
+    <input id="sPin">
+   </div>
 
-    <div id="logoPreview" style="margin-top:10px"></div>
-
-    <div class="actions">
-      <button class="primary" onclick="saveSettings()">Save Settings</button>
-    </div>
+   <div>
+    <label>Invoice Prefix</label>
+    <input id="sPrefix">
+   </div>
   </div>
+
+  <hr style="margin:25px 0">
+
+  <h3>Invoice Design / Background</h3>
+
+  <div class="design-options">
+   <div class="preview-design d1" onclick="chooseDesign('classic')">
+    <span>Classic</span>
+   </div>
+   <div class="preview-design d2" onclick="chooseDesign('light')">
+    <span>Light Green</span>
+   </div>
+   <div class="preview-design d3" onclick="chooseDesign('solar')">
+    <span>Solar Blue</span>
+   </div>
+   <div class="preview-design d4" onclick="chooseDesign('dark')">
+    <span>Elegant</span>
+   </div>
+  </div>
+
+  <p>Selected: <b id="selectedDesign">classic</b></p>
+
+  <label>Invoice Background Color</label>
+  <input id="sBgColor" type="color">
+
+  <hr style="margin:25px 0">
+
+  <label>Shop Logo</label>
+  <input id="sLogo" type="file" accept="image/*">
+
+  <div id="logoPreview" style="margin-top:10px"></div>
+
+  <div class="actions">
+   <button class="primary" onclick="saveSettings()">Save Settings</button>
+  </div>
+ </div>
 </section>
 
 <section id="backup" class="page">
-  <div class="card">
-    <h2>Backup / Restore</h2>
-    <button class="blue" onclick="downloadBackup()">Download Backup</button>
-    <input type="file" id="restoreFile" accept=".json" style="margin-top:12px">
-    <button class="orange" onclick="restoreBackup()">Restore Backup</button>
-  </div>
+ <div class="card">
+  <h2>Backup / Restore</h2>
+
+  <button class="blue" onclick="downloadBackup()">Download Backup</button>
+
+  <input type="file" id="restoreFile" accept=".json" style="margin-top:12px">
+
+  <button class="orange" onclick="restoreBackup()">Restore Backup</button>
+ </div>
 </section>
 
 </main>
 
 <!-- INVOICE MODAL -->
 <div id="invoiceModal" class="modal">
-  <div class="modal-box">
-    <div id="invoiceArea"></div>
+ <div class="modal-box">
+  <div id="invoiceArea"></div>
 
-    <div class="actions">
-      <button class="primary" onclick="printInvoice()">🖨 Print</button>
-      <button class="green" onclick="shareInvoicePDF()">📤 Share as PDF</button>
-      <button class="blue" onclick="downloadInvoicePDF()">📄 Download PDF</button>
-      <button class="gray" onclick="closeInvoice()">Close</button>
-    </div>
+  <div class="actions">
+   <button class="primary" onclick="printInvoice()">🖨 Print</button>
+   <button class="green" onclick="shareInvoicePDF()">📤 Share as PDF</button>
+   <button class="blue" onclick="downloadInvoicePDF()">📄 Download PDF</button>
+   <button class="gray" onclick="closeInvoice()">Close</button>
   </div>
+ </div>
 </div>
 
 <script>
+
 const KEY={
-  products:"samadProducts",
-  purchases:"samadPurchases",
-  sales:"samadSales",
-  expenses:"samadExpenses",
-  debts:"samadDebts",
-  capital:"samadCapital",
-  settings:"samadSettings"
+ products:"samadProducts",
+ purchases:"samadPurchases",
+ sales:"samadSales",
+ expenses:"samadExpenses",
+ debts:"samadDebts",
+ capital:"samadCapital",
+ settings:"samadSettings"
 };
 
 let products=load(KEY.products,[]);
@@ -699,1013 +691,2218 @@ let debts=load(KEY.debts,[]);
 let capital=load(KEY.capital,{usd:0,afn:0});
 
 let settings=load(KEY.settings,{
-  shopName:"Samad Solar",
-  gmail:"",
-  address:"",
-  phone:"",
-  whatsapp:"",
-  language:"ps",
-  currency:"USD",
-  bgColor:"#f1f5f9",
-  pin:"786",
-  logo:"",
-  invoicePrefix:"SMD",
-  nextInvoice:1,
-  invoiceDesign:"classic"
+ shopName:"Samad Solar",
+ gmail:"",
+ address:"",
+ phone:"",
+ whatsapp:"",
+ language:"ps",
+ currency:"USD",
+ bgColor:"#f1f5f9",
+ pin:"786",
+ logo:"",
+ invoicePrefix:"SMD",
+ nextInvoice:1,
+ invoiceDesign:"classic",
+ greeting:"تشکر از این که برند ما را انتخاب کردید."
 });
 
 let saleItems=[];
 let editingProductId=null;
 let currentInvoice=null;
+let currentReportPeriod="daily";
 
 function load(k,d){
-  try{
-    const x=localStorage.getItem(k);
-    return x?JSON.parse(x):d;
-  }catch(e){return d}
+ try{
+  const x=localStorage.getItem(k);
+  return x?JSON.parse(x):d;
+ }catch(e){return d}
 }
 
 function save(k,v){
-  localStorage.setItem(k,JSON.stringify(v));
+ localStorage.setItem(k,JSON.stringify(v));
 }
 
 function uid(){
-  return Date.now().toString(36)+Math.random().toString(36).slice(2,8);
+ return Date.now().toString(36)+Math.random().toString(36).slice(2,8);
 }
 
 function money(n){
-  return Number(n||0).toLocaleString();
+ return Number(n||0).toLocaleString();
 }
 
 function today(){
-  return new Date().toLocaleDateString();
+ return new Date().toLocaleDateString();
+}
+
+function esc(v){
+ return String(v??"")
+ .replace(/&/g,"&amp;")
+ .replace(/</g,"&lt;")
+ .replace(/>/g,"&gt;")
+ .replace(/"/g,"&quot;")
+ .replace(/'/g,"&#039;");
 }
 
 document.getElementById("dateNow").textContent=today();
 
 function showPage(id){
-  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
 
-  document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));
-  [...document.querySelectorAll(".nav button")]
-    .find(b=>b.getAttribute("onclick")===`showPage('${id}')`)
-    ?.classList.add("active");
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
 
-  if(id==="dashboard")renderDashboard();
-  if(id==="stock")renderStock();
-  if(id==="purchase"){fillPurchaseProducts();renderPurchases()}
-  if(id==="sale"){fillSaleProducts();renderSales()}
-  if(id==="expense")renderExpenses();
-  if(id==="debt")renderDebts();
-  if(id==="reports")renderReports();
-  if(id==="settings")loadSettingsForm();
+ const page=document.getElementById(id);
+ if(page)page.classList.add("active");
+
+ document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));
+
+ [...document.querySelectorAll(".nav button")]
+ .find(b=>b.getAttribute("onclick")===`showPage('${id}')`)
+ ?.classList.add("active");
+
+ if(id==="dashboard")renderDashboard();
+ if(id==="stock")renderStock();
+
+ if(id==="purchase"){
+  fillPurchaseProducts();
+  renderPurchases();
+ }
+
+ if(id==="sale"){
+  fillSaleProducts();
+  renderSales();
+ }
+
+ if(id==="expense")renderExpenses();
+ if(id==="debt")renderDebts();
+
+ if(id==="reports"){
+  renderReports();
+ }
+
+ if(id==="settings")loadSettingsForm();
 }
+
+/* DASHBOARD */
 
 function renderDashboard(){
-  document.getElementById("dProducts").textContent=products.length;
-  document.getElementById("dStock").textContent=products.reduce((a,p)=>a+Number(p.stock||0),0);
-  document.getElementById("dSales").textContent=sales.length;
-  document.getElementById("dPurchases").textContent=purchases.length;
-  document.getElementById("dExpenses").textContent=money(expenses.reduce((a,e)=>a+Number(e.amount||0),0));
-  document.getElementById("dDebt").textContent=money(debts.reduce((a,d)=>a+Number(d.remaining||0),0));
 
-  const low=products.filter(p=>Number(p.stock||0)<=Number(p.limit||0));
-  document.getElementById("lowStock").innerHTML=low.length
-    ? low.map(p=>`
-      <div class="alert">
-        ⚠️ <b>${esc(p.name)}</b> — Stock: ${p.stock}
-        <button class="orange" onclick="openProduct('${p.id}')">Open Item</button>
-      </div>`).join("")
-    : `<div class="success">✓ No low stock items.</div>`;
+ document.getElementById("dProducts").textContent=products.length;
 
-  const recent=sales.slice(-5).reverse();
-  document.getElementById("recentSales").innerHTML=recent.length
-    ? `<table><tr><th>Invoice</th><th>Customer</th><th>Total</th><th>Date</th></tr>
-      ${recent.map(s=>`
-      <tr>
-        <td>${esc(s.invoiceNo)}</td>
-        <td>${esc(s.customer||"Walk-in")}</td>
-        <td>${money(s.total)} ${esc(s.currency||"USD")}</td>
-        <td>${esc(s.date)}</td>
-      </tr>`).join("")}</table>`
-    : "No sales yet.";
+ document.getElementById("dStock").textContent=
+ products.reduce((a,p)=>a+Number(p.stock||0),0);
+
+ document.getElementById("dSales").textContent=sales.length;
+
+ document.getElementById("dPurchases").textContent=purchases.length;
+
+ document.getElementById("dExpenses").textContent=
+ money(expenses.reduce((a,e)=>a+Number(e.amount||0),0));
+
+ document.getElementById("dDebt").textContent=
+ money(debts.reduce((a,d)=>a+Number(d.remaining||0),0));
+
+ const low=products.filter(p=>
+  Number(p.stock||0)<=Number(p.limit||0)
+ );
+
+ document.getElementById("lowStock").innerHTML=low.length
+ ?low.map(p=>`
+  <div class="alert">
+   ⚠️ <b>${esc(p.name)}</b> — Stock: ${p.stock}
+   <button class="orange" onclick="openProduct('${p.id}')">
+    Open Item
+   </button>
+  </div>
+ `).join("")
+ :`<div class="success">✓ No low stock items.</div>`;
+
+ const recent=sales.slice(-5).reverse();
+
+ document.getElementById("recentSales").innerHTML=recent.length
+ ?`
+ <table>
+ <tr>
+  <th>Invoice</th>
+  <th>Customer</th>
+  <th>Total</th>
+  <th>Date</th>
+ </tr>
+ ${recent.map(s=>`
+ <tr>
+  <td>${esc(s.invoiceNo)}</td>
+  <td>${esc(s.customer||"Walk-in")}</td>
+  <td>${money(s.total)} ${esc(s.currency||"USD")}</td>
+  <td>${esc(s.date)}</td>
+ </tr>
+ `).join("")}
+ </table>
+ `
+ :"No sales yet.";
 }
 
+/* STOCK */
+
 function saveProduct(){
-  const name=document.getElementById("pName").value.trim();
-  if(!name)return alert("Product name is required.");
 
-  const obj={
-    id:editingProductId||uid(),
-    name,
-    model:document.getElementById("pModel").value.trim(),
-    category:document.getElementById("pCategory").value.trim(),
-    buy:Number(document.getElementById("pBuy").value||0),
-    sell:Number(document.getElementById("pSell").value||0),
-    stock:Number(document.getElementById("pStock").value||0),
-    limit:Number(document.getElementById("pLimit").value||0)
-  };
+ const name=document.getElementById("pName").value.trim();
 
-  if(editingProductId){
-    const i=products.findIndex(p=>p.id===editingProductId);
-    if(i>=0)products[i]=obj;
-  }else{
-    products.push(obj);
-  }
+ if(!name)return alert("Product name is required.");
 
-  save(KEY.products,products);
-  clearProductForm();
-  renderStock();
-  fillSaleProducts();
-  fillPurchaseProducts();
-  renderDashboard();
+ const obj={
+  id:editingProductId||uid(),
+  name,
+  model:document.getElementById("pModel").value.trim(),
+  category:document.getElementById("pCategory").value.trim(),
+  buy:Number(document.getElementById("pBuy").value||0),
+  sell:Number(document.getElementById("pSell").value||0),
+  stock:Number(document.getElementById("pStock").value||0),
+  limit:Number(document.getElementById("pLimit").value||0)
+ };
+
+ if(editingProductId){
+
+  const i=products.findIndex(p=>p.id===editingProductId);
+
+  if(i>=0)products[i]=obj;
+
+ }else{
+  products.push(obj);
+ }
+
+ save(KEY.products,products);
+
+ clearProductForm();
+ renderStock();
+ fillSaleProducts();
+ fillPurchaseProducts();
+ renderDashboard();
 }
 
 function editProduct(id){
-  const p=products.find(x=>x.id===id);
-  if(!p)return;
 
-  editingProductId=id;
-  document.getElementById("pName").value=p.name;
-  document.getElementById("pModel").value=p.model||"";
-  document.getElementById("pCategory").value=p.category||"";
-  document.getElementById("pBuy").value=p.buy||0;
-  document.getElementById("pSell").value=p.sell||0;
-  document.getElementById("pStock").value=p.stock||0;
-  document.getElementById("pLimit").value=p.limit||0;
+ const p=products.find(x=>x.id===id);
 
-  window.scrollTo({top:0,behavior:"smooth"});
+ if(!p)return;
+
+ editingProductId=id;
+
+ document.getElementById("pName").value=p.name;
+ document.getElementById("pModel").value=p.model||"";
+ document.getElementById("pCategory").value=p.category||"";
+ document.getElementById("pBuy").value=p.buy||0;
+ document.getElementById("pSell").value=p.sell||0;
+ document.getElementById("pStock").value=p.stock||0;
+ document.getElementById("pLimit").value=p.limit||0;
+
+ window.scrollTo({top:0,behavior:"smooth"});
 }
 
 function openProduct(id){
-  showPage("stock");
-  document.getElementById("stockSearch").value="";
-  editProduct(id);
+ showPage("stock");
+ document.getElementById("stockSearch").value="";
+ editProduct(id);
 }
 
 function deleteProduct(id){
-  if(!confirm("Delete this product?"))return;
-  products=products.filter(p=>p.id!==id);
-  save(KEY.products,products);
-  renderStock();
-  fillSaleProducts();
-  fillPurchaseProducts();
-  renderDashboard();
+
+ if(!confirm("Delete this product?"))return;
+
+ products=products.filter(p=>p.id!==id);
+
+ save(KEY.products,products);
+
+ renderStock();
+ fillSaleProducts();
+ fillPurchaseProducts();
+ renderDashboard();
 }
 
 function clearProductForm(){
-  editingProductId=null;
-  ["pName","pModel","pCategory","pBuy","pSell","pStock"].forEach(id=>{
-    document.getElementById(id).value="";
-  });
-  document.getElementById("pLimit").value=2;
+
+ editingProductId=null;
+
+ ["pName","pModel","pCategory","pBuy","pSell","pStock"]
+ .forEach(id=>document.getElementById(id).value="");
+
+ document.getElementById("pLimit").value=2;
 }
 
 function renderStock(){
-  const q=(document.getElementById("stockSearch")?.value||"").toLowerCase();
 
-  const arr=products.filter(p=>
-    [p.name,p.model,p.category].join(" ").toLowerCase().includes(q)
-  );
+ const q=(document.getElementById("stockSearch")?.value||"").toLowerCase();
 
-  document.getElementById("stockTable").innerHTML=arr.length
-    ? `<table>
-      <tr><th>Name</th><th>Model</th><th>Buy</th><th>Sell</th><th>Stock</th><th>Actions</th></tr>
-      ${arr.map(p=>`
-      <tr>
-        <td>${esc(p.name)}</td>
-        <td>${esc(p.model||"")}</td>
-        <td>${money(p.buy)}</td>
-        <td>${money(p.sell)}</td>
-        <td>${p.stock<=p.limit?`⚠️ ${p.stock}`:p.stock}</td>
-        <td>
-          <button class="blue" onclick="editProduct('${p.id}')">Edit</button>
-          <button class="red" onclick="deleteProduct('${p.id}')">Delete</button>
-        </td>
-      </tr>`).join("")}</table>`
-    : "No products.";
+ const arr=products.filter(p=>
+  [p.name,p.model,p.category].join(" ").toLowerCase().includes(q)
+ );
+
+ document.getElementById("stockTable").innerHTML=arr.length
+ ?`
+ <table>
+ <tr>
+  <th>Name</th>
+  <th>Model</th>
+  <th>Buy</th>
+  <th>Sell</th>
+  <th>Stock</th>
+  <th>Actions</th>
+ </tr>
+
+ ${arr.map(p=>`
+ <tr>
+  <td>${esc(p.name)}</td>
+  <td>${esc(p.model||"")}</td>
+  <td>${money(p.buy)}</td>
+  <td>${money(p.sell)}</td>
+  <td>${p.stock<=p.limit?`⚠️ ${p.stock}`:p.stock}</td>
+  <td>
+   <button class="blue" onclick="editProduct('${p.id}')">Edit</button>
+   <button class="red" onclick="deleteProduct('${p.id}')">Delete</button>
+  </td>
+ </tr>
+ `).join("")}
+ </table>
+ `
+ :"No products.";
 }
+
+/* PURCHASE */
 
 function fillPurchaseProducts(){
-  document.getElementById("purchaseProduct").innerHTML=
-    `<option value="">Select product</option>`+
-    products.map(p=>`<option value="${p.id}">${esc(p.name)} — ${esc(p.model||"")}</option>`).join("");
-}
 
-function fillSaleProducts(){
-  document.getElementById("saleProduct").innerHTML=
-    `<option value="">Select product</option>`+
-    products.map(p=>`<option value="${p.id}">${esc(p.name)} — Stock ${p.stock}</option>`).join("");
+ document.getElementById("purchaseProduct").innerHTML=
+ `<option value="">Select product</option>`+
+ products.map(p=>
+  `<option value="${p.id}">
+   ${esc(p.name)} — ${esc(p.model||"")}
+  </option>`
+ ).join("");
 }
 
 function savePurchase(){
-  const pid=document.getElementById("purchaseProduct").value;
-  const qty=Number(document.getElementById("purchaseQty").value||0);
-  const price=Number(document.getElementById("purchasePrice").value||0);
 
-  if(!pid||qty<=0)return alert("Select product and quantity.");
+ const pid=document.getElementById("purchaseProduct").value;
+ const qty=Number(document.getElementById("purchaseQty").value||0);
+ const price=Number(document.getElementById("purchasePrice").value||0);
 
-  const p=products.find(x=>x.id===pid);
-  if(!p)return;
+ if(!pid||qty<=0)return alert("Select product and quantity.");
 
-  p.stock=Number(p.stock||0)+qty;
-  p.buy=price||p.buy;
+ const p=products.find(x=>x.id===pid);
 
-  purchases.push({
-    id:uid(),
-    productId:pid,
-    product:p.name,
-    qty,
-    price,
-    supplier:document.getElementById("purchaseSupplier").value.trim(),
-    date:today(),
-    total:qty*price,
-    currency:"USD"
-  });
+ if(!p)return;
 
-  save(KEY.products,products);
-  save(KEY.purchases,purchases);
+ p.stock=Number(p.stock||0)+qty;
+ p.buy=price||p.buy;
 
-  document.getElementById("purchaseQty").value="";
-  document.getElementById("purchasePrice").value="";
-  document.getElementById("purchaseSupplier").value="";
+ purchases.push({
+  id:uid(),
+  productId:pid,
+  product:p.name,
+  qty,
+  price,
+  supplier:document.getElementById("purchaseSupplier").value.trim(),
+  date:new Date().toISOString(),
+  total:qty*price,
+  currency:"USD"
+ });
 
-  renderPurchases();
-  renderDashboard();
-  fillSaleProducts();
+ save(KEY.products,products);
+ save(KEY.purchases,purchases);
 
-  alert("Purchase saved.");
+ document.getElementById("purchaseQty").value="";
+ document.getElementById("purchasePrice").value="";
+ document.getElementById("purchaseSupplier").value="";
+
+ renderPurchases();
+ renderDashboard();
+ fillSaleProducts();
+
+ alert("Purchase saved.");
 }
 
 function renderPurchases(){
-  document.getElementById("purchaseTable").innerHTML=purchases.length
-    ? `<table><tr><th>Product</th><th>Qty</th><th>Price</th><th>Total</th><th>Date</th></tr>
-      ${purchases.slice().reverse().map(p=>`
-      <tr>
-        <td>${esc(p.product)}</td>
-        <td>${p.qty}</td>
-        <td>${money(p.price)} USD</td>
-        <td>${money(p.total)} USD</td>
-        <td>${esc(p.date)}</td>
-      </tr>`).join("")}</table>`
-    : "No purchases yet.";
+
+ document.getElementById("purchaseTable").innerHTML=purchases.length
+ ?`
+ <table>
+ <tr>
+  <th>Product</th>
+  <th>Qty</th>
+  <th>Price</th>
+  <th>Total</th>
+  <th>Date</th>
+ </tr>
+
+ ${purchases.slice().reverse().map(p=>`
+ <tr>
+  <td>${esc(p.product)}</td>
+  <td>${p.qty}</td>
+  <td>${money(p.price)} USD</td>
+  <td>${money(p.total)} USD</td>
+  <td>${formatDate(p.date)}</td>
+ </tr>
+ `).join("")}
+
+ </table>
+ `
+ :"No purchases yet.";
 }
 
-function addSaleItem(){
-  const pid=document.getElementById("saleProduct").value;
-  const qty=Number(document.getElementById("saleQty").value||0);
-  const price=Number(document.getElementById("salePrice").value||0);
+/* SALES */
 
-  if(!pid||qty<=0)return alert("Select product and quantity.");
+function fillSaleProducts(){
 
-  const p=products.find(x=>x.id===pid);
-  if(!p)return;
-
-  if(qty>Number(p.stock||0)){
-    return alert("Not enough stock.");
-  }
-
-  saleItems.push({
-    id:uid(),
-    productId:pid,
-    name:p.name,
-    qty,
-    price,
-    total:qty*price,
-    inventory:true
-  });
-
-  renderSaleItems();
+ document.getElementById("saleProduct").innerHTML=
+ `<option value="">Select product</option>`+
+ products.map(p=>
+ `<option value="${p.id}">
+  ${esc(p.name)} — Stock ${p.stock}
+ </option>`
+ ).join("");
 }
-
-function addOtherItem(){
-  const name=prompt("Other item name:");
-  if(!name)return;
-
-  const price=Number(prompt("Price USD:")||0);
-  if(price<=0)return;
-
-  saleItems.push({
-    id:uid(),
-    productId:null,
-    name,
-    qty:1,
-    price,
-    total:price,
-    inventory:false
-  });
-
-  renderSaleItems();
-}
-
-function removeSaleItem(id){
-  saleItems=saleItems.filter(x=>x.id!==id);
-  renderSaleItems();
-}
-
-function renderSaleItems(){
-  document.getElementById("saleItems").innerHTML=saleItems.length
-    ? `<table>
-      <tr><th>Item</th><th>Qty</th><th>Price</th><th>Total</th><th></th></tr>
-      ${saleItems.map(i=>`
-      <tr>
-        <td>${esc(i.name)} ${i.inventory?"":"(Other)"}</td>
-        <td>${i.qty}</td>
-        <td>${money(i.price)}</td>
-        <td>${money(i.total)} USD</td>
-        <td><button class="red" onclick="removeSaleItem('${i.id}')">×</button></td>
-      </tr>`).join("")}</table>`
-    : "";
-
-  calculateSaleTotal();
-}
-
-function calculateSaleTotal(){
-  const itemsTotal=saleItems.reduce((a,i)=>a+Number(i.total||0),0);
-  const extra=Number(document.getElementById("extraCost").value||0);
-  document.getElementById("saleTotal").value=itemsTotal+extra;
-}
-
-document.getElementById("extraCost").addEventListener("input",calculateSaleTotal);
-
-function completeSale(){
-  if(!saleItems.length)return alert("Add at least one item.");
-
-  const customer=document.getElementById("customerName").value.trim()||"Walk-in";
-  const phone=document.getElementById("customerPhone").value.trim();
-  const whatsapp=document.getElementById("customerWhatsapp").value.trim();
-
-  const total=Number(document.getElementById("saleTotal").value||0);
-  let paid=Number(document.getElementById("salePaid").value||0);
-
-  if(paid>total)return alert("Paid amount cannot be greater than total.");
-
-  if(paid>0 && paid<total){
-    const allPaid=confirm("ایا مشتری ټولې پیسې درکړې؟\n\nYES = Full Paid\nNO = Keep Remaining");
-    if(allPaid)paid=total;
-  }
-
-  saleItems.forEach(item=>{
-    if(item.inventory){
-      const p=products.find(x=>x.id===item.productId);
-      if(p)p.stock-=item.qty;
-    }
-  });
-
-  const invoiceNo=`${settings.invoicePrefix}-${settings.nextInvoice++}`;
-  const remaining=total-paid;
-
-  const sale={
-    id:uid(),
-    invoiceNo,
-    customer,
-    phone,
-    whatsapp,
-    items:[...saleItems],
-    extra:Number(document.getElementById("extraCost").value||0),
-    total,
-    paid,
-    remaining,
-    currency:"USD",
-    date:today()
-  };
-
-  sales.push(sale);
-
-  if(remaining>0){
-    debts.push({
-      id:uid(),
-      saleId:sale.id,
-      name:customer,
-      phone,
-      whatsapp,
-      amount:total,
-      paid,
-      remaining,
-      date:today(),
-      note:"Invoice "+invoiceNo
-    });
-    save(KEY.debts,debts);
-  }
-
-  save(KEY.products,products);
-  save(KEY.sales,sales);
-  save(KEY.settings,settings);
-
-  saleItems=[];
-  currentInvoice=sale;
-
-  renderSaleItems();
-  renderSales();
-  renderDashboard();
-  renderDebts();
-  renderInvoice(sale);
-
-  document.getElementById("customerName").value="";
-  document.getElementById("customerPhone").value="";
-  document.getElementById("customerWhatsapp").value="";
-  document.getElementById("salePaid").value=0;
-  document.getElementById("extraCost").value=0;
-  document.getElementById("saleTotal").value=0;
-}
-
-function renderSales(){
-  document.getElementById("salesTable").innerHTML=sales.length
-    ? `<table>
-      <tr><th>Invoice</th><th>Customer</th><th>Total</th><th>Paid</th><th>Remaining</th><th>Date</th><th></th></tr>
-      ${sales.slice().reverse().map(s=>`
-      <tr>
-        <td>${esc(s.invoiceNo)}</td>
-        <td>${esc(s.customer)}</td>
-        <td>${money(s.total)} ${s.currency}</td>
-        <td>${money(s.paid)}</td>
-        <td class="${s.remaining>0?"remaining":"paid"}">${money(s.remaining)}</td>
-        <td>${esc(s.date)}</td>
-        <td><button class="blue" onclick="openInvoice('${s.id}')">Invoice</button></td>
-      </tr>`).join("")}</table>`
-    : "No sales yet.";
-}
-
-function renderExpenses(){
-  document.getElementById("expenseTable").innerHTML=expenses.length
-    ? `<table><tr><th>Title</th><th>Amount</th><th>Note</th><th>Date</th></tr>
-      ${expenses.slice().reverse().map(e=>`
-      <tr>
-        <td>${esc(e.title)}</td>
-        <td>${money(e.amount)} AFN</td>
-        <td>${esc(e.note||"")}</td>
-        <td>${esc(e.date)}</td>
-      </tr>`).join("")}</table>`
-    : "No expenses.";
-}
-
-function saveExpense(){
-  const title=document.getElementById("expenseTitle").value.trim();
-  const amount=Number(document.getElementById("expenseAmount").value||0);
-
-  if(!title||amount<=0)return alert("Enter title and amount.");
-
-  expenses.push({
-    id:uid(),
-    title,
-    amount,
-    note:document.getElementById("expenseNote").value.trim(),
-    date:today(),
-    currency:"AFN"
-  });
-
-  save(KEY.expenses,expenses);
-
-  document.getElementById("expenseTitle").value="";
-  document.getElementById("expenseAmount").value="";
-  document.getElementById("expenseNote").value="";
-
-  renderExpenses();
-  renderDashboard();
-}
-
-function renderDebts(){
-  document.getElementById("debtTable").innerHTML=debts.length
-    ? `<table>
-      <tr><th>Customer</th><th>Total</th><th>Paid</th><th>Remaining</th><th>Date</th><th>WhatsApp</th></tr>
-      ${debts.filter(d=>Number(d.remaining)>0).map(d=>`
-      <tr>
-        <td>${esc(d.name)}</td>
-        <td>${money(d.amount)}</td>
-        <td>${money(d.paid)}</td>
-        <td class="remaining">${money(d.remaining)}</td>
-        <td>${esc(d.date)}</td>
-        <td>${d.whatsapp?whatsappLink(d.whatsapp):"—"}</td>
-      </tr>`).join("")}</table>`
-    : `<div class="success">✓ No remaining debt.</div>`;
-}
-
-function renderReports(){
-  const salesTotal=sales.reduce((a,s)=>a+Number(s.total||0),0);
-  const purchaseTotal=purchases.reduce((a,p)=>a+Number(p.total||0),0);
-  const expenseTotal=expenses.reduce((a,e)=>a+Number(e.amount||0),0);
-
-  document.getElementById("rSales").textContent=money(salesTotal)+" USD";
-  document.getElementById("rPurchases").textContent=money(purchaseTotal)+" USD";
-  document.getElementById("rExpenses").textContent=money(expenseTotal)+" AFN";
-  document.getElementById("rGross").textContent=money(salesTotal-purchaseTotal)+" USD";
-}
-
-function unlockCapital(){
-  const pin=prompt("Enter Security PIN:");
-  if(pin!==String(settings.pin)){
-    return alert("Wrong PIN.");
-  }
-
-  document.getElementById("capitalBox").innerHTML=`
-    <div class="grid">
-      <div class="stat">Capital USD<b>${money(capital.usd)} USD</b></div>
-      <div class="stat">Capital AFN<b>${money(capital.afn)} AFN</b></div>
-    </div>
-    <hr>
-    <div class="form-grid">
-      <div>
-        <label>Set Capital USD</label>
-        <input id="capUSD" type="number" value="${capital.usd}">
-      </div>
-      <div>
-        <label>Set Capital AFN</label>
-        <input id="capAFN" type="number" value="${capital.afn}">
-      </div>
-    </div>
-    <button class="primary" onclick="saveCapital()">Save Capital</button>
-  `;
-}
-
-function saveCapital(){
-  capital.usd=Number(document.getElementById("capUSD").value||0);
-  capital.afn=Number(document.getElementById("capAFN").value||0);
-  save(KEY.capital,capital);
-  alert("Capital saved.");
-  unlockCapital();
-}
-
-function loadSettingsForm(){
-  document.getElementById("sShopName").value=settings.shopName||"";
-  document.getElementById("sGmail").value=settings.gmail||"";
-  document.getElementById("sPhone").value=settings.phone||"";
-  document.getElementById("sWhatsapp").value=settings.whatsapp||"";
-  document.getElementById("sAddress").value=settings.address||"";
-  document.getElementById("sLanguage").value=settings.language||"ps";
-  document.getElementById("sCurrency").value=settings.currency||"USD";
-  document.getElementById("sPin").value=settings.pin||"786";
-  document.getElementById("sPrefix").value=settings.invoicePrefix||"SMD";
-  document.getElementById("sBgColor").value=settings.bgColor||"#f1f5f9";
-
-  document.getElementById("selectedDesign").textContent=settings.invoiceDesign||"classic";
-
-  document.getElementById("logoPreview").innerHTML=settings.logo
-    ? `<img src="${settings.logo}" style="width:90px;height:90px;object-fit:contain">`
-    : "No logo.";
-}
-
-function chooseDesign(name){
-  settings.invoiceDesign=name;
-  document.getElementById("selectedDesign").textContent=name;
-  save(KEY.settings,settings);
-}
-
-document.getElementById("sLogo").addEventListener("change",function(){
-  const file=this.files[0];
-  if(!file)return;
-
-  const reader=new FileReader();
-  reader.onload=e=>{
-    settings.logo=e.target.result;
-    document.getElementById("logoPreview").innerHTML=
-      `<img src="${settings.logo}" style="width:90px;height:90px;object-fit:contain">`;
-  };
-  reader.readAsDataURL(file);
-});
-
-function saveSettings(){
-  settings.shopName=document.getElementById("sShopName").value.trim()||"Samad Solar";
-  settings.gmail=document.getElementById("sGmail").value.trim();
-  settings.phone=document.getElementById("sPhone").value.trim();
-  settings.whatsapp=document.getElementById("sWhatsapp").value.trim();
-  settings.address=document.getElementById("sAddress").value.trim();
-  settings.language=document.getElementById("sLanguage").value;
-  settings.currency=document.getElementById("sCurrency").value;
-  settings.pin=document.getElementById("sPin").value||"786";
-  settings.invoicePrefix=document.getElementById("sPrefix").value.trim()||"SMD";
-  settings.bgColor=document.getElementById("sBgColor").value;
-
-  save(KEY.settings,settings);
-
-  document.getElementById("shopTitle").textContent=settings.shopName;
-  alert("Settings saved.");
-}
-
-function openInvoice(id){
-  const s=sales.find(x=>x.id===id);
-  if(!s)return;
-  currentInvoice=s;
-  renderInvoice(s);
-}
-
-function closeInvoice(){
-  document.getElementById("invoiceModal").classList.remove("show");
-}
-
-function whatsappLink(number){
-  let n=String(number||"").replace(/\D/g,"");
-  if(n.startsWith("0"))n="93"+n.slice(1);
-
-  const msg=encodeURIComponent("سلام، د Samad Solar په اړه اړیکه نیسم.");
-  return `
-    <a class="whatsapp" target="_blank" href="https://wa.me/${n}?text=${msg}">
-      <svg class="wa-icon" viewBox="0 0 32 32" aria-hidden="true">
-        <circle cx="16" cy="16" r="15" fill="#25D366"/>
-        <path fill="white" d="M23.2 8.8A10.1 10.1 0 0 0 16 5.9c-5.6 0-10.1 4.5-10.1 10.1 0 1.8.5 3.5 1.3 5L5.8 26l5.2-1.4c1.5.8 3.2 1.2 5 1.2 5.6 0 10.1-4.5 10.1-10.1 0-2.6-1-5-2.9-6.9ZM16 24.1c-1.6 0-3.1-.4-4.5-1.2l-.3-.2-3.1.8.8-3-.2-.3a8.2 8.2 0 1 1 7.3 3.9Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.7 1-.1.2-.3.2-.5.1-1.3-.6-2.2-1.1-3.1-2.5-.2-.3.2-.3.6-1 .1-.2.1-.3 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9.6.3 1.1.4 1.5.5.6.2 1.2.1 1.7.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.3-.1-.5-.2Z"/>
-      </svg>
-      ${esc(number)}
-    </a>`;
-}
-
-function renderInvoice(s){
-  const design=settings.invoiceDesign||"classic";
-
-  const logo=settings.logo
-    ? `<img class="invoice-logo" src="${settings.logo}">`
-    : "";
-
-  const wa=settings.whatsapp
-    ? whatsappLink(settings.whatsapp)
-    : "";
-
-  const items=s.items.map((i,index)=>`
-    <tr>
-      <td>${index+1}</td>
-      <td>${esc(i.name)}</td>
-      <td>${i.qty}</td>
-      <td>${money(i.price)} USD</td>
-      <td>${money(i.total)} USD</td>
-    </tr>`).join("");
-
-  const status=s.remaining<=0
-    ? `<div style="color:#16a34a;font-weight:bold;font-size:18px">✓ PAID</div>`
-    : `<div style="color:#dc2626;font-weight:bold;font-size:18px">REMAINING</div>`;
-
-  document.getElementById("invoiceArea").innerHTML=`
-    <div id="printInvoice" class="invoice design-${design}" style="background-color:${settings.bgColor}">
-      
-      <div class="watermark">
-        ${settings.logo?`<img src="${settings.logo}">`:""}
-      </div>
-
-      <div class="invoice-inner">
-
-        <div class="invoice-header">
-          <div>
-            ${logo}
-            <div class="shop-name">${esc(settings.shopName)}</div>
-            <div>${esc(settings.address||"")}</div>
-            <div>${settings.phone?`📞 ${esc(settings.phone)}`:""}</div>
-            <div>${wa}</div>
-            <div>${settings.gmail?`✉ ${esc(settings.gmail)}`:""}</div>
-          </div>
-
-          <div class="invoice-meta">
-            <b>INVOICE</b><br>
-            No: ${esc(s.invoiceNo)}<br>
-            Date: ${esc(s.date)}<br><br>
-            ${status}
-          </div>
-        </div>
-
-        <div class="customer-box">
-          <b>Customer:</b> ${esc(s.customer||"Walk-in")}
-          ${s.phone?` &nbsp; | &nbsp; 📞 ${esc(s.phone)}`:""}
-          ${s.whatsapp?` &nbsp; | &nbsp; ${whatsappLink(s.whatsapp)}`:""}
-        </div>
-
-        <table class="invoice-table">
-          <tr>
-            <th>#</th>
-            <th>Item</th>
-            <th>Qty</th>
-            <th>Unit Price</th>
-            <th>Total</th>
-          </tr>
-          ${items}
-          ${s.extra>0?`
-          <tr>
-            <td></td>
-            <td><b>Transport / Installation</b></td>
-            <td>1</td>
-            <td>${money(s.extra)} USD</td>
-            <td>${money(s.extra)} USD</td>
-          </tr>`:""}
-        </table>
-
-        <div class="invoice-total">
-          <div class="total-row">
-            <span>Total</span>
-            <b>${money(s.total)} USD</b>
-          </div>
-          <div class="total-row">
-            <span>Paid</span>
-            <b class="paid">${money(s.paid)} USD</b>
-          </div>
-          <div class="total-row">
-            <span>Remaining</span>
-            <b class="remaining">${money(s.remaining)} USD</b>
-          </div>
-        </div>
-
-        <div style="margin-top:30px">
-          ${status}
-        </div>
-
-        <div style="margin-top:35px;text-align:center;font-size:15px">
-          ${esc(settings.greeting||"Thank you for choosing our brand.")}
-        </div>
-
-      </div>
-
-      <div class="invoice-footer">
-        <span>${esc(settings.address||"")}</span>
-        <span>
-          ${settings.whatsapp?`WhatsApp: ${esc(settings.whatsapp)}`:""}
-        </span>
-      </div>
-    </div>
-  `;
-
-  document.getElementById("invoiceModal").classList.add("show");
-}
-
-async function makeInvoiceCanvas(){
-  const element=document.getElementById("printInvoice");
-  return await html2canvas(element,{
-    scale:2,
-    useCORS:true,
-    backgroundColor:"#ffffff"
-  });
-}
-
-async function makePDFBlob(){
-  const canvas=await makeInvoiceCanvas();
-  const {jsPDF}=window.jspdf;
-
-  const pdf=new jsPDF({
-    orientation:"portrait",
-    unit:"mm",
-    format:"a4"
-  });
-
-  const img=canvas.toDataURL("image/jpeg",0.95);
-  const pageWidth=210;
-  const pageHeight=297;
-
-  const ratio=Math.min(
-    pageWidth/canvas.width,
-    pageHeight/canvas.height
-  );
-
-  const w=canvas.width*ratio;
-  const h=canvas.height*ratio;
-
-  pdf.addImage(img,"JPEG",(pageWidth-w)/2,0,w,h);
-
-  return pdf.output("blob");
-}
-
-async function downloadInvoicePDF(){
-  if(!currentInvoice)return;
-
-  const blob=await makePDFBlob();
-  const url=URL.createObjectURL(blob);
-
-  const a=document.createElement("a");
-  a.href=url;
-  a.download=`${currentInvoice.invoiceNo}.pdf`;
-  a.click();
-
-  setTimeout(()=>URL.revokeObjectURL(url),1000);
-}
-
-async function shareInvoicePDF(){
-  if(!currentInvoice)return;
-
-  const blob=await makePDFBlob();
-  const file=new File(
-    [blob],
-    `${currentInvoice.invoiceNo}.pdf`,
-    {type:"application/pdf"}
-  );
-
-  if(navigator.share && navigator.canShare && navigator.canShare({files:[file]})){
-    try{
-      await navigator.share({
-        title:`${settings.shopName} - ${currentInvoice.invoiceNo}`,
-        text:"Invoice PDF",
-        files:[file]
-      });
-      return;
-    }catch(e){}
-  }
-
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement("a");
-  a.href=url;
-  a.download=`${currentInvoice.invoiceNo}.pdf`;
-  a.click();
-
-  setTimeout(()=>URL.revokeObjectURL(url),1000);
-
-  alert("PDF downloaded. اوس یې WhatsApp یا بل ځای ته Share کولی شې.");
-}
-
-function printInvoice(){
-  const content=document.getElementById("printInvoice").outerHTML;
-
-  const w=window.open("","_blank","width=900,height=1000");
-
-  w.document.write(`
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <title>${esc(currentInvoice?.invoiceNo||"Invoice")}</title>
-      <style>
-        *{box-sizing:border-box}
-        body{margin:0;font-family:Arial,Tahoma,sans-serif}
-        .invoice{
-          width:794px;
-          min-height:1123px;
-          margin:auto;
-          position:relative;
-          overflow:hidden
-        }
-        .invoice-inner{position:relative;z-index:2;padding:35px}
-        .invoice-header{
-          display:flex;
-          justify-content:space-between;
-          align-items:flex-start;
-          gap:20px;
-          border-bottom:3px solid #0f766e;
-          padding-bottom:18px
-        }
-        .invoice-logo{width:85px;height:85px;object-fit:contain}
-        .shop-name{font-size:28px;font-weight:bold;color:#0f766e}
-        .invoice-meta{text-align:left;font-size:13px}
-        .invoice-meta b{font-size:18px}
-        .customer-box{margin-top:22px;padding:12px;border-radius:10px;background:#f8fafc}
-        table{width:100%;border-collapse:collapse;margin-top:20px}
-        th,td{padding:10px;border-bottom:1px solid #ddd;text-align:right}
-        th{background:#0f766e;color:white}
-        .invoice-total{
-          margin-top:20px;
-          margin-left:0;
-          width:330px;
-          border:1px solid #ddd
-        }
-        .total-row{
-          display:flex;
-          justify-content:space-between;
-          padding:10px 13px;
-          border-bottom:1px solid #eee
-        }
-        .paid{color:#16a34a}
-        .remaining{color:#dc2626}
-        .invoice-footer{
-          position:absolute;
-          bottom:22px;
-          left:35px;
-          right:35px;
-          border-top:1px solid #ddd;
-          padding-top:12px;
-          display:flex;
-          justify-content:space-between
-        }
-        .watermark{
-          position:absolute;
-          inset:0;
-          display:flex;
-          align-items:center;
-          justify-content:center;
-          z-index:1
-        }
-        .watermark img{width:420px;opacity:.045;transform:rotate(-25deg)}
-        .whatsapp{
-          display:inline-flex;
-          align-items:center;
-          gap:6px;
-          color:#16a34a;
-          font-weight:bold;
-          text-decoration:none
-        }
-        .wa-icon{width:20px;height:20px}
-        @media print{
-          @page{size:A4;margin:0}
-          body{print-color-adjust:exact;-webkit-print-color-adjust:exact}
-        }
-      </style>
-    </head>
-    <body>
-      ${content}
-      <script>
-        window.onload=function(){
-          setTimeout(function(){
-            window.print();
-          },500);
-        };
-      <\/script>
-    </body>
-    </html>
-  `);
-
-  w.document.close();
-}
-
-function clearSale(){
-  saleItems=[];
-  renderSaleItems();
-
-  ["customerName","customerPhone","customerWhatsapp"].forEach(id=>{
-    document.getElementById(id).value="";
-  });
-
-  document.getElementById("saleQty").value=1;
-  document.getElementById("salePrice").value="";
-  document.getElementById("salePaid").value=0;
-  document.getElementById("extraCost").value=0;
-  document.getElementById("saleTotal").value=0;
-}
-
-function downloadBackup(){
-  const data={
-    products,
-    purchases,
-    sales,
-    expenses,
-    debts,
-    capital,
-    settings
-  };
-
-  const blob=new Blob(
-    [JSON.stringify(data,null,2)],
-    {type:"application/json"}
-  );
-
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement("a");
-  a.href=url;
-  a.download=`Samad-Solar-Backup-${new Date().toISOString().slice(0,10)}.json`;
-  a.click();
-
-  setTimeout(()=>URL.revokeObjectURL(url),1000);
-}
-
-function restoreBackup(){
-  const file=document.getElementById("restoreFile").files[0];
-  if(!file)return alert("Choose backup file first.");
-
-  if(!confirm("Restore backup? Current data will be replaced."))return;
-
-  const reader=new FileReader();
-
-  reader.onload=e=>{
-    try{
-      const d=JSON.parse(e.target.result);
-
-      products=d.products||[];
-      purchases=d.purchases||[];
-      sales=d.sales||[];
-      expenses=d.expenses||[];
-      debts=d.debts||[];
-      capital=d.capital||{usd:0,afn:0};
-      settings=d.settings||settings;
-
-      save(KEY.products,products);
-      save(KEY.purchases,purchases);
-      save(KEY.sales,sales);
-      save(KEY.expenses,expenses);
-      save(KEY.debts,debts);
-      save(KEY.capital,capital);
-      save(KEY.settings,settings);
-
-      alert("Backup restored.");
-      location.reload();
-
-    }catch(err){
-      alert("Invalid backup file.");
-    }
-  };
-
-  reader.readAsText(file);
-}
-
-function esc(v){
-  return String(v??"")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-}
-
-document.getElementById("salePrice").addEventListener("input",()=>{});
 
 document.getElementById("saleProduct").addEventListener("change",function(){
-  const p=products.find(x=>x.id===this.value);
-  if(p)document.getElementById("salePrice").value=p.sell||0;
+
+ const p=products.find(x=>x.id===this.value);
+
+ if(p){
+  document.getElementById("salePrice").value=p.sell||0;
+ }
 });
 
 document.getElementById("purchaseProduct").addEventListener("change",function(){
-  const p=products.find(x=>x.id===this.value);
-  if(p)document.getElementById("purchasePrice").value=p.buy||0;
+
+ const p=products.find(x=>x.id===this.value);
+
+ if(p){
+  document.getElementById("purchasePrice").value=p.buy||0;
+ }
 });
 
-settings.shopName=settings.shopName||"Samad Solar";
-document.getElementById("shopTitle").textContent=settings.shopName;
+function addSaleItem(){
+
+ const pid=document.getElementById("saleProduct").value;
+ const qty=Number(document.getElementById("saleQty").value||0);
+ const price=Number(document.getElementById("salePrice").value||0);
+
+ if(!pid||qty<=0)return alert("Select product and quantity.");
+
+ const p=products.find(x=>x.id===pid);
+
+ if(!p)return;
+
+ if(qty>Number(p.stock||0)){
+  return alert("Not enough stock.");
+ }
+
+ saleItems.push({
+  id:uid(),
+  productId:pid,
+  name:p.name,
+  qty,
+  price,
+  total:qty*price,
+  inventory:true,
+  buyPrice:Number(p.buy||0)
+ });
+
+ renderSaleItems();
+}
+
+function addOtherItem(){
+
+ const name=prompt("Other item name:");
+
+ if(!name)return;
+
+ const price=Number(prompt("Price USD:")||0);
+
+ if(price<=0)return;
+
+ saleItems.push({
+  id:uid(),
+  productId:null,
+  name,
+  qty:1,
+  price,
+  total:price,
+  inventory:false,
+  buyPrice:0
+ });
+
+ renderSaleItems();
+}
+
+function removeSaleItem(id){
+
+ saleItems=saleItems.filter(x=>x.id!==id);
+
+ renderSaleItems();
+}
+
+function renderSaleItems(){
+
+ document.getElementById("saleItems").innerHTML=saleItems.length
+ ?`
+ <table>
+ <tr>
+  <th>Item</th>
+  <th>Qty</th>
+  <th>Price</th>
+  <th>Total</th>
+  <th></th>
+ </tr>
+
+ ${saleItems.map(i=>`
+ <tr>
+  <td>${esc(i.name)} ${i.inventory?"":"(Other)"}</td>
+  <td>${i.qty}</td>
+  <td>${money(i.price)}</td>
+  <td>${money(i.total)} USD</td>
+  <td>
+   <button class="red" onclick="removeSaleItem('${i.id}')">×</button>
+  </td>
+ </tr>
+ `).join("")}
+
+ </table>
+ `
+ :"";
+
+ calculateSaleTotal();
+}
+
+function calculateSaleTotal(){
+
+ const itemsTotal=
+ saleItems.reduce((a,i)=>a+Number(i.total||0),0);
+
+ const extra=
+ Number(document.getElementById("extraCost").value||0);
+
+ document.getElementById("saleTotal").value=
+ itemsTotal+extra;
+}
+
+document.getElementById("extraCost")
+.addEventListener("input",calculateSaleTotal);
+
+function completeSale(){
+
+ if(!saleItems.length){
+  return alert("Add at least one item.");
+ }
+
+ const customer=
+ document.getElementById("customerName").value.trim()||"Walk-in";
+
+ const phone=
+ document.getElementById("customerPhone").value.trim();
+
+ const whatsapp=
+ document.getElementById("customerWhatsapp").value.trim();
+
+ const total=
+ Number(document.getElementById("saleTotal").value||0);
+
+ let paid=
+ Number(document.getElementById("salePaid").value||0);
+
+ if(paid>total){
+  return alert("Paid amount cannot be greater than total.");
+ }
+
+ if(paid>0 && paid<total){
+
+  const allPaid=confirm(
+   "ایا مشتری ټولې پیسې درکړې؟\n\nYES = Full Paid\nNO = Keep Remaining"
+  );
+
+  if(allPaid)paid=total;
+ }
+
+ saleItems.forEach(item=>{
+
+  if(item.inventory){
+
+   const p=products.find(x=>x.id===item.productId);
+
+   if(p)p.stock-=item.qty;
+  }
+ });
+
+ const invoiceNo=
+ `${settings.invoicePrefix}-${settings.nextInvoice++}`;
+
+ const remaining=total-paid;
+
+ const sale={
+  id:uid(),
+  invoiceNo,
+  customer,
+  phone,
+  whatsapp,
+  items:[...saleItems],
+  extra:Number(document.getElementById("extraCost").value||0),
+  total,
+  paid,
+  remaining,
+  currency:"USD",
+  date:new Date().toISOString()
+ };
+
+ sales.push(sale);
+
+ if(remaining>0){
+
+  debts.push({
+   id:uid(),
+   saleId:sale.id,
+   name:customer,
+   phone,
+   whatsapp,
+   amount:total,
+   paid,
+   remaining,
+   date:new Date().toISOString(),
+   note:"Invoice "+invoiceNo
+  });
+
+  save(KEY.debts,debts);
+ }
+
+ save(KEY.products,products);
+ save(KEY.sales,sales);
+ save(KEY.settings,settings);
+
+ saleItems=[];
+ currentInvoice=sale;
+
+ renderSaleItems();
+ renderSales();
+ renderDashboard();
+ renderDebts();
+
+ renderInvoice(sale);
+
+ clearSaleFields();
+}
+
+function clearSaleFields(){
+
+ document.getElementById("customerName").value="";
+ document.getElementById("customerPhone").value="";
+ document.getElementById("customerWhatsapp").value="";
+ document.getElementById("salePaid").value=0;
+ document.getElementById("extraCost").value=0;
+ document.getElementById("saleTotal").value=0;
+}
+
+function renderSales(){
+
+ document.getElementById("salesTable").innerHTML=sales.length
+ ?`
+ <table>
+ <tr>
+  <th>Invoice</th>
+  <th>Customer</th>
+  <th>Total</th>
+  <th>Paid</th>
+  <th>Remaining</th>
+  <th>Date</th>
+  <th></th>
+ </tr>
+
+ ${sales.slice().reverse().map(s=>`
+ <tr>
+  <td>${esc(s.invoiceNo)}</td>
+  <td>${esc(s.customer)}</td>
+  <td>${money(s.total)} ${s.currency}</td>
+  <td>${money(s.paid)}</td>
+  <td class="${s.remaining>0?"remaining":"paid"}">
+   ${money(s.remaining)}
+  </td>
+  <td>${formatDate(s.date)}</td>
+  <td>
+   <button class="blue" onclick="openInvoice('${s.id}')">
+    Invoice
+   </button>
+  </td>
+ </tr>
+ `).join("")}
+
+ </table>
+ `
+ :"No sales yet.";
+}
+
+/* EXPENSE */
+
+function renderExpenses(){
+
+ document.getElementById("expenseTable").innerHTML=expenses.length
+ ?`
+ <table>
+ <tr>
+  <th>Title</th>
+  <th>Amount</th>
+  <th>Note</th>
+  <th>Date</th>
+ </tr>
+
+ ${expenses.slice().reverse().map(e=>`
+ <tr>
+  <td>${esc(e.title)}</td>
+  <td>${money(e.amount)} AFN</td>
+  <td>${esc(e.note||"")}</td>
+  <td>${formatDate(e.date)}</td>
+ </tr>
+ `).join("")}
+
+ </table>
+ `
+ :"No expenses.";
+}
+
+function saveExpense(){
+
+ const title=document.getElementById("expenseTitle").value.trim();
+
+ const amount=
+ Number(document.getElementById("expenseAmount").value||0);
+
+ if(!title||amount<=0){
+  return alert("Enter title and amount.");
+ }
+
+ expenses.push({
+  id:uid(),
+  title,
+  amount,
+  note:document.getElementById("expenseNote").value.trim(),
+  date:new Date().toISOString(),
+  currency:"AFN"
+ });
+
+ save(KEY.expenses,expenses);
+
+ document.getElementById("expenseTitle").value="";
+ document.getElementById("expenseAmount").value="";
+ document.getElementById("expenseNote").value="";
+
+ renderExpenses();
+ renderDashboard();
+}
+
+/* DEBT */
+
+function renderDebts(){
+
+ const active=debts.filter(d=>Number(d.remaining)>0);
+
+ document.getElementById("debtTable").innerHTML=active.length
+ ?`
+ <table>
+ <tr>
+  <th>Customer</th>
+  <th>Total</th>
+  <th>Paid</th>
+  <th>Remaining</th>
+  <th>Date</th>
+  <th>WhatsApp</th>
+ </tr>
+
+ ${active.map(d=>`
+ <tr>
+  <td>${esc(d.name)}</td>
+  <td>${money(d.amount)}</td>
+  <td>${money(d.paid)}</td>
+  <td class="remaining">${money(d.remaining)}</td>
+  <td>${formatDate(d.date)}</td>
+  <td>
+   ${d.whatsapp?whatsappLink(d.whatsapp):"—"}
+  </td>
+ </tr>
+ `).join("")}
+
+ </table>
+ `
+ :`<div class="success">✓ No remaining debt.</div>`;
+}
+
+/* =========================
+   REAL REPORT SYSTEM
+========================= */
+
+function setReportPeriod(period){
+
+ currentReportPeriod=period;
+
+ document.querySelectorAll(".report-filter button")
+ .forEach(b=>b.classList.remove("active"));
+
+ const id={
+  daily:"rfDaily",
+  weekly:"rfWeekly",
+  monthly:"rfMonthly",
+  yearly:"rfYearly",
+  all:"rfAll"
+ }[period];
+
+ document.getElementById(id).classList.add("active");
+
+ renderReports();
+}
+
+function dateOnly(d){
+ const x=new Date(d);
+ return new Date(x.getFullYear(),x.getMonth(),x.getDate());
+}
+
+function startOfWeek(d){
+
+ const x=dateOnly(d);
+ const day=x.getDay();
+
+ const diff=day===0?-6:1-day;
+
+ x.setDate(x.getDate()+diff);
+
+ return x;
+}
+
+function getReportRange(period){
+
+ const now=new Date();
+
+ let start;
+ let end;
+
+ if(period==="daily"){
+
+  start=dateOnly(now);
+  end=new Date(start);
+  end.setDate(end.getDate()+1);
+
+ }else if(period==="weekly"){
+
+  start=startOfWeek(now);
+
+  end=new Date(start);
+  end.setDate(end.getDate()+7);
+
+ }else if(period==="monthly"){
+
+  start=new Date(now.getFullYear(),now.getMonth(),1);
+
+  end=new Date(now.getFullYear(),now.getMonth()+1,1);
+
+ }else if(period==="yearly"){
+
+  start=new Date(now.getFullYear(),0,1);
+
+  end=new Date(now.getFullYear()+1,0,1);
+
+ }else{
+
+  start=null;
+  end=null;
+ }
+
+ return {start,end};
+}
+
+function inRange(date,range){
+
+ if(!range.start)return true;
+
+ const d=new Date(date);
+
+ return d>=range.start && d<range.end;
+}
+
+function reportPeriodName(){
+
+ const names={
+  daily:"Daily Report",
+  weekly:"Weekly Report",
+  monthly:"Monthly Report",
+  yearly:"Yearly Report",
+  all:"All Time Report"
+ };
+
+ return names[currentReportPeriod]||"Report";
+}
+
+function formatDate(d){
+
+ if(!d)return"";
+
+ const x=new Date(d);
+
+ if(isNaN(x.getTime()))return String(d);
+
+ return x.toLocaleDateString();
+}
+
+function renderReports(){
+
+ const range=getReportRange(currentReportPeriod);
+
+ const rsales=sales.filter(s=>inRange(s.date,range));
+
+ const rpurchases=purchases.filter(p=>inRange(p.date,range));
+
+ const rexpenses=expenses.filter(e=>inRange(e.date,range));
+
+ const salesTotal=
+ rsales.reduce((a,s)=>a+Number(s.total||0),0);
+
+ const paidTotal=
+ rsales.reduce((a,s)=>a+Number(s.paid||0),0);
+
+ const remainingTotal=
+ rsales.reduce((a,s)=>a+Number(s.remaining||0),0);
+
+ const purchaseTotal=
+ rpurchases.reduce((a,p)=>a+Number(p.total||0),0);
+
+ const expenseTotal=
+ rexpenses.reduce((a,e)=>a+Number(e.amount||0),0);
+
+ /*
+  Gross Profit:
+  د هر sold product د buy price پر اساس حسابېږي.
+  Other Item buy price = 0.
+ */
+
+ let costOfGoods=0;
+
+ rsales.forEach(s=>{
+
+  (s.items||[]).forEach(item=>{
+
+   const buy=Number(
+    item.buyPrice||
+    getProductBuyPrice(item.productId)||
+    0
+   );
+
+   costOfGoods+=buy*Number(item.qty||0);
+  });
+ });
+
+ const grossProfit=salesTotal-costOfGoods;
+
+ document.getElementById("reportShopName").textContent=
+ settings.shopName||"Samad Solar";
+
+ document.getElementById("reportHeading").textContent=
+ reportPeriodName();
+
+ if(range.start){
+
+  const endShown=new Date(range.end);
+  endShown.setDate(endShown.getDate()-1);
+
+  document.getElementById("reportDateRange").textContent=
+  `${formatDate(range.start)} — ${formatDate(endShown)}`;
+
+ }else{
+
+  document.getElementById("reportDateRange").textContent=
+  "All saved records";
+ }
+
+ document.getElementById("reportPeriodText").textContent=
+ `Showing: ${reportPeriodName()}`;
+
+ document.getElementById("rrSales").textContent=
+ money(salesTotal)+" USD";
+
+ document.getElementById("rrPurchases").textContent=
+ money(purchaseTotal)+" USD";
+
+ document.getElementById("rrProfit").textContent=
+ money(grossProfit)+" USD";
+
+ document.getElementById("rrPaid").textContent=
+ money(paidTotal)+" USD";
+
+ document.getElementById("rrRemaining").textContent=
+ money(remainingTotal)+" USD";
+
+ document.getElementById("rrExpenses").textContent=
+ money(expenseTotal)+" AFN";
+
+ document.getElementById("rrSalesCount").textContent=
+ rsales.length;
+
+ document.getElementById("rrPurchaseCount").textContent=
+ rpurchases.length;
+
+ /* SOLD ITEMS */
+
+ const itemMap={};
+
+ rsales.forEach(s=>{
+
+  (s.items||[]).forEach(i=>{
+
+   const key=i.productId||("other-"+i.name);
+
+   if(!itemMap[key]){
+    itemMap[key]={
+     name:i.name,
+     qty:0,
+     total:0,
+     cost:0
+    };
+   }
+
+   itemMap[key].qty+=Number(i.qty||0);
+   itemMap[key].total+=Number(i.total||0);
+
+   const buy=Number(
+    i.buyPrice||
+    getProductBuyPrice(i.productId)||
+    0
+   );
+
+   itemMap[key].cost+=buy*Number(i.qty||0);
+  });
+ });
+
+ const soldItems=Object.values(itemMap);
+
+ document.getElementById("reportItems").innerHTML=
+ soldItems.length
+ ?`
+ <table>
+ <tr>
+  <th>Item</th>
+  <th>Qty</th>
+  <th>Sales</th>
+  <th>Cost</th>
+  <th>Profit</th>
+ </tr>
+
+ ${soldItems.map(i=>`
+ <tr>
+  <td>${esc(i.name)}</td>
+  <td>${i.qty}</td>
+  <td>${money(i.total)} USD</td>
+  <td>${money(i.cost)} USD</td>
+  <td class="${i.total-i.cost>=0?"good":"danger"}">
+   ${money(i.total-i.cost)} USD
+  </td>
+ </tr>
+ `).join("")}
+
+ </table>
+ `
+ :"No sold items in this period.";
+
+ /* SALES */
+
+ document.getElementById("reportSales").innerHTML=
+ rsales.length
+ ?`
+ <table>
+ <tr>
+  <th>Invoice</th>
+  <th>Customer</th>
+  <th>Total</th>
+  <th>Paid</th>
+  <th>Remaining</th>
+  <th>Date</th>
+ </tr>
+
+ ${rsales.map(s=>`
+ <tr>
+  <td>${esc(s.invoiceNo)}</td>
+  <td>${esc(s.customer||"Walk-in")}</td>
+  <td>${money(s.total)} USD</td>
+  <td>${money(s.paid)} USD</td>
+  <td class="${s.remaining>0?"danger":"good"}">
+   ${money(s.remaining)} USD
+  </td>
+  <td>${formatDate(s.date)}</td>
+ </tr>
+ `).join("")}
+
+ </table>
+ `
+ :"No sales in this period.";
+
+ /* PURCHASES */
+
+ document.getElementById("reportPurchases").innerHTML=
+ rpurchases.length
+ ?`
+ <table>
+ <tr>
+  <th>Product</th>
+  <th>Qty</th>
+  <th>Price</th>
+  <th>Total</th>
+  <th>Supplier</th>
+  <th>Date</th>
+ </tr>
+
+ ${rpurchases.map(p=>`
+ <tr>
+  <td>${esc(p.product)}</td>
+  <td>${p.qty}</td>
+  <td>${money(p.price)} USD</td>
+  <td>${money(p.total)} USD</td>
+  <td>${esc(p.supplier||"")}</td>
+  <td>${formatDate(p.date)}</td>
+ </tr>
+ `).join("")}
+
+ </table>
+ `
+ :"No purchases in this period.";
+
+ /* EXPENSES */
+
+ document.getElementById("reportExpenses").innerHTML=
+ rexpenses.length
+ ?`
+ <table>
+ <tr>
+  <th>Title</th>
+  <th>Amount</th>
+  <th>Note</th>
+  <th>Date</th>
+ </tr>
+
+ ${rexpenses.map(e=>`
+ <tr>
+  <td>${esc(e.title)}</td>
+  <td>${money(e.amount)} AFN</td>
+  <td>${esc(e.note||"")}</td>
+  <td>${formatDate(e.date)}</td>
+ </tr>
+ `).join("")}
+
+ </table>
+ `
+ :"No expenses in this period.";
+
+ updateReportActiveButton();
+}
+
+function getProductBuyPrice(id){
+
+ if(!id)return 0;
+
+ const p=products.find(x=>x.id===id);
+
+ return p?Number(p.buy||0):0;
+}
+
+function updateReportActiveButton(){
+
+ document.querySelectorAll(".report-filter button")
+ .forEach(b=>b.classList.remove("active"));
+
+ const id={
+  daily:"rfDaily",
+  weekly:"rfWeekly",
+  monthly:"rfMonthly",
+  yearly:"rfYearly",
+  all:"rfAll"
+ }[currentReportPeriod];
+
+ if(document.getElementById(id)){
+  document.getElementById(id).classList.add("active");
+ }
+}
+
+/* REPORT PDF */
+
+async function makeReportPDFBlob(){
+
+ const element=document.getElementById("reportPrintArea");
+
+ const canvas=await html2canvas(element,{
+  scale:2,
+  useCORS:true,
+  backgroundColor:"#ffffff"
+ });
+
+ const {jsPDF}=window.jspdf;
+
+ const pdf=new jsPDF({
+  orientation:"portrait",
+  unit:"mm",
+  format:"a4"
+ });
+
+ const img=canvas.toDataURL("image/jpeg",0.95);
+
+ const pageWidth=210;
+ const pageHeight=297;
+
+ const margin=8;
+
+ const usableWidth=pageWidth-margin*2;
+
+ const ratio=usableWidth/canvas.width;
+
+ const imgWidth=usableWidth;
+ const imgHeight=canvas.height*ratio;
+
+ let position=margin;
+
+ let remainingHeight=imgHeight;
+
+ pdf.addImage(
+  img,
+  "JPEG",
+  margin,
+  position,
+  imgWidth,
+  imgHeight
+ );
+
+ remainingHeight-=pageHeight-margin*2;
+
+ while(remainingHeight>0){
+
+  position=-(imgHeight-remainingHeight)+margin;
+
+  pdf.addPage();
+
+  pdf.addImage(
+   img,
+   "JPEG",
+   margin,
+   position,
+   imgWidth,
+   imgHeight
+  );
+
+  remainingHeight-=pageHeight-margin*2;
+ }
+
+ return pdf.output("blob");
+}
+
+async function downloadReportPDF(){
+
+ const blob=await makeReportPDFBlob();
+
+ const url=URL.createObjectURL(blob);
+
+ const a=document.createElement("a");
+
+ a.href=url;
+
+ a.download=
+ `${settings.shopName||"Samad-Solar"}-${currentReportPeriod}-Report.pdf`;
+
+ a.click();
+
+ setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+async function shareReportPDF(){
+
+ const blob=await makeReportPDFBlob();
+
+ const file=new File(
+  [blob],
+  `${currentReportPeriod}-Report.pdf`,
+  {type:"application/pdf"}
+ );
+
+ if(
+  navigator.share &&
+  navigator.canShare &&
+  navigator.canShare({files:[file]})
+ ){
+
+  try{
+
+   await navigator.share({
+    title:`${settings.shopName} - ${reportPeriodName()}`,
+    text:reportPeriodName(),
+    files:[file]
+   });
+
+   return;
+
+  }catch(e){}
+ }
+
+ const url=URL.createObjectURL(blob);
+
+ const a=document.createElement("a");
+
+ a.href=url;
+
+ a.download=`${currentReportPeriod}-Report.pdf`;
+
+ a.click();
+
+ setTimeout(()=>URL.revokeObjectURL(url),1000);
+
+ alert("PDF downloaded. اوس یې WhatsApp یا بل ځای ته Share کولی شې.");
+}
+
+function printReport(){
+
+ const content=
+ document.getElementById("reportPrintArea").outerHTML;
+
+ const w=window.open(
+  "",
+  "_blank",
+  "width=900,height=1000"
+ );
+
+ w.document.write(`
+ <!DOCTYPE html>
+ <html>
+ <head>
+ <title>${reportPeriodName()}</title>
+
+ <style>
+
+ *{box-sizing:border-box}
+
+ body{
+  margin:0;
+  font-family:Arial,Tahoma,sans-serif;
+  background:white;
+  color:#172033
+ }
+
+ table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:12px
+ }
+
+ th,td{
+  padding:8px;
+  border-bottom:1px solid #ddd;
+  text-align:right
+ }
+
+ th{
+  background:#0f766e;
+  color:white
+ }
+
+ .report-title{
+  text-align:center;
+  margin-bottom:20px
+ }
+
+ .report-title h2{
+  margin:0;
+  color:#0f766e
+ }
+
+ .report-title p{
+  margin:6px 0;
+  color:#64748b
+ }
+
+ .report-summary{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px
+ }
+
+ .report-box{
+  background:#f8fafc;
+  border-radius:8px;
+  padding:12px;
+  border:1px solid #ddd
+ }
+
+ .report-box span{
+  display:block;
+  color:#64748b
+ }
+
+ .report-box b{
+  display:block;
+  font-size:18px;
+  margin-top:5px
+ }
+
+ .danger{color:#dc2626}
+ .good{color:#16a34a}
+
+ @media print{
+  @page{
+   size:A4;
+   margin:10mm
+  }
+
+  body{
+   print-color-adjust:exact;
+   -webkit-print-color-adjust:exact
+  }
+ }
+
+ </style>
+ </head>
+
+ <body>
+
+ ${content}
+
+ <script>
+ window.onload=function(){
+  setTimeout(function(){
+   window.print();
+  },500);
+ };
+ <\/script>
+
+ </body>
+ </html>
+ `);
+
+ w.document.close();
+}
+
+/* CAPITAL */
+
+function unlockCapital(){
+
+ const pin=prompt("Enter Security PIN:");
+
+ if(pin!==String(settings.pin)){
+  return alert("Wrong PIN.");
+ }
+
+ document.getElementById("capitalBox").innerHTML=`
+ <div class="grid">
+
+  <div class="stat">
+   Capital USD
+   <b>${money(capital.usd)} USD</b>
+  </div>
+
+  <div class="stat">
+   Capital AFN
+   <b>${money(capital.afn)} AFN</b>
+  </div>
+
+ </div>
+
+ <hr>
+
+ <div class="form-grid">
+
+  <div>
+   <label>Set Capital USD</label>
+   <input id="capUSD" type="number" value="${capital.usd}">
+  </div>
+
+  <div>
+   <label>Set Capital AFN</label>
+   <input id="capAFN" type="number" value="${capital.afn}">
+  </div>
+
+ </div>
+
+ <button class="primary" onclick="saveCapital()">
+  Save Capital
+ </button>
+ `;
+}
+
+function saveCapital(){
+
+ capital.usd=
+ Number(document.getElementById("capUSD").value||0);
+
+ capital.afn=
+ Number(document.getElementById("capAFN").value||0);
+
+ save(KEY.capital,capital);
+
+ alert("Capital saved.");
+
+ unlockCapital();
+}
+
+/* SETTINGS */
+
+function loadSettingsForm(){
+
+ document.getElementById("sShopName").value=
+ settings.shopName||"";
+
+ document.getElementById("sGmail").value=
+ settings.gmail||"";
+
+ document.getElementById("sPhone").value=
+ settings.phone||"";
+
+ document.getElementById("sWhatsapp").value=
+ settings.whatsapp||"";
+
+ document.getElementById("sAddress").value=
+ settings.address||"";
+
+ document.getElementById("sLanguage").value=
+ settings.language||"ps";
+
+ document.getElementById("sCurrency").value=
+ settings.currency||"USD";
+
+ document.getElementById("sPin").value=
+ settings.pin||"786";
+
+ document.getElementById("sPrefix").value=
+ settings.invoicePrefix||"SMD";
+
+ document.getElementById("sBgColor").value=
+ settings.bgColor||"#f1f5f9";
+
+ document.getElementById("selectedDesign").textContent=
+ settings.invoiceDesign||"classic";
+
+ document.getElementById("logoPreview").innerHTML=
+ settings.logo
+ ?`<img src="${settings.logo}" style="width:90px;height:90px;object-fit:contain">`
+ :"No logo.";
+}
+
+function chooseDesign(name){
+
+ settings.invoiceDesign=name;
+
+ document.getElementById("selectedDesign").textContent=name;
+
+ save(KEY.settings,settings);
+}
+
+document.getElementById("sLogo")
+.addEventListener("change",function(){
+
+ const file=this.files[0];
+
+ if(!file)return;
+
+ const reader=new FileReader();
+
+ reader.onload=e=>{
+
+  settings.logo=e.target.result;
+
+  document.getElementById("logoPreview").innerHTML=
+  `<img src="${settings.logo}"
+   style="width:90px;height:90px;object-fit:contain">`;
+ };
+
+ reader.readAsDataURL(file);
+});
+
+function saveSettings(){
+
+ settings.shopName=
+ document.getElementById("sShopName").value.trim()||
+ "Samad Solar";
+
+ settings.gmail=
+ document.getElementById("sGmail").value.trim();
+
+ settings.phone=
+ document.getElementById("sPhone").value.trim();
+
+ settings.whatsapp=
+ document.getElementById("sWhatsapp").value.trim();
+
+ settings.address=
+ document.getElementById("sAddress").value.trim();
+
+ settings.language=
+ document.getElementById("sLanguage").value;
+
+ settings.currency=
+ document.getElementById("sCurrency").value;
+
+ settings.pin=
+ document.getElementById("sPin").value||"786";
+
+ settings.invoicePrefix=
+ document.getElementById("sPrefix").value.trim()||"SMD";
+
+ settings.bgColor=
+ document.getElementById("sBgColor").value;
+
+ save(KEY.settings,settings);
+
+ document.getElementById("shopTitle").textContent=
+ settings.shopName;
+
+ alert("Settings saved.");
+}
+
+/* WHATSAPP */
+
+function whatsappLink(number){
+
+ let n=String(number||"").replace(/\D/g,"");
+
+ if(n.startsWith("0")){
+  n="93"+n.slice(1);
+ }
+
+ const msg=encodeURIComponent(
+  "سلام، د Samad Solar په اړه اړیکه نیسم."
+ );
+
+ return `
+ <a class="whatsapp"
+    target="_blank"
+    href="https://wa.me/${n}?text=${msg}">
+
+ <svg class="wa-icon" viewBox="0 0 32 32">
+  <circle cx="16" cy="16" r="15" fill="#25D366"/>
+  <path fill="white"
+   d="M23.2 8.8A10.1 10.1 0 0 0 16 5.9c-5.6 0-10.1 4.5-10.1 10.1
+   0 1.8.5 3.5 1.3 5L5.8 26l5.2-1.4c1.5.8 3.2 1.2 5 1.2
+   5.6 0 10.1-4.5 10.1-10.1 0-2.6-1-5-2.9-6.9Z"/>
+ </svg>
+
+ ${esc(number)}
+
+ </a>
+ `;
+}
+
+/* INVOICE */
+
+function openInvoice(id){
+
+ const s=sales.find(x=>x.id===id);
+
+ if(!s)return;
+
+ currentInvoice=s;
+
+ renderInvoice(s);
+}
+
+function closeInvoice(){
+
+ document.getElementById("invoiceModal")
+ .classList.remove("show");
+}
+
+function renderInvoice(s){
+
+ const design=settings.invoiceDesign||"classic";
+
+ const logo=settings.logo
+ ?`<img class="invoice-logo" src="${settings.logo}">`
+ :"";
+
+ const wa=settings.whatsapp
+ ?whatsappLink(settings.whatsapp)
+ :"";
+
+ const items=(s.items||[]).map((i,index)=>`
+ <tr>
+  <td>${index+1}</td>
+  <td>${esc(i.name)}</td>
+  <td>${i.qty}</td>
+  <td>${money(i.price)} USD</td>
+  <td>${money(i.total)} USD</td>
+ </tr>
+ `).join("");
+
+ const status=s.remaining<=0
+ ?`<div style="color:#16a34a;font-weight:bold;font-size:18px">✓ PAID</div>`
+ :`<div style="color:#dc2626;font-weight:bold;font-size:18px">
+    REMAINING
+   </div>`;
+
+ document.getElementById("invoiceArea").innerHTML=`
+
+ <div id="printInvoice"
+      class="invoice design-${design}"
+      style="background-color:${settings.bgColor}">
+
+  <div class="watermark">
+   ${settings.logo
+   ?`<img src="${settings.logo}">`
+   :""}
+  </div>
+
+  <div class="invoice-inner">
+
+   <div class="invoice-header">
+
+    <div>
+
+     ${logo}
+
+     <div class="shop-name">
+      ${esc(settings.shopName)}
+     </div>
+
+     <div>${esc(settings.address||"")}</div>
+
+     <div>
+      ${settings.phone
+      ?`📞 ${esc(settings.phone)}`
+      :""}
+     </div>
+
+     <div>${wa}</div>
+
+     <div>
+      ${settings.gmail
+      ?`✉ ${esc(settings.gmail)}`
+      :""}
+     </div>
+
+    </div>
+
+    <div class="invoice-meta">
+
+     <b>INVOICE</b><br>
+
+     No: ${esc(s.invoiceNo)}<br>
+
+     Date: ${formatDate(s.date)}<br><br>
+
+     ${status}
+
+    </div>
+
+   </div>
+
+   <div class="customer-box">
+
+    <b>Customer:</b>
+    ${esc(s.customer||"Walk-in")}
+
+    ${s.phone
+    ?` &nbsp; | &nbsp; 📞 ${esc(s.phone)}`
+    :""}
+
+    ${s.whatsapp
+    ?` &nbsp; | &nbsp; ${whatsappLink(s.whatsapp)}`
+    :""}
+
+   </div>
+
+   <table class="invoice-table">
+
+    <tr>
+     <th>#</th>
+     <th>Item</th>
+     <th>Qty</th>
+     <th>Unit Price</th>
+     <th>Total</th>
+    </tr>
+
+    ${items}
+
+    ${s.extra>0
+    ?`
+    <tr>
+     <td></td>
+     <td><b>Transport / Installation</b></td>
+     <td>1</td>
+     <td>${money(s.extra)} USD</td>
+     <td>${money(s.extra)} USD</td>
+    </tr>
+    `
+    :""}
+
+   </table>
+
+   <div class="invoice-total">
+
+    <div class="total-row">
+     <span>Total</span>
+     <b>${money(s.total)} USD</b>
+    </div>
+
+    <div class="total-row">
+     <span>Paid</span>
+     <b class="paid">${money(s.paid)} USD</b>
+    </div>
+
+    <div class="total-row">
+     <span>Remaining</span>
+     <b class="remaining">
+      ${money(s.remaining)} USD
+     </b>
+    </div>
+
+   </div>
+
+   <div style="margin-top:30px">
+    ${status}
+   </div>
+
+   <div style="
+    margin-top:35px;
+    text-align:center;
+    font-size:15px">
+
+    ${esc(settings.greeting||
+    "Thank you for choosing our brand.")}
+
+   </div>
+
+  </div>
+
+  <div class="invoice-footer">
+
+   <span>${esc(settings.address||"")}</span>
+
+   <span>
+    ${settings.whatsapp
+    ?`WhatsApp: ${esc(settings.whatsapp)}`
+    :""}
+   </span>
+
+  </div>
+
+ </div>
+ `;
+
+ document.getElementById("invoiceModal")
+ .classList.add("show");
+}
+
+/* INVOICE PDF */
+
+async function makeInvoicePDFBlob(){
+
+ const element=document.getElementById("printInvoice");
+
+ const canvas=await html2canvas(element,{
+  scale:2,
+  useCORS:true,
+  backgroundColor:"#ffffff"
+ });
+
+ const {jsPDF}=window.jspdf;
+
+ const pdf=new jsPDF({
+  orientation:"portrait",
+  unit:"mm",
+  format:"a4"
+ });
+
+ const img=canvas.toDataURL("image/jpeg",.95);
+
+ const pageWidth=210;
+ const pageHeight=297;
+
+ const ratio=Math.min(
+  pageWidth/canvas.width,
+  pageHeight/canvas.height
+ );
+
+ const w=canvas.width*ratio;
+ const h=canvas.height*ratio;
+
+ pdf.addImage(
+  img,
+  "JPEG",
+  (pageWidth-w)/2,
+  0,
+  w,
+  h
+ );
+
+ return pdf.output("blob");
+}
+
+async function downloadInvoicePDF(){
+
+ if(!currentInvoice)return;
+
+ const blob=await makeInvoicePDFBlob();
+
+ const url=URL.createObjectURL(blob);
+
+ const a=document.createElement("a");
+
+ a.href=url;
+
+ a.download=
+ `${currentInvoice.invoiceNo}.pdf`;
+
+ a.click();
+
+ setTimeout(
+  ()=>URL.revokeObjectURL(url),
+  1000
+ );
+}
+
+async function shareInvoicePDF(){
+
+ if(!currentInvoice)return;
+
+ const blob=await makeInvoicePDFBlob();
+
+ const file=new File(
+  [blob],
+  `${currentInvoice.invoiceNo}.pdf`,
+  {type:"application/pdf"}
+ );
+
+ if(
+  navigator.share &&
+  navigator.canShare &&
+  navigator.canShare({files:[file]})
+ ){
+
+  try{
+
+   await navigator.share({
+    title:`${settings.shopName} - ${currentInvoice.invoiceNo}`,
+    text:"Invoice PDF",
+    files:[file]
+   });
+
+   return;
+
+  }catch(e){}
+ }
+
+ const url=URL.createObjectURL(blob);
+
+ const a=document.createElement("a");
+
+ a.href=url;
+
+ a.download=
+ `${currentInvoice.invoiceNo}.pdf`;
+
+ a.click();
+
+ setTimeout(
+  ()=>URL.revokeObjectURL(url),
+  1000
+ );
+
+ alert(
+  "PDF downloaded. اوس یې WhatsApp یا بل ځای ته Share کولی شې."
+ );
+}
+
+function printInvoice(){
+
+ const content=
+ document.getElementById("printInvoice").outerHTML;
+
+ const w=window.open(
+  "",
+  "_blank",
+  "width=900,height=1000"
+ );
+
+ w.document.write(`
+ <!DOCTYPE html>
+ <html>
+ <head>
+
+ <title>
+ ${esc(currentInvoice?.invoiceNo||"Invoice")}
+ </title>
+
+ <style>
+
+ *{box-sizing:border-box}
+
+ body{
+  margin:0;
+  font-family:Arial,Tahoma,sans-serif
+ }
+
+ .invoice{
+  width:794px;
+  min-height:1123px;
+  margin:auto;
+  position:relative;
+  overflow:hidden
+ }
+
+ .invoice-inner{
+  position:relative;
+  z-index:2;
+  padding:35px
+ }
+
+ .invoice-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:20px;
+  border-bottom:3px solid #0f766e;
+  padding-bottom:18px
+ }
+
+ .invoice-logo{
+  width:85px;
+  height:85px;
+  object-fit:contain
+ }
+
+ .shop-name{
+  font-size:28px;
+  font-weight:bold;
+  color:#0f766e
+ }
+
+ .invoice-meta{
+  text-align:left;
+  font-size:13px
+ }
+
+ .invoice-meta b{
+  font-size:18px
+ }
+
+ .customer-box{
+  margin-top:22px;
+  padding:12px;
+  border-radius:10px;
+  background:#f8fafc
+ }
+
+ table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:20px
+ }
+
+ th,td{
+  padding:10px;
+  border-bottom:1px solid #ddd;
+  text-align:right
+ }
+
+ th{
+  background:#0f766e;
+  color:#fff
+ }
+
+ .invoice-total{
+  margin-top:20px;
+  margin-left:0;
+  width:330px;
+  border:1px solid #ddd
+ }
+
+ .total-row{
+  display:flex;
+  justify-content:space-between;
+  padding:10px 13px;
+  border-bottom:1px solid #eee
+ }
+
+ .paid{color:#16a34a}
+ .remaining{color:#dc2626}
+
+ .invoice-footer{
+  position:absolute;
+  bottom:22px;
+  left:35px;
+  right:35px;
+  border-top:1px solid #ddd;
+  padding-top:12px;
+  display:flex;
+  justify-content:space-between
+ }
+
+ .watermark{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:1
+ }
+
+ .watermark img{
+  width:420px;
+  opacity:.045;
+  transform:rotate(-25deg)
+ }
+
+ .whatsapp{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  color:#16a34a;
+  font-weight:bold;
+  text-decoration:none
+ }
+
+ .wa-icon{
+  width:20px;
+  height:20px
+ }
+
+ @media print{
+
+  @page{
+   size:A4;
+   margin:0
+  }
+
+  body{
+   print-color-adjust:exact;
+   -webkit-print-color-adjust:exact
+  }
+
+ }
+
+ </style>
+
+ </head>
+
+ <body>
+
+ ${content}
+
+ <script>
+ window.onload=function(){
+  setTimeout(function(){
+   window.print();
+  },500);
+ };
+ <\/script>
+
+ </body>
+ </html>
+ `);
+
+ w.document.close();
+}
+
+function clearSale(){
+
+ saleItems=[];
+
+ renderSaleItems();
+
+ document.getElementById("customerName").value="";
+ document.getElementById("customerPhone").value="";
+ document.getElementById("customerWhatsapp").value="";
+ document.getElementById("saleQty").value=1;
+ document.getElementById("salePrice").value="";
+ document.getElementById("salePaid").value=0;
+ document.getElementById("extraCost").value=0;
+ document.getElementById("saleTotal").value=0;
+}
+
+/* BACKUP */
+
+function downloadBackup(){
+
+ const data={
+  products,
+  purchases,
+  sales,
+  expenses,
+  debts,
+  capital,
+  settings
+ };
+
+ const blob=new Blob(
+  [JSON.stringify(data,null,2)],
+  {type:"application/json"}
+ );
+
+ const url=URL.createObjectURL(blob);
+
+ const a=document.createElement("a");
+
+ a.href=url;
+
+ a.download=
+ `Samad-Solar-Backup-${new Date().toISOString().slice(0,10)}.json`;
+
+ a.click();
+
+ setTimeout(
+  ()=>URL.revokeObjectURL(url),
+  1000
+ );
+}
+
+function restoreBackup(){
+
+ const file=
+ document.getElementById("restoreFile").files[0];
+
+ if(!file){
+  return alert("Choose backup file first.");
+ }
+
+ if(!confirm(
+  "Restore backup? Current data will be replaced."
+ ))return;
+
+ const reader=new FileReader();
+
+ reader.onload=e=>{
+
+  try{
+
+   const d=JSON.parse(e.target.result);
+
+   products=d.products||[];
+   purchases=d.purchases||[];
+   sales=d.sales||[];
+   expenses=d.expenses||[];
+   debts=d.debts||[];
+   capital=d.capital||{usd:0,afn:0};
+   settings=d.settings||settings;
+
+   save(KEY.products,products);
+   save(KEY.purchases,purchases);
+   save(KEY.sales,sales);
+   save(KEY.expenses,expenses);
+   save(KEY.debts,debts);
+   save(KEY.capital,capital);
+   save(KEY.settings,settings);
+
+   alert("Backup restored.");
+
+   location.reload();
+
+  }catch(err){
+
+   alert("Invalid backup file.");
+
+  }
+ };
+
+ reader.readAsText(file);
+}
+
+/* INIT */
+
+settings.shopName=
+ settings.shopName||"Samad Solar";
+
+document.getElementById("shopTitle").textContent=
+ settings.shopName;
 
 renderDashboard();
 renderStock();
@@ -1715,7 +2912,11 @@ renderPurchases();
 renderSales();
 renderExpenses();
 renderDebts();
-renderReports();
+
+setReportPeriod("daily");
+
+loadSettingsForm();
+
 </script>
 
 </body>
