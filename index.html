@@ -1370,7 +1370,7 @@ function addSaleItem(){
   renderSaleItems();
 
   document.getElementById("saleQty").value=1;
-});
+}
 
 function addOtherItem(){
   const name=document.getElementById("saleOther").value.trim();
@@ -2272,43 +2272,6 @@ function restoreBackup(event) {
 
   reader.readAsText(file);
 }
-      }
-
-      if(!confirm(t("backupWarning"))){
-        event.target.value="";
-        return;
-      }
-
-      products=Array.isArray(data.products)?data.products:[];
-      purchases=Array.isArray(data.purchases)?data.purchases:[];
-      sales=Array.isArray(data.sales)?data.sales:[];
-      expenses=Array.isArray(data.expenses)?data.expenses:[];
-      debts=Array.isArray(data.debts)?data.debts:[];
-      capital=data.capital||{usd:0,afn:0};
-      settings={...settings,...(data.settings||{})};
-
-      save(KEY.products,products);
-      save(KEY.purchases,purchases);
-      save(KEY.sales,sales);
-      save(KEY.expenses,expenses);
-      save(KEY.debts,debts);
-      save(KEY.capital,capital);
-      save(KEY.settings,settings);
-
-      event.target.value="";
-
-      applyLanguage();
-      loadSettingsForm();
-
-      alert(t("restored"));
-
-    }catch(error){
-      alert("Backup file is not valid.");
-    }
-  };
-
-  reader.readAsText(file);
-}
 
 function downloadBlob(blob,name){
   const url=URL.createObjectURL(blob);
@@ -2366,46 +2329,6 @@ applyLanguage();
 showPage("dashboard");
 
 </script>
-  <script>
-function restoreBackup(event) {
-  const file = event.target.files[0];
 
-  if (!file) return;
-
-  const reader = new FileReader();
-
-  reader.onload = function(e) {
-    try {
-      const backup = JSON.parse(e.target.result);
-
-      const keys = [
-        "samadProducts",
-        "samadPurchases",
-        "samadSales",
-        "samadExpenses",
-        "samadDebts",
-        "samadCapital",
-        "samadSettings"
-      ];
-
-      keys.forEach(key => {
-        if (backup[key] !== undefined) {
-          localStorage.setItem(key, JSON.stringify(backup[key]));
-        }
-      });
-
-      alert("Restore په بریالیتوب سره بشپړ شو.");
-      location.reload();
-
-    } catch (error) {
-      alert("Backup فایل ناسم دی.");
-      console.error(error);
-    }
-  };
-
-  reader.readAsText(file);
-}
-</script>
-  <input type="file" accept=".json" onchange="restoreBackup(event)">
 </body>
 </html>
